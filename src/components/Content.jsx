@@ -3,7 +3,7 @@ import React from 'react'
 const Content = () => {
     return (
         <div
-            class="flex h-[80vh] items-center justify-center rounded-xl border-2 border-dashed border-gray-300 dark:border-gray-600 bg-red-700"
+            class="flex h-[80vh] items-center justify-center rounded-xl border-2 border-dashed border-gray-300 dark:border-gray-600"
         >
             <span class="dark:text-white">
                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor soluta autem odit nobis, debitis fuga obcaecati ex rerum rem tempore quo qui numquam minus quam itaque at blanditiis similique aperiam!
