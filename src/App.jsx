@@ -1,11 +1,14 @@
 import React from 'react'
+// import Login from './pages/Login'
+import Navbar from './components/Navbar'
+import SignForm6 from './pages/Login'
+
 
 const App = () => {
   return (
     <>
-      <h1 className="text-3xl font-bold underline text-red-700">
-        Hello world!
-      </h1>
+      <Navbar/>
+      <SignForm6/>
     </>
   )
 }
