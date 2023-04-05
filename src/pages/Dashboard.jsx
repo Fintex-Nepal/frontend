@@ -1,5 +1,7 @@
 import React from 'react'
-
+import { Routes, Route, Link } from 'react-router-dom';
+import MainRegestration from '../components/MainRegestration';
+import Content from '../components/Content';
 const Dashboard = () => {
     return (
         <>
@@ -27,8 +29,8 @@ const Dashboard = () => {
 
                         <ul class="mt-8 space-y-2 tracking-wide">
                             <li>
-                                <a
-                                    href="1"
+                                <Link
+                                    to={'dashboard/accountsetup'}
                                     aria-label="dashboard"
                                     class="relative flex items-center space-x-4 rounded-xl bg-gradient-to-r from-sky-600 to-cyan-400 px-4 py-3 text-white"
                                 >
@@ -46,8 +48,8 @@ const Dashboard = () => {
                                             class="fill-current group-hover:text-sky-300"
                                         ></path>
                                     </svg>
-                                    <span class="-mr-1 font-medium">Dashboard</span>
-                                </a>
+                                    <span class="-mr-1 font-medium">Account Setup</span>
+                                </Link>
                             </li>
                             <li>
                                 <a
@@ -272,11 +274,10 @@ const Dashboard = () => {
                     </div>
 
                     <div class="px-6 pt-6 2xl:container">
-                        <div
-                            class="flex h-[80vh] items-center justify-center rounded-xl border-2 border-dashed border-gray-300 dark:border-gray-600"
-                        >
-                            <span class="dark:text-white">Content</span>
-                        </div>
+                        <Routes>
+                            <Route path='/dashboard' element={<Content />} />
+                            <Route path='dashboard/accountsetup' element={<MainRegestration />} />
+                        </Routes>
                     </div>
                 </div>
             </body>
