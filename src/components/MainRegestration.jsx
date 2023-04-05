@@ -1,18 +1,27 @@
 import React, { useState } from 'react';
 const MainRegestration = () => {
-    const [form1Data, setForm1Data] = useState({});
-    const [form2Data, setForm2Data] = useState({});
+    const [groupSetUpData, setGroupSetUpData] = useState({});
+    const [form2Data, setForm2Data] = useState({
+
+    });
     const [activeForm, setActiveForm] = useState(1);
     const handleForm1Submit = (event) => {
         event.preventDefault();
         // handle form 1 submission logic
     }
 
-    const handleForm2Submit = (event) => {
-        event.preventDefault();
-        // handle form 2 submission logic
+    const GroupDataChangeHandler=(event)=>{
+        const {name,value}=event.target;
+        setGroupSetUpData(prevState=>({
+            ...prevState,
+            [name]:value,
+        }))
     }
 
+    const handleGroupTypeSubmit = (event) => {
+        event.preventDefault();
+        console.log(groupSetUpData,'groupSetUpDatagroupSetUpDatagroupSetUpData');
+    }
 
     return (
         <>
@@ -25,7 +34,7 @@ const MainRegestration = () => {
                     </div>
 
                     {activeForm === 1 &&
-                        <form>
+                        <form onSubmit={handleGroupTypeSubmit}>
                             <div class="space-y-12">
                                 <div class="border-b border-gray-900/10 pb-12">
                                     {/* <h2 class="text-base font-semibold leading-7 text-gray-900">Personal Information</h2> */}
@@ -33,7 +42,7 @@ const MainRegestration = () => {
                                         <div class=" mt-2 sm:col-span-3">
                                             <label for="first-name" class="block text-sm font-medium leading-6 text-gray-900">Account Type</label>
                                             <div class="mt-2">
-                                                <select id="accountType" name="accountType" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6">
+                                                <select onChange={GroupDataChangeHandler} id="accountType" name="accountType" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6">
                                                     <option value="" selected disabled>Select Account</option>
                                                     <option>Assets</option>
                                                     <option>Liability</option>
@@ -43,15 +52,15 @@ const MainRegestration = () => {
                                         </div>
 
                                         <div class="sm:col-span-4">
-                                            <label for="email" class="block text-sm font-medium leading-6 text-gray-900">Group Name</label>
+                                            <label  class="block text-sm font-medium leading-6 text-gray-900">Group Name</label>
                                             <div class="">
-                                                <input id="groupName" name="groupName" type='text' autocomplete="email" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
+                                                <input onChange={GroupDataChangeHandler} id="groupName" name="groupName" type='text' class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
                                             </div>
                                         </div>
                                         <div class="sm:col-span-4">
                                             <label class="block text-sm font-medium leading-6 text-gray-900">समूहको नाम</label>
                                             <div class="">
-                                                <input id="samuhnaam" name="samuhnaam" type='text' autocomplete="email" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
+                                                <input onChange={GroupDataChangeHandler} name="samuhnaam" type='text' class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
                                             </div>
                                         </div>
 
@@ -59,26 +68,23 @@ const MainRegestration = () => {
                                             <label class="block text-sm font-medium leading-6 text-gray-900">Entry Date</label>
                                             <div class="">
 
-                                                <input id="data" name="data" type='date' class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
+                                                <input onChange={GroupDataChangeHandler} id="data" name="data" type='date' class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
                                             </div>
                                         </div>
 
                                         <div class="col-span-full">
                                             <label class="block text-sm font-medium leading-6 text-gray-900">GI Code</label>
                                             <div class="mt-2">
-                                                <input type="text" name="giCode" class="block  rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
+                                                <input onChange={GroupDataChangeHandler} type="text" name="giCode" class="block  rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
                                             </div>
                                         </div>
 
                                         <div class="col-span-full">
                                             <label class="block text-sm font-medium leading-6 text-gray-900">Schedule</label>
                                             <div class="mt-2">
-                                                <input type="text" name="schedule" class="block  rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
+                                                <input onChange={GroupDataChangeHandler} type="text" name="schedule" class="block  rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
                                             </div>
                                         </div>
-
-                                        
-                                        
                                     </div>
                                 </div>
                             </div>
