@@ -123,11 +123,11 @@ const Login = () => {
                                             <button
                                                 class="w-full py-4 mb-4 font-semibold text-gray-200 bg-green-600 rounded-lg px-7 dark:text-gray-300 dark:bg-green-600 hover:text-blue-200 "
                                                 type="submit">LOGIN</button>
-                                            <p class="text-sm text-gray-700 dark:text-gray-400"> Need an account?
+                                            {/* <p class="text-sm text-gray-700 dark:text-gray-400"> Need an account?
                                                 <a href="1"
                                                     class="text-sm font-semibold text-blue-500 hover:text-blue-600 dark:text-blue-400 dark:hover:text-blue-500">
                                                     Create an account</a>
-                                            </p>
+                                            </p> */}
                                         </form>
                                     </div>
                                 </div>
