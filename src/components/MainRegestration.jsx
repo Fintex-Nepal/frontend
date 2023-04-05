@@ -17,12 +17,9 @@ const MainRegestration = () => {
         <>
             <div>
                 <div class="flex space-x-4">
-                    {/* <button onClick={() => setActiveForm(1)}>Group Setup</button>
-                    <button onClick={() => setActiveForm(2)}>Main Ledger Setup</button> */}
 
                     <button class={` hover:bg-blue-700 text-white font-bold py-2 px-4 rounded ${activeForm === 1 ? 'bg-blue-700' : 'bg-blue-400'} `} onClick={() => setActiveForm(1)}>Group Setup</button>
                     <button class={` hover:bg-blue-700 text-white font-bold py-2 px-4 rounded ${activeForm === 2 ? 'bg-blue-700' : 'bg-blue-400'} `} onClick={() => setActiveForm(2)}>Main Ledger Setup</button>
-                    {/* {`bg-blue-300 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded ${activeForm === 2 ? 'active' : ''}`} */}
                 </div>
 
                 {activeForm === 1 &&
@@ -37,7 +34,7 @@ const MainRegestration = () => {
                                             <select id="accountType" name="accountType" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6">
                                             <option value="" selected disabled>Select Account</option>
                                                 <option>Assets</option>
-                                                <option>l</option>
+                                                <option>Liability</option>
                                                 <option>Mexico</option>
                                             </select>
                                         </div>
