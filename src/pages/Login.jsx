@@ -1,5 +1,7 @@
 import React from 'react'
 import { useState } from 'react'
+import Navbar from '../components/Navbar';
+import Footer from '../components/Footer';
 const Login = () => {
     const [loginData,setLoginData]=useState({
         userId:'',
@@ -19,6 +21,7 @@ const Login = () => {
     }
     return (
         <>
+            <Navbar/>
             <section class=" font-poppins">
                 <div class="flex items-center justify-center h-screen mx-auto max-w-7xl">
                     <div class="flex-1">
@@ -129,6 +132,7 @@ const Login = () => {
                     </div>
                 </div>
             </section>
+            <Footer/>
         </>
     )
 }
