@@ -2,7 +2,9 @@ import React from 'react'
 import { useState } from 'react'
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
+import { useNavigate } from 'react-router-dom';
 const Login = () => {
+    const naviate=useNavigate();
     const [loginData,setLoginData]=useState({
         userId:'',
         password:'',
@@ -17,7 +19,10 @@ const Login = () => {
     }
     const formSubmitHandler=(e)=>{
         e.preventDefault();
+        console.log('====================================');
         console.log(loginData);
+        console.log('====================================');
+        naviate('/dashboard')
     }
     return (
         <>

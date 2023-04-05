@@ -10,25 +10,25 @@ const Dashboard = () => {
                 >
                     <div>
                         <div class="-mx-6 px-6 py-4">
-                            <a href="#" title="home">
+                            <a href="1" title="home">
                                 <img src="images/logo.svg" class="w-32" alt="tailus logo" />
                             </a>
                         </div>
 
                         <div class="mt-8 text-center">
                             <img
-                                src="images/second_user.webp"
+                                src="https://images.indianexpress.com/2023/02/salmankhan1200.jpg"
                                 alt=""
                                 class="m-auto h-10 w-10 rounded-full object-cover lg:h-28 lg:w-28"
                             />
-                            <h5 class="mt-4 hidden text-xl font-semibold text-gray-600 lg:block dark:text-gray-300">Cynthia J. Watts</h5>
+                            <h5 class="mt-4 hidden text-xl font-semibold text-gray-600 lg:block dark:text-gray-300">Salman Khan</h5>
                             <span class="hidden text-gray-400 lg:block">Admin</span>
                         </div>
 
                         <ul class="mt-8 space-y-2 tracking-wide">
                             <li>
                                 <a
-                                    href="#"
+                                    href="1"
                                     aria-label="dashboard"
                                     class="relative flex items-center space-x-4 rounded-xl bg-gradient-to-r from-sky-600 to-cyan-400 px-4 py-3 text-white"
                                 >
@@ -51,7 +51,7 @@ const Dashboard = () => {
                             </li>
                             <li>
                                 <a
-                                    href="#"
+                                    href="1"
                                     class="group flex items-center space-x-4 rounded-md px-4 py-3 text-gray-600 dark:text-gray-300"
                                 >
                                     <svg
@@ -76,7 +76,7 @@ const Dashboard = () => {
                             </li>
                             <li>
                                 <a
-                                    href="#"
+                                    href="1"
                                     class="group flex items-center space-x-4 rounded-md px-4 py-3 text-gray-600 dark:text-gray-300"
                                 >
                                     <svg
@@ -101,7 +101,7 @@ const Dashboard = () => {
                             </li>
                             <li>
                                 <a
-                                    href="#"
+                                    href="1"
                                     class="group flex items-center space-x-4 rounded-md px-4 py-3 text-gray-600 dark:text-gray-300"
                                 >
                                     <svg
@@ -124,7 +124,7 @@ const Dashboard = () => {
                             </li>
                             <li>
                                 <a
-                                    href="#"
+                                    href="1"
                                     class="group flex items-center space-x-4 rounded-md px-4 py-3 text-gray-600 dark:text-gray-300"
                                 >
                                     <svg
@@ -191,7 +191,7 @@ const Dashboard = () => {
                                 </svg>
                             </button>
                             <div class="flex space-x-4">
-                                <!--search bar -->
+                                {/* <!--search bar --> */}
                                 <div hidden class="md:block">
                                     <div class="relative flex items-center text-gray-400 focus-within:text-cyan-400">
                                         <span class="absolute left-4 flex h-6 items-center border-r border-gray-300 pr-3 dark:border-gray-700">
@@ -216,7 +216,7 @@ const Dashboard = () => {
                                         />
                                     </div>
                                 </div>
-                                <!--/search bar -->
+                                {/* <!--/search bar --> */}
                                 <button
                                     aria-label="search"
                                     class="h-10 w-10 rounded-xl border bg-gray-100 active:bg-gray-200 md:hidden dark:bg-gray-700 dark:border-gray-600 dark:active:bg-gray-800"

@@ -1,12 +1,15 @@
 import React from 'react'
-import SignForm6 from './pages/Login'
-
+import Login from './pages/Login'
+import Dashboard from './pages/Dashboard'
+import {Routes, Route} from 'react-router-dom'
 
 const App = () => {
   return (
     <>
-      <SignForm6/>
-     
+      <Routes>
+        <Route path='/' element={<Login/>} />
+        <Route path='/dashboard' element={<Dashboard/>} />
+      </Routes>
     </>
   )
 }
