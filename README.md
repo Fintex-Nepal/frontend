@@ -16,8 +16,8 @@
 
 ## Dashboard
 
-![image](https://user-images.githubusercontent.com/74055996/230224257-27941ec8-5c71-4514-b2d4-baebca6721a7.png)
+![image](https://user-images.githubusercontent.com/74055996/230385280-68c6ebba-6de8-4863-b526-86b949f307db.png)
 
 ## Main Ledger
 
-![image](https://user-images.githubusercontent.com/74055996/230224497-57f95d5f-b461-495c-a666-4297969be07c.png)
+![image](https://user-images.githubusercontent.com/74055996/230384808-82cf83a3-8daf-46d6-9f57-1818b6c882c0.png)
