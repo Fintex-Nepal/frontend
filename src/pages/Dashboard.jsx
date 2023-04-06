@@ -30,7 +30,7 @@ const Dashboard = () => {
                         <ul class="mt-8 space-y-2 tracking-wide">
                             <li>
                                 <Link
-                                    to={'dashboard/accountsetup'}
+                                    to={'/dashboard/accountsetup'}
                                     aria-label="dashboard"
                                     class="relative flex items-center space-x-4 rounded-xl bg-gradient-to-r from-sky-600 to-cyan-400 px-4 py-3 text-white"
                                 >
@@ -275,8 +275,9 @@ const Dashboard = () => {
 
                     <div class="px-6 pt-6 2xl:container">
                         <Routes>
-                            <Route path='/dashboard' element={<Content />} />
-                            <Route path='dashboard/accountsetup' element={<MainRegestration />} />
+                            <Route path='/' exect element={<Content />} />
+                            <Route path='/accountsetup' element={<MainRegestration />} />
+                           
                         </Routes>
                     </div>
                 </div>
