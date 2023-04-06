@@ -21,3 +21,10 @@
 ## Main Ledger
 
 ![image](https://user-images.githubusercontent.com/74055996/230384808-82cf83a3-8daf-46d6-9f57-1818b6c882c0.png)
+
+
+
+# Topic Discussed
+  * Main Ledger
+  * Group setup, Ledger Setup
+  * Sub Ledger
