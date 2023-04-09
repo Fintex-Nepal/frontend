@@ -2,12 +2,12 @@ import React from 'react'
 
 const SuperAdminLogin = () => {
     return (
-        <div className='h-screen bg-slate-300'>
-            <section class="flex items-center justify-center h-screen font-poppins ">
+        <>
+            <section class="flex items-center justify-center h-screen font-poppins  bg-slate-300">
                 <div class="flex-1">
                     <div class="px-2 mx-auto max-w-7xl lg:px-4">
                         <div class="relative ">
-                            <div class="relative px-4 py-4 bg-slate-200 shadow-md dark:bg-gray-900 md:py-11 sm:px-8">
+                            <div class="relative px-4  bg-slate-200 shadow-md dark:bg-gray-900 md:py-11 sm:px-8">
                                 <div class="max-w-lg mx-auto text-center">
                                     <a href="1" class="inline-block mb-4 text-blue-900 dark:text-gray-400 lg:mb-7 ">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" fill="currentColor"
@@ -32,7 +32,7 @@ const SuperAdminLogin = () => {
                                                     <input type="password"
                                                         class="w-full px-4 py-3 bg-white rounded-lg lg:py-5 dark:text-gray-300 dark:bg-gray-700 -gray-800 "
                                                         name="" placeholder="Enter password" />
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                    {/* <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                                         class="absolute right-0 mr-3 dark:text-gray-300" fill="currentColor"
                                                         class="bi bi-eye-slash" viewBox="0 0 16 16">
                                                         <path
@@ -41,7 +41,7 @@ const SuperAdminLogin = () => {
                                                             d="M11.297 9.176a3.5 3.5 0 0 0-4.474-4.474l.823.823a2.5 2.5 0 0 1 2.829 2.829l.822.822zm-2.943 1.299.822.822a3.5 3.5 0 0 1-4.474-4.474l.823.823a2.5 2.5 0 0 0 2.829 2.829z" />
                                                         <path
                                                             d="M3.35 5.47c-.18.16-.353.322-.518.487A13.134 13.134 0 0 0 1.172 8l.195.288c.335.48.83 1.12 1.465 1.755C4.121 11.332 5.881 12.5 8 12.5c.716 0 1.39-.133 2.02-.36l.77.772A7.029 7.029 0 0 1 8 13.5C3 13.5 0 8 0 8s.939-1.721 2.641-3.238l.708.709zm10.296 8.884-12-12 .708-.708 12 12-.708.708z" />
-                                                    </svg>
+                                                    </svg> */}
                                                 </div>
                                             </div>
                                         </div>
@@ -69,7 +69,7 @@ const SuperAdminLogin = () => {
                     </div>
                 </div>
             </section>
-        </div>
+        </>
     )
 }
 
