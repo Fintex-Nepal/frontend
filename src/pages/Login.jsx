@@ -4,29 +4,48 @@ import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import { useNavigate } from 'react-router-dom';
 const Login = () => {
-    const naviate=useNavigate();
-    const [loginData,setLoginData]=useState({
-        userId:'',
-        password:'',
-        confirmPassword:'',
+    const naviate = useNavigate();
+    const [loginData, setLoginData] = useState({
+        userId: '',
+        password: '',
+        confirmPassword: '',
     });
-    const signUpFormChangeHandler=(event)=>{
-        const {name,value}=event.target;
+
+    const isPasswordValid = (password) => {
+        const regex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*()_+}{":;'?/>.<,])(?=.*[a-zA-Z]).{8,}$/;
+        return regex.test(password);
+    }
+
+    const signUpFormChangeHandler = (event) => {
+        const { name, value } = event.target;
         setLoginData(prevState => ({
             ...prevState,
             [name]: value,
         }));
     }
-    const formSubmitHandler=(e)=>{
-        e.preventDefault();
-        console.log('====================================');
-        console.log(loginData);
-        console.log('====================================');
-        naviate('/dashboard')
+    const formSubmitHandler = (e) => {
+        e.preventDefault()
+        if (loginData.password !== loginData.confirmPassword) {
+            alert('Passwords do not match')
+            return
+        }
+        if (!isPasswordValid(loginData.password)) {
+            alert(
+                'Password must contain at least 8 characters, including 1 lowercase letter, 1 uppercase letter, and 1 digit'
+            )
+            return
+        }
+        else {
+            naviate('/dashboard')
+            console.log('====================================')
+            console.log(loginData)
+            console.log('====================================')
+        }
+
     }
     return (
         <>
-            <Navbar/>
+            <Navbar />
             <section class=" font-poppins">
                 <div class="flex items-center justify-center h-screen mx-auto max-w-7xl">
                     <div class="flex-1">
@@ -69,22 +88,22 @@ const Login = () => {
                                             Login your Account</h2>
                                         <p class="text-base text-center text-gray-500 mb-7 dark:text-gray-400">
                                             Please fill your credentials</p>
-                                        <form  onSubmit={formSubmitHandler}>
+                                        <form onSubmit={formSubmitHandler}>
                                             <div class="mb-4">
                                                 <input type="text"
                                                     name='userId'
                                                     class="w-full py-4 rounded-lg px-7 dark:text-gray-300 dark:bg-gray-800"
-                                                    placeholder="User Id" required 
+                                                    placeholder="User Id" required
                                                     onChange={signUpFormChangeHandler}
-                                                    />
+                                                />
                                             </div>
                                             <div class="relative flex items-center mb-4">
                                                 <input type="password"
                                                     class="w-full py-4 rounded-lg px-7 dark:text-gray-300 dark:bg-gray-800"
                                                     name='password'
-                                                    placeholder=" password" required 
+                                                    placeholder=" password" required
                                                     onChange={signUpFormChangeHandler}
-                                                    />
+                                                />
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                                     class="absolute right-0 mt-2 mr-3 i dark:text-gray-50" fill="currentColor"
                                                     viewBox="0 0 16 16">
@@ -100,9 +119,9 @@ const Login = () => {
                                                 <input type="password"
                                                     name='confirmPassword'
                                                     class="w-full py-4 rounded-lg px-7 dark:text-gray-300 dark:bg-gray-800"
-                                                    placeholder="Repeat password" required 
+                                                    placeholder="Repeat password" required
                                                     onChange={signUpFormChangeHandler}
-                                                    />
+                                                />
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                                     class="absolute right-0 items-center mr-3 dark:text-gray-50"
                                                     fill="currentColor" viewBox="0 0 16 16">
@@ -137,7 +156,7 @@ const Login = () => {
                     </div>
                 </div>
             </section>
-            <Footer/>
+            <Footer />
         </>
     )
 }
