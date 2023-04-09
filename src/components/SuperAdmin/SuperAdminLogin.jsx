@@ -2,12 +2,12 @@ import React from 'react'
 
 const SuperAdminLogin = () => {
     return (
-        <>
-            <section class="flex items-center justify-center h-screen font-poppins">
+        <div className='h-screen bg-slate-300'>
+            <section class="flex items-center justify-center h-screen font-poppins ">
                 <div class="flex-1">
                     <div class="px-2 mx-auto max-w-7xl lg:px-4">
                         <div class="relative ">
-                            <div class="relative px-4 py-4 bg-gray-100 shadow-md dark:bg-gray-900 md:py-11 sm:px-8">
+                            <div class="relative px-4 py-4 bg-slate-200 shadow-md dark:bg-gray-900 md:py-11 sm:px-8">
                                 <div class="max-w-lg mx-auto text-center">
                                     <a href="1" class="inline-block mb-4 text-blue-900 dark:text-gray-400 lg:mb-7 ">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" fill="currentColor"
@@ -69,7 +69,7 @@ const SuperAdminLogin = () => {
                     </div>
                 </div>
             </section>
-        </>
+        </div>
     )
 }
 
