@@ -18,7 +18,7 @@ const SuperAdminLogin = () => {
                                         </svg>
                                     </a>
                                     <h2 class="mb-4 text-2xl font-bold text-gray-700 lg:mb-7 md:text-5xl dark:text-gray-300">
-                                        Login your account</h2>
+                                        Admin Login account</h2>
                                     <p class="text-gray-500 dark:text-gray-400">Your credentials here</p>
                                     <form action="" class="mt-4 lg:mt-7 ">
                                         <div class="">
@@ -47,8 +47,8 @@ const SuperAdminLogin = () => {
                                         </div>
                                         <div class="flex flex-wrap items-center justify-between mt-4 lg:mt-7">
                                             <label for="" class="flex dark:text-gray-300">
-                                                <input type="checkbox" class="mt-1 mr-4" />
-                                                <span class="text-sm ">Remember me</span>
+                                                {/* <input type="checkbox" class="mt-1 mr-4" /> */}
+                                                <span class="text-sm text-red-600 ">It is punishable crime if you're not admin</span>
                                             </label>
                                             <a href=" 1"
                                                 class="mt-2 text-sm font-semibold text-blue-500 lg:mt-0 dark:text-blue-300 hover:underline">
