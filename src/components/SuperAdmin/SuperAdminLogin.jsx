@@ -1,6 +1,27 @@
 import React from 'react'
+import { useState } from 'react';
 
 const SuperAdminLogin = () => {
+    
+    const [userData,setUserDate]=useState({
+        email:'',
+        password:'',
+    })
+
+    const onChangeHandle=(event)=>{
+        const {name,value}=event.target;
+        setUserDate(prevState=>({
+            ...prevState,
+            [name]:value
+        }))        
+    }
+
+    const formSubmitHandler=(e)=>{
+        e.preventDefault();
+        console.log('====================================');
+        console.log(userData);
+        console.log('====================================');
+    }
     return (
         <>
             <section class="flex items-center justify-center h-screen font-poppins  bg-slate-300">
@@ -20,18 +41,22 @@ const SuperAdminLogin = () => {
                                     <h2 class="mb-4 text-2xl font-bold text-gray-700 lg:mb-7 md:text-5xl dark:text-gray-300">
                                         Admin Login account</h2>
                                     <p class="text-gray-500 dark:text-gray-400">Your credentials here</p>
-                                    <form action="" class="mt-4 lg:mt-7 ">
+                                    <form onSubmit={formSubmitHandler}  class="mt-4 lg:mt-7 ">
                                         <div class="">
                                             <input type="email"
                                                 class="w-full px-4 py-3 mt-2 bg-white rounded-lg lg:py-5 dark:text-gray-300 dark:bg-gray-700 -gray-800"
-                                                name="" placeholder="Enter your email" />
+                                                name="email" placeholder="Enter your email" 
+                                                onChange={onChangeHandle}
+                                                />
                                         </div>
                                         <div class="mt-4 lg:mt-7">
                                             <div>
                                                 <div class="relative flex items-center">
                                                     <input type="password"
                                                         class="w-full px-4 py-3 bg-white rounded-lg lg:py-5 dark:text-gray-300 dark:bg-gray-700 -gray-800 "
-                                                        name="" placeholder="Enter password" />
+                                                        name="password" placeholder="Enter password"
+                                                        onChange={onChangeHandle}
+                                                        />
                                                     {/* <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                                         class="absolute right-0 mr-3 dark:text-gray-300" fill="currentColor"
                                                         class="bi bi-eye-slash" viewBox="0 0 16 16">
