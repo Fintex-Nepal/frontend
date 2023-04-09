@@ -1,12 +1,14 @@
 import React from 'react'
-import { useState } from 'react'
+import { useState ,useEffect} from 'react'
+import ConfirmModal from '../../utils/ConfirmModal'
 const PasswordResetForm = () => {
     const [userData,setUserData]=useState({
         currentPassword:'',
         newpassword:'',
         confirmnewpassword:'',
     })
-
+   const [showConfirmModal,setShowConfirmModal]=useState(false)
+   const [modalResponse,setModalResponse]=useState(false)
     const onChangeHandler=(event)=>{
         const {name,value}=event.target;
        setUserData(prevState=>({
@@ -14,16 +16,28 @@ const PasswordResetForm = () => {
         [name]:value,
        }))
     }
-   
+   useEffect(()=>{
+      console.log(modalResponse,'modalResponsemodalResponsemodalResponsemodalResponse');
+      if(modalResponse)
+      {
+        console.log(userData);
+      }
+   },[modalResponse])
     const submitHandler=(e)=>{
         e.preventDefault();
+        setShowConfirmModal(true)
+       if(modalResponse)
+       {
+        console.log("Iam in");
         console.log('====================================');
         console.log(userData);
         console.log('====================================');
+       }
 
     }
     return (
         <>
+            {showConfirmModal &&<ConfirmModal setShowConfirmModal={setShowConfirmModal} setModalResponse={setModalResponse} modalResponse={modalResponse}/>}
             <div className="mx-auto max-w-screen-xl px-4 py-16 sm:px-6 lg:px-8">
                 <div className="mx-auto max-w-lg">
                     <h1 className="text-center text-2xl font-bold text-indigo-600 sm:text-3xl">
