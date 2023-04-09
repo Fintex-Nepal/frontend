@@ -1,6 +1,6 @@
 import React from 'react'
 import { Routes,Route, Link } from 'react-router-dom'
-import Test from '../../pages/Test'
+import PasswordResetForm from './PasswordResetForm'
 import logo from '../../assets/logo.png'
 const SuperAdminDashboard = () => {
     return (
@@ -800,7 +800,7 @@ const SuperAdminDashboard = () => {
                             </div>
                         </div> */}
                         <Routes>
-                            <Route path='/profile' element={<Test/>}/>
+                            <Route path='/profile' element={<PasswordResetForm/>}/>
                         </Routes>
                     </div>
                 </div>

@@ -1,33 +1,87 @@
 import React from 'react'
-
+import { useState } from 'react'
 const PasswordResetForm = () => {
+    const [userData,setUserData]=useState({
+        currentPassword:'',
+        newpassword:'',
+        confirmnewpassword:'',
+    })
+
+    const onChangeHandler=(event)=>{
+        const {name,value}=event.target;
+       setUserData(prevState=>({
+        ...prevState,
+        [name]:value,
+       }))
+    }
+   
+    const submitHandler=(e)=>{
+        e.preventDefault();
+        console.log('====================================');
+        console.log(userData);
+        console.log('====================================');
+
+    }
     return (
         <>
             <div className="mx-auto max-w-screen-xl px-4 py-16 sm:px-6 lg:px-8">
                 <div className="mx-auto max-w-lg">
                     <h1 className="text-center text-2xl font-bold text-indigo-600 sm:text-3xl">
-                        Get started today
+                        Reset Password
                     </h1>
 
                     <p className="mx-auto mt-4 max-w-md text-center text-gray-500">
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Obcaecati sunt
-                        dolores deleniti inventore quaerat mollitia?
+                        write something here
                     </p>
 
                     <form
-                        action=""
+                        onSubmit={submitHandler}
                         className="mt-6 mb-0 space-y-4 rounded-lg p-4 shadow-lg sm:p-6 lg:p-8"
                     >
-                        <p className="text-center text-lg font-medium">Sign in to your account</p>
+                        <p className="text-center text-lg font-medium">your credentials</p>
 
                         <div>
-                            <label htmlFor="email" className="sr-only">Email</label>
+                            <label htmlFor="currentPassword" className="sr-only">Current Password</label>
 
                             <div className="relative">
                                 <input
-                                    type="email"
+                                    type='string'
                                     className="w-full rounded-lg border-gray-200 p-4 pr-12 text-sm shadow-sm"
-                                    placeholder="Enter email"
+                                    placeholder="Current Password"
+                                    onChange={onChangeHandler}
+                                    name='currentPassword'
+                                />
+
+                                <span
+                                    className="absolute inset-y-0 right-0 grid place-content-center px-4"
+                                >
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        className="h-4 w-4 text-gray-400"
+                                        fill="none"
+                                        viewBox="0 0 24 24"
+                                        stroke="currentColor"
+                                    >
+                                        <path
+                                            strokeLinecap="round"
+                                            strokeLinejoin="round"
+                                            strokeWidth="2"
+                                            d="M16 12a4 4 0 10-8 0 4 4 0 008 0zm0 0v1.5a2.5 2.5 0 005 0V12a9 9 0 10-9 9m4.5-1.206a8.959 8.959 0 01-4.5 1.207"
+                                        />
+                                    </svg>
+                                </span>
+                            </div>
+                        </div>
+                        <div>
+                            <label htmlFor="newpassword" className="sr-only">New Password</label>
+
+                            <div className="relative">
+                                <input
+                                    type='string'
+                                    className="w-full rounded-lg border-gray-200 p-4 pr-12 text-sm shadow-sm"
+                                    placeholder="newpassword"
+                                    onChange={onChangeHandler}
+                                    name='newpassword'
                                 />
 
                                 <span
@@ -52,13 +106,15 @@ const PasswordResetForm = () => {
                         </div>
 
                         <div>
-                            <label htmlFor="password" className="sr-only">Password</label>
+                            <label htmlFor="confirmnewpassword" className="sr-only">Confirm New Password</label>
 
                             <div className="relative">
                                 <input
-                                    type="password"
+                                    type="string"
                                     className="w-full rounded-lg border-gray-200 p-4 pr-12 text-sm shadow-sm"
-                                    placeholder="Enter password"
+                                    placeholder="Confirm Password"
+                                    onChange={onChangeHandler}
+                                    name='confirmnewpassword'
                                 />
 
                                 <span
@@ -92,13 +148,8 @@ const PasswordResetForm = () => {
                             type="submit"
                             className="block w-full rounded-lg bg-indigo-600 px-5 py-3 text-sm font-medium text-white"
                         >
-                            Sign in
+                           Change password
                         </button>
-
-                        <p className="text-center text-sm text-gray-500">
-                            No account?
-                            <a className="underline" href="">Sign up</a>
-                        </p>
                     </form>
                 </div>
             </div>
