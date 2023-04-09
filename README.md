@@ -8,7 +8,8 @@
 # Work Track
   * Group Form added
   * Group Type Working added
-  * Super Admin page Added
+  * Super Admin page added
+  * Password Change from added
 
 
 # screenshot
