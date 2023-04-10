@@ -37,3 +37,6 @@
   * Main Ledger
   * Group setup, Ledger Setup
   * Sub Ledger
+
+# dependencies
+  * axios
