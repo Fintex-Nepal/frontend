@@ -1,6 +1,6 @@
 import React from 'react'
 
-const ConfirmModal = ({ setShowConfirmModal, setModalResponse,modalResponse }) => {
+const ConfirmModal = ({ setShowConfirmModal, setModalResponse,headText,bodyText }) => {
     const onConfirmHandler = () => {
         setModalResponse(true);
         setShowConfirmModal(false)
@@ -23,9 +23,9 @@ const ConfirmModal = ({ setShowConfirmModal, setModalResponse,modalResponse }) =
                                         </svg>
                                     </div>
                                     <div class="mt-3 text-center sm:ml-4 sm:mt-0 sm:text-left">
-                                        <h3 class="text-base font-semibold leading-6 text-gray-900" id="modal-title">Deactivate account</h3>
+                                        <h3 class="text-base font-semibold leading-6 text-gray-900" id="modal-title">{headText}</h3>
                                         <div class="mt-2">
-                                            <p class="text-sm text-gray-500">Are you sure you want to deactivate your account? All of your data will be permanently removed. This action cannot be undone.</p>
+                                            <p class="text-sm text-gray-500">{bodyText}</p>
                                         </div>
                                     </div>
                                 </div>

@@ -2,6 +2,14 @@ import React from 'react'
 import { useState ,useEffect} from 'react'
 import ConfirmModal from '../../utils/ConfirmModal'
 const PasswordResetForm = () => {
+
+   const modalText={
+    headText:'Password Change',
+    bodyText:"Are You sure you want to change test? It can't be ondone once changed."
+   } 
+
+
+
     const [userData,setUserData]=useState({
         currentPassword:'',
         newpassword:'',
@@ -37,7 +45,7 @@ const PasswordResetForm = () => {
     }
     return (
         <>
-            {showConfirmModal &&<ConfirmModal setShowConfirmModal={setShowConfirmModal} setModalResponse={setModalResponse} modalResponse={modalResponse}/>}
+            {showConfirmModal &&<ConfirmModal headText={modalText.headText} bodyText={modalText.bodyText}  setShowConfirmModal={setShowConfirmModal} setModalResponse={setModalResponse} modalResponse={modalResponse}/>}
             <div className="mx-auto max-w-screen-xl px-4 py-16 sm:px-6 lg:px-8">
                 <div className="mx-auto max-w-lg">
                     <h1 className="text-center text-2xl font-bold text-indigo-600 sm:text-3xl">
