@@ -27,9 +27,9 @@ const CreateAdmin = () => {
     }
     return (
         <>
-            <section class="py-16 bg-stone-100 font-poppins dark:bg-gray-800">
+            <section class=" bg-stone-100 font-poppins dark:bg-gray-800">
                 <div
-                    class="max-w-4xl px-4 py-4 mx-auto bg-white border shadow-sm dark:border-gray-900 dark:bg-gray-900 lg:py-4 md:px-6">
+                    class="max-w-4xl px-4   mx-auto bg-white border shadow-sm dark:border-gray-900 dark:bg-gray-900 ">
                     <div class="mb-10 ">
                         <h2 class="pb-2 mb-2 text-xl font-bold text-gray-800 md:text-3xl dark:text-gray-300">
                             Create Admin
