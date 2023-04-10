@@ -1,5 +1,6 @@
 import React from 'react'
-import { useState } from 'react'
+import { useState } from 'react';
+import axios from 'axios'
 import ConfirmModal from '../../utils/ConfirmModal'
 const PasswordResetForm = () => {
 
@@ -26,10 +27,14 @@ const PasswordResetForm = () => {
     }
    if(modalResponse==='confirm')
    {
-    console.log('====================================');
-    console.log(userData);
-    setModalResponse('cancel')
-    console.log('====================================');
+      axios.get('https://jsonplaceholder.typicode.com/todos/1')
+      .then((res=>{
+        console.log(res.data);
+        setModalResponse('cancel')
+      }))
+      .catch(err=>console.log("Error"))
+   
+    
    }
     const submitHandler=(e)=>{
         e.preventDefault();
