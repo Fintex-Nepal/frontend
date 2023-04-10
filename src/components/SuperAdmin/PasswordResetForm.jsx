@@ -45,7 +45,7 @@ const PasswordResetForm = () => {
                     </h1>
 
                     <p className="mx-auto mt-4 max-w-md text-center text-gray-500">
-                        write something here
+                        Provide your existing and new credentials
                     </p>
 
                     <form

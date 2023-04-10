@@ -30,10 +30,10 @@ const CreateAdmin = () => {
                     class="max-w-4xl px-4 py-4 mx-auto bg-white border shadow-sm dark:border-gray-900 dark:bg-gray-900 lg:py-4 md:px-6">
                     <div class="mb-10 ">
                         <h2 class="pb-2 mb-2 text-xl font-bold text-gray-800 md:text-3xl dark:text-gray-300">
-                            Basic Info
+                            Create Admin
                         </h2>
                         <p class="text-sm dark:text-gray-400">
-                            Lorem ipsum dor amet ispicusus isopiros amet ispis lorem
+                            This userid and password will be used by <b>Fintex</b> client
                         </p>
                     </div>
                     <form onSubmit={formSubmitHandler}>
@@ -79,7 +79,7 @@ const CreateAdmin = () => {
                                 />
                         </div>
 
-                        <button type='submit' class="px-4 py-2 text-base text-gray-100 bg-blue-600 rounded hover:bg-blue-500">Send</button>
+                        <button type='submit' class="px-4 py-2 text-base text-gray-100 bg-blue-600 rounded hover:bg-blue-500">Create</button>
 
                     </form>
                 </div >
