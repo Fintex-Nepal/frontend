@@ -24,24 +24,13 @@ const PasswordResetForm = () => {
         [name]:value,
        }))
     }
-   useEffect(()=>{
-      console.log(modalResponse,'modalResponsemodalResponsemodalResponsemodalResponse');
-      if(modalResponse)
-      {
-        console.log(userData);
-      }
-   },[modalResponse])
+    
     const submitHandler=(e)=>{
         e.preventDefault();
         setShowConfirmModal(true)
-       if(modalResponse)
-       {
-        console.log("Iam in");
-        console.log('====================================');
-        console.log(userData);
-        console.log('====================================');
-       }
-
+       console.log('====================================');
+       console.log(userData);
+       console.log('====================================');
     }
     return (
         <>
