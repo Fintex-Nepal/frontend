@@ -1,7 +1,8 @@
 import React from 'react'
-import { Routes,Route, Link } from 'react-router-dom'
+import { Routes, Route, Link } from 'react-router-dom'
 import PasswordResetForm from './PasswordResetForm'
 import logo from '../../assets/logo.png'
+import CreateAdmin from './CreateAdmin'
 const SuperAdminDashboard = () => {
     return (
         <>
@@ -18,7 +19,7 @@ const SuperAdminDashboard = () => {
 
 
                         <ul class="mt-8 space-y-2 tracking-wide">
-                            
+
                             <li>
                                 <Link to={'/sadmindashboard/profile'}
                                     href="1"
@@ -43,8 +44,8 @@ const SuperAdminDashboard = () => {
                                 </Link>
                             </li>
                             <li>
-                                <a
-                                    href="1"
+                                <Link
+                                   to={'/sadmindashboard/createadmin'}
                                     class="group flex items-center space-x-4 rounded-md px-4 py-3 text-gray-600 dark:text-gray-300"
                                 >
                                     <svg
@@ -64,8 +65,8 @@ const SuperAdminDashboard = () => {
                                             d="M6 12a2 2 0 012-2h8a2 2 0 012 2v2a2 2 0 01-2 2H2h2a2 2 0 002-2v-2z"
                                         />
                                     </svg>
-                                    <span class="group-hover:text-gray-700 dark:group-hover:text-gray-50">Categories</span>
-                                </a>
+                                    <span class="group-hover:text-gray-700 dark:group-hover:text-gray-50">Create Admin</span>
+                                </Link>
                             </li>
                             <li>
                                 <a
@@ -800,7 +801,8 @@ const SuperAdminDashboard = () => {
                             </div>
                         </div> */}
                         <Routes>
-                            <Route path='/profile' element={<PasswordResetForm/>}/>
+                            <Route path='/profile' element={<PasswordResetForm />} />
+                            <Route path='/createadmin' element={<CreateAdmin />} />
                         </Routes>
                     </div>
                 </div>

@@ -1,8 +1,8 @@
 import React from 'react'
 import { useState } from 'react';
-
+import { useNavigate } from 'react-router-dom';
 const SuperAdminLogin = () => {
-    
+    const naviate=useNavigate();
     const [userData,setUserDate]=useState({
         email:'',
         password:'',
@@ -18,6 +18,7 @@ const SuperAdminLogin = () => {
 
     const formSubmitHandler=(e)=>{
         e.preventDefault();
+        naviate('/sadmindashboard')
         console.log('====================================');
         console.log(userData);
         console.log('====================================');
