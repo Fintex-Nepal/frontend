@@ -28,6 +28,9 @@
 
 ![image](https://user-images.githubusercontent.com/74055996/230384808-82cf83a3-8daf-46d6-9f57-1818b6c882c0.png)
 
+## Password Reset
+![image](https://user-images.githubusercontent.com/74055996/230863330-d11d4146-0080-4cfd-9ef9-fd35d2bce6ee.png)
+
 
 
 # Topic Discussed
