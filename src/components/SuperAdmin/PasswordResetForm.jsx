@@ -2,15 +2,12 @@ import React from 'react'
 import { useState } from 'react';
 import axios from 'axios'
 import ConfirmModal from '../../utils/ConfirmModal'
-const PasswordResetForm = () => {
+const PasswordResetForm = ({api}) => {
 
    const modalText={
     headText:'Password Change',
     bodyText:"Are You sure you want to change test? It can't be ondone once changed."
    } 
-
-
-
     const [userData,setUserData]=useState({
         currentPassword:'',
         newpassword:'',
@@ -27,12 +24,15 @@ const PasswordResetForm = () => {
     }
    if(modalResponse==='confirm')
    {
-      axios.get('https://jsonplaceholder.typicode.com/todos/1')
-      .then((res=>{
-        console.log(res.data);
-        setModalResponse('cancel')
-      }))
-      .catch(err=>console.log("Error"))
+    console.log('====================================');
+    console.log(userData);
+    console.log('====================================');
+    //   axios.get(api)
+    //   .then((res=>{
+    //     console.log(res.data);
+    //     setModalResponse('cancel')
+    //   }))
+    //   .catch(err=>console.log("Error"))
    
     
    }
@@ -40,6 +40,7 @@ const PasswordResetForm = () => {
         e.preventDefault();
         setShowConfirmModal(true)
     }
+    console.log(api);
     return (
         <>
             {showConfirmModal &&<ConfirmModal headText={modalText.headText} bodyText={modalText.bodyText}  setShowConfirmModal={setShowConfirmModal} setModalResponse={setModalResponse} modalResponse={modalResponse}/>}

@@ -3,6 +3,7 @@ import { Routes, Route, Link } from 'react-router-dom';
 import MainRegestration from '../components/MainRegestration';
 import Content from '../components/Content';
 import logo from '../assets/logo.png'
+import PasswordResetForm from '../components/SuperAdmin/PasswordResetForm';
 const Dashboard = () => {
     return (
         <>
@@ -29,6 +30,32 @@ const Dashboard = () => {
                         </div>
 
                         <ul class="mt-8 space-y-2 tracking-wide">
+                            
+                            <li>
+                                <Link
+                                   to={'/dashboard/profile'}
+                                    class="group flex items-center space-x-4 rounded-md px-4 py-3 text-gray-600 dark:text-gray-300"
+                                >
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        class="h-5 w-5"
+                                        viewBox="0 0 20 20"
+                                        fill="currentColor"
+                                    >
+                                        <path
+                                            class="fill-current text-gray-300 group-hover:text-cyan-300"
+                                            fillRule="evenodd"
+                                            d="M2 6a2 2 0 012-2h4l2 2h4a2 2 0 012 2v1H8a3 3 0 00-3 3v1.5a1.5 1.5 0 01-3 0V6z"
+                                            clipRule="evenodd"
+                                        />
+                                        <path
+                                            class="fill-current text-gray-600 group-hover:text-cyan-600 dark:group-hover:text-sky-400"
+                                            d="M6 12a2 2 0 012-2h8a2 2 0 012 2v2a2 2 0 01-2 2H2h2a2 2 0 002-2v-2z"
+                                        />
+                                    </svg>
+                                    <span class="group-hover:text-gray-700 dark:group-hover:text-gray-50">Profile</span>
+                                </Link>
+                            </li>
                             <li>
                                 <Link
                                     to={'/dashboard/accountsetup'}
@@ -51,31 +78,6 @@ const Dashboard = () => {
                                     </svg>
                                     <span class="-mr-1 font-medium">Account Setup</span>
                                 </Link>
-                            </li>
-                            <li>
-                                <a
-                                    href="1"
-                                    class="group flex items-center space-x-4 rounded-md px-4 py-3 text-gray-600 dark:text-gray-300"
-                                >
-                                    <svg
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        class="h-5 w-5"
-                                        viewBox="0 0 20 20"
-                                        fill="currentColor"
-                                    >
-                                        <path
-                                            class="fill-current text-gray-300 group-hover:text-cyan-300"
-                                            fillRule="evenodd"
-                                            d="M2 6a2 2 0 012-2h4l2 2h4a2 2 0 012 2v1H8a3 3 0 00-3 3v1.5a1.5 1.5 0 01-3 0V6z"
-                                            clipRule="evenodd"
-                                        />
-                                        <path
-                                            class="fill-current text-gray-600 group-hover:text-cyan-600 dark:group-hover:text-sky-400"
-                                            d="M6 12a2 2 0 012-2h8a2 2 0 012 2v2a2 2 0 01-2 2H2h2a2 2 0 002-2v-2z"
-                                        />
-                                    </svg>
-                                    <span class="group-hover:text-gray-700 dark:group-hover:text-gray-50">Categories</span>
-                                </a>
                             </li>
                             <li>
                                 <a
@@ -176,7 +178,7 @@ const Dashboard = () => {
                 <div class="ml-auto mb-6 lg:w-[75%] xl:w-[80%] 2xl:w-[85%]">
                     <div class="sticky top-0 h-16 border-b bg-white dark:bg-gray-800 dark:border-gray-700 lg:py-2.5">
                         <div class="flex items-center justify-between space-x-4 px-6 2xl:container">
-                            <h5 hidden class="text-2xl font-medium text-gray-600 lg:block dark:text-white">Welcome to Fintex</h5>
+                            <h5 hidden class="text-2xl font-medium text-gray-600 lg:block dark:text-white">services provider: <b>Fintex</b></h5>
                             <button class="-mr-2 h-16 w-12 border-r lg:hidden dark:border-gray-700 dark:text-gray-300">
                                 <svg
                                     xmlns="http://www.w3.org/2000/svg"
@@ -276,7 +278,8 @@ const Dashboard = () => {
 
                     <div class="px-6 pt-6 2xl:container">
                         <Routes>
-                            <Route path='/' exect element={<Content />} />
+                            <Route path='/'  element={<Content />} />
+                            <Route path='/profile' element={<PasswordResetForm api={'api'}/>}/>
                             <Route path='/accountsetup' element={<MainRegestration />} />
                            
                         </Routes>
