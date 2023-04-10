@@ -16,7 +16,7 @@ const PasswordResetForm = () => {
         confirmnewpassword:'',
     })
    const [showConfirmModal,setShowConfirmModal]=useState(false)
-   const [modalResponse,setModalResponse]=useState(false)
+   const [modalResponse,setModalResponse]=useState("")
     const onChangeHandler=(event)=>{
         const {name,value}=event.target;
        setUserData(prevState=>({
@@ -24,13 +24,16 @@ const PasswordResetForm = () => {
         [name]:value,
        }))
     }
-    
+   if(modalResponse==='confirm')
+   {
+    console.log('====================================');
+    console.log(userData);
+    setModalResponse('cancel')
+    console.log('====================================');
+   }
     const submitHandler=(e)=>{
         e.preventDefault();
         setShowConfirmModal(true)
-       console.log('====================================');
-       console.log(userData);
-       console.log('====================================');
     }
     return (
         <>

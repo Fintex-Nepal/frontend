@@ -2,7 +2,7 @@ import React from 'react'
 
 const ConfirmModal = ({ setShowConfirmModal, setModalResponse,headText,bodyText }) => {
     const onConfirmHandler = () => {
-        setModalResponse(true);
+        setModalResponse('confirm');
         setShowConfirmModal(false)
     }
     
