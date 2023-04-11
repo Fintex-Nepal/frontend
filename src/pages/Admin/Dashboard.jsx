@@ -1,9 +1,9 @@
 import React from 'react'
 import { Routes, Route, Link } from 'react-router-dom';
-import MainRegestration from '../components/MainRegestration';
-import Content from '../components/Content';
-import logo from '../assets/logo.png'
-import PasswordResetForm from '../components/SuperAdmin/PasswordResetForm';
+import MainRegestration from './MainRegestration'
+import Content from './Content'
+import PasswordResetForm from '../../components/SuperAdmin/PasswordResetForm';
+import logo from '../../assets/logo.png'
 const Dashboard = () => {
     return (
         <>
@@ -60,7 +60,7 @@ const Dashboard = () => {
                                 <Link
                                     to={'/dashboard/accountsetup'}
                                     aria-label="dashboard"
-                                    class="relative flex items-center space-x-4 rounded-xl bg-gradient-to-r from-sky-600 to-cyan-400 px-4 py-3 text-white"
+                                    class="group flex items-center space-x-4 rounded-md px-4 py-3 text-gray-600 dark:text-gray-300"
                                 >
                                     <svg class="-ml-1 h-6 w-6" viewBox="0 0 24 24" fill="none">
                                         <path
@@ -279,7 +279,7 @@ const Dashboard = () => {
                     <div class="px-6 pt-6 2xl:container">
                         <Routes>
                             <Route path='/'  element={<Content />} />
-                            <Route path='/profile' element={<PasswordResetForm api={'api'}/>}/>
+                            <Route path='/profile' element={<PasswordResetForm/>}/>
                             <Route path='/accountsetup' element={<MainRegestration />} />
                            
                         </Routes>

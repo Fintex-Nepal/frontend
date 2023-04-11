@@ -2,7 +2,7 @@ import React from 'react'
 import { useState } from 'react';
 import axios from 'axios'
 import ConfirmModal from '../../utils/ConfirmModal'
-const PasswordResetForm = ({api}) => {
+const PasswordResetForm = () => {
 
    const modalText={
     headText:'Password Change',
@@ -25,14 +25,14 @@ const PasswordResetForm = ({api}) => {
    if(modalResponse==='confirm')
    {
     console.log('====================================');
-    console.log(userData);
+    console.log();
     console.log('====================================');
-    //   axios.get(api)
-    //   .then((res=>{
-    //     console.log(res.data);
-    //     setModalResponse('cancel')
-    //   }))
-    //   .catch(err=>console.log("Error"))
+      axios.get("api")
+      .then((res=>{
+        console.log(res.data);
+        setModalResponse('cancel')
+      }))
+      .catch(err=>console.log("Error"))
    
     
    }
@@ -40,7 +40,7 @@ const PasswordResetForm = ({api}) => {
         e.preventDefault();
         setShowConfirmModal(true)
     }
-    console.log(api);
+  
     return (
         <>
             {showConfirmModal &&<ConfirmModal headText={modalText.headText} bodyText={modalText.bodyText}  setShowConfirmModal={setShowConfirmModal} setModalResponse={setModalResponse} modalResponse={modalResponse}/>}

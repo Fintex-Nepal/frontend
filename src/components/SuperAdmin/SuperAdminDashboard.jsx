@@ -267,7 +267,7 @@ const SuperAdminDashboard = () => {
 
                     <div class="px-6 pt-6 2xl:container">
                         <Routes>
-                            <Route path='/profile' element={<PasswordResetForm api={'https://jsonplaceholder.typicode.com/todos/1'} />} />
+                            <Route path='/profile' element={<PasswordResetForm />} />
                             <Route path='/createadmin' element={<CreateAdmin />} />
                         </Routes>
                     </div>
