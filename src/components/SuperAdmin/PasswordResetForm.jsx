@@ -10,11 +10,11 @@ const PasswordResetForm = () => {
    } 
     const [userData,setUserData]=useState({
         currentPassword:'',
-        newpassword:'',
-        confirmnewpassword:'',
+        newPassword:'',
+        confirmNewPassword:'',
     })
-   const [showConfirmModal,setShowConfirmModal]=useState(false)
-   const [modalResponse,setModalResponse]=useState("")
+//    const [showConfirmModal,setShowConfirmModal]=useState(false)
+//    const [modalResponse,setModalResponse]=useState("")
     const onChangeHandler=(event)=>{
         const {name,value}=event.target;
        setUserData(prevState=>({
@@ -22,28 +22,48 @@ const PasswordResetForm = () => {
         [name]:value,
        }))
     }
-   if(modalResponse==='confirm')
-   {
-    console.log('====================================');
-    console.log();
-    console.log('====================================');
-      axios.get("api")
-      .then((res=>{
-        console.log(res.data);
-        setModalResponse('cancel')
-      }))
-      .catch(err=>console.log("Error"))
+//    if(modalResponse==='confirm')
+//    {
+//     console.log('====================================');
+//     console.log();
+//     console.log('====================================');
+//       axios.get("api")
+//       .then((res=>{
+//         console.log(res.data);
+//         setModalResponse('cancel')
+//       }))
+//       .catch(err=>console.log("Error"))
    
     
-   }
-    const submitHandler=(e)=>{
-        e.preventDefault();
-        setShowConfirmModal(true)
+//    }
+   const isPasswordValid = (password) => {
+    const regex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*()_+}{":;'?/>.<,])(?=.*[a-zA-Z]).{8,}$/;
+    return regex.test(password);
+}
+   const formSubmitHandler = (e) => {
+    e.preventDefault()
+    if (userData.newPassword !== userData.confirmNewPassword) {
+        alert('Passwords do not match')
+        return
     }
+    if (!isPasswordValid(userData.newPassword)) {
+        alert(
+            'Password must contain at least 8 characters, including 1 lowercase letter, 1 uppercase letter, and 1 digit'
+        )
+        return
+    }
+    else {
+        alert('Password Successfully Changed')
+    }
+    console.log('====================================');
+    console.log(userData);
+    console.log('====================================');
+
+}
   
     return (
         <>
-            {showConfirmModal &&<ConfirmModal headText={modalText.headText} bodyText={modalText.bodyText}  setShowConfirmModal={setShowConfirmModal} setModalResponse={setModalResponse} modalResponse={modalResponse}/>}
+            {/* {showConfirmModal &&<ConfirmModal headText={modalText.headText} bodyText={modalText.bodyText}  setShowConfirmModal={setShowConfirmModal} setModalResponse={setModalResponse} modalResponse={modalResponse}/>} */}
             <div className="mx-auto max-w-screen-xl px-4 py-16 sm:px-6 lg:px-8">
                 <div className="mx-auto max-w-lg">
                     <h1 className="text-center text-2xl font-bold text-indigo-600 sm:text-3xl">
@@ -55,7 +75,7 @@ const PasswordResetForm = () => {
                     </p>
 
                     <form
-                        onSubmit={submitHandler}
+                        onSubmit={formSubmitHandler}
                         className="mt-6 mb-0 space-y-4 rounded-lg p-4 shadow-lg sm:p-6 lg:p-8"
                     >
                         <p className="text-center text-lg font-medium">your credentials</p>
@@ -82,7 +102,7 @@ const PasswordResetForm = () => {
                                     className="w-full rounded-lg border-gray-200 p-4 pr-12 text-sm shadow-sm"
                                     placeholder="newpassword"
                                     onChange={onChangeHandler}
-                                    name='newpassword'
+                                    name='newPassword'
                                 />
                             </div>
                         </div>
@@ -96,7 +116,7 @@ const PasswordResetForm = () => {
                                     className="w-full rounded-lg border-gray-200 p-4 pr-12 text-sm shadow-sm"
                                     placeholder="Confirm Password"
                                     onChange={onChangeHandler}
-                                    name='confirmnewpassword'
+                                    name='confirmNewPassword'
                                 />
 
                                 <span

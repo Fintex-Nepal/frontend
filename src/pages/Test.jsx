@@ -11,10 +11,10 @@ const Test = () => {
         confirmPassword: '',
     });
 
-    // const isPasswordValid = (password) => {
-    //     const regex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*()_+}{":;'?/>.<,])(?=.*[a-zA-Z]).{8,}$/;
-    //     return regex.test(password);
-    // }
+    const isPasswordValid = (password) => {
+        const regex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*()_+}{":;'?/>.<,])(?=.*[a-zA-Z]).{8,}$/;
+        return regex.test(password);
+    }
 
     const signUpFormChangeHandler = (event) => {
         const { name, value } = event.target;
@@ -25,10 +25,23 @@ const Test = () => {
     }
     const formSubmitHandler = (e) => {
         e.preventDefault()
-        console.log('====================================');
-        console.log(loginData);
-        console.log('====================================');
-        naviate('/dashboard')
+        if (loginData.password !== loginData.confirmPassword) {
+            alert('Passwords do not match')
+            return
+        }
+        if (!isPasswordValid(loginData.password)) {
+            alert(
+                'Password must contain at least 8 characters, including 1 lowercase letter, 1 uppercase letter, and 1 digit'
+            )
+            return
+        }
+        else {
+            naviate('/dashboard')
+            console.log('====================================')
+            console.log(loginData)
+            console.log('====================================')
+        }
+
     }
     return (
         <>
