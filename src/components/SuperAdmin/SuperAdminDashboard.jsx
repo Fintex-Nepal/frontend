@@ -1,12 +1,13 @@
 import React from 'react'
 import { Routes, Route, Link } from 'react-router-dom'
 import PasswordResetForm from './PasswordResetForm'
-import logo from '../../assets/logo.png'
 import CreateAdmin from './CreateAdmin'
+import logo from '../../assets/logo.png'
 const SuperAdminDashboard = () => {
     return (
         <>
-            <body class="bg-gray-100 dark:bg-gray-900">
+          
+            <div class="bg-gray-100 dark:bg-gray-900">
                 <aside
                     class="fixed top-0 z-10 ml-[-100%] flex h-screen w-full flex-col justify-between border-r bg-white px-6 pb-3 transition duration-300 md:w-4/12 lg:ml-0 lg:w-[25%] xl:w-[20%] 2xl:w-[15%] dark:bg-gray-800 dark:border-gray-700"
                 >
@@ -270,9 +271,10 @@ const SuperAdminDashboard = () => {
                             <Route path='/profile' element={<PasswordResetForm />} />
                             <Route path='/createadmin' element={<CreateAdmin />} />
                         </Routes>
+                        
                     </div>
                 </div>
-            </body>
+            </div>
 
         </>
     )

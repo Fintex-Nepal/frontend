@@ -1,13 +1,13 @@
 import React from 'react'
 import { useState } from 'react';
-import axios from 'axios'
-import ConfirmModal from '../../utils/ConfirmModal'
+// import axios from 'axios'
+// import ConfirmModal from '../../utils/ConfirmModal'
 const PasswordResetForm = () => {
 
-   const modalText={
-    headText:'Password Change',
-    bodyText:"Are You sure you want to change test? It can't be ondone once changed."
-   } 
+//    const modalText={
+//     headText:'Password Change',
+//     bodyText:"Are You sure you want to change test? It can't be ondone once changed."
+//    } 
     const [userData,setUserData]=useState({
         currentPassword:'',
         newPassword:'',
