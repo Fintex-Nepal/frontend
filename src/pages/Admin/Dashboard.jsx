@@ -6,11 +6,18 @@ import PasswordResetForm from '../../components/SuperAdmin/PasswordResetForm';
 import logo from '../../assets/logo.png'
 import CreateClientUser from './CreateClientUser';
 import CreateStaff from './CreateStaff';
+import DropdownMenu from '../Test';
+import CreateStaffLogin from './CreateStaffLogin';
 const Dashboard = () => {
     // const [mobileView,setMobileView]=useState(false)
     // const sideBarMobleView=()=>{
     //     setMobileView(!mobileView);
     // }
+
+    const staffSubOption=[
+        'Create Staff',
+        'Create Staff Login',
+    ]
     return (
         <>
             <div class="bg-gray-100 dark:bg-gray-900">
@@ -85,32 +92,8 @@ const Dashboard = () => {
                                     <span class="-mr-1 font-medium">Account Setup</span>
                                 </Link>
                             </li>
-                            <li>
-                                <Link
-                                    to={'/dashboard/createstaff'}
-                                    class="group flex items-center space-x-4 rounded-md px-4 py-3 text-gray-600 dark:text-gray-300"
-                                >
-                                    <svg
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        class="h-5 w-5"
-                                        viewBox="0 0 20 20"
-                                        fill="currentColor"
-                                    >
-                                        <path
-                                            class="fill-current text-gray-600 group-hover:text-cyan-600 dark:group-hover:text-sky-400"
-                                            fillRule="evenodd"
-                                            d="M2 5a2 2 0 012-2h8a2 2 0 012 2v10a2 2 0 002 2H4a2 2 0 01-2-2V5zm3 1h6v4H5V6zm6 6H5v2h6v-2z"
-                                            clipRule="evenodd"
-                                        />
-                                        <path
-                                            class="fill-current text-gray-300 group-hover:text-cyan-300"
-                                            d="M15 7h1a2 2 0 012 2v5.5a1.5 1.5 0 01-3 0V7z"
-                                        />
-                                    </svg>
-                                    <span class="group-hover:text-gray-700 dark:group-hover:text-gray-50">Create Staff</span>
-                                </Link>
-                            </li>
-
+                            
+                              
                             <li>
                                 <Link
                                     to={'/dashboard/createUser'}
@@ -134,31 +117,7 @@ const Dashboard = () => {
                                     <span class="group-hover:text-gray-700 dark:group-hover:text-gray-50">Create User</span>
                                 </Link>
                             </li>
-                            <li>
-                                <a
-                                    href="1"
-                                    class="group flex items-center space-x-4 rounded-md px-4 py-3 text-gray-600 dark:text-gray-300"
-                                >
-                                    <svg
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        class="h-5 w-5"
-                                        viewBox="0 0 20 20"
-                                        fill="currentColor"
-                                    >
-                                        <path
-                                            class="fill-current text-gray-300 group-hover:text-cyan-300"
-                                            d="M4 4a2 2 0 00-2 2v1h16V6a2 2 0 00-2-2H4z"
-                                        />
-                                        <path
-                                            class="fill-current text-gray-600 group-hover:text-cyan-600 dark:group-hover:text-sky-400"
-                                            fillRule="evenodd"
-                                            d="M18 9H2v5a2 2 0 002 2h12a2 2 0 002-2V9zM4 13a1 1 0 011-1h1a1 1 0 110 2H5a1 1 0 01-1-1zm5-1a1 1 0 100 2h1a1 1 0 100-2H9z"
-                                            clipRule="evenodd"
-                                        />
-                                    </svg>
-                                    <span class="group-hover:text-gray-700 dark:group-hover:text-white">Finance</span>
-                                </a>
-                            </li>
+                            <DropdownMenu staffSubOption={staffSubOption} />
                         </ul>
                     </div>
 
@@ -290,6 +249,7 @@ const Dashboard = () => {
                             <Route path='/accountsetup' element={<MainRegestration />} />
                             <Route path='/createUser' element={<CreateClientUser />} />
                             <Route path='/createstaff' element={<CreateStaff/>} />
+                            <Route path='/createstafflogin' element={<CreateStaffLogin/>} />
                         </Routes>
                     </div>
                 </div>
