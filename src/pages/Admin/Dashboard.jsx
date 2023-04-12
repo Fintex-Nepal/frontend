@@ -1,15 +1,21 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Routes, Route, Link } from 'react-router-dom';
 import MainRegestration from './MainRegestration'
 import Content from './Content'
 import PasswordResetForm from '../../components/SuperAdmin/PasswordResetForm';
 import logo from '../../assets/logo.png'
+import CreateClientUser from './CreateClientUser';
+import CreateStaff from './CreateStaff';
 const Dashboard = () => {
+    // const [mobileView,setMobileView]=useState(false)
+    // const sideBarMobleView=()=>{
+    //     setMobileView(!mobileView);
+    // }
     return (
         <>
-
-            <body class="bg-gray-100 dark:bg-gray-900">
+            <div class="bg-gray-100 dark:bg-gray-900">
                 <aside
+                    // className={"btn-group pull-right " + (this.props.showBulkActions ? 'show' : 'hidden')}
                     class="fixed top-0 z-10 ml-[-100%] flex h-screen w-full flex-col justify-between border-r bg-white px-6 pb-3 transition duration-300 md:w-4/12 lg:ml-0 lg:w-[25%] xl:w-[20%] 2xl:w-[15%] dark:bg-gray-800 dark:border-gray-700"
                 >
                     <div>
@@ -21,19 +27,19 @@ const Dashboard = () => {
 
                         <div class="mt-8 text-center">
                             <img
-                                src="https://images.indianexpress.com/2023/02/salmankhan1200.jpg"
+                                src="https://article1000.com/wp-content/uploads/2017/08/bank-logo.jpg"
                                 alt=""
-                                class="m-auto h-10 w-10 rounded-full object-cover lg:h-28 lg:w-28"
+                                class="m-auto h-10 w-10 rounded-full object-fill lg:h-28 lg:w-28"
                             />
-                            <h5 class="mt-4 hidden text-xl font-semibold text-gray-600 lg:block dark:text-gray-300">Salman Khan</h5>
+                            <h5 class="mt-4 hidden text-xl font-semibold text-gray-600 lg:block dark:text-gray-300">Samiramrullah</h5>
                             <span class="hidden text-gray-400 lg:block">Admin</span>
                         </div>
 
                         <ul class="mt-8 space-y-2 tracking-wide">
-                            
+
                             <li>
                                 <Link
-                                   to={'/dashboard/profile'}
+                                    to={'/dashboard/profile'}
                                     class="group flex items-center space-x-4 rounded-md px-4 py-3 text-gray-600 dark:text-gray-300"
                                 >
                                     <svg
@@ -80,8 +86,8 @@ const Dashboard = () => {
                                 </Link>
                             </li>
                             <li>
-                                <a
-                                    href="1"
+                                <Link
+                                    to={'/dashboard/createstaff'}
                                     class="group flex items-center space-x-4 rounded-md px-4 py-3 text-gray-600 dark:text-gray-300"
                                 >
                                     <svg
@@ -101,12 +107,13 @@ const Dashboard = () => {
                                             d="M15 7h1a2 2 0 012 2v5.5a1.5 1.5 0 01-3 0V7z"
                                         />
                                     </svg>
-                                    <span class="group-hover:text-gray-700 dark:group-hover:text-gray-50">Reports</span>
-                                </a>
+                                    <span class="group-hover:text-gray-700 dark:group-hover:text-gray-50">Create Staff</span>
+                                </Link>
                             </li>
+
                             <li>
-                                <a
-                                    href="1"
+                                <Link
+                                    to={'/dashboard/createUser'}
                                     class="group flex items-center space-x-4 rounded-md px-4 py-3 text-gray-600 dark:text-gray-300"
                                 >
                                     <svg
@@ -124,8 +131,8 @@ const Dashboard = () => {
                                             d="M12 2.252A8.014 8.014 0 0117.748 8H12V2.252z"
                                         />
                                     </svg>
-                                    <span class="group-hover:text-gray-700 dark:group-hover:text-gray-50">Other data</span>
-                                </a>
+                                    <span class="group-hover:text-gray-700 dark:group-hover:text-gray-50">Create User</span>
+                                </Link>
                             </li>
                             <li>
                                 <a
@@ -179,7 +186,7 @@ const Dashboard = () => {
                     <div class="sticky top-0 h-16 border-b bg-white dark:bg-gray-800 dark:border-gray-700 lg:py-2.5">
                         <div class="flex items-center justify-between space-x-4 px-6 2xl:container">
                             <h5 hidden class="text-2xl font-medium text-gray-600 lg:block dark:text-white">services provider: <b>Fintex</b></h5>
-                            <button class="-mr-2 h-16 w-12 border-r lg:hidden dark:border-gray-700 dark:text-gray-300">
+                            <button onClick={(e) => console.log("Clicked")} class="-mr-2 h-16 w-12 border-r lg:hidden dark:border-gray-700 dark:text-gray-300">
                                 <svg
                                     xmlns="http://www.w3.org/2000/svg"
                                     class="my-auto h-6 w-6"
@@ -278,14 +285,15 @@ const Dashboard = () => {
 
                     <div class="px-6 pt-6 2xl:container">
                         <Routes>
-                            <Route path='/'  element={<Content />} />
-                            <Route path='/profile' element={<PasswordResetForm/>}/>
+                            <Route path='/' element={<Content />} />
+                            <Route path='/profile' element={<PasswordResetForm />} />
                             <Route path='/accountsetup' element={<MainRegestration />} />
-                           
+                            <Route path='/createUser' element={<CreateClientUser />} />
+                            <Route path='/createstaff' element={<CreateStaff/>} />
                         </Routes>
                     </div>
                 </div>
-            </body>
+            </div>
 
         </>
     )

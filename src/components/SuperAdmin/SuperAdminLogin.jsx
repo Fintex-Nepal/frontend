@@ -1,10 +1,11 @@
 import React from 'react'
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios'
 const SuperAdminLogin = () => {
     const naviate=useNavigate();
     const [userData,setUserDate]=useState({
-        email:'',
+        userName:'',
         password:'',
     })
 
@@ -18,6 +19,9 @@ const SuperAdminLogin = () => {
 
     const formSubmitHandler=(e)=>{
         e.preventDefault();
+        axios.post('https://d8e5-103-89-157-247.ngrok-free.app/superadmin/login',userData)
+        .then((res)=>console.log(res.data))
+        .catch(err=>console.log(err))
         naviate('/sadmindashboard')
         console.log('====================================');
         console.log(userData);
@@ -44,9 +48,9 @@ const SuperAdminLogin = () => {
                                     <p class="text-gray-500 dark:text-gray-400">Your credentials here</p>
                                     <form onSubmit={formSubmitHandler}  class="mt-4 lg:mt-7 ">
                                         <div class="">
-                                            <input type="email"
+                                            <input type="string"
                                                 class="w-full px-4 py-3 mt-2 bg-white rounded-lg lg:py-5 dark:text-gray-300 dark:bg-gray-700 -gray-800"
-                                                name="email" placeholder="Enter your email" 
+                                                name="userName" placeholder="Enter your email" 
                                                 onChange={onChangeHandle}
                                                 />
                                         </div>

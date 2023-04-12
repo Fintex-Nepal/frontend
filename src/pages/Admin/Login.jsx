@@ -3,18 +3,20 @@ import { useState } from 'react'
 import Navbar from '../../components/Navbar'
 import Footer from '../../components/Footer'
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 const Login = () => {
     const naviate = useNavigate();
     const [loginData, setLoginData] = useState({
-        userId: '',
+        userName: '',
         password: '',
         confirmPassword: '',
+        stayLogin:true,
     });
 
-    const isPasswordValid = (password) => {
-        const regex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*()_+}{":;'?/>.<,])(?=.*[a-zA-Z]).{8,}$/;
-        return regex.test(password);
-    }
+    // const isPasswordValid = (password) => {
+    //     const regex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*()_+}{":;'?/>.<,])(?=.*[a-zA-Z]).{8,}$/;
+    //     return regex.test(password);
+    // }
 
     const signUpFormChangeHandler = (event) => {
         const { name, value } = event.target;
@@ -25,22 +27,15 @@ const Login = () => {
     }
     const formSubmitHandler = (e) => {
         e.preventDefault()
-        if (loginData.password !== loginData.confirmPassword) {
-            alert('Passwords do not match')
-            return
-        }
-        if (!isPasswordValid(loginData.password)) {
-            alert(
-                'Password must contain at least 8 characters, including 1 lowercase letter, 1 uppercase letter, and 1 digit'
-            )
-            return
-        }
-        else {
+        axios.post('https://d8e5-103-89-157-247.ngrok-free.app/financecompany/login',loginData)
+        .then((res=>{
+            console.log(res.data);
             naviate('/dashboard')
-            console.log('====================================')
-            console.log(loginData)
-            console.log('====================================')
-        }
+        }))
+        .catch(err=>console.log(err))
+
+        
+        
 
     }
     return (
@@ -91,7 +86,7 @@ const Login = () => {
                                         <form onSubmit={formSubmitHandler}>
                                             <div class="mb-4">
                                                 <input type="text"
-                                                    name='userId'
+                                                    name='userName'
                                                     class="w-full py-4 rounded-lg px-7 dark:text-gray-300 dark:bg-gray-800"
                                                     placeholder="User Id" required
                                                     onChange={signUpFormChangeHandler}

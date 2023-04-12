@@ -1,12 +1,13 @@
 import React from 'react'
 import { Routes, Route, Link } from 'react-router-dom'
 import PasswordResetForm from './PasswordResetForm'
-import CreateAdmin from './CreateAdmin'
+import CreateAdmin from './CreateAdmin';
 import logo from '../../assets/logo.png'
+import Content from '../../pages/Admin/Content';
 const SuperAdminDashboard = () => {
     return (
         <>
-          
+
             <div class="bg-gray-100 dark:bg-gray-900">
                 <aside
                     class="fixed top-0 z-10 ml-[-100%] flex h-screen w-full flex-col justify-between border-r bg-white px-6 pb-3 transition duration-300 md:w-4/12 lg:ml-0 lg:w-[25%] xl:w-[20%] 2xl:w-[15%] dark:bg-gray-800 dark:border-gray-700"
@@ -23,7 +24,7 @@ const SuperAdminDashboard = () => {
 
                             <li>
                                 <Link to={'/sadmindashboard/profile'}
-                                     
+
                                     aria-label="dashboard"
                                     class="group flex items-center space-x-4 rounded-md px-4 py-3 text-gray-600 dark:text-gray-300"
                                 >
@@ -46,7 +47,7 @@ const SuperAdminDashboard = () => {
                             </li>
                             <li>
                                 <Link
-                                   to={'/sadmindashboard/createadmin'}
+                                    to={'/sadmindashboard/createadmin'}
                                     class="group flex items-center space-x-4 rounded-md px-4 py-3 text-gray-600 dark:text-gray-300"
                                 >
                                     <svg
@@ -146,23 +147,25 @@ const SuperAdminDashboard = () => {
                     </div>
 
                     <div class="-mx-6 flex items-center justify-between border-t px-6 pt-4 dark:border-gray-700">
-                        <button class="group flex items-center space-x-4 rounded-md px-4 py-3 text-gray-600 dark:text-gray-300">
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                class="h-6 w-6"
-                                fill="none"
-                                viewBox="0 0 24 24"
-                                stroke="currentColor"
-                            >
-                                <path
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                    strokeWidth="2"
-                                    d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"
-                                />
-                            </svg>
-                            <span class="group-hover:text-gray-700 dark:group-hover:text-white">Logout</span>
-                        </button>
+                        <Link to={'/sadminlogin'}>
+                            <button class="group flex items-center space-x-4 rounded-md px-4 py-3 text-gray-600 dark:text-gray-300">
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    class="h-6 w-6"
+                                    fill="none"
+                                    viewBox="0 0 24 24"
+                                    stroke="currentColor"
+                                >
+                                    <path
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                        strokeWidth="2"
+                                        d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"
+                                    />
+                                </svg>
+                                <span class="group-hover:text-gray-700 dark:group-hover:text-white">Logout</span>
+                            </button>
+                        </Link>
                     </div>
                 </aside>
                 <div class="ml-auto mb-6 lg:w-[75%] xl:w-[80%] 2xl:w-[85%]">
@@ -268,10 +271,11 @@ const SuperAdminDashboard = () => {
 
                     <div class="px-6 pt-6 2xl:container">
                         <Routes>
+                        <Route path='/' element={<Content/>} />
                             <Route path='/profile' element={<PasswordResetForm />} />
                             <Route path='/createadmin' element={<CreateAdmin />} />
                         </Routes>
-                        
+
                     </div>
                 </div>
             </div>

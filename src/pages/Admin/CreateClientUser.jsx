@@ -1,7 +1,7 @@
 import React from 'react'
 import { useState } from 'react';
 import axios from 'axios';
-const CreateAdmin = () => {
+const CreateClientUser = () => {
     const [formData, setFormData] = useState({
         name: '',
         userName: '',
@@ -12,6 +12,7 @@ const CreateAdmin = () => {
         email:'',
         role:'',
         createdBy:'',
+        isActive:true,
     });
 
     const onChangeHandler = (event) => {
@@ -21,7 +22,6 @@ const CreateAdmin = () => {
             [name]: value
         }))
     }
-
     const formSubmitHandler = (e) => {
         e.preventDefault();
         axios.post('https://d8e5-103-89-157-247.ngrok-free.app/superadmin/create-admin',formData)
@@ -35,7 +35,7 @@ const CreateAdmin = () => {
                     class="max-w-4xl px-4   mx-auto bg-white border shadow-sm dark:border-gray-900 dark:bg-gray-900 ">
                     <div class="mb-10 ">
                         <h2 class="pb-2 mb-2 text-xl font-bold text-gray-800 md:text-3xl dark:text-gray-300">
-                            Create Admin
+                            Create Client
                         </h2>
                         <p class="text-sm dark:text-gray-400">
                             This userid and password will be used by <b>Fintex</b> client
@@ -127,4 +127,4 @@ const CreateAdmin = () => {
     )
 }
 
-export default CreateAdmin
+export default CreateClientUser
