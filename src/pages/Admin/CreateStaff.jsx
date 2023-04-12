@@ -79,10 +79,10 @@ const CreateStaff = () => {
                 <div class="w-full px-4 md:w-1/2 lg:w-1/3">
                     <div class="mb-12">
                         <label for="" class="mb-3 block text-base font-medium text-black">
-                            Default Input
+                            Date Of Joining
                         </label>
                         <input
-                            type="text"
+                            type='date'
                             placeholder="Default Input"
                             class="border-form-stroke text-body-color placeholder-body-color focus:border-primary active:border-primary w-full rounded-lg border-[1.5px] py-3 px-5 font-medium outline-none transition disabled:cursor-default disabled:bg-[#F5F7FD]"
                         />
@@ -91,7 +91,7 @@ const CreateStaff = () => {
                 <div class="w-full px-4 md:w-1/2 lg:w-1/3">
                     <div class="mb-12">
                         <label for="" class="mb-3 block text-base font-medium text-black">
-                            Active Input
+                            Branch Name
                         </label>
                         <input
                             type="text"
