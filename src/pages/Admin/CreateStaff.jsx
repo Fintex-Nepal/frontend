@@ -103,13 +103,35 @@ const CreateStaff = () => {
                 <div class="w-full px-4 md:w-1/2 lg:w-1/3">
                     <div class="mb-12">
                         <label for="" class="mb-3 block text-base font-medium text-black">
-                            Disabled label
+                            PF Allowed
+                        </label>
+                        <select className='border-form-stroke text-body-color placeholder-body-color focus:border-primary active:border-primary w-full rounded-lg border-[1.5px] py-3 px-5 font-medium outline-none transition disabled:cursor-default disabled:bg-[#F5F7FD]'>
+                            <option>Yes</option>
+                            <option>No</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="w-full px-4 md:w-1/2 lg:w-1/3">
+                    <div class="mb-12">
+                        <label for="" class="mb-3 block text-base font-medium text-black">
+                            Salary Posting Account
                         </label>
                         <input
                             type="text"
-                            placeholder="Disabled Input"
-                            disabled=""
-                            class="border-form-stroke text-body-color placeholder-body-color focus:border-primary active:border-primary w-full rounded-lg border-[1.5px] py-3 px-5 font-medium outline-none transition disabled:cursor-default disabled:bg-[#F5F7FD]"
+                            placeholder="Salary Account Number"
+                            class="border-primary text-body-color placeholder-body-color focus:border-primary active:border-primary w-full rounded-lg border-[1.5px] py-3 px-5 font-medium outline-none transition disabled:cursor-default disabled:bg-[#F5F7FD]"
+                        />
+                    </div>
+                </div>
+                <div class="w-full px-4 md:w-1/2 lg:w-1/3">
+                    <div class="mb-12">
+                        <label for="" class="mb-3 block text-base font-medium text-black">
+                            Provident Posting Account
+                        </label>
+                        <input
+                            type="text"
+                            placeholder="Provident Account Number"
+                            class="border-primary text-body-color placeholder-body-color focus:border-primary active:border-primary w-full rounded-lg border-[1.5px] py-3 px-5 font-medium outline-none transition disabled:cursor-default disabled:bg-[#F5F7FD]"
                         />
                     </div>
                 </div>
@@ -117,11 +139,11 @@ const CreateStaff = () => {
                 <div class="w-full px-4 md:w-1/2 lg:w-1/3">
                     <div class="mb-12">
                         <label class="mb-3 block text-base font-medium text-black">
-                            Currency
+                            Salary Amount
                         </label>
                         <div class="flex items-center">
                             <span class="h-full rounded-tl-md rounded-bl-md border border-r-0 border-stroke bg-gray-1 py-3 px-4 text-base uppercase text-body-color">
-                                USD
+                                NPR
                             </span>
                             <input type="text" placeholder="Pimjo Labs" class="w-full rounded-br-md rounded-tr-md border border-form-stroke p-3 pl-5 text-black placeholder-[#929DA7] outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-[#F5F7FD]" />
                         </div>
@@ -130,22 +152,68 @@ const CreateStaff = () => {
                 <div class="w-full px-4 md:w-1/2 lg:w-1/3">
                     <div class="mb-12">
                         <label class="mb-3 block text-base font-medium text-black">
-                            Email
+                            Tax
                         </label>
                         <div class="relative">
-                            <input type="email" placeholder="Devid Jhon" class="w-full rounded-md border border-danger py-3 pl-5 pr-12 text-black placeholder-[#929DA7] outline-none transition" />
-                            <span class="absolute top-1/2 right-4 -translate-y-1/2">
-                                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M9.9987 2.50065C5.85656 2.50065 2.4987 5.85852 2.4987 10.0007C2.4987 14.1428 5.85656 17.5007 9.9987 17.5007C14.1408 17.5007 17.4987 14.1428 17.4987 10.0007C17.4987 5.85852 14.1408 2.50065 9.9987 2.50065ZM0.832031 10.0007C0.832031 4.93804 4.93609 0.833984 9.9987 0.833984C15.0613 0.833984 19.1654 4.93804 19.1654 10.0007C19.1654 15.0633 15.0613 19.1673 9.9987 19.1673C4.93609 19.1673 0.832031 15.0633 0.832031 10.0007Z" fill="#DC3545"></path>
-                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M10.0013 5.83398C10.4615 5.83398 10.8346 6.20708 10.8346 6.66732V10.0007C10.8346 10.4609 10.4615 10.834 10.0013 10.834C9.54106 10.834 9.16797 10.4609 9.16797 10.0007V6.66732C9.16797 6.20708 9.54106 5.83398 10.0013 5.83398Z" fill="#DC3545"></path>
-                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M9.16797 13.3333C9.16797 12.8731 9.54106 12.5 10.0013 12.5H10.0096C10.4699 12.5 10.843 12.8731 10.843 13.3333C10.843 13.7936 10.4699 14.1667 10.0096 14.1667H10.0013C9.54106 14.1667 9.16797 13.7936 9.16797 13.3333Z" fill="#DC3545"></path>
+                            <input type="text" placeholder="Tax percentage" class="w-full rounded-md border border-form-stroke p-3 pl-12 text-black placeholder-[#929DA7] outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-[#F5F7FD]" />
+                            <span class="absolute top-1/2 left-4 -translate-y-1/2">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M15 8.25H9m6 3H9m3 6l-3-3h1.5a3 3 0 100-6M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                                 </svg>
+
                             </span>
                         </div>
-                        <p class="mt-[10px] text-sm text-danger">Invalid email address</p>
                     </div>
                 </div>
                 <div class="w-full px-4 md:w-1/2 lg:w-1/3">
+                    <div class="mb-12">
+                        <label for="" class="mb-3 block text-base font-medium text-black">
+                            Facilities
+                        </label>
+                        <input
+                            type="text"
+                            placeholder="facilities"
+                            class="border-primary text-body-color placeholder-body-color focus:border-primary active:border-primary w-full rounded-lg border-[1.5px] py-3 px-5 font-medium outline-none transition disabled:cursor-default disabled:bg-[#F5F7FD]"
+                        />
+                    </div>
+                </div>
+                <div class="w-full px-4 md:w-1/2 lg:w-1/3">
+                    <div class="mb-12">
+                        <label for="" class="mb-3 block text-base font-medium text-black">
+                            Grade
+                        </label>
+                        <input
+                            type="text"
+                            placeholder="facilities"
+                            class="border-primary text-body-color placeholder-body-color focus:border-primary active:border-primary w-full rounded-lg border-[1.5px] py-3 px-5 font-medium outline-none transition disabled:cursor-default disabled:bg-[#F5F7FD]"
+                        />
+                    </div>
+                </div>
+                <div class="w-full px-4 md:w-1/2 lg:w-1/3">
+                    <div class="mb-12">
+                        <label for="" class="mb-3 block text-base font-medium text-black">
+                            PAN Number
+                        </label>
+                        <input
+                            type='text'
+                            placeholder="PAN Number"
+                            class="border-primary text-body-color placeholder-body-color focus:border-primary active:border-primary w-full rounded-lg border-[1.5px] py-3 px-5 font-medium outline-none transition disabled:cursor-default disabled:bg-[#F5F7FD]"
+                        />
+                    </div>
+                </div>
+                <div class="w-full px-4 md:w-1/2 lg:w-1/3">
+                    <div class="mb-12">
+                        <label for="" class="mb-3 block text-base font-medium text-black">
+                            Other Facilities-- Redundent
+                        </label>
+                        <input
+                            type='text'
+                            placeholder="PAN Number"
+                            class="border-primary text-body-color placeholder-body-color focus:border-primary active:border-primary w-full rounded-lg border-[1.5px] py-3 px-5 font-medium outline-none transition disabled:cursor-default disabled:bg-[#F5F7FD]"
+                        />
+                    </div>
+                </div>
+                {/* <div class="w-full px-4 md:w-1/2 lg:w-1/3">
                     <div class="mb-12">
                         <label class="mb-3 block text-base font-medium text-black">
                             Email
@@ -169,8 +237,15 @@ const CreateStaff = () => {
                         </div>
                         <p class="mt-[10px] text-sm text-success">Password is strong</p>
                     </div>
-                </div>
+                </div> */}
+                <button
+                    
+                    class="bg-blue-600 inline-flex items-center justify-center rounded-md py-4 px-10 text-center text-base font-normal text-white hover:bg-opacity-90 lg:px-8 xl:px-10"
+                >
+                    Create
+                </button>
             </div>
+
         </>
     )
 }
