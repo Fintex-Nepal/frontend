@@ -1,19 +1,14 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { Routes, Route, Link } from 'react-router-dom';
 import MainRegestration from './MainRegestration'
 import Content from './Content'
 import PasswordResetForm from '../../components/SuperAdmin/PasswordResetForm';
-import logo from '../../assets/logo.png'
 import CreateClientUser from './CreateClientUser';
 import CreateStaff from './CreateStaff';
-import DropdownMenu from '../Test';
+import DropdownMenu from '../../utils/DropDown'
 import CreateStaffLogin from './CreateStaffLogin';
+import logo from '../../assets/logo.png'
 const Dashboard = () => {
-    // const [mobileView,setMobileView]=useState(false)
-    // const sideBarMobleView=()=>{
-    //     setMobileView(!mobileView);
-    // }
-
     const staffSubOption=[
         'Create Staff',
         'Create Staff Login',
@@ -117,7 +112,7 @@ const Dashboard = () => {
                                     <span class="group-hover:text-gray-700 dark:group-hover:text-gray-50">Create User</span>
                                 </Link>
                             </li>
-                            <DropdownMenu staffSubOption={staffSubOption} />
+                            <DropdownMenu staffSubOption={staffSubOption} heading={'Staff'} />
                         </ul>
                     </div>
 
