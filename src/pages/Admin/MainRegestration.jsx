@@ -2,6 +2,31 @@ import React from 'react'
 import { useState } from 'react'
 const MainRegestration = () => {
     const [activeButton, setActiveButton] = useState('')
+    const [mainLedgerData, setMainLedgerData] = useState({});
+    const [groupData, setGroupData] = useState({})
+
+    const mainLedgerChangeHandler = (event) => {
+        const { name, value } = event.target;
+        setMainLedgerData(prevState => ({
+            ...prevState,
+            [name]: value
+        }))
+    }
+    const groupDataChangeHandler = (event) => {
+        const { name, value } = event.target;
+        setGroupData(prevState => ({
+            ...prevState,
+            [name]: value,
+        }))
+    }
+    const mainLedgerSubmitHandler = (e) => {
+        e.preventDefault();
+        console.log(mainLedgerData);
+    }
+    const groupSubmitHandler = (e) => {
+        e.preventDefault();
+        console.log(groupData);
+    }
     return (
         <>
             <div class="bg-gray-100  flex flex-wrap items-center justify-center">
@@ -24,69 +49,97 @@ const MainRegestration = () => {
             <div class="grid grid-cols-1 sm:grid-cols-2 h-screen">
                 <div class="  h-1/2 sm:h-full p-4">
                     <section class="max-w-4xl p-6 mx-auto bg-white rounded-md shadow-md dark:bg-gray-800">
-                        {activeButton==='mainledger' ? (
-                            <form>
-                                <h2 class="text-lg font-semibold text-gray-700 capitalize dark:text-white">Main Ledger</h2>
-                                <div class="grid grid-cols-1 gap-6 mt-4 sm:grid-cols-2">
-                                    <div>
-                                        <label class="text-gray-700 dark:text-gray-200" for="username">Account Type</label>
-                                        <select class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring">
-                                            <option>Assets</option>
-                                            <option>Liabilities</option>
-                                        </select>
-                                    </div>
-
-                                    <div>
-                                        <label class="text-gray-700 dark:text-gray-200" for="emailAddress">Group Name</label>
-                                        <input type="text" class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring" />
-                                    </div>
-
-                                    <div>
-                                        <label class="text-gray-700 dark:text-gray-200" for="password">Ledger Name</label>
-                                        <input type="text" class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring" />
-                                    </div>
-
-                                    <div>
-                                        <label class="text-gray-700 dark:text-gray-200" for="passwordConfirmation">लेजरको नाम</label>
-                                        <input type="text" class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring" />
-                                    </div>
-                                    <div>
-                                        <label class="text-gray-700 dark:text-gray-200" for="passwordConfirmation">Entry Date</label>
-                                        <input type='date' class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring" />
-                                    </div>
-                                    <div>
-                                        <label class="text-gray-700 dark:text-gray-200" for="passwordConfirmation">Sub Account</label>
-
-                                        <select class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring">
-                                            <option>Yes</option>
-                                            <option>No</option>
-                                        </select>
-                                    </div>
-                                    <div>
-                                        <label class="text-gray-700 dark:text-gray-200" for="password">GI Code</label>
-                                        <input type="text" class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring" />
-                                    </div>
-                                    <div>
-                                        <label class="text-gray-700 dark:text-gray-200" for="password">Deprection Rate</label>
-                                        <input type="text" class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring" />
-                                    </div>
-                                    <div>
-                                        <label class="text-gray-700 dark:text-gray-200" for="password">हिसाब न</label>
-                                        <input type="text" class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring" />
-                                    </div>
+                        {activeButton === 'mainledger' ? (
+                            <form onSubmit={mainLedgerSubmitHandler}>
+                            <h2 class="text-lg font-semibold text-gray-700 capitalize dark:text-white">Main Ledger</h2>
+                            <div class="grid grid-cols-1 gap-6 mt-4 sm:grid-cols-2">
+                                <div>
+                                    <label class="text-gray-700 dark:text-gray-200" for="username">Account Type</label>
+                                    <select name='accountType' required onChange={mainLedgerChangeHandler} class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring">
+                                        <option>Assets</option>
+                                        <option>Liabilities</option>
+                                    </select>
                                 </div>
 
-                                <div class="flex justify-end mt-6">
-                                    <button class="px-8 py-2.5 leading-5 text-white transition-colors duration-300 transform bg-gray-700 rounded-md hover:bg-gray-600 focus:outline-none focus:bg-gray-600">Save</button>
+                                <div>
+                                    <label class="text-gray-700 dark:text-gray-200" for="emailAddress">Group Name</label>
+                                    <input type="text" class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring"
+                                        name='groupName'
+                                        required
+                                        onChange={mainLedgerChangeHandler}
+                                    />
                                 </div>
-                            </form>
+
+                                <div>
+                                    <label class="text-gray-700 dark:text-gray-200" for="password">Ledger Name</label>
+                                    <input type="text" class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring"
+                                        name='ledgerName'
+                                        required
+                                        onChange={mainLedgerChangeHandler}
+                                    />
+                                </div>
+
+                                <div>
+                                    <label class="text-gray-700 dark:text-gray-200" for="passwordConfirmation">लेजरको नाम</label>
+                                    <input type="text" class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring"
+                                        name='लेजरको नाम'
+                                        required
+                                        onChange={mainLedgerChangeHandler}
+                                    />
+                                </div>
+                                <div>
+                                    <label class="text-gray-700 dark:text-gray-200" for="passwordConfirmation">Entry Date</label>
+                                    <input type='date' class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring"
+                                        name='entryData'
+                                        required
+                                        onChange={mainLedgerChangeHandler}
+                                    />
+                                </div>
+                                <div>
+                                    <label class="text-gray-700 dark:text-gray-200" for="passwordConfirmation">Sub Account</label>
+
+                                    <select name='subAccount' required onChange={mainLedgerChangeHandler} class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring">
+                                        <option>Yes</option>
+                                        <option>No</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label class="text-gray-700 dark:text-gray-200" for="password">GI Code</label>
+                                    <input type="text" class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring"
+                                        name='giCode'
+                                        required
+                                        onChange={mainLedgerChangeHandler}
+                                    />
+                                </div>
+                                <div>
+                                    <label class="text-gray-700 dark:text-gray-200" for="password">Deprection Rate</label>
+                                    <input type="text" class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring"
+                                        name='deprectionRate'
+                                        required
+                                        onChange={mainLedgerChangeHandler}
+                                    />
+                                </div>
+                                <div>
+                                    <label class="text-gray-700 dark:text-gray-200" for="password">हिसाब न</label>
+                                    <input type="text" class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring"
+                                        name='हिसाब न'
+                                        required
+                                        onChange={mainLedgerChangeHandler}
+                                    />
+                                </div>
+                            </div>
+
+                            <div class="flex justify-end mt-6">
+                                <button type='submit' class="px-8 py-2.5 leading-5 text-white transition-colors duration-300 transform bg-gray-700 rounded-md hover:bg-gray-600 focus:outline-none focus:bg-gray-600">Save</button>
+                            </div>
+                        </form>
                         ) : (
-                            <form>
-                                <h2 class="text-lg font-semibold text-gray-700 capitalize dark:text-white">Main Ledger</h2>
+                            <form onChange={groupSubmitHandler}>
+                                <h2 class="text-lg font-semibold text-gray-700 capitalize dark:text-white">Group Setup</h2>
                                 <div class="grid grid-cols-1 gap-6 mt-4 sm:grid-cols-2">
                                     <div>
                                         <label class="text-gray-700 dark:text-gray-200" for="username">Account Type</label>
-                                        <select class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring">
+                                        <select name='accountName' required onChange={groupDataChangeHandler} class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring">
                                             <option>Assets</option>
                                             <option>Liabilities</option>
                                         </select>
@@ -94,31 +147,51 @@ const MainRegestration = () => {
 
                                     <div>
                                         <label class="text-gray-700 dark:text-gray-200" for="emailAddress">Group Name</label>
-                                        <input type="text" class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring" />
+                                        <input type="text" class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring"
+                                            name='groupName'
+                                            required
+                                            onChange={groupDataChangeHandler}
+                                        />
                                     </div>
 
                                     <div>
                                         <label class="text-gray-700 dark:text-gray-200" for="password">समुहको नाम</label>
-                                        <input type="text" class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring" />
+                                        <input type="text" class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring"
+                                            name='समुहको नाम'
+                                            required
+                                            onChange={groupDataChangeHandler}
+                                        />
                                     </div>
                                     <div>
                                         <label class="text-gray-700 dark:text-gray-200" for="passwordConfirmation">Entry Date</label>
-                                        <input type='date' class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring" />
+                                        <input type='date' class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring"
+                                            name='entryDate'
+                                            required
+                                            onChange={groupDataChangeHandler}
+                                        />
                                     </div>
-                                    
+
                                     <div>
                                         <label class="text-gray-700 dark:text-gray-200" for="password">GI Code</label>
-                                        <input type="text" class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring" />
+                                        <input type="text" class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring"
+                                            name='giCode'
+                                            required
+                                            onChange={groupDataChangeHandler}
+                                        />
                                     </div>
                                     <div>
                                         <label class="text-gray-700 dark:text-gray-200" for="password">Schedule</label>
-                                        <input type="text" class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring" />
+                                        <input type="text" class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring"
+                                            name='schedule'
+                                            required
+                                            onChange={groupDataChangeHandler}
+                                        />
                                     </div>
 
                                 </div>
 
                                 <div class="flex justify-end mt-6">
-                                    <button class="px-8 py-2.5 leading-5 text-white transition-colors duration-300 transform bg-gray-700 rounded-md hover:bg-gray-600 focus:outline-none focus:bg-gray-600">Save</button>
+                                    <button type='submit' class="px-8 py-2.5 leading-5 text-white transition-colors duration-300 transform bg-gray-700 rounded-md hover:bg-gray-600 focus:outline-none focus:bg-gray-600">Save</button>
                                 </div>
                             </form>
                         )}
