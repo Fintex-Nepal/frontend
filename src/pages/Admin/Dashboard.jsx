@@ -8,11 +8,13 @@ import CreateStaff from './CreateStaff';
 import DropdownMenu from '../../utils/DropDown'
 import CreateStaffLogin from './CreateStaffLogin';
 import logo from '../../assets/logo.png'
-import MultiLevelDropdown from '../Test';
+import StaffInfo from './StaffInfo';
+
 const Dashboard = () => {
     const staffSubOption=[
         'Create Staff',
         'Create Staff Login',
+        'Staff Info'
     ]
     return (
         <>
@@ -248,6 +250,7 @@ const Dashboard = () => {
                             <Route path='/createUser' element={<CreateClientUser />} />
                             <Route path='/createstaff' element={<CreateStaff/>} />
                             <Route path='/createstafflogin' element={<CreateStaffLogin/>} />
+                            <Route path='/staffinfo' element={<StaffInfo/>} />
                         </Routes>
                     </div>
                 </div>

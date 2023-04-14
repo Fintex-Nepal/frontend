@@ -47,7 +47,12 @@ const MainRegestration = () => {
                 </div>
 
             </div>
-            <div class="grid grid-cols-1 sm:grid-cols-2 h-screen">
+            {/* <div class="flex flex-wrap justify-center">
+                <button class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded m-2">Button 1</button>
+                <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded m-2">Button 2</button>
+            </div> */}
+
+            <div class="grid grid-cols-1  sm:grid-cols-2 h-screen">
                 <div class="  h-1/2 sm:h-full p-4">
                     <section class="max-w-4xl p-6 mx-auto bg-white rounded-md shadow-md dark:bg-gray-800">
                         {activeButton === 'mainledger' ? (
@@ -58,6 +63,7 @@ const MainRegestration = () => {
                                     <div>
                                         <label class="text-gray-700 dark:text-gray-200" for="username">Account Type</label>
                                         <select name='accountType' required onChange={mainLedgerChangeHandler} class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring">
+                                            <option value="none" selected disabled hidden>Select Account Type</option>
                                             <option>Assets</option>
                                             <option>Liabilities</option>
                                         </select>
@@ -86,6 +92,7 @@ const MainRegestration = () => {
                                             required
                                             onChange={mainLedgerChangeHandler}
                                         />
+                                        
                                     </div>
 
                                     <div>
@@ -141,6 +148,7 @@ const MainRegestration = () => {
                                     <div>
                                         <label class="text-gray-700 dark:text-gray-200" for="username">Account Type</label>
                                         <select name='accountName' required onChange={groupDataChangeHandler} class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring">
+                                            <option value="none" selected disabled hidden>Select Account Type</option>
                                             <option>Assets</option>
                                             <option>Liabilities</option>
                                         </select>
@@ -204,64 +212,125 @@ const MainRegestration = () => {
                             <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
                                 <div class="inline-block min-w-full py-2 sm:px-6 lg:px-8">
                                     <div class="overflow-hidden">
-                                        <table
-                                            class="min-w-full border text-center text-sm font-light dark:border-neutral-500">
-                                            <thead class="border-b font-medium dark:border-neutral-500">
-                                                <tr>
-                                                    <th
-                                                        scope="col"
-                                                        class="border-r px-6 py-4 dark:border-neutral-500">
-                                                        S.No.
-                                                    </th>
-                                                    <th
-                                                        scope="col"
-                                                        class="border-r px-6 py-4 dark:border-neutral-500">
-                                                        GI No.
-                                                    </th>
-                                                    <th
-                                                        scope="col"
-                                                        class="border-r px-6 py-4 dark:border-neutral-500">
-                                                        Ledger Name
-                                                    </th>
-                                                    <th
-                                                        scope="col"
-                                                        class="border-r px-6 py-4 dark:border-neutral-500">
-                                                        लेजरको नाम
-                                                    </th>
-                                                    <th
-                                                        scope="col"
-                                                        class="border-r px-6 py-4 dark:border-neutral-500">
-                                                        Schedule
-                                                    </th>
-                                                </tr>
+                                        {activeButton === 'mainledger' ? (
+                                            <table
+                                                class="min-w-full border text-center text-sm font-light dark:border-neutral-500">
+                                                <thead class="border-b font-medium dark:border-neutral-500">
+                                                    <tr>
+                                                        <th
+                                                            scope="col"
+                                                            class="border-r px-6 py-4 dark:border-neutral-500">
+                                                            S.No.
+                                                        </th>
+                                                        <th
+                                                            scope="col"
+                                                            class="border-r px-6 py-4 dark:border-neutral-500">
+                                                            GI No.
+                                                        </th>
+                                                        <th
+                                                            scope="col"
+                                                            class="border-r px-6 py-4 dark:border-neutral-500">
+                                                            Ledger Name
+                                                        </th>
+                                                        <th
+                                                            scope="col"
+                                                            class="border-r px-6 py-4 dark:border-neutral-500">
+                                                            समुहको नाम
+                                                        </th>
+                                                        <th
+                                                            scope="col"
+                                                            class="border-r px-6 py-4 dark:border-neutral-500">
+                                                            Schedule
+                                                        </th>
+                                                    </tr>
 
-                                            </thead>
-                                            <tbody>
-                                                <tr class="border-b dark:border-neutral-500">
-                                                    <td
-                                                        class="whitespace-nowrap border-r px-6 py-4 font-medium dark:border-neutral-500">
-                                                        1
-                                                    </td>
-                                                    <td
-                                                        class="whitespace-nowrap border-r px-6 py-4 dark:border-neutral-500">
-                                                        Mark
-                                                    </td>
-                                                    <td
-                                                        class="whitespace-nowrap border-r px-6 py-4 dark:border-neutral-500">
-                                                        Otto
-                                                    </td>
-                                                    <td
-                                                        class="whitespace-nowrap border-r px-6 py-4 dark:border-neutral-500">
-                                                        Otto
-                                                    </td>
-                                                    <td
-                                                        class="whitespace-nowrap border-r px-6 py-4 dark:border-neutral-500">
-                                                        Otto
-                                                    </td>
-                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr class="border-b dark:border-neutral-500">
+                                                        <td
+                                                            class="whitespace-nowrap border-r px-6 py-4 font-medium dark:border-neutral-500">
+                                                            1
+                                                        </td>
+                                                        <td
+                                                            class="whitespace-nowrap border-r px-6 py-4 dark:border-neutral-500">
+                                                            Mark
+                                                        </td>
+                                                        <td
+                                                            class="whitespace-nowrap border-r px-6 py-4 dark:border-neutral-500">
+                                                            Otto
+                                                        </td>
+                                                        <td
+                                                            class="whitespace-nowrap border-r px-6 py-4 dark:border-neutral-500">
+                                                            Otto
+                                                        </td>
+                                                        <td
+                                                            class="whitespace-nowrap border-r px-6 py-4 dark:border-neutral-500">
+                                                            Otto
+                                                        </td>
+                                                    </tr>
 
-                                            </tbody>
-                                        </table>
+                                                </tbody>
+                                            </table>
+                                        ) : (
+                                            <table
+                                                class="min-w-full border text-center text-sm font-light dark:border-neutral-500">
+                                                <thead class="border-b font-medium dark:border-neutral-500">
+                                                    <tr>
+                                                        <th
+                                                            scope="col"
+                                                            class="border-r px-6 py-4 dark:border-neutral-500">
+                                                            S.No.
+                                                        </th>
+                                                        <th
+                                                            scope="col"
+                                                            class="border-r px-6 py-4 dark:border-neutral-500">
+                                                            Group No.
+                                                        </th>
+                                                        <th
+                                                            scope="col"
+                                                            class="border-r px-6 py-4 dark:border-neutral-500">
+                                                            Group Name
+                                                        </th>
+                                                        <th
+                                                            scope="col"
+                                                            class="border-r px-6 py-4 dark:border-neutral-500">
+                                                            लेजरको नाम
+                                                        </th>
+                                                        <th
+                                                            scope="col"
+                                                            class="border-r px-6 py-4 dark:border-neutral-500">
+                                                            Schedule
+                                                        </th>
+                                                    </tr>
+
+                                                </thead>
+                                                <tbody>
+                                                    <tr class="border-b dark:border-neutral-500">
+                                                        <td
+                                                            class="whitespace-nowrap border-r px-6 py-4 font-medium dark:border-neutral-500">
+                                                            1
+                                                        </td>
+                                                        <td
+                                                            class="whitespace-nowrap border-r px-6 py-4 dark:border-neutral-500">
+                                                            Mark
+                                                        </td>
+                                                        <td
+                                                            class="whitespace-nowrap border-r px-6 py-4 dark:border-neutral-500">
+                                                            Otto
+                                                        </td>
+                                                        <td
+                                                            class="whitespace-nowrap border-r px-6 py-4 dark:border-neutral-500">
+                                                            Otto
+                                                        </td>
+                                                        <td
+                                                            class="whitespace-nowrap border-r px-6 py-4 dark:border-neutral-500">
+                                                            Otto
+                                                        </td>
+                                                    </tr>
+
+                                                </tbody>
+                                            </table>
+                                        )}
                                     </div>
                                 </div>
                             </div>

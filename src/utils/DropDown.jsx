@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { ChevronDownIcon } from "@heroicons/react/solid";
-import  { useState } from "react";
+import { useState } from "react";
 function DropdownMenu({ staffSubOption, heading }) {
     const [isOpen, setIsOpen] = useState(false);
     return (
@@ -19,10 +19,10 @@ function DropdownMenu({ staffSubOption, heading }) {
             </button>
             <div
                 className={`${isOpen ? "block" : "hidden"
-                    } absolute z-10 w-full mt-2 bg-white rounded-md shadow-lg`}
+                    } absolute z-10 w-full bg-white rounded-md shadow-lg`}
             >
-                <ul className="py-1">
-                    <li className="relative px-4 pt-2">
+                <ul className="">
+                    <li className="relative px-4 ">
                         {/* <button
                             type="button"
                             className="flex items-center justify-between w-full text-sm font-medium text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100"
@@ -45,10 +45,9 @@ function DropdownMenu({ staffSubOption, heading }) {
                                 <Link
                                     to={`${itm.replace(/\s/g, "").toLowerCase()}`}
                                     className="relative px-4 ">
-                                    <button
+                                    <button style={{ height: '3rem' }}
                                         type="button"
                                         className="flex rounded items-center justify-between w-full text-sm font-medium text-gray-700 hover:bg-gray-100 focus:outline-none  pl-6"
-                                        onClick={() => console.log("Second-level item clicked!")}
                                     >
                                         <span>{itm}</span>
 
