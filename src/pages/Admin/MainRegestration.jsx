@@ -53,6 +53,7 @@ const MainRegestration = () => {
                         {activeButton === 'mainledger' ? (
                             <form onSubmit={mainLedgerSubmitHandler}>
                                 <h2 class="text-lg font-semibold text-gray-700 capitalize dark:text-white">Main Ledger</h2>
+
                                 <div class="grid grid-cols-1 gap-6 mt-4 sm:grid-cols-2">
                                     <div>
                                         <label class="text-gray-700 dark:text-gray-200" for="username">Account Type</label>
@@ -134,7 +135,7 @@ const MainRegestration = () => {
                                 </div>
                             </form>
                         ) : (
-                            <form onChange={groupSubmitHandler}>
+                            <form onSubmit={groupSubmitHandler}>
                                 <h2 class="text-lg font-semibold text-gray-700 capitalize dark:text-white">Group Setup</h2>
                                 <div class="grid grid-cols-1 gap-6 mt-4 sm:grid-cols-2">
                                     <div>
