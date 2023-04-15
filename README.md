@@ -40,3 +40,46 @@
 
 # dependencies
   * axios
+
+
+# Main Api link
+  * https://ac86-103-89-157-243.ngrok-free.app
+
+
+
+
+  ## Admin:
+  {
+  "userName": "samiradmin",
+  "email": "samiramrullah@gmail.com",
+  "name": "Samir Admin",
+  "password": "Hello@1234",
+  "confirmPassword": "Test@123",
+  "createdBy": "Samir",
+  "companyName": "Fintex",
+  "branchName": "Birgunj",
+  "phoneNumber": "9823231006",
+  "isActive": true,
+  "role":0
+}
+
+
+# Api ready for following options:
+  ## SuperAdmin
+1. Login
+2. Create Admin
+3. Get Users
+
+## Finance Company
+1. Login
+2. Register
+3. Update Password
+4. Update User Profile
+5. Get User By UserName
+6. Get User By Id
+7. Get Users
+8. Create Employee
+9. Update Employee Profile
+10. Get Employe By UserName
+11. Get Employee By Id
+12. Get Employess

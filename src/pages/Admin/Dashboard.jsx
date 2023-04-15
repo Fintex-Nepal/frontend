@@ -9,18 +9,20 @@ import DropdownMenu from '../../utils/DropDown'
 import CreateStaffLogin from './CreateStaffLogin';
 import logo from '../../assets/logo.png'
 import StaffInfo from './StaffInfo';
+// import Test from '../Test';
 
 const Dashboard = () => {
     const staffSubOption=[
-        'Create Staff',
-        'Create Staff Login',
-        'Staff Info'
+        'Create Employee',
+        'Create Employee Login',
+        'Employee Info',
+        
     ]
     return (
         <>
-            <div class=" dark:bg-gray-900">
+            <div class=" ">
                 <aside
-                    // className={"btn-group pull-right " + (this.props.showBulkActions ? 'show' : 'hidden')}
+                    
                     class="fixed top-0 z-10 ml-[-100%] flex h-screen w-full flex-col justify-between border-r bg-white px-6 pb-3 transition duration-300 md:w-4/12 lg:ml-0 lg:w-[25%] xl:w-[20%] 2xl:w-[15%] dark:bg-gray-800 dark:border-gray-700"
                 >
                     <div>
@@ -115,7 +117,9 @@ const Dashboard = () => {
                                     <span class="group-hover:text-gray-700 dark:group-hover:text-gray-50">Create User</span>
                                 </Link>
                             </li>
-                            <DropdownMenu staffSubOption={staffSubOption} heading={'Staff'} />
+                            <DropdownMenu staffSubOption={staffSubOption} heading={'Employee'} />
+                            
+                            
                             
                             
                         </ul>
@@ -144,7 +148,7 @@ const Dashboard = () => {
                 <div class="ml-auto mb-6 lg:w-[75%] xl:w-[80%] 2xl:w-[85%]">
                     <div class="sticky top-0 h-16 border-b bg-white dark:bg-gray-800 dark:border-gray-700 lg:py-2.5">
                         <div class="flex items-center justify-between space-x-4 px-6 2xl:container">
-                            <h5 hidden class="text-2xl font-medium text-gray-600 lg:block dark:text-white">services provider: <b>Fintex</b></h5>
+                            <h5 hidden class="text-2xl font-medium text-gray-600 lg:block dark:text-white"><b>Fintex</b></h5>
                             <button onClick={(e) => console.log("Clicked")} class="-mr-2 h-16 w-12 border-r lg:hidden dark:border-gray-700 dark:text-gray-300">
                                 <svg
                                     xmlns="http://www.w3.org/2000/svg"
@@ -248,9 +252,9 @@ const Dashboard = () => {
                             <Route path='/profile' element={<PasswordResetForm />} />
                             <Route path='/accountsetup' element={<MainRegestration />} />
                             <Route path='/createUser' element={<CreateClientUser />} />
-                            <Route path='/createstaff' element={<CreateStaff/>} />
-                            <Route path='/createstafflogin' element={<CreateStaffLogin/>} />
-                            <Route path='/staffinfo' element={<StaffInfo/>} />
+                            <Route path='/createemployee' element={<CreateStaff/>} />
+                            <Route path='/createemployeelogin' element={<CreateStaffLogin/>} />
+                            <Route path='/employeeinfo' element={<StaffInfo/>} />
                         </Routes>
                     </div>
                 </div>

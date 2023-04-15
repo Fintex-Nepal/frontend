@@ -3,29 +3,27 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios'
 const SuperAdminLogin = () => {
-    const naviate=useNavigate();
-    const [userData,setUserDate]=useState({
-        userName:'',
-        password:'',
+    const naviate = useNavigate();
+    const [userData, setUserDate] = useState({
+        userName: '',
+        password: '',
     })
 
-    const onChangeHandle=(event)=>{
-        const {name,value}=event.target;
-        setUserDate(prevState=>({
+    const onChangeHandle = (event) => {
+        const { name, value } = event.target;
+        setUserDate(prevState => ({
             ...prevState,
-            [name]:value
-        }))        
+            [name]: value
+        }))
     }
-
-    const formSubmitHandler=(e)=>{
+    const formSubmitHandler = (e) => {
         e.preventDefault();
-        axios.post('https://d8e5-103-89-157-247.ngrok-free.app/superadmin/login',userData)
-        .then((res)=>console.log(res.data))
-        .catch(err=>console.log(err))
-        naviate('/sadmindashboard')
-        console.log('====================================');
-        console.log(userData);
-        console.log('====================================');
+        axios.post('https://ac86-103-89-157-243.ngrok-free.app/superadmin/login', userData)
+            .then((res) => {
+                console.log(res.data);
+                naviate('/sadmindashboard')
+            })
+            .catch(err => console.log(err))
     }
     return (
         <>
@@ -46,13 +44,13 @@ const SuperAdminLogin = () => {
                                     <h2 class="mb-4 text-2xl font-bold text-gray-700 lg:mb-7 md:text-5xl dark:text-gray-300">
                                         Admin Login account</h2>
                                     <p class="text-gray-500 dark:text-gray-400">Your credentials here</p>
-                                    <form onSubmit={formSubmitHandler}  class="mt-4 lg:mt-7 ">
+                                    <form onSubmit={formSubmitHandler} class="mt-4 lg:mt-7 ">
                                         <div class="">
                                             <input type="string"
                                                 class="w-full px-4 py-3 mt-2 bg-white rounded-lg lg:py-5 dark:text-gray-300 dark:bg-gray-700 -gray-800"
-                                                name="userName" placeholder="Enter your email" 
+                                                name="userName" placeholder="Enter your email"
                                                 onChange={onChangeHandle}
-                                                />
+                                            />
                                         </div>
                                         <div class="mt-4 lg:mt-7">
                                             <div>
@@ -61,7 +59,7 @@ const SuperAdminLogin = () => {
                                                         class="w-full px-4 py-3 bg-white rounded-lg lg:py-5 dark:text-gray-300 dark:bg-gray-700 -gray-800 "
                                                         name="password" placeholder="Enter password"
                                                         onChange={onChangeHandle}
-                                                        />
+                                                    />
                                                     {/* <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                                         class="absolute right-0 mr-3 dark:text-gray-300" fill="currentColor"
                                                         class="bi bi-eye-slash" viewBox="0 0 16 16">

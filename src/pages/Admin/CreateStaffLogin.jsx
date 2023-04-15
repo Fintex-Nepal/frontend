@@ -65,11 +65,11 @@ const CreateStaffLogin = () => {
                     <div class="w-full px-4 md:w-1/2 lg:w-1/3">
                         <div class="mb-12">
                             <label class="mb-3 block text-base font-medium text-black">
-                                Designation
+                                Role
                             </label>
                             <div class="relative">
                                 <input type="text" placeholder="Pimjo Labs" class="w-full rounded-md border border-form-stroke p-3 pl-12 text-black placeholder-[#929DA7] outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-[#F5F7FD]"
-                                    name='designation'
+                                    name='role'
                                     required
                                     onChange={fromChangeHandler}
                                 />
