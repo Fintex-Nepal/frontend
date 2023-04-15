@@ -1,18 +1,9 @@
 import React from 'react'
 import { useState } from 'react';
 import axios from 'axios';
+import './style.css'
 const CreateAdmin = () => {
-    const [formData, setFormData] = useState({
-        name: '',
-        userName: '',
-        password: '',
-        confirmPassword: '',
-        companyName: '',
-        branchName: '',
-        email:'',
-        role:'',
-        createdBy:'',
-    });
+    const [formData, setFormData] = useState({});
 
     const onChangeHandler = (event) => {
         const { name, value } = event.target;
@@ -24,105 +15,102 @@ const CreateAdmin = () => {
 
     const formSubmitHandler = (e) => {
         e.preventDefault();
-        axios.post('https://d8e5-103-89-157-247.ngrok-free.app/superadmin/create-admin',formData)
-        .then((res)=>console.log(res.data))
-        .catch(err=>console.log(err))
+        axios.post('https://d8e5-103-89-157-247.ngrok-free.app/superadmin/create-admin', formData)
+            .then((res) => console.log(res.data))
+            .catch(err => console.log(err))
     }
     return (
         <>
-            <section class=" bg-stone-100 font-poppins dark:bg-gray-800">
-                <div
-                    class="max-w-4xl px-4   mx-auto bg-white border shadow-sm dark:border-gray-900 dark:bg-gray-900 ">
-                    <div class="mb-10 ">
-                        <h2 class="pb-2 mb-2 text-xl font-bold text-gray-800 md:text-3xl dark:text-gray-300">
-                            Create Admin
-                        </h2>
-                        <p class="text-sm dark:text-gray-400">
-                            This userid and password will be used by <b>Fintex</b> client
-                        </p>
-                    </div>
-                    <form onSubmit={formSubmitHandler}>
-                        <div class="mb-6">
-                            <label for="" class="block mb-2 text-sm font-medium dark:text-gray-400">Name</label>
-                            <input type="text"
-                                class="block w-full px-4 py-3 mb-2 text-sm bg-gray-100 border rounded dark:placeholder-gray-400 dark:text-gray-400 dark:border-gray-800 dark:bg-gray-800"
-                                placeholder="Name...." required
+            <section class="max-w-4xl p-6 mx-auto bg-white rounded-md shadow-md dark:bg-gray-800">
+                <h2 class="text-lg font-semibold text-gray-700 capitalize dark:text-white">Account settings</h2>
+
+                <form onSubmit={formSubmitHandler}>
+                    <div class="grid grid-cols-1 gap-6 mt-4 sm:grid-cols-2">
+                        <div>
+                            <label class="text-gray-700 dark:text-gray-200" for="username">Name</label>
+                            <input type="text" class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring"
+                                required
                                 name='name'
                                 onChange={onChangeHandler}
                             />
                         </div>
-                        <div class="mb-6">
-                            <label for="" class="block mb-2 text-sm font-medium dark:text-gray-400">Email</label>
-                            <input type="email"
-                                class="block w-full px-4 py-3 mb-2 text-sm bg-gray-100 border rounded dark:placeholder-gray-400 dark:text-gray-400 dark:border-gray-800 dark:bg-gray-800"
-                                placeholder="Email...." required
+                        <div>
+                            <label class="text-gray-700 dark:text-gray-200" for="emailAddress">Email Address</label>
+                            <input type="email" class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring"
+                                required
                                 name='email'
                                 onChange={onChangeHandler}
                             />
                         </div>
-                        <div class="mb-6">
-                            <label for="" class="block mb-2 text-sm font-medium dark:text-gray-400">User Name</label>
-                            <input type="text"
-                                class="block w-full px-4 py-3 mb-2 text-sm bg-gray-100 border rounded dark:placeholder-gray-400 dark:text-gray-400 dark:border-gray-800 dark:bg-gray-800"
-                                placeholder="User Name...." required
+                        <div>
+                            <label class="text-gray-700 dark:text-gray-200" for="emailAddress">User Name</label>
+                            <input type="text" class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring"
                                 name='userName'
+                                required
                                 onChange={onChangeHandler}
                             />
                         </div>
-                        <div class="mb-6">
-                            <label for="" class="block mb-2 text-sm font-medium dark:text-gray-400">Password</label>
-                            <input type='password' placeholder="*******" required
+
+                        <div>
+                            <label class="text-gray-700 dark:text-gray-200" for="password">Password</label>
+                            <input type="password" class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring"
                                 name='password'
-                                class="block w-full px-4 py-3 mb-3 leading-tight placeholder-gray-400 bg-gray-100 border rounded ark:border-gray-800 dark:bg-gray-800 dark:placeholder-gray-500 dark:text-gray-400 dark:border-gray-800 "
+                                required
                                 onChange={onChangeHandler}
                             />
                         </div>
-                        <div class="mb-6">
-                            <label for="" class="block mb-2 text-sm font-medium dark:text-gray-400">Confirm Password</label>
-                            <input type='password' placeholder="*******" required
+
+                        <div>
+                            <label class="text-gray-700 dark:text-gray-200" for="passwordConfirmation">Password Confirmation</label>
+                            <input type="password" class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring"
+                                required
                                 name='confirmPassword'
-                                class="block w-full px-4 py-3 mb-3 leading-tight placeholder-gray-400 bg-gray-100 border rounded ark:border-gray-800 dark:bg-gray-800 dark:placeholder-gray-500 dark:text-gray-400 dark:border-gray-800 "
                                 onChange={onChangeHandler}
                             />
                         </div>
-                        <div class="mb-6">
-                            <label for="" class="block mb-2 text-sm font-medium dark:text-gray-400">Company Name</label>
-                            <input type='string' placeholder="Company Name...." required
+                        <div>
+                            <label class="text-gray-700 dark:text-gray-200" for="passwordConfirmation">Company Name</label>
+                            <input type="text" class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring"
                                 name='companyName'
-                                class="block w-full px-4 py-3 mb-3 leading-tight placeholder-gray-400 bg-gray-100 border rounded ark:border-gray-800 dark:bg-gray-800 dark:placeholder-gray-500 dark:text-gray-400 dark:border-gray-800 "
+                                required
                                 onChange={onChangeHandler}
                             />
                         </div>
-                        <div class="mb-6">
-                            <label for="" class="block mb-2 text-sm font-medium dark:text-gray-400">Branch Name</label>
-                            <input type='string' placeholder="Branch..." required
+                        <div>
+                            <label class="text-gray-700 dark:text-gray-200" for="passwordConfirmation">Branch Name</label>
+                            <input type="text" class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring"
+                                required
                                 name='branchName'
-                                class="block w-full px-4 py-3 mb-3 leading-tight placeholder-gray-400 bg-gray-100 border rounded ark:border-gray-800 dark:bg-gray-800 dark:placeholder-gray-500 dark:text-gray-400 dark:border-gray-800 "
                                 onChange={onChangeHandler}
                             />
                         </div>
-                        <div class="mb-6">
-                            <label for="" class="block mb-2 text-sm font-medium dark:text-gray-400">Role</label>
-                            <input type='string' placeholder="Branch..." required
+                        <div>
+                            <label class="text-gray-700 dark:text-gray-200" for="passwordConfirmation">Role</label>
+                            <input type="number" class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring"
+                                required
                                 name='role'
-                                class="block w-full px-4 py-3 mb-3 leading-tight placeholder-gray-400 bg-gray-100 border rounded ark:border-gray-800 dark:bg-gray-800 dark:placeholder-gray-500 dark:text-gray-400 dark:border-gray-800 "
+                                min={0}
+                                step={1}
+                                max={3}
                                 onChange={onChangeHandler}
+                                
                             />
                         </div>
-                        <div class="mb-6">
-                            <label for="" class="block mb-2 text-sm font-medium dark:text-gray-400">Created By</label>
-                            <input type='string' placeholder="Branch..." required
+                        <div>
+                            <label class="text-gray-700 dark:text-gray-200" for="passwordConfirmation">Created By</label>
+                            <input type="text" class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring"
+                                required
                                 name='createdBy'
-                                class="block w-full px-4 py-3 mb-3 leading-tight placeholder-gray-400 bg-gray-100 border rounded ark:border-gray-800 dark:bg-gray-800 dark:placeholder-gray-500 dark:text-gray-400 dark:border-gray-800 "
                                 onChange={onChangeHandler}
                             />
                         </div>
+                    </div>
 
-                        <button type='submit' class="px-4 py-2 text-base text-gray-100 bg-blue-600 rounded hover:bg-blue-500">Create</button>
-
-                    </form>
-                </div >
-            </section >
+                    <div class="flex justify-end mt-6">
+                        <button type='submit' class="px-8 py-2.5 leading-5 text-white transition-colors duration-300 transform bg-gray-700 rounded-md hover:bg-gray-600 focus:outline-none focus:bg-gray-600">Save</button>
+                    </div>
+                </form>
+            </section>
         </>
     )
 }

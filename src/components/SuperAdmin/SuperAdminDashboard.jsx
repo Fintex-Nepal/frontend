@@ -8,7 +8,7 @@ const SuperAdminDashboard = () => {
     return (
         <>
 
-            <div class="bg-gray-100 dark:bg-gray-900">
+            <div class="bg-gray-100 h-screen dark:bg-gray-900">
                 <aside
                     class="fixed top-0 z-10 ml-[-100%] flex h-screen w-full flex-col justify-between border-r bg-white px-6 pb-3 transition duration-300 md:w-4/12 lg:ml-0 lg:w-[25%] xl:w-[20%] 2xl:w-[15%] dark:bg-gray-800 dark:border-gray-700"
                 >
@@ -92,7 +92,7 @@ const SuperAdminDashboard = () => {
                                             d="M15 7h1a2 2 0 012 2v5.5a1.5 1.5 0 01-3 0V7z"
                                         />
                                     </svg>
-                                    <span class="group-hover:text-gray-700 dark:group-hover:text-gray-50">Reports</span>
+                                    <span class="group-hover:text-gray-700 dark:group-hover:text-gray-50">Users</span>
                                 </Link>
                             </li>
                             <li>
