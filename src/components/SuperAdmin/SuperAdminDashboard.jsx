@@ -4,6 +4,7 @@ import PasswordResetForm from './PasswordResetForm'
 import CreateAdmin from './CreateAdmin';
 import logo from '../../assets/logo.png'
 import Content from '../../pages/Admin/Content';
+import Users from './Users';
 const SuperAdminDashboard = () => {
     return (
         <>
@@ -72,7 +73,7 @@ const SuperAdminDashboard = () => {
                             </li>
                             <li>
                                 <Link
-                                    href="1"
+                                    to={'/sadmindashboard/users'}
                                     class="group flex items-center space-x-4 rounded-md px-4 py-3 text-gray-600 dark:text-gray-300"
                                 >
                                     <svg
@@ -274,6 +275,7 @@ const SuperAdminDashboard = () => {
                         <Route path='/' element={<Content/>} />
                             <Route path='/profile' element={<PasswordResetForm />} />
                             <Route path='/createadmin' element={<CreateAdmin />} />
+                            <Route path='/users' element={<Users/>} />
                         </Routes>
 
                     </div>
