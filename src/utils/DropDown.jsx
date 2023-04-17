@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { ChevronDownIcon } from "@heroicons/react/solid";
 import { useState } from "react";
-function DropdownMenu({ staffSubOption, heading }) {
+const DropdownMenu=({ staffSubOption, heading }) =>{
     const [isOpen, setIsOpen] = useState(false);
     return (
         <div className="relative">
