@@ -1,5 +1,6 @@
 import React from 'react'
 import { Routes, Route, Link } from 'react-router-dom';
+import { useState } from 'react';
 import MainRegestration from './MainRegestration'
 import Content from './Content'
 import PasswordResetForm from '../../components/SuperAdmin/PasswordResetForm';
@@ -7,23 +8,31 @@ import CreateClientUser from './CreateClientUser';
 import CreateStaff from './CreateStaff';
 import DropdownMenu from '../../utils/DropDown'
 import CreateStaffLogin from './CreateStaffLogin';
-import logo from '../../assets/logo.png'
 import StaffInfo from './StaffInfo';
+import logo from '../../assets/logo.png'
 // import Test from '../Test';
 
 const Dashboard = () => {
+    const [mobileView,setMobileView]=useState(true)
     const staffSubOption=[
         'Create Employee',
         'Create Employee Login',
         'Employee Info',
         
     ]
+
+    const mobileViewHandler=()=>{
+        setMobileView(!mobileView)
+    }
+    console.log('====================================');
+    console.log(mobileView);
+    console.log('====================================');
     return (
         <>
             <div class=" ">
                 <aside
-                    
-                    class="fixed top-0 z-10 ml-[-100%] flex h-screen w-full flex-col justify-between border-r bg-white px-6 pb-3 transition duration-300 md:w-4/12 lg:ml-0 lg:w-[25%] xl:w-[20%] 2xl:w-[15%] dark:bg-gray-800 dark:border-gray-700"
+                    className={`${mobileView ? 'fixed top-0 z-10 ml-[-100%] flex h-screen w-full flex-col justify-between border-r bg-white px-6 pb-3 transition duration-300 md:w-4/12 lg:ml-0 lg:w-[25%] xl:w-[20%] 2xl:w-[15%] dark:bg-gray-800 dark:border-gray-700' : "fixed top-0  flex h-screen w-full flex-col justify-between border-r bg-white px-6 pb-3 transition duration-300 md:w-4/12 lg:ml-0 lg:w-[25%] xl:w-[20%] 2xl:w-[15%] dark:bg-gray-800 dark:border-gray-700 z-50"}`}
+                    // class=""
                 >
                     <div>
                         <div class="-mx-6 px-6 py-4">
@@ -93,7 +102,6 @@ const Dashboard = () => {
                                 </Link>
                             </li>
                             
-                              
                             <li>
                                 <Link
                                     to={'/dashboard/createUser'}
@@ -117,12 +125,9 @@ const Dashboard = () => {
                                     <span class="group-hover:text-gray-700 dark:group-hover:text-gray-50">Create User</span>
                                 </Link>
                             </li>
-                            <DropdownMenu staffSubOption={staffSubOption} heading={'Employee'} />
-                            
-                            
-                            
-                            
+                            <DropdownMenu staffSubOption={staffSubOption} heading={'Employee'} />      
                         </ul>
+                        
                     </div>
 
                     <div class="-mx-6 flex items-center justify-between border-t px-6 pt-4 dark:border-gray-700">
@@ -149,7 +154,7 @@ const Dashboard = () => {
                     <div class="sticky top-0 h-16 border-b bg-white dark:bg-gray-800 dark:border-gray-700 lg:py-2.5">
                         <div class="flex items-center justify-between space-x-4 px-6 2xl:container">
                             <h5 hidden class="text-2xl font-medium text-gray-600 lg:block dark:text-white"><b>Fintex</b></h5>
-                            <button onClick={(e) => console.log("Clicked")} class="-mr-2 h-16 w-12 border-r lg:hidden dark:border-gray-700 dark:text-gray-300">
+                            <button onClick={mobileViewHandler} class="-mr-2 h-16 w-12 border-r lg:hidden dark:border-gray-700 dark:text-gray-300">
                                 <svg
                                     xmlns="http://www.w3.org/2000/svg"
                                     class="my-auto h-6 w-6"

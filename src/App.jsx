@@ -6,12 +6,14 @@ import Error from './pages/Error'
 
 import SuperAdminLogin from './components/SuperAdmin/SuperAdminLogin'
 import SuperAdminDashboard from './components/SuperAdmin/SuperAdminDashboard'
+import Test from './pages/Test'
 
 const App = () => {
   return (
     <>
       <Routes>
         <Route path='/' element={<Login />} />
+        <Route path='/test' element={<Test/>} />
         <Route path='/sadminlogin' element={<SuperAdminLogin/>}/>
         <Route path='/sadmindashboard/*' element={<SuperAdminDashboard/>}/>
         <Route path='/dashboard/*' element={<Dashboard />} />
