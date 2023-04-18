@@ -52,7 +52,7 @@ const MainRegestration = () => {
                 <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded m-2">Button 2</button>
             </div> */}
 
-            <div class="grid grid-cols-1  sm:grid-cols-2 h-screen">
+            <div class="grid grid-cols-1  sm:grid-cols-2 h-full">
                 <div class="  h-1/2 sm:h-full p-4">
                     <section class="max-w-4xl p-6 mx-auto bg-white rounded-md shadow-md dark:bg-gray-800">
                         {activeButton === 'mainledger' ? (

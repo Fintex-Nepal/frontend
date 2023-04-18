@@ -44,7 +44,7 @@ const DropdownMenu=({ staffSubOption, heading }) =>{
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
                             </svg>
                         </button> */}
-                        <ul className="absolute top-0 left-full w-full  bg-white rounded-md shadow-lg">
+                        <ul className="absolute top-0  w-full  bg-white rounded-md shadow-lg">
                             {staffSubOption?.map((itm) => (
                                 <Link
                                     to={`${itm.replace(/\s/g, "").toLowerCase()}`}
