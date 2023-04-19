@@ -2,19 +2,13 @@ import React from 'react'
 import { useState } from 'react';
 // import axios from 'axios'
 // import ConfirmModal from '../../utils/ConfirmModal'
-const PasswordResetForm = () => {
+const PasswordResetForm = ({api}) => {
 
-//    const modalText={
-//     headText:'Password Change',
-//     bodyText:"Are You sure you want to change test? It can't be ondone once changed."
-//    } 
     const [userData,setUserData]=useState({
         currentPassword:'',
         newPassword:'',
         confirmNewPassword:'',
     })
-//    const [showConfirmModal,setShowConfirmModal]=useState(false)
-//    const [modalResponse,setModalResponse]=useState("")
     const onChangeHandler=(event)=>{
         const {name,value}=event.target;
        setUserData(prevState=>({
@@ -22,20 +16,6 @@ const PasswordResetForm = () => {
         [name]:value,
        }))
     }
-//    if(modalResponse==='confirm')
-//    {
-//     console.log('====================================');
-//     console.log();
-//     console.log('====================================');
-//       axios.get("api")
-//       .then((res=>{
-//         console.log(res.data);
-//         setModalResponse('cancel')
-//       }))
-//       .catch(err=>console.log("Error"))
-   
-    
-//    }
    const isPasswordValid = (password) => {
     const regex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*()_+}{":;'?/>.<,])(?=.*[a-zA-Z]).{8,}$/;
     return regex.test(password);

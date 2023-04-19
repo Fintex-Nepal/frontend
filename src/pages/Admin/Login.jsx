@@ -27,16 +27,12 @@ const Login = () => {
     }
     const formSubmitHandler = (e) => {
         e.preventDefault()
-        axios.post('https://d8e5-103-89-157-247.ngrok-free.app/financecompany/login',loginData)
+        axios.post('http://localhost:8080/FinanceCompany/login',loginData)
         .then((res=>{
-            console.log(res.data);
+            localStorage.setItem('adminToken',res.data.token)
             naviate('/dashboard')
         }))
-        .catch(err=>console.log(err))
-
-        
-        
-
+        .catch(err=>console.log(err)) 
     }
     return (
         <>
