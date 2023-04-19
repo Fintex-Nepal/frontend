@@ -1,35 +1,42 @@
 import React from 'react'
 import { useState } from 'react';
 import axios from 'axios';
+import SuccessModal from '../../utils/SuccessModal';
 import './style.css'
 const CreateAdmin = () => {
     const [formData, setFormData] = useState({
         isActive: true
     });
-
+    const [showSuccessModal, setshowSuccessModal] = useState(false)
     const onChangeHandler = (event) => {
         const { name, value } = event.target;
         var newValue = name === "role" ? Number(value) : value;
-       
+
         setFormData(prevState => ({
             ...prevState,
             [name]: newValue
         }))
     }
-
+    const modalText = {
+        heading: "Admin Account Successfully Created",
+        bodyText:'The entered username and password can be used by client admin'
+    }
     const formSubmitHandler = (e) => {
         e.preventDefault();
         console.log('Bearer ' + localStorage.getItem('sAdminToken'));
         axios.post('http://localhost:8080/SuperAdmin/create-admin', formData, {
             headers: {
-                'Authorization': 'Bearer ' + localStorage.getItem('sAdminToken') 
+                'Authorization': 'Bearer ' + localStorage.getItem('sAdminToken')
             }
         })
-            .then((res) => console.log(res.data))
+            .then((res) => {
+                setshowSuccessModal(true)
+            })
             .catch(err => console.log(err))
     }
     return (
         <>
+            {showSuccessModal && <SuccessModal heading={modalText?.heading} bodyText={modalText?.bodyText} setshowSuccessModal={setshowSuccessModal} showSuccessModal={showSuccessModal} />}
             <section class="max-w-4xl p-6 mx-auto bg-white rounded-md shadow-md dark:bg-gray-800">
                 <h2 class="text-lg font-semibold text-gray-700 capitalize dark:text-white">Account settings</h2>
 
