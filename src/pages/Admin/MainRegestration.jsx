@@ -30,7 +30,7 @@ const MainRegestration = () => {
     }
     return (
         <>
-            <div class="bg-gray-100  flex flex-wrap items-center justify-center">
+            <div class="  flex flex-wrap items-center justify-center">
                 <div onClick={() => setActiveButton('mainledger')} class="w-52 h-16 relative md:mt-0 mt-4 ">
                     <img src="https://i.ibb.co/DwNs7zG/Steps.png" alt="step1" class="w-full h-full" />
                     <div class="absolute w-full flex flex-col px-6 items-center justify-center inset-0 m-0">

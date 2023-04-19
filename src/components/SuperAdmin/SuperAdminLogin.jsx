@@ -18,9 +18,10 @@ const SuperAdminLogin = () => {
     }
     const formSubmitHandler = (e) => {
         e.preventDefault();
-        axios.post('https://ac86-103-89-157-243.ngrok-free.app/superadmin/login', userData)
+        axios.post('http://localhost:8080/SuperAdmin/login', userData)
             .then((res) => {
-                console.log(res.data);
+
+                localStorage.setItem('sAdminToken', res.data.token)
                 naviate('/sadmindashboard')
             })
             .catch(err => console.log(err))

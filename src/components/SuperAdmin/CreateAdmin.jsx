@@ -3,19 +3,28 @@ import { useState } from 'react';
 import axios from 'axios';
 import './style.css'
 const CreateAdmin = () => {
-    const [formData, setFormData] = useState({});
+    const [formData, setFormData] = useState({
+        isActive: true
+    });
 
     const onChangeHandler = (event) => {
         const { name, value } = event.target;
+        var newValue = name === "role" ? Number(value) : value;
+       
         setFormData(prevState => ({
             ...prevState,
-            [name]: value
+            [name]: newValue
         }))
     }
 
     const formSubmitHandler = (e) => {
         e.preventDefault();
-        axios.post('https://d8e5-103-89-157-247.ngrok-free.app/superadmin/create-admin', formData)
+        console.log('Bearer ' + localStorage.getItem('sAdminToken'));
+        axios.post('http://localhost:8080/SuperAdmin/create-admin', formData, {
+            headers: {
+                'Authorization': 'Bearer ' + localStorage.getItem('sAdminToken') 
+            }
+        })
             .then((res) => console.log(res.data))
             .catch(err => console.log(err))
     }
@@ -93,9 +102,25 @@ const CreateAdmin = () => {
                                 step={1}
                                 max={3}
                                 onChange={onChangeHandler}
-                                
+
                             />
                         </div>
+                        <div>
+                            <label class="text-gray-700 dark:text-gray-200" for="passwordConfirmation">Phone Number</label>
+                            <input type="text" class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring"
+                                required
+                                name='phoneNumber'
+                                onChange={onChangeHandler}
+                            />
+                        </div>
+                        {/* <div>
+                            <label class="text-gray-700 dark:text-gray-200" for="passwordConfirmation">Is Active?</label>
+                            <input type='checkbox' class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring"
+                                required
+                                name='isActive'
+                                onChange={onChangeHandler}
+                            />
+                        </div> */}
                         <div>
                             <label class="text-gray-700 dark:text-gray-200" for="passwordConfirmation">Created By</label>
                             <input type="text" class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring"
