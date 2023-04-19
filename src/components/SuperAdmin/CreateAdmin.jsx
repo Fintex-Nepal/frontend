@@ -30,6 +30,7 @@ const CreateAdmin = () => {
             }
         })
             .then((res) => {
+                console.log(res);
                 setshowSuccessModal(true)
             })
             .catch(err => console.log(err))

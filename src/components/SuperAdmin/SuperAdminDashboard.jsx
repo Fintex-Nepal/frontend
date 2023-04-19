@@ -18,10 +18,6 @@ const SuperAdminDashboard = () => {
             setIsValidUser(false)
         }
     }, [])
-    // const [menu, setMenu] = useState(false);
-    // const [menu1, setMenu1] = useState(false);
-    // const [menu2, setMenu2] = useState(false);
-    // const [menu3, setMenu3] = useState(false);
     if (isValidUser) {
         return (
             <>
@@ -33,27 +29,21 @@ const SuperAdminDashboard = () => {
                                 <img src={logo} width={144} height={30} alt='logo'></img>
                             </div>
                             <ul className=" py-6">
-                                <li className="pl-6 cursor-pointer  text-sm leading-3 tracking-normal pb-4 pt-5 text-indigo-700 focus:text-indigo-700 focus:outline-none">
-                                    <div className="flex items-center">
-                                        <div>
-                                            <svg xmlns="http://www.w3.org/2000/svg" className="icon icon-tabler icon-tabler-grid" width={20} height={20} viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" fill="none" strokeLinecap="round" strokeLinejoin="round">
-                                                <path stroke="none" d="M0 0h24v24H0z" />
-                                                <rect x={4} y={4} width={6} height={6} rx={1} />
-                                                <rect x={14} y={4} width={6} height={6} rx={1} />
-                                                <rect x={4} y={14} width={6} height={6} rx={1} />
-                                                <rect x={14} y={14} width={6} height={6} rx={1} />
+                                <li className="pl-6 cursor-pointer text-gray-600 text-sm leading-3 tracking-normal mt-4 mb-4 py-2 hover:text-indigo-700 focus:text-indigo-700 focus:outline-none">
+                                    <Link to={'/sadmindashboard/users'}>
+                                        <div className="flex items-center">
+                                            <svg xmlns="http://www.w3.org/2000/svg"  width={20} height={20} fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                                <path stroke-linecap="round" stroke-linejoin="round" d="M15 19.128a9.38 9.38 0 002.625.372 9.337 9.337 0 004.121-.952 4.125 4.125 0 00-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 018.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0111.964-3.07M12 6.375a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zm8.25 2.25a2.625 2.625 0 11-5.25 0 2.625 2.625 0 015.25 0z" />
                                             </svg>
+
+
+                                            <span className="ml-2">Users</span>
                                         </div>
-                                        <span className="ml-2">Dashboard</span>
-                                    </div>
+                                    </Link>
                                 </li>
                                 <li className="pl-6 cursor-pointer text-gray-600 text-sm leading-3 tracking-normal mt-4 mb-4 py-2 hover:text-indigo-700 focus:text-indigo-700 focus:outline-none">
                                     <Link to={'/sadmindashboard/profile'}>
                                         <div className="flex items-center">
-                                            {/* <svg xmlns="http://www.w3.org/2000/svg" className="icon icon-tabler icon-tabler-puzzle"  viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" fill="none" strokeLinecap="round" strokeLinejoin="round">
-                                                <path stroke="none" d="M0 0h24v24H0z" />
-                                                <path d="M4 7h3a1 1 0 0 0 1 -1v-1a2 2 0 0 1 4 0v1a1 1 0 0 0 1 1h3a1 1 0 0 1 1 1v3a1 1 0 0 0 1 1h1a2 2 0 0 1 0 4h-1a1 1 0 0 0 -1 1v3a1 1 0 0 1 -1 1h-3a1 1 0 0 1 -1 -1v-1a2 2 0 0 0 -4 0v1a1 1 0 0 1 -1 1h-3a1 1 0 0 1 -1 -1v-3a1 1 0 0 1 1 -1h1a2 2 0 0 0 0 -4h-1a1 1 0 0 1 -1 -1v-3a1 1 0 0 1 1 -1" />
-                                            </svg> */}
                                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" width={20} height={20} viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" >
                                                 <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" />
                                             </svg>
@@ -121,7 +111,7 @@ const SuperAdminDashboard = () => {
                                                 <Link to={'/sadmindashboard/profile'}>
                                                     <div className="flex items-center">
                                                         <div className="w-6 h-6 md:w-8 md:h-8">
-                                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none"  viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" >
+                                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" >
                                                                 <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" />
                                                             </svg>
 

@@ -1,39 +1,52 @@
-import React from 'react'
-import EmployeeCard from '../../utils/EmployeeCard'
+import React, { useEffect, useState } from 'react'
+import axios from 'axios';
 const Users = () => {
-    const employeeData = [
-        {
-            name: 'Samir Alam',
-            designation: 'CEO',
-            place: 'Birgunj',
-            email: 'samiramrullah@gmail.com',
-        },
-        {
-            name: 'Ashish',
-            designation: 'CEO',
-            place: 'Chitwan',
-            email: 'ashihish@gmail.com',
-        },
-
-        {
-            name: 'Sajid',
-            designation: 'CEO',
-            place: 'Birgunj',
-            email: 'sajid@gmail.com',
-        }
-    ]
+    const [allUsers, setAllUsers] = useState();
+    useEffect(() => {
+        axios.get('http://localhost:8080/superadmin/getusers', {
+            headers: {
+                'Authorization': 'Bearer ' + localStorage.getItem('sAdminToken')
+            }
+        })
+            .then((res) => setAllUsers(res.data))
+            .catch(err => console.log(err))
+    }, [])
     return (
         <>
-            <section class="flex items-center   font-poppins dark:bg-gray-900 ">
-                <div class="justify-center max-w-6xl px-4 py-4 mx-auto lg:py-0">
-                    <div class="grid grid-cols-1 gap-6 lg:grid-cols-3 md:grid-cols-2">
-                        {employeeData?.map((itm => (
-                            <EmployeeCard name={itm.name} designation={itm.designation} place={itm.place} email={itm.email} />
-                        )))}
 
-                    </div>
-                </div>
-            </section>
+            <div class="relative overflow-x-auto">
+                <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+                    <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                        <tr>
+                            <th scope="col" class="px-6 py-3">
+                                User Name
+                            </th>
+                            <th scope="col" class="px-6 py-3">
+                                Role
+                            </th>
+                            <th scope="col" class="px-6 py-3">
+                                Status
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {allUsers?.map((user) => (
+                            <tr
+                                key={user.userId}
+                                className="bg-white border-b dark:bg-gray-800 dark:border-gray-700"
+                            >
+                                <td className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                    {user.userName}
+                                </td>
+                                <td className="px-6 py-4">{user.role}</td>
+                                <td className={`my-element ${user?.isActive ? 'px-6 py-4 text-green-800 font-bold' : 'px-6 py-4 bg-red-800 font-bold'}`}>{user.isActive ?'Active':'Inactive'}</td>
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
+            </div>
+
+
         </>
     )
 }
