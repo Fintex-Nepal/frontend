@@ -54,7 +54,7 @@ const MainRegestration = () => {
                                             />
                                         )}
                                         <button type='button' onClick={() => setShowGroupDropDown(!showGroupDropDown)} class="flex items-center px-4 py-2 mt-2 ml-2 font-medium tracking-wide text-white transition-colors duration-300 transform bg-gray-700 rounded-md hover:bg-gray-600 focus:outline-none focus:bg-gray-600">
-                                            <span class="mx-1">Add</span>
+                                            <span class="mx-1">{showGroupDropDown?("Add"):("Select")}</span>
                                         </button>
                                     </div>
 
