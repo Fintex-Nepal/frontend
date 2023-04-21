@@ -323,9 +323,9 @@ const Dashboard = () => {
                         </nav>
                         {/* Navigation ends */}
                         {/* Remove class [ h-64 ] when adding a card block */}
-                        <div className="container mx-auto py-10 h-64 md:w-4/5 w-11/12 px-6">
+                        <div className="container  py-10 h-64  w-full">
                             {/* Remove class [ border-dashed border-2 border-gray-300 ] to remove dotted border */}
-                            <div className="w-full h-full rounded border-dashed  border-gray-300">
+                            <div className="w-full h-full rounded border-dashed  border-gray-300 ">
                                 <Routes>
                                     <Route path='/' element={<Content />} />
                                     <Route path='/profile' element={<PasswordResetForm />} />
