@@ -19,19 +19,19 @@ const ModifyRegestrartionModal = ({ setShowUpdateModal }) => {
 
     return (
         <>
-            <div className="py-12 md:w-2/5 md:ml-60 sm:w-full  md:h-auto ml-0 h-full bg-gray-700 transition duration-150 ease-in-out z-10 absolute top-0 right-0 bottom-0 left-0" id="modal">
+            <div className="py-12 md:w-2/5 md:ml-60 sm:w-full  md:h-auto ml-0 h-fit bg-gray-700 transition duration-150 ease-in-out z-10 absolute top-0 right-0 bottom-0 left-0" id="modal">
                 <div role="alert" className="container mx-auto w-11/12 md:w-2/3 max-w-lg">
                     <div className="relative py-8 px-5 md:px-10 bg-white shadow-md rounded border border-gray-400">
-                        <div className="w-full flex justify-start text-gray-600 mb-3">
+                        {/* <div className="w-full flex justify-start text-gray-600 mb-3">
                             <svg xmlns="http://www.w3.org/2000/svg" className="icon icon-tabler icon-tabler-wallet" width={52} height={52} viewBox="0 0 24 24" strokeWidth={1} stroke="currentColor" fill="none" strokeLinecap="round" strokeLinejoin="round">
                                 <path stroke="none" d="M0 0h24v24H0z" />
                                 <path d="M17 8v-3a1 1 0 0 0 -1 -1h-10a2 2 0 0 0 0 4h12a1 1 0 0 1 1 1v3m0 4v3a1 1 0 0 1 -1 1h-12a2 2 0 0 1 -2 -2v-12" />
                                 <path d="M20 12v4h-4a2 2 0 0 1 0 -4h4" />
                             </svg>
-                        </div>
-                        <h1 className="text-gray-800 font-lg font-bold tracking-normal leading-tight mb-4">Enter Billing Details</h1>
+                        </div> */}
+                        {/* <h1 className="text-gray-800 font-lg font-bold tracking-normal leading-tight mb-4">Enter Billing Details</h1> */}
                         <form onSubmit={mainLedgerSubmitHandler}>
-                            <h2 class="text-lg font-semibold text-gray-700 capitalize dark:text-white">Main Ledger</h2>
+                            <h2 class="text-lg font-semibold text-gray-700 capitalize dark:text-white">Ledger Setup</h2>
 
                             <div class="grid grid-cols-1 gap-6 mt-4 sm:grid-cols-2">
                                 <div>
@@ -133,8 +133,8 @@ const ModifyRegestrartionModal = ({ setShowUpdateModal }) => {
                                 </div>
                             </div>
                             <div className="flex items-center justify-between w-full mt-2">
-                                <button className="focus:outline-none transition duration-150 ease-in-out hover:bg-indigo-600 bg-indigo-700 rounded text-white px-8 py-2 text-sm">Submit</button>
-                                <button type='button' onClick={() => setShowUpdateModal(false)} className="focus:outline-none ml-3 bg-gray-100 transition duration-150 text-gray-600 ease-in-out hover:border-gray-400 hover:bg-gray-300 border rounded px-8 py-2 text-sm" onclick="modalHandler()">
+                                <button type='submit' className="focus:outline-none transition duration-150 ease-in-out hover:bg-indigo-600 bg-indigo-700 rounded text-white px-8 py-2 text-sm">Submit</button>
+                                <button type='button' onClick={() => setShowUpdateModal(false)} className="focus:outline-none ml-3 bg-red-500 transition duration-150 text-white ease-in-out hover:border-gray-400 hover:bg-red-400 border rounded px-8 py-2 text-sm" onclick="modalHandler()">
                                     Cancel
                                 </button>
                             </div>

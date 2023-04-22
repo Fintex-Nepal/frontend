@@ -3,7 +3,7 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
-import EmployeeCard from '../../utils/EmployeeCard'
+// import EmployeeCard from '../../utils/EmployeeCard'
 
 const StaffInfo = () => {
     const employeeData = [
@@ -12,12 +12,14 @@ const StaffInfo = () => {
             designation: 'CEO',
             place: 'Birgunj',
             email: 'samiramrullah@gmail.com',
+            phoneNo: 9823231004,
         },
         {
             name: 'Ashish',
             designation: 'CEO',
             place: 'Chitwan',
             email: 'ashihish@gmail.com',
+            phoneNo: 9823231005,
         },
 
         {
@@ -25,10 +27,11 @@ const StaffInfo = () => {
             designation: 'CEO',
             place: 'Birgunj',
             email: 'sajid@gmail.com',
+            phoneNo: 9823231006,
         }
     ]
     const [age, setAge] = React.useState('');
-
+    const sn=0;
     const handleChange = (event) => {
         setAge(event.target.value);
     };
@@ -79,16 +82,99 @@ const StaffInfo = () => {
                     </div></div>
             </div>
 
-            <section class="flex items-center   font-poppins dark:bg-gray-900 ">
-                <div class="justify-center max-w-6xl px-4 py-4 mx-auto lg:py-0">
-                    <div class="grid grid-cols-1 gap-6 lg:grid-cols-3 md:grid-cols-2">
-                        {employeeData?.map((itm => (
-                            <EmployeeCard name={itm.name} designation={itm.designation} place={itm.place} email={itm.email} />
-                        )))}
+            <div class=" text-black bg-white px-4 py-2 rounded w-full">
+                <div class="flex flex-col">
+                    <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
+                        <div class="inline-block min-w-full py-2 sm:px-6 lg:px-8">
+                            <div class="overflow-hidden">
 
+                                <table
+                                    class="min-w-full border text-center text-sm font-light dark:border-neutral-500">
+                                    <thead class="border-b font-medium dark:border-neutral-500">
+                                        <tr>
+                                            <th
+                                                scope="col"
+                                                class="border-r px-6 py-4 dark:border-neutral-500">
+                                                S.No.
+                                            </th>
+                                            <th
+                                                scope="col"
+                                                class="border-r px-6 py-4 dark:border-neutral-500">
+                                                Name
+                                            </th>
+                                            <th
+                                                scope="col"
+                                                class="border-r px-6 py-4 dark:border-neutral-500">
+                                                Designation
+                                            </th>
+                                            <th
+                                                scope="col"
+                                                class="border-r px-6 py-4 dark:border-neutral-500">
+                                                Place
+                                            </th>
+                                            <th
+                                                scope="col"
+                                                class="border-r px-6 py-4 dark:border-neutral-500">
+                                                Email
+                                            </th>
+                                            <th
+                                                scope="col"
+                                                class="border-r px-6 py-4 dark:border-neutral-500">
+                                                Phone No.
+                                            </th>
+                                            <th
+                                                scope="col"
+                                                class="border-r px-6 py-4 dark:border-neutral-500">
+                                                Action
+                                            </th>
+                                        </tr>
+
+                                    </thead>
+                                    <tbody>
+                                        {employeeData?.map((itm, index)=> (
+                                            <tr class="border-b dark:border-neutral-500">
+                                                <td
+                                                    class="whitespace-nowrap border-r px-6 py-4 dark:border-neutral-500">
+                                                   {index+1}
+                                                </td>
+                                                <td
+                                                    class="whitespace-nowrap border-r px-6 py-4 font-medium dark:border-neutral-500">
+                                                    {itm.name}
+                                                </td>
+                                                <td
+                                                    class="whitespace-nowrap border-r px-6 py-4 dark:border-neutral-500">
+                                                    {itm.designation}
+                                                </td>
+                                                <td
+                                                    class="whitespace-nowrap border-r px-6 py-4 dark:border-neutral-500">
+                                                    {itm.place}
+                                                </td>
+                                                <td
+                                                    class="whitespace-nowrap border-r px-6 py-4 dark:border-neutral-500">
+                                                    {itm.email}
+                                                </td>
+                                                <td
+                                                    class="whitespace-nowrap border-r px-6 py-4 dark:border-neutral-500">
+                                                    {itm.phoneNo}
+                                                </td>
+
+                                                <td role='button'
+                                                    class="whitespace-nowrap border-r px-6 py-4 dark:border-neutral-500">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10" />
+                                                    </svg>
+
+                                                </td>
+                                            </tr>
+                                        ))}
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </section>
+            </div>
         </>
     )
 }
