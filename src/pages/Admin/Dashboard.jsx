@@ -295,6 +295,7 @@ const Dashboard = () => {
                                                 )}
                                                 <div className="relative">
                                                     <img className="rounded-full h-10 w-10 object-cover" src="https://tuk-cdn.s3.amazonaws.com/assets/components/sidebar_layout/sl_1.png" alt="avatar" />
+                                                    
                                                     <div className="w-2 h-2 rounded-full bg-green-400 border border-white absolute inset-0 mb-0 mr-0 m-auto" />
                                                 </div>
                                             </div>
@@ -318,12 +319,13 @@ const Dashboard = () => {
                                         <line x1={4} y1={8} x2={20} y2={8} />
                                         <line x1={4} y1={16} x2={20} y2={16} />
                                     </svg>
+                                    
                                 )}
                             </div>
                         </nav>
                         {/* Navigation ends */}
                         {/* Remove class [ h-64 ] when adding a card block */}
-                        <div className="container  py-10 h-64  w-full">
+                        <div className="container pl-12 py-10 h-64  w-full">
                             {/* Remove class [ border-dashed border-2 border-gray-300 ] to remove dotted border */}
                             <div className="w-full h-full rounded border-dashed  border-gray-300 ">
                                 <Routes>

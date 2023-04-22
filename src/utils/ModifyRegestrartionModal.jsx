@@ -1,10 +1,8 @@
 import React from 'react'
-import { useState } from 'react'
-import ModifyRegestrartionModal from '../../utils/ModifyRegestrartionModal';
-const MainRegestration = () => {
+import { useState } from 'react';
+const ModifyRegestrartionModal = ({ setShowUpdateModal }) => {
     const [mainLedgerData, setMainLedgerData] = useState({});
     const [showGroupDropDown, setShowGroupDropDown] = useState(true);
-    const [showUpdateModal,setShowUpdateModal]=useState(false)
     const [showSubAccount, setShowSubAccount] = useState('No')
     const mainLedgerChangeHandler = (event) => {
         const { name, value } = event.target;
@@ -21,11 +19,17 @@ const MainRegestration = () => {
 
     return (
         <>
-            {showUpdateModal &&<ModifyRegestrartionModal setShowUpdateModal={setShowUpdateModal} showUpdateModal={showUpdateModal} />}
-            <div class="grid grid-cols-1  sm:grid-cols-2 h-full">
-                <div class="  h-1/2 sm:h-full p-4">
-                    <section class="max-w-4xl p-6 mx-auto bg-white rounded-md shadow-md dark:bg-gray-800">
-
+            <div className="py-12 md:w-2/5 md:ml-60 sm:w-full  md:h-auto ml-0 h-full bg-gray-700 transition duration-150 ease-in-out z-10 absolute top-0 right-0 bottom-0 left-0" id="modal">
+                <div role="alert" className="container mx-auto w-11/12 md:w-2/3 max-w-lg">
+                    <div className="relative py-8 px-5 md:px-10 bg-white shadow-md rounded border border-gray-400">
+                        <div className="w-full flex justify-start text-gray-600 mb-3">
+                            <svg xmlns="http://www.w3.org/2000/svg" className="icon icon-tabler icon-tabler-wallet" width={52} height={52} viewBox="0 0 24 24" strokeWidth={1} stroke="currentColor" fill="none" strokeLinecap="round" strokeLinejoin="round">
+                                <path stroke="none" d="M0 0h24v24H0z" />
+                                <path d="M17 8v-3a1 1 0 0 0 -1 -1h-10a2 2 0 0 0 0 4h12a1 1 0 0 1 1 1v3m0 4v3a1 1 0 0 1 -1 1h-12a2 2 0 0 1 -2 -2v-12" />
+                                <path d="M20 12v4h-4a2 2 0 0 1 0 -4h4" />
+                            </svg>
+                        </div>
+                        <h1 className="text-gray-800 font-lg font-bold tracking-normal leading-tight mb-4">Enter Billing Details</h1>
                         <form onSubmit={mainLedgerSubmitHandler}>
                             <h2 class="text-lg font-semibold text-gray-700 capitalize dark:text-white">Main Ledger</h2>
 
@@ -128,113 +132,25 @@ const MainRegestration = () => {
                                     />
                                 </div>
                             </div>
-
-                            <div class="flex justify-end mt-6">
-                                <button type='submit' class="px-8 py-2.5 leading-5 text-white transition-colors duration-300 transform bg-gray-700 rounded-md hover:bg-gray-600 focus:outline-none focus:bg-gray-600">Save</button>
+                            <div className="flex items-center justify-between w-full mt-2">
+                                <button className="focus:outline-none transition duration-150 ease-in-out hover:bg-indigo-600 bg-indigo-700 rounded text-white px-8 py-2 text-sm">Submit</button>
+                                <button type='button' onClick={() => setShowUpdateModal(false)} className="focus:outline-none ml-3 bg-gray-100 transition duration-150 text-gray-600 ease-in-out hover:border-gray-400 hover:bg-gray-300 border rounded px-8 py-2 text-sm" onclick="modalHandler()">
+                                    Cancel
+                                </button>
                             </div>
                         </form>
-                    </section>
-                </div>
-                <div class=" h-1/2 sm:h-full p-4">
-                    <div class=" text-black bg-white px-4 py-2 rounded w-full">
-                        <div class="flex flex-col">
-                            <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
-                                <div class="inline-block min-w-full py-2 sm:px-6 lg:px-8">
-                                    <div class="overflow-hidden">
-
-                                        <table
-                                            class="min-w-full border text-center text-sm font-light dark:border-neutral-500">
-                                            <thead class="border-b font-medium dark:border-neutral-500">
-                                                <tr>
-                                                    <th
-                                                        scope="col"
-                                                        class="border-r px-6 py-4 dark:border-neutral-500">
-                                                        S.No.
-                                                    </th>
-                                                    <th
-                                                        scope="col"
-                                                        class="border-r px-6 py-4 dark:border-neutral-500">
-                                                        Group No.
-                                                    </th>
-                                                    <th
-                                                        scope="col"
-                                                        class="border-r px-6 py-4 dark:border-neutral-500">
-                                                        Group Name
-                                                    </th>
-                                                    <th
-                                                        scope="col"
-                                                        class="border-r px-6 py-4 dark:border-neutral-500">
-                                                        समुहको नाम
-                                                    </th>
-                                                    <th
-                                                        scope="col"
-                                                        class="border-r px-6 py-4 dark:border-neutral-500">
-                                                        Ledger Name
-                                                    </th>
-                                                    <th
-                                                        scope="col"
-                                                        class="border-r px-6 py-4 dark:border-neutral-500">
-                                                        Schedule
-                                                    </th>
-                                                    <th
-                                                        scope="col"
-                                                        class="border-r px-6 py-4 dark:border-neutral-500">
-                                                        Action
-                                                    </th>
-                                                </tr>
-
-                                            </thead>
-                                            <tbody>
-                                                <tr class="border-b dark:border-neutral-500">
-                                                    <td
-                                                        class="whitespace-nowrap border-r px-6 py-4 font-medium dark:border-neutral-500">
-                                                        1
-                                                    </td>
-                                                    <td
-                                                        class="whitespace-nowrap border-r px-6 py-4 dark:border-neutral-500">
-                                                        demo
-                                                    </td>
-                                                    <td
-                                                        class="whitespace-nowrap border-r px-6 py-4 dark:border-neutral-500">
-                                                        demo
-                                                    </td>
-                                                    <td
-                                                        class="whitespace-nowrap border-r px-6 py-4 dark:border-neutral-500">
-                                                        demo
-                                                    </td>
-                                                    <td
-                                                        class="whitespace-nowrap border-r px-6 py-4 dark:border-neutral-500">
-                                                        demo
-                                                    </td>
-                                                    <td
-                                                        class="whitespace-nowrap border-r px-6 py-4 dark:border-neutral-500">
-                                                        demo
-                                                    </td>
-                                                    <td role='button' onClick={()=>setShowUpdateModal(true)}
-                                                        class="whitespace-nowrap border-r px-6 py-4 dark:border-neutral-500">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                                            <path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10" />
-                                                        </svg>
-
-                                                    </td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                            </div>
+                        <div onClick={() => setShowUpdateModal(false)} className="cursor-pointer absolute top-0 right-0 mt-4 mr-5 text-gray-400 hover:text-gray-600 transition duration-150 ease-in-out" onclick="modalHandler()">
+                            <svg xmlns="http://www.w3.org/2000/svg" aria-label="Close" className="icon icon-tabler icon-tabler-x" width={20} height={20} viewBox="0 0 24 24" strokeWidth="2.5" stroke="currentColor" fill="none" strokeLinecap="round" strokeLinejoin="round">
+                                <path stroke="none" d="M0 0h24v24H0z" />
+                                <line x1={18} y1={6} x2={6} y2={18} />
+                                <line x1={6} y1={6} x2={18} y2={18} />
+                            </svg>
                         </div>
                     </div>
                 </div>
             </div>
-
-
         </>
     )
 }
 
-export default MainRegestration
-
-
-
-
+export default ModifyRegestrartionModal
