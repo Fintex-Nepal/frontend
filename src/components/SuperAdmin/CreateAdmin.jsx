@@ -2,10 +2,8 @@ import React from 'react'
 import { useState } from 'react';
 import axios from 'axios';
 import SuccessModal from '../../utils/SuccessModal';
-import './style.css'
 const CreateAdmin = () => {
     const [formData, setFormData] = useState({
-        isActive: true
     });
 
     const roleMap = {
@@ -43,20 +41,20 @@ const CreateAdmin = () => {
     }
     const formSubmitHandler = (e) => {
         e.preventDefault();
+        console.log('Bearer ' + localStorage.getItem('sAdminToken'));
         console.log('====================================');
         console.log(formData);
         console.log('====================================');
-        // console.log('Bearer ' + localStorage.getItem('sAdminToken'));
-        // axios.post('http://localhost:8080/SuperAdmin/create-admin', formData, {
-        //     headers: {
-        //         'Authorization': 'Bearer ' + localStorage.getItem('sAdminToken')
-        //     }
-        // })
-        //     .then((res) => {
-        //         console.log(res);
-        //         setshowSuccessModal(true)
-        //     })
-        //     .catch(err => console.log(err))
+        axios.post('http://localhost:8080/SuperAdmin/create-admin', formData, {
+            headers: {
+                'Authorization': 'Bearer ' + localStorage.getItem('sAdminToken')
+            }
+        })
+            .then((res) => {
+                console.log(res);
+                setshowSuccessModal(true)
+            })
+            .catch(err => console.log(err))
     }
     return (
         <>
