@@ -1,8 +1,10 @@
 import React from 'react'
 import { useState } from 'react'
+import jwt_decode from 'jwt-decode';
 const CreateStaffLogin = () => {
     const [staffLogin, setStaffLogin] = useState({});
-
+    const decoded=jwt_decode(localStorage.getItem('adminToken'))
+    console.log(decoded);
     const fromChangeHandler = (event) => {
         const { name, value } = event.target;
         setStaffLogin(prevState => ({
@@ -10,6 +12,7 @@ const CreateStaffLogin = () => {
             [name]: value,
         }))
     }
+
     const formSubmitHandler = (e) => {
         e.preventDefault()
         console.log(staffLogin);
@@ -96,8 +99,27 @@ const CreateStaffLogin = () => {
                                     onChange={fromChangeHandler}
                                 />
                                 <span class="absolute top-1/2 left-4 -translate-y-1/2">
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                        <path stroke-linecap="round" stroke-linejoin="round" d="M15 8.25H9m6 3H9m3 6l-3-3h1.5a3 3 0 100-6M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" class="w-6 h-6">
+                                        <path strokeLinecap="round" strokeLinejoin="round" d="M15 8.25H9m6 3H9m3 6l-3-3h1.5a3 3 0 100-6M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                    </svg>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="w-full px-4 md:w-1/2 lg:w-1/3">
+                        <div class="mb-12">
+                            <label class="mb-3 block text-base font-medium text-black">
+                                Loan Limit
+                            </label>
+                            <div class="relative">
+                                <input type="text" placeholder="Deposit Limit" class="w-full rounded-md border border-form-stroke p-3 pl-12 text-black placeholder-[#929DA7] outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-[#F5F7FD]"
+                                    name='loanLimit'
+                                    required
+                                    onChange={fromChangeHandler}
+                                />
+                                <span class="absolute top-1/2 left-4 -translate-y-1/2">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" class="w-6 h-6">
+                                        <path strokeLinecap="round" strokeLinejoin="round" d="M15 8.25H9m6 3H9m3 6l-3-3h1.5a3 3 0 100-6M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                                     </svg>
                                 </span>
                             </div>
@@ -116,8 +138,8 @@ const CreateStaffLogin = () => {
                                     onChange={fromChangeHandler}
                                 />
                                 <span class="absolute top-1/2 left-4 -translate-y-1/2">
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                        <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z" />
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" class="w-6 h-6">
+                                        <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z" />
                                     </svg>
                                 </span>
                             </div>
@@ -136,8 +158,8 @@ const CreateStaffLogin = () => {
                                     onChange={fromChangeHandler}
                                 />
                                 <span class="absolute top-1/2 left-4 -translate-y-1/2">
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                        <path stroke-linecap="round" stroke-linejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z" />
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" class="w-6 h-6">
+                                        <path strokeLinecap="round" strokeLinejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z" />
                                     </svg>
 
                                 </span>
@@ -146,7 +168,7 @@ const CreateStaffLogin = () => {
                     </div>
 
                     <button type='submit'  class="rounded-md px-3.5 py-2 m-1 overflow-hidden relative group cursor-pointer border-2 font-medium border-indigo-600  text-white">
-                        <span class="absolute w-64 h-0 transition-all duration-300 origin-center rotate-45 -translate-x-20 bg-indigo-600 top-1/2 group-hover:h-64 group-hover:-translate-y-32 ease"></span>
+                        {/* <span class="absolute w-64 h-0 transition-all duration-300 origin-center rotate-45 -translate-x-20 bg-indigo-600 top-1/2 group-hover:h-64 group-hover:-translate-y-32 ease"></span> */}
                         <span class="relative text-indigo-600 transition duration-300 group-hover:text-white ease">Create</span>
                     </button>
                 </div>

@@ -2,11 +2,9 @@ import React from 'react'
 import { Routes, Route } from 'react-router-dom'
 import Login from './pages/Admin/Login'
 import Dashboard from './pages/Admin/Dashboard'
-import Error from './pages/Error'
-
-
 import SuperAdminLogin from './components/SuperAdmin/SuperAdminLogin'
 import SuperAdminDashboard from './components/SuperAdmin/SuperAdminDashboard'
+import Error from './pages/Error'
 import Test from './pages/Test'
 
 const App = () => {

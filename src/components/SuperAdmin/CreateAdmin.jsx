@@ -7,33 +7,56 @@ const CreateAdmin = () => {
     const [formData, setFormData] = useState({
         isActive: true
     });
+
+    const roleMap = {
+        "Marketing": 0,
+        "Assistant": 1,
+        "Senior Assistant": 2,
+        "Officer": 3
+    };
     const [showSuccessModal, setshowSuccessModal] = useState(false)
     const onChangeHandler = (event) => {
         const { name, value } = event.target;
-        var newValue = name === "role" ? Number(value) : value;
 
-        setFormData(prevState => ({
-            ...prevState,
-            [name]: newValue
-        }))
-    }
+        if (name === "role") {
+            const roleValue = roleMap[value];
+            setFormData(prevState => ({
+                ...prevState,
+                [name]: roleValue
+            }));
+        } else if (name === "isActive") {
+            const newValue = value === "true";
+            setFormData(prevState => ({
+                ...prevState,
+                [name]: newValue
+            }));
+        } else {
+            setFormData(prevState => ({
+                ...prevState,
+                [name]: value
+            }));
+        }
+    };
     const modalText = {
         heading: "Admin Account Successfully Created",
-        bodyText:'The entered username and password can be used by client admin'
+        bodyText: 'The entered username and password can be used by client admin'
     }
     const formSubmitHandler = (e) => {
         e.preventDefault();
-        console.log('Bearer ' + localStorage.getItem('sAdminToken'));
-        axios.post('http://localhost:8080/SuperAdmin/create-admin', formData, {
-            headers: {
-                'Authorization': 'Bearer ' + localStorage.getItem('sAdminToken')
-            }
-        })
-            .then((res) => {
-                console.log(res);
-                setshowSuccessModal(true)
-            })
-            .catch(err => console.log(err))
+        console.log('====================================');
+        console.log(formData);
+        console.log('====================================');
+        // console.log('Bearer ' + localStorage.getItem('sAdminToken'));
+        // axios.post('http://localhost:8080/SuperAdmin/create-admin', formData, {
+        //     headers: {
+        //         'Authorization': 'Bearer ' + localStorage.getItem('sAdminToken')
+        //     }
+        // })
+        //     .then((res) => {
+        //         console.log(res);
+        //         setshowSuccessModal(true)
+        //     })
+        //     .catch(err => console.log(err))
     }
     return (
         <>
@@ -103,15 +126,13 @@ const CreateAdmin = () => {
                         </div>
                         <div>
                             <label class="text-gray-700 dark:text-gray-200" for="passwordConfirmation">Role</label>
-                            <input type="number" class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring"
-                                required
-                                name='role'
-                                min={0}
-                                step={1}
-                                max={3}
-                                onChange={onChangeHandler}
-
-                            />
+                            <select name="role" onChange={onChangeHandler} class="lock w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring">
+                                <option value="select role" disabled selected>Select Role</option>
+                                <option >Marketing</option>
+                                <option >Assistant</option>
+                                <option >Senior Assistant</option>
+                                <option>Officer</option>
+                            </select>
                         </div>
                         <div>
                             <label class="text-gray-700 dark:text-gray-200" for="passwordConfirmation">Phone Number</label>
@@ -121,21 +142,13 @@ const CreateAdmin = () => {
                                 onChange={onChangeHandler}
                             />
                         </div>
-                        {/* <div>
-                            <label class="text-gray-700 dark:text-gray-200" for="passwordConfirmation">Is Active?</label>
-                            <input type='checkbox' class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring"
-                                required
-                                name='isActive'
-                                onChange={onChangeHandler}
-                            />
-                        </div> */}
                         <div>
-                            <label class="text-gray-700 dark:text-gray-200" for="passwordConfirmation">Created By</label>
-                            <input type="text" class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring"
-                                required
-                                name='createdBy'
-                                onChange={onChangeHandler}
-                            />
+                            <label class="text-gray-700 dark:text-gray-200" for="status">Status</label>
+                            <select name="isActive" onChange={onChangeHandler} class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring">
+                                <option value="select role" disabled selected>Select Status</option>
+                                <option value="true">Active</option>
+                                <option value="false">In Active</option>
+                            </select>
                         </div>
                     </div>
 
