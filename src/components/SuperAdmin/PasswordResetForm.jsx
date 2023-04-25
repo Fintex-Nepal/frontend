@@ -1,11 +1,17 @@
 import React from 'react'
 import { useState } from 'react';
 import axios from 'axios'
-// import ConfirmModal from '../../utils/ConfirmModal'
 import updatePasswordUrl from '../../utils/Url'
+import SuccessModal from '../../utils/SuccessModal';
 const PasswordResetForm = ({ api }) => {
+    const modalText = {
+        heading: "Password Changed Successfull",
+        bodyText: 'Please login again'
+    }
 
     const [userData, setUserData] = useState({})
+    const [showSuccessModal, setshowSuccessModal] = useState(false)
+    const [isLogout, setIsLogout] = useState(false)
     const onChangeHandler = (event) => {
         const { name, value } = event.target;
         setUserData(prevState => ({
@@ -30,19 +36,18 @@ const PasswordResetForm = ({ api }) => {
             return
         }
         else {
-            console.log('====================================');
-            console.log(userData);
-            console.log('====================================');
             axios.put(updatePasswordUrl, userData, {
                 headers: {
                     'Authorization': 'Bearer ' + localStorage.getItem('sAdminToken')
                 }
             })
-            .then((res) => {
-                console.log(res);
-                // setshowSuccessModal(true)
-            })
-            .catch(err => console.log(err))
+                .then((res) => {
+                    console.log(res);
+                    setIsLogout(true)
+                    setshowSuccessModal(true);
+
+                })
+                .catch(err => console.log(err))
         }
 
 
@@ -50,7 +55,7 @@ const PasswordResetForm = ({ api }) => {
 
     return (
         <>
-            {/* {showConfirmModal &&<ConfirmModal headText={modalText.headText} bodyText={modalText.bodyText}  setShowConfirmModal={setShowConfirmModal} setModalResponse={setModalResponse} modalResponse={modalResponse}/>} */}
+            {showSuccessModal && <SuccessModal heading={modalText?.heading} bodyText={modalText?.bodyText} setshowSuccessModal={setshowSuccessModal} showSuccessModal={showSuccessModal} isLogout={isLogout} />}
             <div className="mx-auto max-w-screen-xl px-4 py-16 sm:px-6 lg:px-8">
                 <div className="mx-auto max-w-lg">
                     <h1 className="text-center text-2xl font-bold text-indigo-600 sm:text-3xl">
