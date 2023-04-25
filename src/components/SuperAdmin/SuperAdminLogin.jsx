@@ -20,7 +20,6 @@ const SuperAdminLogin = () => {
         e.preventDefault();
         axios.post('http://localhost:8080/SuperAdmin/login', userData)
             .then((res) => {
-
                 localStorage.setItem('sAdminToken', res.data.token)
                 naviate('/sadmindashboard')
             })

@@ -1,7 +1,7 @@
 import React from 'react'
 import { useState } from 'react';
 import axios from 'axios'
-import updatePasswordUrl from '../../utils/Url'
+import {updatePasswordUrl} from '../../utils/Url'
 import SuccessModal from '../../utils/SuccessModal';
 const PasswordResetForm = ({ api }) => {
     const modalText = {
@@ -41,16 +41,22 @@ const PasswordResetForm = ({ api }) => {
                     'Authorization': 'Bearer ' + localStorage.getItem('sAdminToken')
                 }
             })
-                .then((res) => {
-                    console.log(res);
-                    setIsLogout(true)
-                    setshowSuccessModal(true);
+            .then((res) => {
+                    if (res.data.status) {
+                        setIsLogout(true)
+                        setshowSuccessModal(true);
+                    }
+                    else
+                    {
+                        console.log('====================================');
+                        console.log(res.data);
+                        console.log('====================================');
+                    }
+
 
                 })
                 .catch(err => console.log(err))
         }
-
-
     }
 
     return (
