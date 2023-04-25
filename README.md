@@ -88,3 +88,8 @@
 
 # Problem in backend:
   * Space in username and name is not allowed
+  * It only changes from inactive to active but not vice-versa
+
+
+# Super Admin Functionalities Updated
+  * any issue reported while testing

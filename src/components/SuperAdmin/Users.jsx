@@ -13,7 +13,6 @@ const Users = () => {
             .then((res) => setAllUsers(res.data))
             .catch(err => console.log(err))
     }, [allUsers])
-
     const handleUpdate = () => {
         axios.put(userActivateDeactivateUrl, selectedUsers, {
             headers: {
