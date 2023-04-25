@@ -1,46 +1,53 @@
 import React from 'react'
 import { useState } from 'react';
-// import axios from 'axios'
+import axios from 'axios'
 // import ConfirmModal from '../../utils/ConfirmModal'
-const PasswordResetForm = ({api}) => {
+import updatePasswordUrl from '../../utils/Url'
+const PasswordResetForm = ({ api }) => {
 
-    const [userData,setUserData]=useState({
-        currentPassword:'',
-        newPassword:'',
-        confirmNewPassword:'',
-    })
-    const onChangeHandler=(event)=>{
-        const {name,value}=event.target;
-       setUserData(prevState=>({
-        ...prevState,
-        [name]:value,
-       }))
+    const [userData, setUserData] = useState({})
+    const onChangeHandler = (event) => {
+        const { name, value } = event.target;
+        setUserData(prevState => ({
+            ...prevState,
+            [name]: value,
+        }))
     }
-   const isPasswordValid = (password) => {
-    const regex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*()_+}{":;'?/>.<,])(?=.*[a-zA-Z]).{8,}$/;
-    return regex.test(password);
-}
-   const formSubmitHandler = (e) => {
-    e.preventDefault()
-    if (userData.newPassword !== userData.confirmNewPassword) {
-        alert('Passwords do not match')
-        return
+    const isPasswordValid = (password) => {
+        const regex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*()_+}{":;'?/>.<,])(?=.*[a-zA-Z]).{8,}$/;
+        return regex.test(password);
     }
-    if (!isPasswordValid(userData.newPassword)) {
-        alert(
-            'Password must contain at least 8 characters, including 1 lowercase letter, 1 uppercase letter, and 1 digit'
-        )
-        return
-    }
-    else {
-        alert('Password Successfully Changed')
-    }
-    console.log('====================================');
-    console.log(userData);
-    console.log('====================================');
+    const formSubmitHandler = (e) => {
+        e.preventDefault()
+        if (userData.newPassword !== userData.confirmNewPassword) {
+            alert('Passwords do not match')
+            return
+        }
+        if (!isPasswordValid(userData.newPassword)) {
+            alert(
+                'Password must contain at least 8 characters, including 1 lowercase letter, 1 uppercase letter, and 1 digit'
+            )
+            return
+        }
+        else {
+            console.log('====================================');
+            console.log(userData);
+            console.log('====================================');
+            axios.put(updatePasswordUrl, userData, {
+                headers: {
+                    'Authorization': 'Bearer ' + localStorage.getItem('sAdminToken')
+                }
+            })
+            .then((res) => {
+                console.log(res);
+                // setshowSuccessModal(true)
+            })
+            .catch(err => console.log(err))
+        }
 
-}
-  
+
+    }
+
     return (
         <>
             {/* {showConfirmModal &&<ConfirmModal headText={modalText.headText} bodyText={modalText.bodyText}  setShowConfirmModal={setShowConfirmModal} setModalResponse={setModalResponse} modalResponse={modalResponse}/>} */}
@@ -61,7 +68,7 @@ const PasswordResetForm = ({api}) => {
                         <p className="text-center text-lg font-medium">your credentials</p>
 
                         <div>
-                            <label htmlFor="currentPassword" className="sr-only">Current Password</label>
+                            <label className="sr-only">Current Password</label>
 
                             <div className="relative">
                                 <input
@@ -69,7 +76,7 @@ const PasswordResetForm = ({api}) => {
                                     className="w-full rounded-lg border-gray-200 p-4 pr-12 text-sm shadow-sm"
                                     placeholder="Current Password"
                                     onChange={onChangeHandler}
-                                    name='currentPassword'
+                                    name='oldPassword'
                                 />
                             </div>
                         </div>
@@ -130,7 +137,7 @@ const PasswordResetForm = ({api}) => {
                             type="submit"
                             className="block w-full rounded-lg bg-indigo-600 px-5 py-3 text-sm font-medium text-white"
                         >
-                           Change password
+                            Change password
                         </button>
                     </form>
                 </div>

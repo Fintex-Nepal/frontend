@@ -19,6 +19,10 @@ const SuperAdminDashboard = () => {
             navigate('/sadminlogin')
         }
     }, [navigate])
+    const logOutHandler=()=>{
+        localStorage.removeItem('sAdminToken')
+        navigate('/sadminlogin')
+    }
     if (isValidUser) {
         return (
             <>
@@ -246,7 +250,7 @@ const SuperAdminDashboard = () => {
                                                                     <span className="text-sm ml-2">My Profile</span>
                                                                 </div>
                                                             </li>
-                                                            <li className="flex w-full justify-between text-gray-600 hover:text-indigo-700 cursor-pointer items-center mt-2">
+                                                            <li  onClick={logOutHandler} className="flex w-full justify-between text-gray-600 hover:text-indigo-700 cursor-pointer items-center mt-2">
                                                                 <div className="flex items-center">
                                                                     <svg xmlns="http://www.w3.org/2000/svg" className="icon icon-tabler icon-tabler-logout" width={20} height={20} viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" fill="none" strokeLinecap="round" strokeLinejoin="round">
                                                                         <path stroke="none" d="M0 0h24v24H0z" />

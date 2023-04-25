@@ -39,7 +39,7 @@ const Users = () => {
                                     {user.userName}
                                 </td>
                                 <td className="px-6 py-4">{user.role}</td>
-                                <td className={`my-element ${user?.isActive ? 'px-6 py-4 text-green-800 font-bold' : 'px-6 py-4 bg-red-800 font-bold'}`}>{user.isActive ?'Active':'Inactive'}</td>
+                                <td className={`my-element ${user?.isActive ? 'px-6 py-4 text-green-800 font-bold' : 'px-6 py-4 text-red-800 font-bold'}`}>{user.isActive ?'Active':'In Active'}</td>
                             </tr>
                         ))}
                     </tbody>
