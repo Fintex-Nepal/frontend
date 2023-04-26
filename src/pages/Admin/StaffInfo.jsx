@@ -1,6 +1,6 @@
 
 import { getAllEmployeeUrl } from '../../utils/Url'
-import axios  from 'axios'
+import axios from 'axios'
 import { useEffect, useState } from 'react';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
@@ -8,56 +8,37 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 
 const StaffInfo = () => {
-    const employeeData = [
-        {
-            name: 'Samir Alam',
-            designation: 'CEO',
-            place: 'Birgunj',
-            email: 'samiramrullah@gmail.com',
-            phoneNo: 9823231004,
-        },
-        {
-            name: 'Ashish',
-            designation: 'CEO',
-            place: 'Chitwan',
-            email: 'ashihish@gmail.com',
-            phoneNo: 9823231005,
-        },
-
-        {
-            name: 'Sajid',
-            designation: 'CEO',
-            place: 'Birgunj',
-            email: 'sajid@gmail.com',
-            phoneNo: 9823231006,
-        }
-    ]
-
-
-    const [allEmployee,setAllEmployee]=useState([]);
-
+    const [allEmployee, setAllEmployee] = useState([]);
+    const [onSearch, setonSearch] = useState();
+    
     useEffect(() => {
-        axios.get(getAllEmployeeUrl,{
+        axios.get(getAllEmployeeUrl, {
             headers: {
                 'Authorization': 'Bearer ' + localStorage.getItem('adminToken')
             },
         })
             .then((res => {
                 setAllEmployee(res.data);
+                setonSearch(res.data)
             }))
             .catch(err => console.log(err))
     }, [])
+    const onSearchHandler = (e) => {
+        setonSearch(
+          allEmployee.filter((item) => item.employeeData.name.includes(e.target.value))
+        );
+      };
     return (
         <>
             <div class="flex justify-between">
                 <div class="left-div">
                     <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
-                        <InputLabel id="demo-simple-select-standard-label">Employee</InputLabel>
+                        <InputLabel  id="demo-simple-select-standard-label">Employee</InputLabel>
                         <Select
                             labelId="demo-simple-select-standard-label"
                             id="demo-simple-select-standard"
                             // value={age}
-                            // onChange={handleChange}
+                            
                             label="Age"
                         >
                             <MenuItem value="">
@@ -84,7 +65,7 @@ const StaffInfo = () => {
                                 fill="#4B5563"
                             />
                         </svg>
-                        <input
+                        <input onChange={onSearchHandler}
                             className="relative text-sm leading-none text-gray-600 bg-white  rounded lg:max-w-[452px] w-full px-10 py-4 outline-none"
                             type="text"
                             name
@@ -97,7 +78,7 @@ const StaffInfo = () => {
             <div class=" text-black bg-white px-4 py-2 rounded w-full">
                 <div class="flex flex-col">
                     <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
-                        <div class="inline-block min-w-full py-2 sm:px-6 lg:px-8 overflow-auto" style={{height:'40rem'}}> 
+                        <div class="inline-block min-w-full py-2 sm:px-6 lg:px-8 overflow-auto" style={{ height: '40rem' }}>
                             <div class="overflow-hidden">
 
                                 <table
@@ -148,7 +129,8 @@ const StaffInfo = () => {
 
                                     </thead>
                                     <tbody>
-                                        {allEmployee?.map((itm, index) => (
+
+                                     {allEmployee?.length&& onSearch?.map((itm, index) => (
                                             <tr class="border-b ">
                                                 <td
                                                     class="whitespace-nowrap border-r px-6 py-4 ">
