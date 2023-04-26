@@ -70,6 +70,8 @@
 2. Create Admin
 3. Get Users
 
+## Super Admin Completed
+
 ## Finance Company
 1. Login
 2. Register
@@ -84,11 +86,12 @@
 11. Get Employee By Id
 12. Get Employess
 
+# Finance Company  
+  * Create Employee
+
 
 
 # Problem in backend:
-  * Space in username and name is not allowed
-  * It only changes from inactive to active but not vice-versa
 
 
 # Super Admin Functionalities Updated
