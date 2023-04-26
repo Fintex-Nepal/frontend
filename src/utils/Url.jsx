@@ -4,5 +4,6 @@ export const userActivateDeactivateUrl="http://localhost:8080/superadmin/activat
 
 export const updatePasswordMicrofinance="http://localhost:8080/financecompany/update-password";
 
-export const createEmployeeLoginUrl="http://localhost:8080/financecompany/register"
+export const createEmployeeLoginUrl="http://localhost:8080/financecompany/register";
+export const getAllEmployeeUrl="http://localhost:8080/financecompany/getusers";
 
