@@ -1,9 +1,71 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios';
+import { styled } from "@mui/material/styles";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import Switch from "@mui/material/Switch";
 import { userActivateDeactivateUrl } from '../../utils/Url'
+import SuccessModal from '../../utils/SuccessModal'
+
+
+const IOSSwitch = styled((props) => (
+    <Switch focusVisibleClassName=".Mui-focusVisible" disableRipple {...props} />
+))(({ theme }) => ({
+    width: 42,
+    height: 26,
+    padding: 0,
+    "& .MuiSwitch-switchBase": {
+        padding: 0,
+        margin: 2,
+        transitionDuration: "300ms",
+        "&.Mui-checked": {
+            transform: "translateX(16px)",
+            color: "#fff",
+            "& + .MuiSwitch-track": {
+                backgroundColor: theme.palette.mode === "dark" ? "#2ECA45" : "#65C466",
+                opacity: 1,
+                border: 0
+            },
+            "&.Mui-disabled + .MuiSwitch-track": {
+                opacity: 0.5
+            }
+        },
+        "&.Mui-focusVisible .MuiSwitch-thumb": {
+            color: "#33cf4d",
+            border: "6px solid #fff"
+        },
+        "&.Mui-disabled .MuiSwitch-thumb": {
+            color:
+                theme.palette.mode === "light"
+                    ? theme.palette.grey[100]
+                    : theme.palette.grey[600]
+        },
+        "&.Mui-disabled + .MuiSwitch-track": {
+            opacity: theme.palette.mode === "light" ? 0.7 : 0.3
+        }
+    },
+    "& .MuiSwitch-thumb": {
+        boxSizing: "border-box",
+        width: 22,
+        height: 22
+    },
+    "& .MuiSwitch-track": {
+        borderRadius: 26 / 2,
+        backgroundColor: theme.palette.mode === "light" ? "#E9E9EA" : "#39393D",
+        opacity: 1,
+        transition: theme.transitions.create(["background-color"], {
+            duration: 500
+        })
+    }
+}));
 const Users = () => {
     const [allUsers, setAllUsers] = useState();
     const [selectedUsers, setSelectedUsers] = useState([]);
+    const [updatedUsers, setUpdatedUsers] = useState([]);
+    const [showSuccessModal, setshowSuccessModal] = useState(false)
+    const modalText = {
+        heading: "Status Successfully Activated",
+        bodyText: 'Now user Will access accordingly'
+    }
     useEffect(() => {
         axios.get('http://localhost:8080/superadmin/getusers', {
             headers: {
@@ -12,46 +74,48 @@ const Users = () => {
         })
             .then((res) => setAllUsers(res.data))
             .catch(err => console.log(err))
-    }, [allUsers])
+    }, [])
     const handleUpdate = () => {
+        console.log(selectedUsers);
         axios.put(userActivateDeactivateUrl, selectedUsers, {
             headers: {
                 'Authorization': 'Bearer ' + localStorage.getItem('sAdminToken')
             }
         })
             .then(res => {
-                // update isActive property in allUsers
-                const updatedAllUsers = allUsers.map(user => {
-                    const selectedUser = selectedUsers.find(selected => selected.username === user.username);
-                    if (selectedUser && selectedUser.isActive !== user.isActive) {
-                        return {
-                            ...user,
-                            isActive: selectedUser.isActive
-                        }
-                    }
-                    return user;
-                });
-                setAllUsers(updatedAllUsers);
-                
+               if(res.status)
+               {
+                   setUpdatedUsers(res.data)
+                   setAllUsers(allUsers.map(user => {
+                       const updatedUser = updatedUsers.find(u => u.userId === user.userId);
+                       if (updatedUser) {
+                           return { ...user, isActive: updatedUser.isActive };
+                       }
+                       return user;
+                   }))
+                   setshowSuccessModal(true)
+               }
+                // else
+                // {
+                //     alert('Sth Went Wrong')
+                // }
             })
             .catch(err => console.log(err));
     }
-    const handleCheckboxChange = (event, user) => {
-
-        if (event.target.checked) {
-
-            setSelectedUsers([...selectedUsers, { username: user.userName, isActive: !user.isActive }]);
-        }
-    }
+    const handleSwitchChange = (event, user) => {
+        const updatedUser = { ...{ userName: user.userName }, isActive: event.target.checked };
+        setSelectedUsers([...selectedUsers, updatedUser])
+    };
     return (
         <>
+        {showSuccessModal && <SuccessModal heading={modalText?.heading} bodyText={modalText?.bodyText} setshowSuccessModal={setshowSuccessModal} showSuccessModal={showSuccessModal} />}
             <div class=" text-black bg-white px-4 py-2 rounded w-full">
                 <div class="flex flex-col">
                     <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
-                        <div class="inline-block min-w-full py-2 sm:px-6 lg:px-8">
+                        <div class="inline-block min-w-full py-2 sm:px-6 lg:px-8" style={{ height: '46rem' }}>
                             <div class="overflow-hidden"></div>
                             <table
-                                class="min-w-full border text-center text-sm font-light ">
+                                class="min-w-full border text-center text-sm font-light h-96  overflow-y-auto">
                                 <thead class="border-b font-medium ">
                                     <tr>
                                         <th
@@ -64,11 +128,6 @@ const Users = () => {
                                             class="border-r px-6 py-4 ">
                                             User Name
                                         </th>
-                                        {/* <th
-                            scope="col"
-                            class="border-r px-6 py-4 ">
-                            Email
-                        </th> */}
                                         <th
                                             scope="col"
                                             class="border-r px-6 py-4 ">
@@ -104,15 +163,20 @@ const Users = () => {
                                                 {itm.role}
                                             </td>
                                             <td
-                                                class={`${itm.isActive?'whitespace-nowrap border-r px-6 py-4 text-green-800 font-extrabold':'whitespace-nowrap border-r px-6 py-4 text-red-800 font-extrabold'}`}>
+                                                class={`${itm.isActive ? 'whitespace-nowrap border-r px-6 py-4 text-green-800 font-extrabold' : 'whitespace-nowrap border-r px-6 py-4 text-red-800 font-extrabold'}`}>
                                                 {itm.isActive ? 'Active' : ('In Active')}
                                             </td>
 
-                                            <td role='button'
-                                                class="whitespace-nowrap border-r px-6 py-4">
-                                                <label>
-                                                    <input type="checkbox" onChange={(event) => handleCheckboxChange(event, itm)} /> {itm.isActive ? 'In Active' : 'Active'}
-                                                </label>
+                                            <td role='button'>
+
+
+                                                <FormControlLabel
+                                                    control={<IOSSwitch sx={{ m: 1 }} defaultChecked={itm.isActive} onChange={(event) => handleSwitchChange(event, itm)} />}
+                                                    label={itm.isActive ? 'Active' : 'In Active'}
+                                                    role="button"
+                                                    className="whitespace-nowrap border-r px-6 py-4"
+                                                />
+
 
                                             </td>
                                         </tr>
