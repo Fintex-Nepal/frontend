@@ -59,7 +59,7 @@ const PasswordResetForm = () => {
                 .catch(err => console.log(err))
         }
     }
-
+  console.log('asasasas');
     return (
         <>
             {showSuccessModal && <SuccessModal heading={modalText?.heading} bodyText={modalText?.bodyText} setshowSuccessModal={setshowSuccessModal} showSuccessModal={showSuccessModal} isLogout={isLogout} />}

@@ -64,7 +64,7 @@ const Users = () => {
     const [showSuccessModal, setshowSuccessModal] = useState(false)
     const modalText = {
         heading: "Status Successfully Activated",
-        bodyText: 'Now user Will access accordingly'
+        bodyText: 'Now user will access accordingly'
     }
     useEffect(() => {
         axios.get('http://localhost:8080/superadmin/getusers', {
@@ -74,7 +74,7 @@ const Users = () => {
         })
             .then((res) => setAllUsers(res.data))
             .catch(err => console.log(err))
-    }, [])
+    }, [updatedUsers])
     const handleUpdate = () => {
         console.log(selectedUsers);
         axios.put(userActivateDeactivateUrl, selectedUsers, {
@@ -106,6 +106,9 @@ const Users = () => {
         const updatedUser = { ...{ userName: user.userName }, isActive: event.target.checked };
         setSelectedUsers([...selectedUsers, updatedUser])
     };
+    console.log('====================================');
+    console.log('called');
+    console.log('====================================');
     return (
         <>
         {showSuccessModal && <SuccessModal heading={modalText?.heading} bodyText={modalText?.bodyText} setshowSuccessModal={setshowSuccessModal} showSuccessModal={showSuccessModal} />}

@@ -13,10 +13,7 @@ const Login = () => {
         stayLogin:true,
     });
 
-    // const isPasswordValid = (password) => {
-    //     const regex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*()_+}{":;'?/>.<,])(?=.*[a-zA-Z]).{8,}$/;
-    //     return regex.test(password);
-    // }
+
 
     const signUpFormChangeHandler = (event) => {
         const { name, value } = event.target;
@@ -32,7 +29,7 @@ const Login = () => {
             localStorage.setItem('adminToken',res.data.token)
             naviate('/dashboard')
         }))
-        .catch(err=>console.log(err)) 
+        .catch(err=>alert(err.response.statusText)) 
     }
     return (
         <>
