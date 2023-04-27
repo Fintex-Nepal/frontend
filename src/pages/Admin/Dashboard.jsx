@@ -20,7 +20,6 @@ const Dashboard = () => {
         'Create Employee',
         'Create Employee Login',
         'Employee Info',
-        // 'Employee Details/id'
     ]
     useEffect(() => {
         if (localStorage.getItem('adminToken')) {

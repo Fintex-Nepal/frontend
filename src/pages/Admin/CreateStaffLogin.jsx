@@ -58,12 +58,12 @@ const CreateStaffLogin = () => {
         <>
             {showSuccessModal && <SuccessModal heading={modalText?.heading} bodyText={modalText?.bodyText} setshowSuccessModal={setshowSuccessModal} showSuccessModal={showSuccessModal} />}
             <section class="max-w-4xl p-6 mx-auto bg-white rounded-md shadow-md ">
-                <h2 class="text-lg font-semibold text-gray-700 capitalize dark:text-white">Create Employee Login</h2>
+                <h2 class="text-lg font-semibold text-gray-700 capitalize ">Create Employee Login</h2>
 
                 <form onSubmit={formSubmitHandler}>
                     <div class="grid grid-cols-1 gap-6 mt-4 sm:grid-cols-3">
                         <div>
-                            <label class="text-gray-700 dark:text-gray-200" >User Name</label>
+                            <label class="text-gray-700 " >User Name</label>
                             <input type="text" class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 focus:outline-none focus:ring"
                                 name='userName'
                                 onChange={fromChangeHandler}
@@ -71,7 +71,7 @@ const CreateStaffLogin = () => {
                         </div>
 
                         <div>
-                            <label class="text-gray-700 dark:text-gray-200" >Email Address</label>
+                            <label class="text-gray-700 " >Email Address</label>
                             <input type="email" class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 focus:outline-none focus:ring"
                                 name='email'
                                 onChange={fromChangeHandler}
@@ -79,7 +79,7 @@ const CreateStaffLogin = () => {
                         </div>
 
                         <div>
-                            <label class="text-gray-700 dark:text-gray-200" >Password</label>
+                            <label class="text-gray-700 " >Password</label>
                             <input type="password" class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 focus:outline-none focus:ring"
                                 name='password'
                                 onChange={fromChangeHandler}
@@ -87,14 +87,14 @@ const CreateStaffLogin = () => {
                         </div>
 
                         <div>
-                            <label class="text-gray-700 dark:text-gray-200" >Password Confirmation</label>
+                            <label class="text-gray-700 " >Password Confirmation</label>
                             <input type="text" class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 focus:outline-none focus:ring"
                                 name='confirmPassword'
                                 onChange={fromChangeHandler}
                             />
                         </div>
                         <div>
-                            <label class="text-gray-700 dark:text-gray-200" >Role</label>
+                            <label class="text-gray-700 " >Role</label>
                             <select onChange={fromChangeHandler} name='role' type="text" class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 focus:outline-none focus:ring">
                                 <option>Marketing</option>
                                 <option>Assistant</option>
@@ -102,21 +102,21 @@ const CreateStaffLogin = () => {
                             </select>
                         </div>
                         <div>
-                            <label class="text-gray-700 dark:text-gray-200" >Deposit Limit</label>
+                            <label class="text-gray-700 " >Deposit Limit</label>
                             <input type="number" class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 focus:outline-none focus:ring"
                                 name='depositLimit'
                                 onChange={fromChangeHandler}
                             />
                         </div>
                         <div>
-                            <label class="text-gray-700 dark:text-gray-200" >Loan Limit</label>
+                            <label class="text-gray-700 " >Loan Limit</label>
                             <input type="number" class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 focus:outline-none focus:ring"
                                 name='loanLimit'
                                 onChange={fromChangeHandler}
                             />
                         </div>
                         <div>
-                            <label class="text-gray-700 dark:text-gray-200" >Created By</label>
+                            <label class="text-gray-700 " >Created By</label>
                             <input type="text" class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 focus:outline-none focus:ring"
                                 name='createdBy'
                                 onChange={fromChangeHandler}

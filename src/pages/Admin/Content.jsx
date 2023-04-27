@@ -3,9 +3,9 @@ import React from 'react'
 const Content = () => {
     return (
         <div
-            class="flex h-[80vh] items-center justify-center rounded-xl border-2 border-dashed border-gray-300 dark:border-gray-600"
+            class="flex h-[80vh] items-center justify-center rounded-xl border-2 border-dashed border-gray-300 "
         >
-            <span class="dark:text-white">
+            <span class="">
                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor soluta autem odit nobis, debitis fuga obcaecati ex rerum rem tempore quo qui numquam minus quam itaque at blanditiis similique aperiam!
                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Iure mollitia deleniti a explicabo assumenda. Iusto obcaecati atque laboriosam eum at ducimus autem expedita ratione alias ipsam? Distinctio, qui. Laborum, enim.
                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Eligendi libero voluptatum, provident natus ipsa optio possimus. Beatae laboriosam, repudiandae libero neque debitis illum placeat consectetur incidunt natus aperiam? Accusamus, repudiandae.

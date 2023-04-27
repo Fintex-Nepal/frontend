@@ -40,12 +40,12 @@ const CreateStaff = () => {
     return (
         <>
             {showSuccessModal && <SuccessModal heading={modalText?.heading} bodyText={modalText?.bodyText} setshowSuccessModal={setshowSuccessModal} showSuccessModal={showSuccessModal} />}
-            <section class="max-w-4xl p-6 mx-auto bg-white rounded-md shadow-md dark:bg-gray-800">
-                <h2 class="text-lg font-semibold text-gray-700 capitalize dark:text-white">Create Employee</h2>
+            <section class="max-w-4xl p-6 mx-auto bg-white rounded-md shadow-md ">
+                <h2 class="text-lg font-semibold text-gray-700 capitalize ">Create Employee</h2>
                 <form onSubmit={formSubmitHandler}>
                     <div class="grid grid-cols-1 gap-6 mt-4 sm:grid-cols-3">
                         <div>
-                            <label class="text-gray-700 dark:text-gray-200" for="username">Name</label>
+                            <label class="text-gray-700 " for="username">Name</label>
                             <input type="text" class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md   focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40  focus:outline-none focus:ring"
                                 name='name'
                                 required
@@ -53,7 +53,7 @@ const CreateStaff = () => {
                             />
                         </div>
                         <div>
-                            <label class="text-gray-700 dark:text-gray-200" >Email Address</label>
+                            <label class="text-gray-700 " >Email Address</label>
                             <input type="email" class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md   focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40  focus:outline-none focus:ring"
                                 name='email'
                                 required
@@ -62,7 +62,7 @@ const CreateStaff = () => {
                         </div>
 
                         <div>
-                            <label class="text-gray-700 dark:text-gray-200" >User Name</label>
+                            <label class="text-gray-700 " >User Name</label>
                             <input type="string" class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md   focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40  focus:outline-none focus:ring"
                                 name='userName'
                                 required
@@ -71,7 +71,7 @@ const CreateStaff = () => {
                         </div>
 
                         <div>
-                            <label class="text-gray-700 dark:text-gray-200" >Company Name</label>
+                            <label class="text-gray-700 " >Company Name</label>
                             <input type="text" class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md   focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40  focus:outline-none focus:ring"
                                 name='companyName'
                                 required
@@ -79,7 +79,7 @@ const CreateStaff = () => {
                             />
                         </div>
                         <div>
-                            <label class="text-gray-700 dark:text-gray-200" >Branch Name</label>
+                            <label class="text-gray-700 " >Branch Name</label>
                             <input type="text" class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md   focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40  focus:outline-none focus:ring"
                                 name='branchName'
                                 required
@@ -87,7 +87,7 @@ const CreateStaff = () => {
                             />
                         </div>
                         <div>
-                            <label class="text-gray-700 dark:text-gray-200" >Phone Number</label>
+                            <label class="text-gray-700 " >Phone Number</label>
                             <input type="number" class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md   focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40  focus:outline-none focus:ring"
                                 name='phoneNumber'
                                 required
@@ -97,91 +97,91 @@ const CreateStaff = () => {
                             />
                         </div>
                         <div>
-                            <label class="text-gray-700 dark:text-gray-200" >Designation</label>
+                            <label class="text-gray-700 " >Designation</label>
                             <input type="text" class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md   focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40  focus:outline-none focus:ring"
                                 name='designation'
                                 onChange={fromChangeHandler}
                             />
                         </div>
                         <div>
-                            <label class="text-gray-700 dark:text-gray-200" >Date Of Joining</label>
+                            <label class="text-gray-700 " >Date Of Joining</label>
                             <input type="date" class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md   focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40  focus:outline-none focus:ring"
                                 name='dateOfJoining'
                                 onChange={fromChangeHandler}
                             />
                         </div>
                         <div>
-                            <label class="text-gray-700 dark:text-gray-200" >Gender</label>
+                            <label class="text-gray-700 " >Gender</label>
                             <input type="text" class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md   focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40  focus:outline-none focus:ring"
                                 name='gender'
                                 onChange={fromChangeHandler}
                             />
                         </div>
                         <div>
-                            <label class="text-gray-700 dark:text-gray-200" >PF Allowed</label>
+                            <label class="text-gray-700 " >PF Allowed</label>
                             <select onChange={fromChangeHandler} name='pfAllowed' type='text' class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md   focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40  focus:outline-none focus:ring">
                                 <option value={true}>Yes</option>
                                 <option value={false}>No</option>
                             </select>
                         </div>
                         <div>
-                            <label class="text-gray-700 dark:text-gray-200" >Salary Posting Account</label>
+                            <label class="text-gray-700 " >Salary Posting Account</label>
                             <input type='text' class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md   focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40  focus:outline-none focus:ring"
                                 name='salaryPostingAccount'
                                 onChange={fromChangeHandler}
                             />
                         </div>
                         <div>
-                            <label class="text-gray-700 dark:text-gray-200" >Provident Posting Account</label>
+                            <label class="text-gray-700 " >Provident Posting Account</label>
                             <input type='text' class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md   focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40  focus:outline-none focus:ring"
                                 name='providentPostingAccount'
                                 onChange={fromChangeHandler}
                             />
                         </div>
                         <div>
-                            <label class="text-gray-700 dark:text-gray-200" >Salary Amount</label>
+                            <label class="text-gray-700 " >Salary Amount</label>
                             <input type='number' class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md   focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40  focus:outline-none focus:ring"
                                 name='salaryAmount'
                                 onChange={fromChangeHandler}
                             />
                         </div>
                         <div>
-                            <label class="text-gray-700 dark:text-gray-200" >Tax</label>
+                            <label class="text-gray-700 " >Tax</label>
                             <input type="number" class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md   focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40  focus:outline-none focus:ring"
                                 name='tax'
                                 onChange={fromChangeHandler}
                             />
                         </div>
                         <div>
-                            <label class="text-gray-700 dark:text-gray-200" >Facilities</label>
+                            <label class="text-gray-700 " >Facilities</label>
                             <input type="text" class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md   focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40  focus:outline-none focus:ring"
                                 name='facilities'
                                 onChange={fromChangeHandler}
                             />
                         </div>
                         <div>
-                            <label class="text-gray-700 dark:text-gray-200" >Grade</label>
+                            <label class="text-gray-700 " >Grade</label>
                             <input type="text" class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md   focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40  focus:outline-none focus:ring"
                                 name='grade'
                                 onChange={fromChangeHandler}
                             />
                         </div>
                         <div>
-                            <label class="text-gray-700 dark:text-gray-200" >Pan Number</label>
+                            <label class="text-gray-700 " >Pan Number</label>
                             <input type="text" class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md   focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40  focus:outline-none focus:ring"
                                 name='panNumber'
                                 onChange={fromChangeHandler}
                             />
                         </div>
                         <div>
-                            <label class="text-gray-700 dark:text-gray-200" >Other Facilities</label>
+                            <label class="text-gray-700 " >Other Facilities</label>
                             <input type="text" class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md   focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40  focus:outline-none focus:ring"
                                 name='otherFacilities'
                                 onChange={fromChangeHandler}
                             />
                         </div>
                         <div>
-                            <label class="text-gray-700 dark:text-gray-200" >Created BY</label>
+                            <label class="text-gray-700 " >Created BY</label>
                             <input type="text" class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md   focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40  focus:outline-none focus:ring"
                                 name='createdBy'
                                 onChange={fromChangeHandler}

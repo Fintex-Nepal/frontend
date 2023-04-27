@@ -55,30 +55,30 @@ const CreateAdmin = () => {
     return (
         <>
             {showSuccessModal && <SuccessModal heading={modalText?.heading} bodyText={modalText?.bodyText} setshowSuccessModal={setshowSuccessModal} showSuccessModal={showSuccessModal} />}
-            <section class="max-w-4xl p-6 mx-auto bg-white rounded-md shadow-md dark:bg-gray-800">
-                <h2 class="text-lg font-semibold text-gray-700 capitalize dark:text-white">Account settings</h2>
+            <section class="max-w-4xl p-6 mx-auto bg-white rounded-md shadow-md ">
+                <h2 class="text-lg font-semibold text-gray-700 capitalize ">Account settings</h2>
 
                 <form onSubmit={formSubmitHandler}>
                     <div class="grid grid-cols-1 gap-6 mt-4 sm:grid-cols-2">
                         <div>
-                            <label class="text-gray-700 dark:text-gray-200" for="username">Name</label>
-                            <input type="text" class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring"
+                            <label class="text-gray-700">Name</label>
+                            <input type="text" class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 focus:outline-none focus:ring"
                                 required
                                 name='name'
                                 onChange={onChangeHandler}
                             />
                         </div>
                         <div>
-                            <label class="text-gray-700 dark:text-gray-200" for="emailAddress">Email Address</label>
-                            <input type="email" class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring"
+                            <label class="text-gray-700" for="emailAddress">Email Address</label>
+                            <input type="email" class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 focus:outline-none focus:ring"
                                 required
                                 name='email'
                                 onChange={onChangeHandler}
                             />
                         </div>
                         <div>
-                            <label class="text-gray-700 dark:text-gray-200" for="emailAddress">User Name</label>
-                            <input type="text" class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring"
+                            <label class="text-gray-700" for="emailAddress">User Name</label>
+                            <input type="text" class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 focus:outline-none focus:ring"
                                 name='userName'
                                 required
                                 onChange={onChangeHandler}
@@ -86,8 +86,8 @@ const CreateAdmin = () => {
                         </div>
 
                         <div>
-                            <label class="text-gray-700 dark:text-gray-200" for="password">Password</label>
-                            <input type="password" class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring"
+                            <label class="text-gray-700" for="password">Password</label>
+                            <input type="password" class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 focus:outline-none focus:ring"
                                 name='password'
                                 required
                                 onChange={onChangeHandler}
@@ -95,32 +95,32 @@ const CreateAdmin = () => {
                         </div>
 
                         <div>
-                            <label class="text-gray-700 dark:text-gray-200" for="passwordConfirmation">Password Confirmation</label>
-                            <input type="password" class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring"
+                            <label class="text-gray-700" for="passwordConfirmation">Password Confirmation</label>
+                            <input type="password" class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 focus:outline-none focus:ring"
                                 required
                                 name='confirmPassword'
                                 onChange={onChangeHandler}
                             />
                         </div>
                         <div>
-                            <label class="text-gray-700 dark:text-gray-200" for="passwordConfirmation">Company Name</label>
-                            <input type="text" class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring"
+                            <label class="text-gray-700" for="passwordConfirmation">Company Name</label>
+                            <input type="text" class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 focus:outline-none focus:ring"
                                 name='companyName'
                                 required
                                 onChange={onChangeHandler}
                             />
                         </div>
                         <div>
-                            <label class="text-gray-700 dark:text-gray-200" for="passwordConfirmation">Branch Name</label>
-                            <input type="text" class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring"
+                            <label class="text-gray-700" for="passwordConfirmation">Branch Name</label>
+                            <input type="text" class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 focus:outline-none focus:ring"
                                 required
                                 name='branchName'
                                 onChange={onChangeHandler}
                             />
                         </div>
                         <div>
-                            <label class="text-gray-700 dark:text-gray-200" for="passwordConfirmation">Role</label>
-                            <select name="role" onChange={onChangeHandler} class="lock w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring">
+                            <label class="text-gray-700" for="passwordConfirmation">Role</label>
+                            <select name="role" onChange={onChangeHandler} class="lock w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 focus:outline-none focus:ring">
                                 <option value="select role" disabled selected>Select Role</option>
                                 <option >Marketing</option>
                                 <option >Assistant</option>
@@ -129,24 +129,24 @@ const CreateAdmin = () => {
                             </select>
                         </div>
                         <div>
-                            <label class="text-gray-700 dark:text-gray-200" for="passwordConfirmation">Phone Number</label>
-                            <input type="text" class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring"
+                            <label class="text-gray-700" for="passwordConfirmation">Phone Number</label>
+                            <input type="text" class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 focus:outline-none focus:ring"
                                 required
                                 name='phoneNumber'
                                 onChange={onChangeHandler}
                             />
                         </div>
                         <div>
-                            <label class="text-gray-700 dark:text-gray-200" for="passwordConfirmation">Created by</label>
-                            <input type="text" class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring"
+                            <label class="text-gray-700" for="passwordConfirmation">Created by</label>
+                            <input type="text" class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 focus:outline-none focus:ring"
                                 required
                                 name='createdBy'
                                 onChange={onChangeHandler}
                             />
                         </div>
                         <div>
-                            <label class="text-gray-700 dark:text-gray-200" for="status">Status</label>
-                            <select name="isActive" onChange={onChangeHandler} class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring">
+                            <label class="text-gray-700" for="status">Status</label>
+                            <select name="isActive" onChange={onChangeHandler} class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 focus:outline-none focus:ring">
                                 <option value="select role" disabled selected>Select Status</option>
                                 <option value="true">Active</option>
                                 <option value="false">In Active</option>

@@ -43,25 +43,25 @@ const Login = () => {
                                 <img class="absolute inset-0 z-0 object-cover w-full h-full ml-auto"
                                     src="https://images.pexels.com/photos/7321/sea-water-ocean-horizon.jpg?auto=compress&cs=tinysrgb&h=750&w=1260" alt='loginImage' />
                                 <div class="top-0 z-10 max-w-xl mx-auto mb-12 text-center ">
-                                    <h2 class="mb-4 text-4xl font-bold text-gray-100 dark:text-gray-300 ">
+                                    <h2 class="mb-4 text-4xl font-bold text-gray-100  ">
                                         Welcome to our community and join with us</h2>
                                     <div class="max-w-lg mx-auto mb-6">
-                                        <p class="pt-6 font-medium text-gray-300 dark:text-gray-300">
+                                        <p class="pt-6 font-medium text-gray-300 ">
                                             lorem ipsum dor amet sidcuscd andih wkoidus iusoyions hejitywa qopasation dummy text
                                             ipsum
                                         </p>
                                     </div>
                                     <a href="1"
-                                        class="inline-block px-6 py-2 font-medium bg-green-600 text-gray-50 dark:text-gray-300">
+                                        class="inline-block px-6 py-2 font-medium bg-green-600 text-gray-50 ">
                                         Join now</a>
                                 </div>
                             </div>
-                            <div class="w-full py-6 bg-gray-100 shadow-md lg:py-7 lg:w-1/2 dark:bg-gray-900">
+                            <div class="w-full py-6 bg-gray-100 shadow-md lg:py-7 lg:w-1/2 ">
                                 <div class="max-w-md mx-auto">
                                     <div class="px-4 my-7 ">
                                         <div class="mb-7">
                                             <span
-                                                class="flex items-center justify-center w-20 h-20 mx-auto text-gray-900 bg-green-600 rounded-lg dark:bg-green-600 ">
+                                                class="flex items-center justify-center w-20 h-20 mx-auto text-gray-900 bg-green-600 rounded-lg">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32"
                                                     fill="currentColor" class="text-gray-200 bi bi-person-circle"
                                                     viewBox="0 0 16 16">
@@ -72,28 +72,28 @@ const Login = () => {
                                                 </svg>
                                             </span>
                                         </div>
-                                        <h2 class="mb-3 text-2xl font-bold text-center text-gray-800 dark:text-gray-400">
+                                        <h2 class="mb-3 text-2xl font-bold text-center text-gray-800 ">
                                             Login your Account</h2>
-                                        <p class="text-base text-center text-gray-500 mb-7 dark:text-gray-400">
+                                        <p class="text-base text-center text-gray-500 mb-7 ">
                                             Please fill your credentials</p>
                                         <form onSubmit={formSubmitHandler}>
                                             <div class="mb-4">
                                                 <input type="text"
                                                     name='userName'
-                                                    class="w-full py-4 rounded-lg px-7 dark:text-gray-300 dark:bg-gray-800"
+                                                    class="w-full py-4 rounded-lg px-7  "
                                                     placeholder="User Id" required
                                                     onChange={signUpFormChangeHandler}
                                                 />
                                             </div>
                                             <div class="relative flex items-center mb-4">
                                                 <input type="password"
-                                                    class="w-full py-4 rounded-lg px-7 dark:text-gray-300 dark:bg-gray-800"
+                                                    class="w-full py-4 rounded-lg px-7  "
                                                     name='password'
                                                     placeholder=" password" required
                                                     onChange={signUpFormChangeHandler}
                                                 />
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                                    class="absolute right-0 mt-2 mr-3 i dark:text-gray-50" fill="currentColor"
+                                                    class="absolute right-0 mt-2 mr-3 i " fill="currentColor"
                                                     viewBox="0 0 16 16">
                                                     <path
                                                         d="M13.359 11.238C15.06 9.72 16 8 16 8s-3-5.5-8-5.5a7.028 7.028 0 0 0-2.79.588l.77.771A5.944 5.944 0 0 1 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.134 13.134 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755-.165.165-.337.328-.517.486l.708.709z" />
@@ -106,12 +106,12 @@ const Login = () => {
                                             <div class="relative flex items-center mb-4">
                                                 <input type="password"
                                                     name='confirmPassword'
-                                                    class="w-full py-4 rounded-lg px-7 dark:text-gray-300 dark:bg-gray-800"
+                                                    class="w-full py-4 rounded-lg px-7  "
                                                     placeholder="Repeat password" required
                                                     onChange={signUpFormChangeHandler}
                                                 />
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                                    class="absolute right-0 items-center mr-3 dark:text-gray-50"
+                                                    class="absolute right-0 items-center mr-3 "
                                                     fill="currentColor" viewBox="0 0 16 16">
                                                     <path
                                                         d="M13.359 11.238C15.06 9.72 16 8 16 8s-3-5.5-8-5.5a7.028 7.028 0 0 0-2.79.588l.77.771A5.944 5.944 0 0 1 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.134 13.134 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755-.165.165-.337.328-.517.486l.708.709z" />
@@ -123,16 +123,16 @@ const Login = () => {
                                             </div>
                                             <div class="mb-4 text-right ">
                                                 <a href="1"
-                                                    class="text-sm font-semibold text-blue-500 dark:text-blue-400 dark:hover:text-blue-300 hover:underline">
+                                                    class="text-sm font-semibold text-blue-500   hover:underline">
                                                     forgot password?</a>
                                             </div>
 
                                             <button
-                                                class="w-full py-4 mb-4 font-semibold text-gray-200 bg-green-600 rounded-lg px-7 dark:text-gray-300 dark:bg-green-600 hover:text-blue-200 "
+                                                class="w-full py-4 mb-4 font-semibold text-gray-200 bg-green-600 rounded-lg px-7 hover:text-blue-200 "
                                                 type="submit">LOGIN</button>
-                                            {/* <p class="text-sm text-gray-700 dark:text-gray-400"> Need an account?
+                                            {/* <p class="text-sm text-gray-700 "> Need an account?
                                                 <a href="1"
-                                                    class="text-sm font-semibold text-blue-500 hover:text-blue-600 dark:text-blue-400 dark:hover:text-blue-500">
+                                                    class="text-sm font-semibold text-blue-500 hover:text-blue-600">
                                                     Create an account</a>
                                             </p> */}
                                         </form>

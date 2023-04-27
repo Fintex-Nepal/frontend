@@ -31,12 +31,12 @@ const ModifyRegestrartionModal = ({ setShowUpdateModal }) => {
                         </div> */}
                         {/* <h1 className="text-gray-800 font-lg font-bold tracking-normal leading-tight mb-4">Enter Billing Details</h1> */}
                         <form onSubmit={mainLedgerSubmitHandler}>
-                            <h2 class="text-lg font-semibold text-gray-700 capitalize dark:text-white">Ledger Setup</h2>
+                            <h2 class="text-lg font-semibold text-gray-700 capitalize te">Ledger Setup</h2>
 
                             <div class="grid grid-cols-1 gap-6 mt-4 sm:grid-cols-2">
                                 <div>
-                                    <label class="text-gray-700 dark:text-gray-200" for="username">Account Type</label>
-                                    <select name='accountType' required onChange={mainLedgerChangeHandler} class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring">
+                                    <label class="text-gray-700 " for="username">Account Type</label>
+                                    <select name='accountType' required onChange={mainLedgerChangeHandler} class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md   focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 focus:outline-none focus:ring">
                                         <option value="none" selected disabled hidden>Select Account Type</option>
                                         <option>Assets</option>
                                         <option>Expense</option>
@@ -45,10 +45,10 @@ const ModifyRegestrartionModal = ({ setShowUpdateModal }) => {
                                     </select>
                                 </div>
                                 <div>
-                                    <label class="text-gray-700 dark:text-gray-200" for="passwordConfirmation">Group Name</label>
+                                    <label class="text-gray-700 " for="passwordConfirmation">Group Name</label>
                                     <div class="flex h-12">
                                         {showGroupDropDown ? (
-                                            <select required name='groupName' onChange={mainLedgerChangeHandler} class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring">
+                                            <select required name='groupName' onChange={mainLedgerChangeHandler} class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md   focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 focus:outline-none focus:ring">
                                                 <option>A</option>
                                                 <option>B</option>
                                                 <option>C</option>
@@ -56,7 +56,7 @@ const ModifyRegestrartionModal = ({ setShowUpdateModal }) => {
                                             </select>
                                         ) : (
                                             <input required name='groupName' onChange={mainLedgerChangeHandler}
-                                                class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring"
+                                                class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md   focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 focus:outline-none focus:ring"
                                             />
                                         )}
                                         <button type='button' onClick={() => setShowGroupDropDown(!showGroupDropDown)} class="flex items-center px-4 py-2 mt-2 ml-2 font-medium tracking-wide text-white transition-colors duration-300 transform bg-gray-700 rounded-md hover:bg-gray-600 focus:outline-none focus:bg-gray-600">
@@ -66,32 +66,32 @@ const ModifyRegestrartionModal = ({ setShowUpdateModal }) => {
 
                                 </div>
                                 <div>
-                                    <label class="text-gray-700 dark:text-gray-200" for="emailAddress">समुहको नाम</label>
-                                    <input type="text" class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring"
+                                    <label class="text-gray-700 " for="emailAddress">समुहको नाम</label>
+                                    <input type="text" class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md   focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 focus:outline-none focus:ring"
                                         name='समुहको नाम'
                                         required
                                         onChange={mainLedgerChangeHandler}
                                     />
                                 </div>
                                 <div>
-                                    <label class="text-gray-700 dark:text-gray-200" for="password">Ledger Name</label>
-                                    <input type="text" class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring"
+                                    <label class="text-gray-700 " for="password">Ledger Name</label>
+                                    <input type="text" class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md   focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 focus:outline-none focus:ring"
                                         name='ledgerName'
                                         required
                                         onChange={mainLedgerChangeHandler}
                                     />
                                 </div>
                                 <div>
-                                    <label class="text-gray-700 dark:text-gray-200" for="passwordConfirmation">लेजरको नाम</label>
-                                    <input type="text" class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring"
+                                    <label class="text-gray-700 " for="passwordConfirmation">लेजरको नाम</label>
+                                    <input type="text" class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md   focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 focus:outline-none focus:ring"
                                         name='लेजरको नाम'
                                         required
                                         onChange={mainLedgerChangeHandler}
                                     />
                                 </div>
                                 <div>
-                                    <label class="text-gray-700 dark:text-gray-200" for="passwordConfirmation">Entry Date</label>
-                                    <input type="date" class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring"
+                                    <label class="text-gray-700 " for="passwordConfirmation">Entry Date</label>
+                                    <input type="date" class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md   focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 focus:outline-none focus:ring"
                                         name='entryData'
                                         required
                                         onChange={mainLedgerChangeHandler}
@@ -101,31 +101,31 @@ const ModifyRegestrartionModal = ({ setShowUpdateModal }) => {
 
 
                                 <div>
-                                    <label class="text-gray-700 dark:text-gray-200" for="passwordConfirmation">Sub Account</label>
-                                    <select name='subAccount' required onChange={(e) => setShowSubAccount(e.target.value)} class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring">
+                                    <label class="text-gray-700 " for="passwordConfirmation">Sub Account</label>
+                                    <select name='subAccount' required onChange={(e) => setShowSubAccount(e.target.value)} class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md   focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 focus:outline-none focus:ring">
                                         <option>No</option>
                                         <option>Yes</option>
                                     </select>
                                 </div>
                                 {showSubAccount === 'Yes' && <div>
-                                    <label class="text-gray-700 dark:text-gray-200" for="password">Sub Ledger Name</label>
-                                    <input type="text" class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring"
+                                    <label class="text-gray-700 " for="password">Sub Ledger Name</label>
+                                    <input type="text" class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md   focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 focus:outline-none focus:ring"
                                         name='subLederName'
                                         required
                                         onChange={mainLedgerChangeHandler}
                                     />
                                 </div>}
                                 <div>
-                                    <label class="text-gray-700 dark:text-gray-200" for="password">Deprection Rate</label>
-                                    <input type='number' class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring"
+                                    <label class="text-gray-700 " for="password">Deprection Rate</label>
+                                    <input type='number' class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md   focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 focus:outline-none focus:ring"
                                         name='deprectionRate'
                                         required
                                         onChange={mainLedgerChangeHandler}
                                     />
                                 </div>
                                 <div>
-                                    <label class="text-gray-700 dark:text-gray-200" for="password">हिसाब न</label>
-                                    <input type='number' class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring"
+                                    <label class="text-gray-700 " for="password">हिसाब न</label>
+                                    <input type='number' class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md   focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 focus:outline-none focus:ring"
                                         name='हिसाब न'
                                         required
                                         onChange={mainLedgerChangeHandler}
