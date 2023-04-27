@@ -1,16 +1,15 @@
 
+import * as XLSX from 'xlsx';
+import { saveAs } from 'file-saver';
 import { getAllEmployeeUrl } from '../../utils/Url'
 import axios from 'axios'
 import { useEffect, useState } from 'react';
-import InputLabel from '@mui/material/InputLabel';
-import MenuItem from '@mui/material/MenuItem';
-import FormControl from '@mui/material/FormControl';
-import Select from '@mui/material/Select';
+import { Link } from 'react-router-dom';
 
 const StaffInfo = () => {
     const [allEmployee, setAllEmployee] = useState([]);
     const [onSearch, setonSearch] = useState();
-    
+
     useEffect(() => {
         axios.get(getAllEmployeeUrl, {
             headers: {
@@ -18,6 +17,7 @@ const StaffInfo = () => {
             },
         })
             .then((res => {
+                console.log(res.data);
                 setAllEmployee(res.data);
                 setonSearch(res.data)
             }))
@@ -25,34 +25,46 @@ const StaffInfo = () => {
     }, [])
     const onSearchHandler = (e) => {
         setonSearch(
-          allEmployee.filter((item) => item.employeeData.name.includes(e.target.value))
+            allEmployee.filter((item) => item.employeeData.name.includes(e.target.value))
         );
-      };
+    };
 
-      const deleteHandler=(e)=>{
-         console.log(e);
-      }
+    const deleteHandler = (e) => {
+        console.log(e);
+    }
+
+    const donwnLoadUser = () => {
+        // Define the worksheet data
+        const ws = XLSX.utils.json_to_sheet(allEmployee.map(emp => emp.employeeData));
+
+        // Define the workbook and add the worksheet to it
+        const wb = XLSX.utils.book_new();
+        XLSX.utils.book_append_sheet(wb, ws, 'Employee Data');
+
+        // Define the filename and file type
+        const fileName = 'employee_data.xlsx';
+        const fileType = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8';
+
+        // Convert the workbook to a buffer and save the file
+        const excelBuffer = XLSX.write(wb, { bookType: 'xlsx', type: 'array' });
+        const blob = new Blob([excelBuffer], { type: fileType });
+        saveAs(blob, fileName);
+
+    }
     return (
         <>
             <div class="flex justify-between">
                 <div class="left-div">
-                    <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
-                        <InputLabel  id="demo-simple-select-standard-label">Employee</InputLabel>
-                        <Select
-                            labelId="demo-simple-select-standard-label"
-                            id="demo-simple-select-standard"
-                            // value={age}
-                            
-                            label="Age"
-                        >
-                            <MenuItem value="">
-                                <em>None</em>
-                            </MenuItem>
-                            <MenuItem value={10}>ID</MenuItem>
-                            <MenuItem value={20}>Twenty</MenuItem>
-                            <MenuItem value={30}>Thirty</MenuItem>
-                        </Select>
-                    </FormControl>
+                    <button onClick={donwnLoadUser}
+                        type="button"
+                        class="px-4 py-3 bg-gray-700 hover:bg-gray-600 rounded-md text-white outline-none  shadow-lg transform active:scale-x-75 transition-transform mx-5 flex"
+                    >
+                        <svg class="h-6 w-6 animate-bounce" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                        </svg>
+
+                        <span class="ml-2">Download</span>
+                    </button>
                 </div>
                 <div class="right-div">
                     <div className="relative rounded bg-red-400">
@@ -134,7 +146,7 @@ const StaffInfo = () => {
                                     </thead>
                                     <tbody>
 
-                                     {allEmployee?.length&& onSearch?.map((itm, index) => (
+                                        {allEmployee?.length && onSearch?.map((itm, index) => (
                                             <tr class="border-b ">
                                                 <td
                                                     class="whitespace-nowrap border-r px-6 py-4 ">
@@ -165,16 +177,17 @@ const StaffInfo = () => {
                                                     {itm?.employeeData.phoneNumber}
                                                 </td>
 
-                                                <td onClick={()=>deleteHandler(itm.employeeData.userName)} role='button'
+                                                <td onClick={() => deleteHandler(itm.employeeData.userName)} role='button'
                                                     class="whitespace-nowrap border-r px-6 py-4 ">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" class="w-6 h-6">
-                                                        <path strokeLinecap="round" strokeLinejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10" />
-                                                    </svg>
-
+                                                    <Link to={`/dashboard/employeedetails/${itm.employeeData.userName}`}>
+                                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                                            <path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z" />
+                                                            <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                                                        </svg>
+                                                    </Link>
                                                 </td>
                                             </tr>
                                         ))}
-
                                     </tbody>
                                 </table>
                             </div>

@@ -1,7 +1,7 @@
 import React from 'react'
-import { useState,useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import MainRegestration from './MainRegestration'
-import { Routes, Route, Link,useNavigate } from 'react-router-dom'
+import { Routes, Route, Link, useNavigate } from 'react-router-dom'
 import Content from './Content'
 import CreateClientUser from './CreateClientUser';
 import CreateStaff from './CreateStaff';
@@ -10,33 +10,32 @@ import CreateStaffLogin from './CreateStaffLogin';
 import StaffInfo from './StaffInfo';
 import Logo from '../../assets/logo.png'
 import PasswordResetForm from './PasswordResetForm'
+import EmployeeDetails from './EmployeeDetails'
 const Dashboard = () => {
     const [show, setShow] = useState(false);
     const [profile, setProfile] = useState(false);
-    const [isAuthorized,setIsAuthorized]=useState(false);
-    const navigate=useNavigate()
+    const [isAuthorized, setIsAuthorized] = useState(false);
+    const navigate = useNavigate()
     const staffSubOption = [
         'Create Employee',
         'Create Employee Login',
         'Employee Info',
+        // 'Employee Details/id'
     ]
-    useEffect(()=>{
-        if(localStorage.getItem('adminToken'))
-        {
+    useEffect(() => {
+        if (localStorage.getItem('adminToken')) {
             setIsAuthorized(true)
         }
-        else
-        {
+        else {
             navigate('/');
         }
-    },[navigate])
+    }, [navigate])
 
-const signOutHandler=()=>{
-    localStorage.removeItem('adminToken')
-    navigate('/')
-}
-    if(isAuthorized)
-    {
+    const signOutHandler = () => {
+        localStorage.removeItem('adminToken')
+        navigate('/')
+    }
+    if (isAuthorized) {
         return (
             <>
                 <div className="w-full h-full ">
@@ -52,7 +51,7 @@ const signOutHandler=()=>{
                                     />
                                 </svg> */}
                             </div>
-                            <ul  className=" py-6">
+                            <ul className=" py-6">
                                 <li className="pl-6 cursor-pointer text-gray-600 text-sm leading-3 tracking-normal pb-4 pt-5  focus:text-indigo-700 focus:outline-none">
                                     <div className="flex items-center">
                                         <div>
@@ -76,7 +75,7 @@ const signOutHandler=()=>{
                                                 xmlns="http://www.w3.org/2000/svg" >
                                                 <path strokeLinecap="round" strokeLinejoin="round" d="M17.982 18.725A7.488 7.488 0 0012 15.75a7.488 7.488 0 00-5.982 2.975m11.963 0a9 9 0 10-11.963 0m11.963 0A8.966 8.966 0 0112 21a8.966 8.966 0 01-5.982-2.275M15 9.75a3 3 0 11-6 0 3 3 0 016 0z" />
                                             </svg>
-    
+
                                             <span className="ml-2">Profile</span>
                                         </div>
                                     </Link>
@@ -88,8 +87,8 @@ const signOutHandler=()=>{
                                             <svg className="icon icon-tabler icon-tabler-puzzle" width={20} height={20} viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" fill="none" strokeLinecap="round" strokeLinejoin="round" xmlns="http://www.w3.org/2000/svg"  >
                                                 <path strokeLinecap="round" strokeLinejoin="round" d="M11.42 15.17L17.25 21A2.652 2.652 0 0021 17.25l-5.877-5.877M11.42 15.17l2.496-3.03c.317-.384.74-.626 1.208-.766M11.42 15.17l-4.655 5.653a2.548 2.548 0 11-3.586-3.586l6.837-5.63m5.108-.233c.55-.164 1.163-.188 1.743-.14a4.5 4.5 0 004.486-6.336l-3.276 3.277a3.004 3.004 0 01-2.25-2.25l3.276-3.276a4.5 4.5 0 00-6.336 4.486c.091 1.076-.071 2.264-.904 2.95l-.102.085m-1.745 1.437L5.909 7.5H4.5L2.25 3.75l1.5-1.5L7.5 4.5v1.409l4.26 4.26m-1.745 1.437l1.745-1.437m6.615 8.206L15.75 15.75M4.867 19.125h.008v.008h-.008v-.008z" />
                                             </svg>
-    
-    
+
+
                                             <span className="ml-2">Account Setup</span>
                                         </div>
                                     </Link>
@@ -136,8 +135,8 @@ const signOutHandler=()=>{
                                                 </svg>
                                             </div>
                                         </div>
-    
-                                        <ul  className=" py-6">
+
+                                        <ul className=" py-6">
                                             <li className="pl-6 cursor-pointer  text-sm leading-3 tracking-normal pb-4 pt-5 text-indigo-700 focus:text-indigo-700 focus:outline-none">
                                                 <div className="flex items-center">
                                                     <div className="w-6 h-6 md:w-8 md:h-8">
@@ -299,7 +298,7 @@ const signOutHandler=()=>{
                                                             </li>
                                                             <li className="flex w-full justify-between text-gray-600 hover:text-indigo-700 cursor-pointer items-center mt-2">
                                                                 <div onClick={signOutHandler} className="flex items-center">
-                                                                    <svg  xmlns="http://www.w3.org/2000/svg" className="icon icon-tabler icon-tabler-logout" width={20} height={20} viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" fill="none" strokeLinecap="round" strokeLinejoin="round">
+                                                                    <svg xmlns="http://www.w3.org/2000/svg" className="icon icon-tabler icon-tabler-logout" width={20} height={20} viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" fill="none" strokeLinecap="round" strokeLinejoin="round">
                                                                         <path stroke="none" d="M0 0h24v24H0z" />
                                                                         <path d="M14 8v-2a2 2 0 0 0 -2 -2h-7a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h7a2 2 0 0 0 2 -2v-2" />
                                                                         <path d="M7 12h14l-3 -3m0 6l3 -3" />
@@ -313,7 +312,7 @@ const signOutHandler=()=>{
                                                     )}
                                                     <div className="relative">
                                                         <img className="rounded-full h-10 w-10 object-cover" src="https://tuk-cdn.s3.amazonaws.com/assets/components/sidebar_layout/sl_1.png" alt="avatar" />
-                                                        
+
                                                         <div className="w-2 h-2 rounded-full bg-green-400 border border-white absolute inset-0 mb-0 mr-0 m-auto" />
                                                     </div>
                                                 </div>
@@ -337,7 +336,7 @@ const signOutHandler=()=>{
                                             <line x1={4} y1={8} x2={20} y2={8} />
                                             <line x1={4} y1={16} x2={20} y2={16} />
                                         </svg>
-                                        
+
                                     )}
                                 </div>
                             </nav>
@@ -348,12 +347,13 @@ const signOutHandler=()=>{
                                 <div className="w-full h-full rounded border-dashed  border-gray-300 ">
                                     <Routes>
                                         <Route path='/' element={<Content />} />
-                                        <Route path='/profile' element={<PasswordResetForm/>} />
+                                        <Route path='/profile' element={<PasswordResetForm />} />
                                         <Route path='/accountsetup' element={<MainRegestration />} />
                                         <Route path='/createUser' element={<CreateClientUser />} />
                                         <Route path='/createemployee' element={<CreateStaff />} />
                                         <Route path='/createemployeelogin' element={<CreateStaffLogin />} />
                                         <Route path='/employeeinfo' element={<StaffInfo />} />
+                                        <Route path='/employeedetails/:id' element={<EmployeeDetails />} />
                                     </Routes>
                                 </div>
                             </div>
@@ -363,10 +363,11 @@ const signOutHandler=()=>{
             </>
         )
     }
-    else
-    {
+    else {
         return null;
     }
 }
 
 export default Dashboard
+
+// /login/:login'
