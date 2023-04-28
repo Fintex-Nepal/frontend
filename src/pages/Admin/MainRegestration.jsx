@@ -27,11 +27,11 @@ const MainRegestration = () => {
                     <section class="max-w-4xl p-6 mx-auto bg-white rounded-md shadow-md ">
 
                         <form onSubmit={mainLedgerSubmitHandler}>
-                            <h2 class="text-lg font-semibold text-gray-700 capitalize dark:text-white">Ledger Setup</h2>
+                            <h2 class="text-lg font-semibold text-gray-700 capitalize ">Ledger Setup</h2>
 
                             <div class="grid grid-cols-1 gap-6 mt-4 sm:grid-cols-2">
                                 <div>
-                                    <label class="text-gray-700 dark:text-gray-200" for="username">Account Type</label>
+                                    <label class="text-gray-700 " >Account Type</label>
                                     <select name='accountType' required onChange={mainLedgerChangeHandler} class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md   focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 focus:outline-none focus:ring">
                                         <option value="none" selected disabled hidden>Select Account Type</option>
                                         <option>Assets</option>
@@ -41,7 +41,7 @@ const MainRegestration = () => {
                                     </select>
                                 </div>
                                 <div>
-                                    <label class="text-gray-700 dark:text-gray-200" for="passwordConfirmation">Group Name</label>
+                                    <label class="text-gray-700 " >Group Name</label>
                                     <div class="flex h-12">
                                         {showGroupDropDown ? (
                                             <select required name='groupName' onChange={mainLedgerChangeHandler} class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md   focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 focus:outline-none focus:ring">
@@ -62,7 +62,7 @@ const MainRegestration = () => {
 
                                 </div>
                                 <div>
-                                    <label class="text-gray-700 dark:text-gray-200" for="emailAddress">समुहको नाम</label>
+                                    <label class="text-gray-700 " >समुहको नाम</label>
                                     <input type="text" class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md   focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 focus:outline-none focus:ring"
                                         name='समुहको नाम'
                                         required
@@ -70,7 +70,7 @@ const MainRegestration = () => {
                                     />
                                 </div>
                                 <div>
-                                    <label class="text-gray-700 dark:text-gray-200" for="password">Ledger Name</label>
+                                    <label class="text-gray-700 " >Ledger Name</label>
                                     <input type="text" class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md   focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 focus:outline-none focus:ring"
                                         name='ledgerName'
                                         required
@@ -78,7 +78,7 @@ const MainRegestration = () => {
                                     />
                                 </div>
                                 <div>
-                                    <label class="text-gray-700 dark:text-gray-200" for="passwordConfirmation">लेजरको नाम</label>
+                                    <label class="text-gray-700 " >लेजरको नाम</label>
                                     <input type="text" class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md   focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 focus:outline-none focus:ring"
                                         name='लेजरको नाम'
                                         required
@@ -86,7 +86,7 @@ const MainRegestration = () => {
                                     />
                                 </div>
                                 <div>
-                                    <label class="text-gray-700 dark:text-gray-200" for="passwordConfirmation">Entry Date</label>
+                                    <label class="text-gray-700 " >Entry Date</label>
                                     <input type="date" class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md   focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 focus:outline-none focus:ring"
                                         name='entryData'
                                         required
@@ -97,14 +97,14 @@ const MainRegestration = () => {
 
 
                                 <div>
-                                    <label class="text-gray-700 dark:text-gray-200" for="passwordConfirmation">Sub Account</label>
+                                    <label class="text-gray-700 " >Sub Account</label>
                                     <select name='subAccount' required onChange={(e) => setShowSubAccount(e.target.value)} class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md   focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 focus:outline-none focus:ring">
                                         <option>No</option>
                                         <option>Yes</option>
                                     </select>
                                 </div>
                                 {showSubAccount === 'Yes' && <div>
-                                    <label class="text-gray-700 dark:text-gray-200" for="password">Sub Ledger Name</label>
+                                    <label class="text-gray-700 " >Sub Ledger Name</label>
                                     <input type="text" class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md   focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 focus:outline-none focus:ring"
                                         name='subLederName'
                                         required
@@ -112,7 +112,7 @@ const MainRegestration = () => {
                                     />
                                 </div>}
                                 <div>
-                                    <label class="text-gray-700 dark:text-gray-200" for="password">Deprection Rate</label>
+                                    <label class="text-gray-700 " >Deprection Rate</label>
                                     <input type='number' class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md   focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 focus:outline-none focus:ring"
                                         name='deprectionRate'
                                         required
@@ -120,7 +120,7 @@ const MainRegestration = () => {
                                     />
                                 </div>
                                 <div>
-                                    <label class="text-gray-700 dark:text-gray-200" for="password">हिसाब न</label>
+                                    <label class="text-gray-700 " >हिसाब न</label>
                                     <input type='number' class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md   focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 focus:outline-none focus:ring"
                                         name='हिसाब न'
                                         required

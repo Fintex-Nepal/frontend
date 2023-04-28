@@ -79,11 +79,11 @@ const SuperAdminLogin = () => {
                                                 <span class="text-sm text-red-600 ">It is punishable crime if you're not admin</span>
                                             </label>
                                             <a href=" 1"
-                                                class="mt-2 text-sm font-semibold text-blue-500 lg:mt-0 dark:text-blue-300 hover:underline">
+                                                class="mt-2 text-sm font-semibold text-blue-500 lg:mt-0  hover:underline">
                                                 forgot password? </a>
                                         </div>
                                         <button
-                                            class="w-full py-3 text-lg font-bold text-gray-300 uppercase bg-blue-700 rounded-md lg:mt-7 mt-7 dark:bg-blue-700 px-11 md:mt-7 hover:bg-blue-900 dark:hover:bg-blue-900"
+                                            class="w-full py-3 text-lg font-bold text-gray-300 uppercase bg-blue-700 rounded-md lg:mt-7 mt-7 px-11 md:mt-7 hover:bg-blue-900 "
                                             type="submit">LOGIN</button>
                                         {/* <p class="mt-4 text-xs text-gray-700 lg:mt-7 lg:text-base">
                                             Need an account?
