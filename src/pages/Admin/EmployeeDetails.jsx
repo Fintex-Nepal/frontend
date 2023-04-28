@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react'
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import { editUserProfile } from '../../utils/Url';
-// import {} from 'jwt-decode'
 const EmployeeDetails = () => {
     const [userData, setUserData] = useState();
     const [isEditable, setIsEditable] = useState(false)
@@ -30,9 +29,6 @@ const EmployeeDetails = () => {
             })
                 .then((res) => {
                     if (res.data.status) {
-                        console.log('====================================');
-                        console.log(userData);
-                        console.log('====================================');
                         setDataUpdated(res.data)
                     }
                 })
@@ -110,7 +106,7 @@ const EmployeeDetails = () => {
                             <label class="text-gray-700 " for="passwordConfirmation">Date Of Joining</label>
                             <input type={isEditable ? "date" : "text"}
                                 class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md   focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40  focus:outline-none focus:ring"
-                                value={isEditable ? userData?.dateOfJoining : userData?.dateOfJoining.substring(0, 10)}
+                                value={isEditable ? userData?.dateOfJoining : userData?.dateOfJoining?.substring(0, 10)}
                                 readOnly={!isEditable}
                                 name='dateOfJoining'
                                 onChange={onChangeHandler}
@@ -218,6 +214,7 @@ const EmployeeDetails = () => {
                                 value={userData?.createdBy}
                                 onChange={onChangeHandler}
                                 name='createdBy'
+                                readOnly
                             />
                         </div>
                     </div>

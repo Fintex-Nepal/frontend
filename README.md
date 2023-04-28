@@ -92,6 +92,7 @@
 
 
 # Problem in backend:
+  * Issue in creating employee login
 
 
 # Super Admin Functionalities Updated

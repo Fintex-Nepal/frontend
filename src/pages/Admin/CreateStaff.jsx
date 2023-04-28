@@ -1,13 +1,12 @@
 import React, { useState } from 'react'
 import axios from 'axios';
 import SuccessModal from '../../utils/SuccessModal';
-
+import jwt_decode from 'jwt-decode'
 const CreateStaff = () => {
 
-
+    const decoded=jwt_decode(localStorage.getItem('adminToken'))
     const [formData, setFormData] = useState({});
     const [showSuccessModal, setshowSuccessModal] = useState(false)
-
     const modalText = {
         heading: "Employee Account Successfully Created",
         bodyText: 'The entered username and password can be used by Employee'
@@ -185,6 +184,8 @@ const CreateStaff = () => {
                             <input type="text" class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md   focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40  focus:outline-none focus:ring"
                                 name='createdBy'
                                 onChange={fromChangeHandler}
+                                readOnly
+                                value={decoded.given_name}
                             />
                         </div>
                     </div>
