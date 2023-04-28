@@ -7,3 +7,4 @@ export const updatePasswordMicrofinance="http://localhost:8080/financecompany/up
 export const createEmployeeLoginUrl="http://localhost:8080/financecompany/register";
 export const getAllEmployeeUrl="http://localhost:8080/financecompany/getusers";
 
+export const editUserProfile="http://localhost:8080/financecompany/edit-profile"
