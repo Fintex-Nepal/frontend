@@ -2,10 +2,17 @@ import { useEffect, useState } from 'react'
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import { editUserProfile } from '../../utils/Url';
+import SuccessModal from '../../utils/SuccessModal';
+const modalText = {
+    heading: "Successfully Updated",
+    bodyText: ''
+}
 const EmployeeDetails = () => {
     const [userData, setUserData] = useState();
     const [isEditable, setIsEditable] = useState(false)
     const [dataUpdate, setDataUpdated] = useState([])
+    const [showSuccessModal, setshowSuccessModal] = useState(false)
+    
     const { id } = useParams();
     useEffect(() => {
         axios.get(`http://localhost:8080/financecompany/getemployee/username?username=${id}`, {
@@ -28,6 +35,7 @@ const EmployeeDetails = () => {
             })
                 .then((res) => {
                     if (res.data.status) {
+                        setshowSuccessModal(true)
                         setDataUpdated(res.data)
                     }
                 })
@@ -45,8 +53,9 @@ const EmployeeDetails = () => {
     }
     return (
         <>
+            {showSuccessModal && <SuccessModal heading={modalText?.heading} bodyText={modalText?.bodyText} setshowSuccessModal={setshowSuccessModal} showSuccessModal={showSuccessModal} />}
             <section class="max-w-7xl p-6 mx-auto bg-white rounded-md shadow-md ">
-                <h2 class="text-lg font-semibold text-gray-700 capitalize ">Account settings</h2>
+                <h2 class="text-lg font-semibold text-gray-700 capitalize ">User Details</h2>
                 <form>
                     <div class="grid grid-cols-1 gap-6 mt-4 sm:grid-cols-4">
                         <div>
@@ -135,7 +144,7 @@ const EmployeeDetails = () => {
                             <label class="text-gray-700 " for="passwordConfirmation">Is Pf Allowed</label>
                             {isEditable ? (
                                 <select onChange={onChangeHandler} name='pfAllowed' class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md   focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40  focus:outline-none focus:ring">
-                                    <option value={null} disabled>Select</option>
+                                    <option value={null} disabled selected>Select</option>
                                     <option value={true}>Yes</option>
                                     <option value={false}>No</option>
                                 </select>

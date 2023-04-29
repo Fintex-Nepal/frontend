@@ -1,3 +1,4 @@
+export const createAdminUrl="http://localhost:8080/superadmin/create-admin";
 export const updatePasswordUrl = "http://localhost:8080/superadmin/update-password";
 
 export const userActivateDeactivateUrl="http://localhost:8080/superadmin/activate-deactivate";

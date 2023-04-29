@@ -1,54 +1,48 @@
-import React from 'react'
-import { useState } from 'react';
+import React, { useState } from 'react'
 import axios from 'axios';
+import { createAdminUrl } from '../../utils/Url'
 import SuccessModal from '../../utils/SuccessModal';
+import jwt_decode from 'jwt-decode'
 const CreateAdmin = () => {
+    const decoded = jwt_decode(localStorage.getItem('sAdminToken'))
     const [formData, setFormData] = useState({
+        "createdBy": decoded.given_name,
+        "role": 3,
     });
-
-    const roleMap = {
-        "Marketing": 0,
-        "Assistant": 1,
-        "Senior Assistant": 2,
-        "Officer": 3
-    };
     const [showSuccessModal, setshowSuccessModal] = useState(false)
     const onChangeHandler = (event) => {
         const { name, value } = event.target;
-
-        if (name === "role") {
-            const roleValue = roleMap[value];
-            setFormData(prevState => ({
+        name === 'role'
+            ? setFormData({ ...formData, role: 1 })
+            : setFormData(prevState => ({
                 ...prevState,
-                [name]: roleValue
+                [name]: name === 'isActive' ? value === "true" : value
             }));
-        } else if (name === "isActive") {
-            const newValue = value === "true";
-            setFormData(prevState => ({
-                ...prevState,
-                [name]: newValue
-            }));
-        } else {
-            setFormData(prevState => ({
-                ...prevState,
-                [name]: value
-            }));
-        }
     };
+
     const modalText = {
         heading: "Admin Account Successfully Created",
         bodyText: 'The entered username and password can be used by client admin'
     }
     const formSubmitHandler = (e) => {
         e.preventDefault();
-        axios.post('http://localhost:8080/superadmin/create-admin', formData, {
+        console.log('====================================');
+        console.log(formData);
+        console.log('====================================');
+        axios.post(createAdminUrl, formData, {
             headers: {
                 'Authorization': 'Bearer ' + localStorage.getItem('sAdminToken')
             }
         })
             .then((res) => {
-                console.log(res);
-                setshowSuccessModal(true)
+               if(res.data.status)
+               {
+                   setshowSuccessModal(true)
+               }
+               else
+               {
+                alert(res.data.message)
+               }
             })
             .catch(err => console.log(err))
     }
@@ -56,8 +50,7 @@ const CreateAdmin = () => {
         <>
             {showSuccessModal && <SuccessModal heading={modalText?.heading} bodyText={modalText?.bodyText} setshowSuccessModal={setshowSuccessModal} showSuccessModal={showSuccessModal} />}
             <section class="max-w-4xl p-6 mx-auto bg-white rounded-md shadow-md ">
-                <h2 class="text-lg font-semibold text-gray-700 capitalize ">Account settings</h2>
-
+                <h2 class="text-lg font-semibold text-gray-700 capitalize ">Create Admin</h2>
                 <form onSubmit={formSubmitHandler}>
                     <div class="grid grid-cols-1 gap-6 mt-4 sm:grid-cols-2">
                         <div>
@@ -120,13 +113,13 @@ const CreateAdmin = () => {
                         </div>
                         <div>
                             <label class="text-gray-700" for="passwordConfirmation">Role</label>
-                            <select name="role" onChange={onChangeHandler} class="lock w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 focus:outline-none focus:ring">
-                                <option value="select role" disabled selected>Select Role</option>
-                                <option >Marketing</option>
-                                <option >Assistant</option>
-                                <option >Senior Assistant</option>
-                                <option>Officer</option>
-                            </select>
+                            <input type="text" class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 focus:outline-none focus:ring"
+                                required
+                                disabled
+                                value={'Officer'}
+                                name='role'
+                                onChange={onChangeHandler}
+                            />
                         </div>
                         <div>
                             <label class="text-gray-700" for="passwordConfirmation">Phone Number</label>
@@ -137,21 +130,24 @@ const CreateAdmin = () => {
                             />
                         </div>
                         <div>
-                            <label class="text-gray-700" for="passwordConfirmation">Created by</label>
-                            <input type="text" class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 focus:outline-none focus:ring"
-                                required
-                                name='createdBy'
-                                onChange={onChangeHandler}
-                            />
-                        </div>
-                        <div>
                             <label class="text-gray-700" for="status">Status</label>
                             <select name="isActive" onChange={onChangeHandler} class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 focus:outline-none focus:ring">
-                                <option value="select role" disabled selected>Select Status</option>
+                                <option value="select Status" disabled selected>Select Status</option>
                                 <option value="true">Active</option>
                                 <option value="false">In Active</option>
                             </select>
                         </div>
+                        <div>
+                            <label class="text-gray-700" for="passwordConfirmation">Created by</label>
+                            <input type="text" class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 focus:outline-none focus:ring"
+                                required
+                                readOnly
+                                value={decoded?.given_name}
+                                name='createdBy'
+
+                            />
+                        </div>
+
                     </div>
 
                     <div class="flex justify-end mt-6">

@@ -128,6 +128,7 @@ const CreateStaff = () => {
                         <div>
                             <label class="text-gray-700 " >PF Allowed</label>
                             <select onChange={fromChangeHandler} name='pfAllowed' type='text' class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md   focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40  focus:outline-none focus:ring">
+                            <option  disabled selected>Select</option>
                                 <option value={true}>Yes</option>
                                 <option value={false}>No</option>
                             </select>

@@ -17,11 +17,10 @@ const StaffInfo = () => {
             },
         })
             .then((res => {
-                console.log(res.data);
                 setAllEmployee(res.data);
                 setonSearch(res.data)
             }))
-            .catch(err => console.log(err))
+            .catch(err => alert(err))
     }, [])
     const onSearchHandler = (e) => {
         setonSearch(
@@ -29,13 +28,10 @@ const StaffInfo = () => {
         );
     };
 
-    const deleteHandler = (e) => {
-        console.log(e);
-    }
 
-    const donwnLoadUser = () => {
+    const downloadExcel = () => {
         // Define the worksheet data
-        const ws = XLSX.utils.json_to_sheet(allEmployee.map(emp => emp.employeeData));
+        const ws = XLSX.utils.json_to_sheet(allEmployee);
 
         // Define the workbook and add the worksheet to it
         const wb = XLSX.utils.book_new();
@@ -49,13 +45,16 @@ const StaffInfo = () => {
         const excelBuffer = XLSX.write(wb, { bookType: 'xlsx', type: 'array' });
         const blob = new Blob([excelBuffer], { type: fileType });
         saveAs(blob, fileName);
+    };
 
-    }
+
+
+
     return (
         <>
             <div class="flex justify-between">
                 <div class="left-div">
-                    <button onClick={donwnLoadUser}
+                    <button onClick={downloadExcel}
                         type="button"
                         class="px-4 py-3 bg-gray-700 hover:bg-gray-600 rounded-md text-white outline-none  shadow-lg transform active:scale-x-75 transition-transform mx-5 flex"
                     >
@@ -177,7 +176,7 @@ const StaffInfo = () => {
                                                     {itm?.phoneNumber}
                                                 </td>
 
-                                                <td onClick={() => deleteHandler(itm.userName)} role='button'
+                                                <td  role='button'
                                                     class="whitespace-nowrap border-r px-6 py-4 ">
                                                     <Link to={`/dashboard/employeedetails/${itm.userName}`}>
                                                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">

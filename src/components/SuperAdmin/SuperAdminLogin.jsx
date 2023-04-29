@@ -23,7 +23,7 @@ const SuperAdminLogin = () => {
                 localStorage.setItem('sAdminToken', res.data.token)
                 naviate('/sadmindashboard')
             })
-            .catch(err => console.log(err))
+            .catch(err => alert(err))
     }
     return (
         <>
