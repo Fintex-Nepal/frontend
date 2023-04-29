@@ -25,7 +25,7 @@ const StaffInfo = () => {
     }, [])
     const onSearchHandler = (e) => {
         setonSearch(
-            allEmployee.filter((item) => item.employeeData.name.includes(e.target.value))
+            allEmployee.filter((item) => item?.name.includes(e.target.value))
         );
     };
 
@@ -84,7 +84,7 @@ const StaffInfo = () => {
                         <input onChange={onSearchHandler}
                             className="relative text-sm leading-none text-gray-600 bg-white  rounded lg:max-w-[452px] w-full px-10 py-4 outline-none"
                             type="text"
-                            name
+                            // name
                             id
                             placeholder="Search"
                         />
@@ -154,32 +154,32 @@ const StaffInfo = () => {
                                                 </td>
                                                 <td
                                                     class="whitespace-nowrap border-r px-6 py-4 font-medium ">
-                                                    {itm?.employeeData.name}
+                                                    {itm?.name}
                                                 </td>
                                                 <td
                                                     class="whitespace-nowrap border-r px-6 py-4 ">
-                                                    {itm?.employeeData.designation}
+                                                    {itm?.designation}
                                                 </td>
                                                 <td
                                                     class="whitespace-nowrap border-r px-6 py-4 ">
-                                                    {itm?.employeeData.companyName}
+                                                    {itm?.companyName}
                                                 </td>
                                                 <td
                                                     class="whitespace-nowrap border-r px-6 py-4 ">
-                                                    {itm?.employeeData.branchName}
+                                                    {itm?.branchName}
                                                 </td>
                                                 <td
                                                     class="whitespace-nowrap border-r px-6 py-4 ">
-                                                    {itm?.employeeData.email}
+                                                    {itm?.email}
                                                 </td>
                                                 <td
                                                     class="whitespace-nowrap border-r px-6 py-4 ">
-                                                    {itm?.employeeData.phoneNumber}
+                                                    {itm?.phoneNumber}
                                                 </td>
 
-                                                <td onClick={() => deleteHandler(itm.employeeData.userName)} role='button'
+                                                <td onClick={() => deleteHandler(itm.userName)} role='button'
                                                     class="whitespace-nowrap border-r px-6 py-4 ">
-                                                    <Link to={`/dashboard/employeedetails/${itm.employeeData.userName}`}>
+                                                    <Link to={`/dashboard/employeedetails/${itm.userName}`}>
                                                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                                                             <path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z" />
                                                             <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />

@@ -1,6 +1,6 @@
 import React from 'react'
 import { useState, useEffect } from 'react'
-import MainRegestration from './MainRegestration'
+import MainRegestration from './Regestration/MainRegestration'
 import { Routes, Route, Link, useNavigate } from 'react-router-dom'
 import Content from './Content'
 import CreateClientUser from './CreateClientUser';

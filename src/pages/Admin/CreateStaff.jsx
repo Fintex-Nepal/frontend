@@ -5,7 +5,9 @@ import jwt_decode from 'jwt-decode'
 const CreateStaff = () => {
 
     const decoded=jwt_decode(localStorage.getItem('adminToken'))
-    const [formData, setFormData] = useState({});
+    const [formData, setFormData] = useState({
+        "createdBy":decoded.given_name,
+    });
     const [showSuccessModal, setshowSuccessModal] = useState(false)
     const modalText = {
         heading: "Employee Account Successfully Created",
@@ -31,7 +33,14 @@ const CreateStaff = () => {
             },
         })
             .then((res => {
-                setshowSuccessModal(true)
+                if(res.data.status)
+                {
+                    setshowSuccessModal(true)
+                }
+                else
+                {
+                    alert(res.data.message)
+                }
             }))
             .catch(err => console.log(err))
 
