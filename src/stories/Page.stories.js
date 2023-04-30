@@ -1,6 +1,6 @@
 import { within, userEvent } from '@storybook/testing-library';
-
 import { Page } from './Page';
+import MainRegestration from '../pages/Admin/Regestration/MainRegestration';
 
 export default {
   title: 'Example/Page',
@@ -23,3 +23,5 @@ export const LoggedIn = {
     await userEvent.click(loginButton);
   },
 };
+
+export const WithContent = () => <Page><MainRegestration /></Page>;

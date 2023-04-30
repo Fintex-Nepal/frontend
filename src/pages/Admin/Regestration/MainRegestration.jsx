@@ -34,6 +34,12 @@ const MainRegestration = () => {
                                     Sub Ledger Setup</span>
                             </div>
                         </div>
+                        <div class="w-52 h-16 relative   pl-5">
+                            <div onClick={() => setActiveForm(formType.SUBLEDGERSETUP)} role='button' class="w-full flex justify-center text-gray-100  transition duration-200 ease-in-out transform px-4 py-2  border-b-4 border-gray-500 hover:border-b-2 bg-gradient-to-t from-gray-400  via-gray-600 to-gray-200 rounded-2xl hover:translate-y-px">
+                                <span class="font-bold">
+                                    Bank Setup</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div >
