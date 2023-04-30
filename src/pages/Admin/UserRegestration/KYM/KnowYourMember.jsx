@@ -1,10 +1,13 @@
 import React, { useState } from 'react'
 import BasicInfo from '../BasicInfo'
+import AdditionalInfo from './AdditionalInfo'
+import OtherInfo from './OtherInfo'
+import PhotoSign from './PhotoSign'
 const KnowYourMember = () => {
     const [activeSteps, setActiveSteps] = useState(1)
     const prevStep = () => {
 
-        if (activeSteps >= 1) setActiveSteps(activeSteps - 1)
+        if (activeSteps > 1) setActiveSteps(activeSteps - 1)
     }
     const nextStep = () => {
         if (activeSteps < 4) setActiveSteps(activeSteps + 1);
@@ -56,7 +59,10 @@ const KnowYourMember = () => {
                     </div>
                 </div>
             </div>
-            <BasicInfo />
+            {activeSteps === 1 && <BasicInfo />}
+            {activeSteps === 2 && <AdditionalInfo />}
+            {activeSteps === 3 && <OtherInfo />}
+            {activeSteps === 4 && <PhotoSign />}
             <div class="flex p-2 mt-4">
                 <button onClick={prevStep} class="text-base hover:scale-110 focus:outline-none flex justify-center px-4 py-2 rounded font-bold cursor-pointer 
         hover:bg-gray-200  
