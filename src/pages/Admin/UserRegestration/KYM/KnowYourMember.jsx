@@ -24,7 +24,7 @@ const KnowYourMember = () => {
                                     <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path>
                                 </svg>
                             </div>
-                            <div class="absolute top-0 -ml-10 text-center mt-16 w-32 text-xs font-medium uppercase text-teal-600">Basic Information</div>
+                            <div class="hidden sm:block absolute top-0 -ml-10 text-center mt-16 w-32 text-xs font-medium uppercase text-teal-600">Basic Information</div>
                         </div>
                         <div class={`flex-auto border-t-2 transition duration-500 ease-in-out ${activeSteps > 1 ? 'border-teal-600' : ''}`}></div>
                         <div class="flex items-center text-white relative">
@@ -34,7 +34,7 @@ const KnowYourMember = () => {
                                 </svg>
 
                             </div>
-                            <div class={`absolute top-0 -ml-10 text-center mt-16 w-32 text-xs font-medium uppercase text-teal-600 ${activeSteps > 1 ? 'border-teal-600' : ''}`}>Address Information</div>
+                            <div class="hidden sm:block absolute top-0 -ml-10 text-center mt-16 w-32 text-xs font-medium uppercase text-teal-600 ">Address Information</div>
                         </div>
                         <div class={`flex-auto border-t-2 transition duration-500 ease-in-out ${activeSteps > 2 ? 'border-teal-600' : 'border-gray-300'}`}></div>
                         <div class="flex items-center text-white relative">
@@ -44,7 +44,7 @@ const KnowYourMember = () => {
                                     <polyline points="22,6 12,13 2,6"></polyline>
                                 </svg>
                             </div>
-                            <div class="absolute top-0 -ml-10 text-center mt-16 w-32 text-xs font-medium uppercase text-gray-500">Other Information</div>
+                            <div class="hidden sm:block absolute top-0 -ml-10 text-center mt-16 w-32 text-xs font-medium uppercase text-gray-500">Other Information</div>
                         </div>
                         <div class={`flex-auto border-t-2 transition duration-500 ease-in-out  ${activeSteps > 3 ? 'border-teal-600' : 'border-gray-300'}`}></div>
                         <div class="flex items-center text-white relative">
@@ -54,7 +54,7 @@ const KnowYourMember = () => {
                                 </svg>
 
                             </div>
-                            <div class="absolute top-0 -ml-10 text-center mt-16 w-32 text-xs font-medium uppercase text-gray-500">Photo & Sign</div>
+                            <div class="hidden sm:block absolute top-0 -ml-10 text-center mt-16 w-32 text-xs font-medium uppercase text-gray-500">Photo & Sign</div>
                         </div>
                     </div>
                 </div>
