@@ -1,10 +1,8 @@
 import { within, userEvent } from '@storybook/testing-library';
-import { Page } from './Page';
-import MainRegestration from '../pages/Admin/Regestration/MainRegestration';
-
+import Test2 from '../pages/Test2';
 export default {
   title: 'Example/Page',
-  component: Page,
+  component: Test2,
   parameters: {
     // More on how to position stories at: https://storybook.js.org/docs/react/configure/story-layout
     layout: 'fullscreen',
@@ -24,4 +22,4 @@ export const LoggedIn = {
   },
 };
 
-export const WithContent = () => <Page><MainRegestration /></Page>;
+export const WithContent = () => <Test2 />;

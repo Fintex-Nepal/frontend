@@ -97,3 +97,14 @@
 
 # Super Admin Functionalities Updated
   * any issue reported while testing
+
+
+
+
+# Ask client
+* Name of sons in other info
+* Name of daughters in other info
+* Relation ko dropdown (options)
+
+
+* Introduced by (refrence ma dropdown ma xa , if dropdown ma chaiyo bahne list dinu)

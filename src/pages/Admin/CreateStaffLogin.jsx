@@ -53,7 +53,7 @@ const CreateStaffLogin = () => {
                     console.log(res.data.message)
                 }
             })
-            .catch(err => console.log(err.response.data))
+            .catch(err => alert(err.response.data.message))
     }
     return (
         <>

@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import BasicInfo from '../BasicInfo'
-import AdditionalInfo from './AdditionalInfo'
+import Address from './Address'
 import OtherInfo from './OtherInfo'
 import PhotoSign from './PhotoSign'
 const KnowYourMember = () => {
@@ -15,7 +15,8 @@ const KnowYourMember = () => {
     return (
         <>
 
-            <div class="p-5">
+            <div class="">
+                <h2 class="text-lg font-semibold text-gray-700 capitalize">User Regestration</h2>
                 <div class="mx-4 p-4">
                     <div class="flex items-center ">
                         <div class="flex items-center text-white relative">
@@ -32,7 +33,6 @@ const KnowYourMember = () => {
                                 <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" >
                                     <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
                                 </svg>
-
                             </div>
                             <div class="hidden sm:block absolute top-0 -ml-10 text-center mt-16 w-32 text-xs font-medium uppercase text-teal-600 ">Address Information</div>
                         </div>
@@ -60,7 +60,7 @@ const KnowYourMember = () => {
                 </div>
             </div>
             {activeSteps === 1 && <BasicInfo />}
-            {activeSteps === 2 && <AdditionalInfo />}
+            {activeSteps === 2 && <Address />}
             {activeSteps === 3 && <OtherInfo />}
             {activeSteps === 4 && <PhotoSign />}
             <div class="flex p-2 mt-4">
@@ -85,9 +85,6 @@ const KnowYourMember = () => {
         border-teal-600 transition">Skip</button>
                 </div>
             </div>
-
-
-
         </>
     )
 }

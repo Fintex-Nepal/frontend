@@ -46,14 +46,11 @@ const StaffInfo = () => {
         const blob = new Blob([excelBuffer], { type: fileType });
         saveAs(blob, fileName);
     };
-
-
-
-
     return (
         <>
             <div class="flex justify-between">
                 <div class="left-div">
+                   
                     <button onClick={downloadExcel}
                         type="button"
                         class="px-4 py-3 bg-gray-700 hover:bg-gray-600 rounded-md text-white outline-none  shadow-lg transform active:scale-x-75 transition-transform mx-5 flex"
