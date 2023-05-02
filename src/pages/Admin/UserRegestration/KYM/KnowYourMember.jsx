@@ -63,7 +63,7 @@ const KnowYourMember = () => {
             {activeSteps === 2 && <Address />}
             {activeSteps === 3 && <OtherInfo />}
             {activeSteps === 4 && <PhotoSign />}
-            <div class="flex p-2 mt-4">
+            <div class="flex p-2">
                 <button onClick={prevStep} class="text-base hover:scale-110 focus:outline-none flex justify-center px-4 py-2 rounded font-bold cursor-pointer 
         hover:bg-gray-200  
         bg-gray-100 

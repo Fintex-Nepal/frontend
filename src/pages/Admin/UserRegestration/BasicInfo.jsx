@@ -2,7 +2,7 @@ import React from 'react'
 
 const BasicInfo = () => {
   return (
-    <section class="mt-7 max-w-7xl p-6 mx-auto bg-white rounded-md shadow-md ">
+    <section class="mt-7  p-6 mx-auto bg-white rounded-md shadow-md w-full ">
       <h2 class="text-lg font-bold text-gray-700 capitalize text-center">Basic Information</h2>
 
       <form>
