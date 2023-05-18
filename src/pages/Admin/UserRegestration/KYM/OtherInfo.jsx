@@ -230,7 +230,6 @@ const OtherInfo = () => {
             </tbody>
           </table>
         </div>
-
       </div>
     </div>
   )

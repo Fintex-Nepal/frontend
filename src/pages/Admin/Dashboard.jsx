@@ -1,5 +1,6 @@
 import React from 'react'
 import { useState, useEffect } from 'react'
+import jwtDecode from 'jwt-decode'
 import MainRegestration from './Regestration/MainRegestration'
 import { Routes, Route, Link, useNavigate } from 'react-router-dom'
 import Content from './Content'
@@ -10,18 +11,16 @@ import StaffInfo from './StaffInfo';
 import PasswordResetForm from './PasswordResetForm'
 import EmployeeDetails from './EmployeeDetails'
 import Logo from '../../assets/logo.png'
-// import CreateClientUser from './CreateClientUser';
-import './style.css'
 import DropDownCustom from '../../utils/DropDownCustom'
+import './style.css'
+
+
 const Dashboard = () => {
     const [sidebarOpen, setSidebarOpen] = useState(false);
-
 
     const toggleSidebar = () => {
         setSidebarOpen(!sidebarOpen);
     };
-    // const [show, setShow] = useState(false);
-    // const [profile, setProfile] = useState(false);
     const [isAuthorized, setIsAuthorized] = useState(false);
     const navigate = useNavigate()
     const employeeDropdown = [
@@ -42,10 +41,11 @@ const Dashboard = () => {
         }
     }, [navigate])
 
-    const signOutHandler = () => {
-        localStorage.removeItem('adminToken')
-        navigate('/')
-    }
+    // const signOutHandler = () => {
+    //     localStorage.removeItem('adminToken')
+    //     navigate('/')
+    // }
+    console.log();
     if (isAuthorized) {
         return (
             <>
@@ -90,8 +90,13 @@ const Dashboard = () => {
 
                                 </Link>
                             </li>
-                            <DropDownCustom dropDownList={employeeDropdown} heading="Employee" />
-                            <DropDownCustom dropDownList={clientDropdown} heading="Clinet" />
+                            {jwtDecode((localStorage.getItem('adminToken'))).role === 'Officer' && (
+                                <>
+                                    <DropDownCustom dropDownList={employeeDropdown} heading="Employee" />
+                                    <DropDownCustom dropDownList={clientDropdown} heading="Clinet" />
+                                </>
+                            )}
+
                             <li>
                                 <a href="1" class="flex items-center p-2 text-gray-900 rounded-lg  hover:bg-gray-100 ">
                                     <svg aria-hidden="true" class="flex-shrink-0 w-6 h-6 text-gray-500 transition duration-75  group-hover:text-gray-900 " fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M8.707 7.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l2-2a1 1 0 00-1.414-1.414L11 7.586V3a1 1 0 10-2 0v4.586l-.293-.293z"></path><path d="M3 5a2 2 0 012-2h1a1 1 0 010 2H5v7h2l1 2h4l1-2h2V5h-1a1 1 0 110-2h1a2 2 0 012 2v10a2 2 0 01-2 2H5a2 2 0 01-2-2V5z"></path></svg>
@@ -120,8 +125,10 @@ const Dashboard = () => {
                             </li>
                             <li>
                                 <a href="1" class="flex items-center p-2 text-gray-900 rounded-lg  hover:bg-gray-100 ">
-                                    <svg aria-hidden="true" class="flex-shrink-0 w-6 h-6 text-gray-500 transition duration-75  group-hover:text-gray-900 " fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M5 4a3 3 0 00-3 3v6a3 3 0 003 3h10a3 3 0 003-3V7a3 3 0 00-3-3H5zm-1 9v-1h5v2H5a1 1 0 01-1-1zm7 1h4a1 1 0 001-1v-1h-5v2zm0-4h5V8h-5v2zM9 8H4v2h5V8z" clip-rule="evenodd"></path></svg>
-                                    <span class="flex-1 ml-3 whitespace-nowrap">Sign Up</span>
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15M12 9l-3 3m0 0l3 3m-3-3h12.75" />
+                                    </svg>
+                                    <span class="flex-1 ml-3 whitespace-nowrap">Logout</span>
                                 </a>
                             </li>
                         </ul>
@@ -137,7 +144,7 @@ const Dashboard = () => {
                         <Route path='/createlogin' element={<CreateStaffLogin />} />
                         <Route path='/data' element={<StaffInfo />} />
                         <Route path='/employeedetails/:id' element={<EmployeeDetails />} />
-                        <Route path='/createclient' element={<KnowYourMember/>}/>
+                        <Route path='/createclient' element={<KnowYourMember />} />
                     </Routes>
                 </div>
             </>
@@ -149,5 +156,3 @@ const Dashboard = () => {
 }
 
 export default Dashboard
-
-// /login/:login'
