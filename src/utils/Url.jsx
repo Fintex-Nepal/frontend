@@ -9,3 +9,11 @@ export const createEmployeeLoginUrl="http://localhost:8080/financecompany/regist
 export const getAllEmployeeUrl="http://localhost:8080/financecompany/getemployees";
 
 export const editUserProfile="http://localhost:8080/financecompany/edit-profile"
+
+
+//Account Setup
+
+export const accountTypesUrl="http://localhost:8080/accountsetup/accounttypes"
+
+export const createGroupUrl="http://localhost:8080/accountsetup/grouptype"
+export const groupTypeById="http://localhost:8080/accountsetup/grouptypes/accounttype?accountTypeId"

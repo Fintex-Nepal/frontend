@@ -48,7 +48,7 @@ const CreateStaff = () => {
     return (
         <>
             {showSuccessModal && <SuccessModal heading={modalText?.heading} bodyText={modalText?.bodyText} setshowSuccessModal={setshowSuccessModal} showSuccessModal={showSuccessModal} />}
-            <section class="max-w-4xl p-6 mx-auto bg-white rounded-md shadow-md ">
+            <section class="max-w-7xl p-6 mx-auto bg-white rounded-md shadow-md ">
                 <h2 class="text-lg font-semibold text-gray-700 capitalize ">Create Employee</h2>
                 <form onSubmit={formSubmitHandler}>
                     <div class="grid grid-cols-1 gap-6 mt-4 sm:grid-cols-3">
