@@ -1,20 +1,31 @@
 import React, { useState } from 'react'
+import axios from 'axios'
 const GroupSetup = () => {
     const [groupSetUpData, setGroupSetUpData] = useState({})
 
     const onChanegHandler = (e) => {
         const { name, value } = e.target;
-        setGroupSetUpData(prevState => ({
+
+        let parsedValue = value;
+        if (name === 'accountTypeId') {
+            parsedValue = parseInt(value);
+        }
+
+        setGroupSetUpData((prevState) => ({
             ...prevState,
-            [name]: value
-        }))
-    }
-    const groupSetUpSubmitHandler=(e)=>{
-        e.preventdefault();
-        console.log('====================================');
-        console.log(groupSetUpData);
-        console.log('====================================');
-        
+            [name]: parsedValue,
+        }));
+    };
+    const groupSetUpSubmitHandler = (e) => {
+        e.preventDefault();
+        axios.post("http://localhost:8080/financecompany/AccountSetup/grouptype",groupSetUpData,{
+            headers:{
+                'Authorization':'Bearer '+localStorage.getItem('adminToken')
+            }
+        })
+        .then((res)=>console.log(res))
+        .catch(err=>console.log(err))
+
     }
     return (
         <>
@@ -27,18 +38,20 @@ const GroupSetup = () => {
                             <div class="grid grid-cols-1 gap-6 mt-4 sm:grid-cols-2">
                                 <div>
                                     <label class="text-gray-700" >Account Type</label>
-                                    <select onChange={onChanegHandler} required name='accountType' class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md" >
-                                        <option>Assets</option>
-                                        <option>Expense</option>
-                                        <option>Income</option>
-                                        <option>Liability</option>
+                                    <select
+                                        required type="number" onChange={onChanegHandler} name='accountTypeId' class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md" >
+                                        <option selected disabled>Select</option>
+                                        <option value={0}>Assets</option>
+                                        <option value={1}>Expense</option>
+                                        <option value={2}>Income</option>
+                                        <option value={3}>Liability</option>
                                     </select>
                                 </div>
 
                                 <div>
                                     <label class="text-gray-700" >Group Name</label>
                                     <input type="text" class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md   "
-                                        name='groupName'
+                                        name='name'
                                         required
                                         onChange={onChanegHandler}
                                     />
@@ -48,7 +61,7 @@ const GroupSetup = () => {
                                     <label class="text-gray-700" >समुहको नाम</label>
                                     <input class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md   "
                                         required
-                                        name='samuhName'
+                                        name='nepaliName'
                                         onChange={onChanegHandler}
                                     />
                                 </div>
