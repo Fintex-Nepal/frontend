@@ -1,20 +1,45 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
+import axios from 'axios';
+import { ledgerDetailByAccountTypeUrl } from '../../../utils/Url';
+import { useSelector, useDispatch } from 'react-redux';
+import { fetchAccountType } from '../../../Redux/AccountTypeSlice';
 const LedgerSetup = () => {
     const [ledgerData, setLedgerData] = useState({})
+    const [selectedAccountType, setSelectedAccountType] = useState()
+    const [existingLedgerData, setExistingLedgerData] = useState()
+    const accountTypeData = useSelector((state) => state.accountType?.data);
+    const dispatch = useDispatch();
+    if (!accountTypeData || accountTypeData.length <= 0) {
+        dispatch(fetchAccountType());
+    }
     const onChangeHandler = (e) => {
         const { name, value } = e.target;
-        
+
         setLedgerData(prevState => ({
             ...prevState,
             [name]: value,
         }))
     }
+    useEffect(() => {
+        if (selectedAccountType) {
+            axios.get(`${ledgerDetailByAccountTypeUrl}=${selectedAccountType}`, {
+                headers: {
+                    'Authorization': 'Bearer ' + localStorage.getItem("adminToken")
+                }
+            })
+                .then((res) => setExistingLedgerData(res.data))
+                .catch(err => alert(err))
+        }
+    }, [selectedAccountType])
     const LedgerSubmitHandler = (e) => {
         e.preventDefault();
         console.log('====================================');
         console.log(ledgerData);
         console.log('====================================');
     }
+    console.log('====================================');
+    console.log(existingLedgerData);
+    console.log('====================================');
     return (
         <>
             <div class="grid grid-cols-1 gap-6 mt-4 sm:grid-cols-2">
@@ -26,22 +51,26 @@ const LedgerSetup = () => {
                             <div class="grid grid-cols-1 gap-6 mt-4 sm:grid-cols-2">
                                 <div>
                                     <label class="text-gray-700" >Account Type</label>
-                                    <select onChange={onChangeHandler} required name='accountType' class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md" >
-                                        <option disabled selected>Please Select</option>
-                                        <option>Assets</option>
-                                        <option>Expense</option>
-                                        <option>Income</option>
-                                        <option>Liability</option>
+                                    <select onChange={(e) => {
+                                        setSelectedAccountType(e.target.value);
+                                        onChangeHandler(e);
+                                    }}
+
+                                        required type="number" name='accountTypeId' class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md" >
+                                        <option selected disabled>Select</option>
+                                        {accountTypeData?.map(itm => (
+                                            <option value={itm?.id}>{itm?.name}</option>
+                                        ))}
                                     </select>
                                 </div>
 
                                 <div>
                                     <label class="text-gray-700" >Group Name</label>
                                     <select onChange={onChangeHandler} required name='groupName' class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md" >
-                                        <option>A</option>
-                                        <option>B</option>
-                                        <option>C</option>
-                                        <option>D</option>
+                                        <option selected disabled>Select</option>
+                                        {existingLedgerData?.map(itm => (
+                                            <option value={itm?.groupType?.id}>{itm?.groupType?.name}</option>
+                                        ))}
                                     </select>
                                 </div>
 
