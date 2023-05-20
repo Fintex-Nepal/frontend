@@ -1,16 +1,18 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
+import { useDispatch,useSelector } from 'react-redux';
 import SuccessModal from '../../../utils/SuccessModal';
-import { accountTypesUrl, createGroupUrl, groupTypeById } from '../../../utils/Url';
+import { createGroupUrl, groupTypeById } from '../../../utils/Url';
 import ModifyRegestrartionModal from '../../../utils/ModifyRegestrartionModal';
+import { fetchAccountType } from '../../../Redux/AccountTypeSlice';
 const GroupSetup = () => {
     const [groupSetUpData, setGroupSetUpData] = useState({})
-    const [accountType, setAccountType] = useState();
     const [existingGroups, setExistingGroups] = useState();
     const [selectedAccountType, setSelectedAccountType] = useState()
     const [showSuccessModal, setshowSuccessModal] = useState(false)
     const [showModifyModal,setShowModifyModal]=useState(false)
-
+    const dispatch = useDispatch();
+    const accountTypeData = useSelector((state) => state.accountType?.data);
     const modalText = {
         heading: "Employee Account Successfully Created",
         bodyText: 'The entered username and password can be used by Employee'
@@ -27,16 +29,15 @@ const GroupSetup = () => {
                 .catch(err => alert(err))
         }
     }, [selectedAccountType])
-    useEffect(() => {
-        axios.get(accountTypesUrl, {
-            headers: {
-                'Authorization': 'Bearer ' + localStorage.getItem('adminToken')
-            }
-        })
-            .then((res) => setAccountType(res.data))
-            .catch(err => alert(err));
+    if(!accountTypeData || accountTypeData.length<=0)
+    {
+        dispatch(fetchAccountType());
+    }
+    // useEffect(() => {
+       
+       
 
-    }, [])
+    // }, [dispatch])
 
     const onChanegHandler = (e) => {
         const { name, value } = e.target;
@@ -69,9 +70,6 @@ const GroupSetup = () => {
             .catch(err => alert(err))
 
     }
-    console.log('====================================');
-    console.log(existingGroups);
-    console.log('====================================');
     return (
         <>
 
@@ -92,7 +90,7 @@ const GroupSetup = () => {
 
                                         required type="number" name='accountTypeId' class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md" >
                                         <option selected disabled>Select</option>
-                                        {accountType?.map(itm => (
+                                        {accountTypeData?.map(itm => (
                                             <option value={itm?.id}>{itm?.name}</option>
                                         ))}
                                     </select>
