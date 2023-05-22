@@ -65,9 +65,6 @@ const GroupSetup = () => {
             .catch(err => alert(err))
 
     }
-    console.log('====================================');
-    console.log(accountTypeData,"accountTypeDataaccountTypeData");
-    console.log('====================================');
     return (
         <>
 
