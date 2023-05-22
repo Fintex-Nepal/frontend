@@ -134,3 +134,34 @@
 
 
 # Group Types details -> Banking
+
+
+
+
+
+
+RESTful API in a Kotlin mobile app. The ideal candidate should have experience working with MongoDB and RESTful API, as well as proficiency in Kotlin programming language.
+
+This application is a graduate project from the Faculty of Computer Science.
+The idea of ​​application in general is an application for booking medical center services (clinics, x-rays, analyzes ..)
+It contains a user interface for the patient and another for the doctor
+Both are programmed using kotlin and the API has been completed
+
+The project requires the following:
+
+- Fetching all app data from MongoDB using RESTful API
+- Ensuring the API is connected to the database
+- Converting the fetched data into JSON format
+
+You will receive from me:
+
+- User interface design on figma
+- API documentation It will be sent upon commencement of work
+- source code for kotlin design
+
+To be received:
+
+- source code after API implementation
+- apk file (run correctly)
+
+If you are interested in this project, please inspect the source code and figma ui and provide your relevant experience and a proposal for the work. Thank you.

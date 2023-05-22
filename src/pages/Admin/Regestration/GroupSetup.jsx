@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import { useDispatch,useSelector } from 'react-redux';
 import SuccessModal from '../../../utils/SuccessModal';
-import { createGroupUrl, groupTypeByIdUrl } from '../../../utils/Url';
+import { createGroupUrl, accoutTypeByIdUrl } from '../../../utils/Url';
 import ModifyRegestrartionModal from '../../../utils/ModifyRegestrartionModal';
 import { fetchAccountType } from '../../../Redux/AccountTypeSlice';
 const GroupSetup = () => {
@@ -20,7 +20,7 @@ const GroupSetup = () => {
 
     useEffect(() => {
         if (selectedAccountType) {
-            axios.get(`${groupTypeByIdUrl}=${selectedAccountType}`, {
+            axios.get(`${accoutTypeByIdUrl}=${selectedAccountType}`, {
                 headers: {
                     'Authorization': 'Bearer ' + localStorage.getItem("adminToken")
                 }
