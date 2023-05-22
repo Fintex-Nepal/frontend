@@ -26,3 +26,8 @@ export const allLedgerDataUrl="http://localhost:8080/accountsetup/ledgers"
 export const createLedgerUrl="http://localhost:8080/accountsetup/ledger"
 
 export const groupByAccountIdUrl="http://localhost:8080/accountsetup/grouptypes/accounttype?accountTypeId"
+
+export const getLedgerByGroupId="http://localhost:8080/accountsetup/ledgers/grouptype?groupTypeId"
+
+
+export const createSubLedgerUrl="http://localhost:8080/accountsetup/subledger"

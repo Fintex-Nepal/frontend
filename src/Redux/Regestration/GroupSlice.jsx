@@ -1,6 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
-import { accountTypesUrl } from "../../utils/Url";
 const groupSlice=createSlice({
     name:'group',
     initialState:{

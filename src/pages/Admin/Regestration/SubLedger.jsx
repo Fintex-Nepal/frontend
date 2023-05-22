@@ -1,53 +1,54 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios';
-import { createLedgerUrl } from '../../../utils/Url';
+import { createLedgerUrl, createSubLedgerUrl } from '../../../utils/Url';
 import { useSelector, useDispatch } from 'react-redux';
-
 import SuccessModal from '../../../utils/SuccessModal';
+import { fetchGroupData } from '../../../Redux/Regestration/LedgerSlice';
+import { fetchAccountType } from '../../../Redux/Regestration/GroupSlice';
+import { fetchLedgerData } from '../../../Redux/Regestration/SubLedgerSlice';
 
 const SubLedger = () => {
-    const [ledgerData, setLedgerData] = useState({})
+    const [subLedgerData, setSubLedgerData] = useState({})
     const [selectedAccountType, setSelectedAccountType] = useState()
+    const [selectedGroupType,setSelectedGroupType]=useState()
     const [showSuccessModal, setshowSuccessModal] = useState(false)
-    const accountTypeData = useSelector((state) => state.accountType?.data);
-    const groupTypeData = useSelector((state) => state.groupType?.groupType);
-    // const ledgerDate=useDispatch((state)=>state.ledger?.data)
-    // const dispatch = useDispatch();
-    // if (!accountTypeData || accountTypeData.length <= 0) {
-    //     dispatch(fetchAccountType());
-    // }
-    // if (!groupTypeData || groupTypeData.length <= 0) {
-    //     dispatch(fetchGroupType());
-    // }
-    // if (!ledgerDate || ledgerDate.length <= 0) {
-    //     dispatch(fetchGroupLedgerData());
-    // }
-    
+    const dispatch = useDispatch()
+    const accountTypeData = useSelector((state) => state.group?.accountTypeData);
+    const groupTypeData = useSelector((state) => state.ledger?.groupData);
+    const ledgerData = useSelector((state) => state.subLedger?.ledgerData);
+    if (!accountTypeData || accountTypeData.length <= 0) {
+        dispatch(fetchAccountType());
+
+    }
+    useEffect(() => {
+        dispatch(fetchGroupData(selectedAccountType))
+    }, [dispatch, selectedAccountType])
+
+
     const onChangeHandler = (e) => {
         const { name, value } = e.target;
         let parsedValue = value;
 
-        if (name === 'groupTypeId' || name==='depreciationRate') {
+        if (name === 'groupTypeId' || name === 'depreciationRate') {
             parsedValue = parseInt(value);
         } else if (name === 'isSubLedgerActive') {
             parsedValue = value === 'true'; // Convert the selected value to a boolean
         }
 
-        setLedgerData((prevState) => ({
+        setSubLedgerData((prevState) => ({
             ...prevState,
             [name]: parsedValue,
         }));
     };
 
-    // useEffect(() => {
-    //     if (selectedAccountType) {
-    //         dispatch(fetchGroupType(selectedAccountType))
-    //     }
-    // }, [dispatch, selectedAccountType])
+    useEffect(() => {
+        if (selectedAccountType) {
+            dispatch(fetchLedgerData(selectedGroupType))
+        }
+    }, [dispatch, selectedAccountType, selectedGroupType])
     const LedgerSubmitHandler = (e) => {
         e.preventDefault();
-        console.log(ledgerData);
-        axios.post(createLedgerUrl, ledgerData, {
+        axios.post(createSubLedgerUrl, subLedgerData, {
             headers: {
                 'Authorization': 'Bearer ' + localStorage.getItem('adminToken')
             }
@@ -66,7 +67,8 @@ const SubLedger = () => {
         heading: "Sub Ledger Successfully Created",
         bodyText: 'The entered username and password can be used by Employee'
     }
- 
+
+
     return (
         <>
             {showSuccessModal && <SuccessModal heading={modalText?.heading} bodyText={modalText?.bodyText} setshowSuccessModal={setshowSuccessModal} showSuccessModal={showSuccessModal} />}
@@ -94,7 +96,10 @@ const SubLedger = () => {
 
                                 <div>
                                     <label class="text-gray-700" >Group Name</label>
-                                    <select onChange={onChangeHandler} required name='groupTypeId' class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md" >
+                                    <select onChange={(e) => {
+                                        setSelectedGroupType(e.target.value);
+                                        onChangeHandler(e);
+                                    }} required name='groupTypeId' class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md" >
                                         <option selected disabled>Select</option>
                                         {groupTypeData?.map(itm => (
                                             <option value={itm?.groupType?.id}>{itm?.groupType?.name}</option>
@@ -104,11 +109,13 @@ const SubLedger = () => {
 
                                 <div>
                                     <label class="text-gray-700" >Ledger Name</label>
-                                    <input req class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md   "
-                                        required
-                                        name='name'
-                                        onChange={onChangeHandler}
-                                    />
+                                    <select onChange={onChangeHandler} className='block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md  '>
+                                        <option disabled selected>Select</option>
+                                        {ledgerData?.map(itm => (
+                                            <option value={itm?.ledger?.id}>{itm?.ledger?.name}</option>
+                                        ))}
+                                    </select>
+                                    
                                 </div>
                                 <div>
                                     <label class="text-gray-700" >Sub Ledger</label>
