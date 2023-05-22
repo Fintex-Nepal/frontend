@@ -4,21 +4,23 @@ import { createLedgerUrl } from '../../../utils/Url';
 import { useSelector, useDispatch } from 'react-redux';
 
 import SuccessModal from '../../../utils/SuccessModal';
+import { fetchAccountType } from '../../../Redux/Regestration/GroupSlice';
+import { fetchGroupData } from '../../../Redux/Regestration/LedgerSlice';
 
 const LedgerSetup = () => {
     const [ledgerData, setLedgerData] = useState({})
     const [selectedAccountType, setSelectedAccountType] = useState()
     const [showSuccessModal, setshowSuccessModal] = useState(false)
-    const accountTypeData = useSelector((state) => state.accountType?.data);
-    // const groupTypeData = useSelector((state) => state.groupType?.groupType);
-    // const dispatch = useDispatch();
-    // if (!accountTypeData || accountTypeData.length <= 0) {
-    //     dispatch(fetchAccountType());
+    const accountTypeData = useSelector((state) => state.group?.accountTypeData);
+    const groupTypeData = useSelector((state) => state.ledger?.groupData);
+    const dispatch = useDispatch();
+    if (!accountTypeData || accountTypeData.length <= 0) {
+        dispatch(fetchAccountType());
        
-    // }
-    // if (!groupTypeData || groupTypeData.length <= 0) {
-    //     dispatch(fetchGroupType());
-    // }
+    }
+    useEffect(()=>{
+        dispatch(fetchGroupData(selectedAccountType))
+    },[dispatch,selectedAccountType])
     
     const onChangeHandler = (e) => {
         const { name, value } = e.target;
@@ -35,12 +37,6 @@ const LedgerSetup = () => {
             [name]: parsedValue,
         }));
     };
-
-    // useEffect(() => {
-    //     if (selectedAccountType) {
-    //         dispatch(fetchGroupType(selectedAccountType))
-    //     }
-    // }, [dispatch, selectedAccountType])
     const LedgerSubmitHandler = (e) => {
         e.preventDefault();
         console.log(ledgerData);
@@ -93,9 +89,9 @@ const LedgerSetup = () => {
                                     <label class="text-gray-700" >Group Name</label>
                                     <select onChange={onChangeHandler} required name='groupTypeId' class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md" >
                                         <option selected disabled>Select</option>
-                                        {/* {groupTypeData?.map(itm => (
+                                        {groupTypeData?.map(itm => (
                                             <option value={itm?.groupType?.id}>{itm?.groupType?.name}</option>
-                                        ))} */}
+                                        ))}
                                     </select>
                                 </div>
 

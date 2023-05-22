@@ -1,34 +1,35 @@
 import { createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
-import { ledgerByGroupId } from "../../utils/Url";
+import { groupByAccountIdUrl } from "../../utils/Url";
 
 const ledgerSlice = createSlice({
     name: 'ledger',
     initialState: {
-        data: [],
+        groupData: [],
     },
     reducers: {
-        setLedgerData(state, action) {
-            state.data = action.payload;
+        setGroupData(state, action) {
+            state.groupData = action.payload;
         }
     }
 })
-export const {setLedgerData}=ledgerSlice.actions
+export const {setGroupData}=ledgerSlice.actions
 export default ledgerSlice.reducer;
 
 
-export function fetchGroupLedgerData(selectedGroupTypeId){
-    return async function fetchGroupLedgerDataThunk(dispatch,getState)
+export function fetchGroupData(selectedGroupTypeId){
+    return async function fetchGroupDataThunk(dispatch,getState)
     {
         try {
-            const response=await axios.get(`${ledgerByGroupId}=${selectedGroupTypeId}`,{
+            const response=await axios.get(`${groupByAccountIdUrl}=${selectedGroupTypeId}`,{
                 headers:{
                     'Authorization':'Bearer '+localStorage.getItem('adminToken')
                 }
             })
-            dispatch(setLedgerData(response.data))
+            dispatch(setGroupData(response.data))
         } catch (error) {
             
         }
     }
 }
+
