@@ -2,27 +2,26 @@ import React, { useState, useEffect } from 'react'
 import axios from 'axios';
 import { createLedgerUrl } from '../../../utils/Url';
 import { useSelector, useDispatch } from 'react-redux';
-import { fetchAccountType } from '../../../Redux/AccountTypeSlice';
+
 import SuccessModal from '../../../utils/SuccessModal';
-import { fetchGroupType } from '../../../Redux/GroupSlice';
-import { fetchGroupLedgerData } from '../../../Redux/LedgerSlice';
+
 const SubLedger = () => {
     const [ledgerData, setLedgerData] = useState({})
     const [selectedAccountType, setSelectedAccountType] = useState()
     const [showSuccessModal, setshowSuccessModal] = useState(false)
     const accountTypeData = useSelector((state) => state.accountType?.data);
     const groupTypeData = useSelector((state) => state.groupType?.groupType);
-    const ledgerDate=useDispatch((state)=>state.ledger?.data)
-    const dispatch = useDispatch();
-    if (!accountTypeData || accountTypeData.length <= 0) {
-        dispatch(fetchAccountType());
-    }
-    if (!groupTypeData || groupTypeData.length <= 0) {
-        dispatch(fetchGroupType());
-    }
-    if (!ledgerDate || ledgerDate.length <= 0) {
-        dispatch(fetchGroupLedgerData());
-    }
+    // const ledgerDate=useDispatch((state)=>state.ledger?.data)
+    // const dispatch = useDispatch();
+    // if (!accountTypeData || accountTypeData.length <= 0) {
+    //     dispatch(fetchAccountType());
+    // }
+    // if (!groupTypeData || groupTypeData.length <= 0) {
+    //     dispatch(fetchGroupType());
+    // }
+    // if (!ledgerDate || ledgerDate.length <= 0) {
+    //     dispatch(fetchGroupLedgerData());
+    // }
     
     const onChangeHandler = (e) => {
         const { name, value } = e.target;
@@ -40,11 +39,11 @@ const SubLedger = () => {
         }));
     };
 
-    useEffect(() => {
-        if (selectedAccountType) {
-            dispatch(fetchGroupType(selectedAccountType))
-        }
-    }, [dispatch, selectedAccountType])
+    // useEffect(() => {
+    //     if (selectedAccountType) {
+    //         dispatch(fetchGroupType(selectedAccountType))
+    //     }
+    // }, [dispatch, selectedAccountType])
     const LedgerSubmitHandler = (e) => {
         e.preventDefault();
         console.log(ledgerData);
@@ -67,9 +66,7 @@ const SubLedger = () => {
         heading: "Sub Ledger Successfully Created",
         bodyText: 'The entered username and password can be used by Employee'
     }
-    console.log('====================================');
-    console.log(ledgerDate,"ledgerDateledgerDateledgerDate");
-    console.log('====================================');
+ 
     return (
         <>
             {showSuccessModal && <SuccessModal heading={modalText?.heading} bodyText={modalText?.bodyText} setshowSuccessModal={setshowSuccessModal} showSuccessModal={showSuccessModal} />}

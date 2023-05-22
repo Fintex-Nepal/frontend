@@ -4,7 +4,8 @@ import { useDispatch,useSelector } from 'react-redux';
 import SuccessModal from '../../../utils/SuccessModal';
 import { createGroupUrl, accoutTypeByIdUrl } from '../../../utils/Url';
 import ModifyRegestrartionModal from '../../../utils/ModifyRegestrartionModal';
-import { fetchAccountType } from '../../../Redux/AccountTypeSlice';
+import { fetchAccountType } from '../../../Redux/Regestration/GroupSlice';
+
 const GroupSetup = () => {
     const [groupSetUpData, setGroupSetUpData] = useState({})
     const [existingGroups, setExistingGroups] = useState();
@@ -12,12 +13,15 @@ const GroupSetup = () => {
     const [showSuccessModal, setshowSuccessModal] = useState(false)
     const [showModifyModal,setShowModifyModal]=useState(false)
     const dispatch = useDispatch();
-    const accountTypeData = useSelector((state) => state.accountType?.data);
+    const accountTypeData = useSelector((state) => state.group?.accountTypeData);
     const modalText = {
         heading: "Employee Account Successfully Created",
         bodyText: 'The entered username and password can be used by Employee'
     }
-
+     if(!accountTypeData || accountTypeData.length<=0)
+     {
+        dispatch(fetchAccountType())
+     }
     useEffect(() => {
         if (selectedAccountType) {
             axios.get(`${accoutTypeByIdUrl}=${selectedAccountType}`, {
@@ -29,10 +33,7 @@ const GroupSetup = () => {
                 .catch(err => alert(err))
         }
     }, [selectedAccountType])
-    if(!accountTypeData || accountTypeData.length<=0)
-    {
-        dispatch(fetchAccountType());
-    }
+   
     const onChanegHandler = (e) => {
         const { name, value } = e.target;
 
@@ -64,6 +65,9 @@ const GroupSetup = () => {
             .catch(err => alert(err))
 
     }
+    console.log('====================================');
+    console.log(accountTypeData,"accountTypeDataaccountTypeData");
+    console.log('====================================');
     return (
         <>
 

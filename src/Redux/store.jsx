@@ -1,13 +1,9 @@
 
 import { configureStore } from "@reduxjs/toolkit";
-import AccountTypeSlice from "./AccountTypeSlice";
-import groupSlice from './GroupSlice'
-import ledgerSlic from './LedgerSlice';
+import groupSlice from './Regestration/GroupSlice'
 const store = configureStore({
   reducer: {
-    accountType: AccountTypeSlice,
-    groupType: groupSlice,
-    ledger: ledgerSlic,
+      group:groupSlice,
   },
 });
 export default store;

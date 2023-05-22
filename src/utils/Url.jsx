@@ -13,6 +13,7 @@ export const editUserProfile="http://localhost:8080/financecompany/edit-profile"
 
 //Account Setup
 
+
 export const accountTypesUrl="http://localhost:8080/accountsetup/accounttypes"
 
 export const createGroupUrl="http://localhost:8080/accountsetup/grouptype"

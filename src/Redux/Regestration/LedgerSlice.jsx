@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
-import { ledgerByGroupId } from "../utils/Url";
+import { ledgerByGroupId } from "../../utils/Url";
 
 const ledgerSlice = createSlice({
     name: 'ledger',
