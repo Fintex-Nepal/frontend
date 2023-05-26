@@ -1,22 +1,68 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
+import axios from 'axios';
+import { createLedgerUrl } from '../../../utils/Url';
+import { useSelector, useDispatch } from 'react-redux';
+
+import SuccessModal from '../../../utils/SuccessModal';
+import { fetchAccountType } from '../../../Redux/Regestration/GroupSlice';
+import { fetchGroupData } from '../../../Redux/Regestration/LedgerSlice';
+
 const LedgerSetup = () => {
     const [ledgerData, setLedgerData] = useState({})
+    const [selectedAccountType, setSelectedAccountType] = useState()
+    const [showSuccessModal, setshowSuccessModal] = useState(false)
+    const accountTypeData = useSelector((state) => state.group?.accountTypeData);
+    const groupTypeData = useSelector((state) => state.ledger?.groupData);
+    const dispatch = useDispatch();
+    if (!accountTypeData || accountTypeData.length <= 0) {
+        dispatch(fetchAccountType());
+       
+    }
+    useEffect(()=>{
+        dispatch(fetchGroupData(selectedAccountType))
+    },[dispatch,selectedAccountType])
+    
     const onChangeHandler = (e) => {
         const { name, value } = e.target;
-        
-        setLedgerData(prevState => ({
+        let parsedValue = value;
+
+        if (name === 'groupTypeId' || name==='depreciationRate') {
+            parsedValue = parseInt(value);
+        } else if (name === 'isSubLedgerActive') {
+            parsedValue = value === 'true'; // Convert the selected value to a boolean
+        }
+
+        setLedgerData((prevState) => ({
             ...prevState,
-            [name]: value,
-        }))
-    }
+            [name]: parsedValue,
+        }));
+    };
     const LedgerSubmitHandler = (e) => {
         e.preventDefault();
-        console.log('====================================');
         console.log(ledgerData);
-        console.log('====================================');
+        axios.post(createLedgerUrl, ledgerData, {
+            headers: {
+                'Authorization': 'Bearer ' + localStorage.getItem('adminToken')
+            }
+        })
+            .then((res) => {
+                if (res?.data?.status) {
+                    setshowSuccessModal(true)
+                }
+                else {
+                    alert(res?.data?.message)
+                }
+            })
+            .catch(err => alert(err))
     }
+    const modalText = {
+        heading: "Ledger Successfully Created",
+        bodyText: 'The entered username and password can be used by Employee'
+    }
+
     return (
         <>
+            {showSuccessModal && <SuccessModal heading={modalText?.heading} bodyText={modalText?.bodyText} setshowSuccessModal={setshowSuccessModal} showSuccessModal={showSuccessModal} />}
             <div class="grid grid-cols-1 gap-6 mt-4 sm:grid-cols-2">
                 <div>
                     <section class="max-w-4xl p-6 mx-auto bg-white rounded-md shadow-md ">
@@ -26,22 +72,26 @@ const LedgerSetup = () => {
                             <div class="grid grid-cols-1 gap-6 mt-4 sm:grid-cols-2">
                                 <div>
                                     <label class="text-gray-700" >Account Type</label>
-                                    <select onChange={onChangeHandler} required name='accountType' class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md" >
-                                        <option disabled selected>Please Select</option>
-                                        <option>Assets</option>
-                                        <option>Expense</option>
-                                        <option>Income</option>
-                                        <option>Liability</option>
+                                    <select onChange={(e) => {
+                                        setSelectedAccountType(e.target.value);
+                                        onChangeHandler(e);
+                                    }}
+
+                                        required type="number" name='accountTypeId' class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md" >
+                                        <option selected disabled>Select</option>
+                                        {accountTypeData?.map(itm => (
+                                            <option value={itm?.id}>{itm?.name}</option>
+                                        ))}
                                     </select>
                                 </div>
 
                                 <div>
                                     <label class="text-gray-700" >Group Name</label>
-                                    <select onChange={onChangeHandler} required name='groupName' class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md" >
-                                        <option>A</option>
-                                        <option>B</option>
-                                        <option>C</option>
-                                        <option>D</option>
+                                    <select onChange={onChangeHandler} required name='groupTypeId' class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md" >
+                                        <option selected disabled>Select</option>
+                                        {groupTypeData?.map(itm => (
+                                            <option value={itm?.groupType?.id}>{itm?.groupType?.name}</option>
+                                        ))}
                                     </select>
                                 </div>
 
@@ -49,7 +99,7 @@ const LedgerSetup = () => {
                                     <label class="text-gray-700" >Ledger Name</label>
                                     <input req class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md   "
                                         required
-                                        name='ledgerName'
+                                        name='name'
                                         onChange={onChangeHandler}
                                     />
                                 </div>
@@ -57,7 +107,7 @@ const LedgerSetup = () => {
                                 <div>
                                     <label class="text-gray-700" >लेजरको नाम</label>
                                     <input type='text' class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md"
-                                        name='ledgernaam'
+                                        name='nepaliName'
                                         required
                                         onChange={onChangeHandler}
                                     />
@@ -73,7 +123,8 @@ const LedgerSetup = () => {
                                 </div>
                                 <div>
                                     <label class="text-gray-700" >Sub Account</label>
-                                    <select onChange={onChangeHandler} required name='subAccount' class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md" >
+                                    <select onChange={onChangeHandler} required name='isSubLedgerActive' class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md" >
+                                        <option selected disabled>Select</option>
                                         <option value={true}>Yes</option>
                                         <option value={false}>No</option>
                                     </select>
