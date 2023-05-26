@@ -107,7 +107,11 @@
 * Relation ko dropdown (options)
 
 
-* Introduced by (refrence ma dropdown ma xa , if dropdown ma chaiyo bahne list dinu)
+* Sub Ledger Create garna ma problem xa:
+
+
+* Create Client api bha ko xa?
+* Api aajahi kun kun bho?
 
 
 

@@ -14,6 +14,7 @@ import EmployeeDetails from './EmployeeDetails'
 // import DropDownCustom from '../../utils/DropDownCustom'
 
 import Dropdown from '../../utils/DropDownt'
+import CreateDeposit from '../Deposit/CreateDeposit'
 
 
 const Dashboard = () => {
@@ -30,7 +31,7 @@ const Dashboard = () => {
     ]
     const clientDropdown = [
         'Create Client',
-        'Users Info'
+        // 'Users Info'
     ]
     useEffect(() => {
         if (localStorage.getItem('adminToken')) {
@@ -63,7 +64,7 @@ const Dashboard = () => {
                                             {/* <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" --> */}
                                             <Link to={'profile'} class="bg-gray-900 text-white rounded-md px-3 py-2 text-sm font-medium" aria-current="page">Profile</Link>
                                             <Link to={'accountsetup'} class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Account Setup</Link>
-                                            <a href="1" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Projects</a>
+                                            <Link to={'createdeposit'} class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Deposit</Link>
                                             <a href="1" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Calendar</a>
                                             <Dropdown dropDownList={clientDropdown} heading="Clinet" />
                                             <Dropdown dropDownList={employeeDropdown} heading="Employee" />
@@ -121,7 +122,7 @@ const Dashboard = () => {
                                     {/* <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" --> */}
                                     <a href="1" class="bg-gray-900 text-white block rounded-md px-3 py-2 text-base font-medium" aria-current="page">Dashboard</a>
                                     <a href="1" class="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium">Team</a>
-                                    <a href="1" class="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium">Projects</a>
+                                    <Link to={'/createdeposit'} class="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium">Deposit</Link>
                                     <Dropdown dropDownList={clientDropdown} heading="Clinet" />
                                     <Dropdown dropDownList={employeeDropdown} heading="Employee" />
                                     <a href="1" class="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium">Reports</a>
@@ -168,6 +169,10 @@ const Dashboard = () => {
                                 <Route path='/data' element={<StaffInfo />} />
                                 <Route path='/employeedetails/:id' element={<EmployeeDetails />} />
                                 <Route path='/createclient' element={<KnowYourMember />} />
+
+
+                                {/* Deposit Routes */}
+                                <Route path='/createdeposit' element={<CreateDeposit />} />
                             </Routes>
                         </div>
                     </main>
