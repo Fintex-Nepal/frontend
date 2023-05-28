@@ -3,7 +3,7 @@ import axios from 'axios';
 import { styled } from "@mui/material/styles";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Switch from "@mui/material/Switch";
-import { userActivateDeactivateUrl } from '../../utils/Url'
+import { getUsersUrl, userActivateDeactivateUrl } from '../../utils/Url'
 import SuccessModal from '../../utils/SuccessModal'
 
 
@@ -67,7 +67,7 @@ const Users = () => {
         bodyText: 'Now user will access accordingly'
     }
     useEffect(() => {
-        axios.get('http://localhost:8080/superadmin/getusers', {
+        axios.get(getUsersUrl, {
             headers: {
                 'Authorization': 'Bearer ' + localStorage.getItem('sAdminToken')
             }
@@ -105,6 +105,7 @@ const Users = () => {
         const updatedUser = { ...{ userName: user.userName }, isActive: event.target.checked };
         setSelectedUsers([...selectedUsers, updatedUser])
     };
+
     return (
         <>
             {showSuccessModal && <SuccessModal heading={modalText?.heading} bodyText={modalText?.bodyText} setshowSuccessModal={setshowSuccessModal} showSuccessModal={showSuccessModal} />}

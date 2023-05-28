@@ -2,6 +2,7 @@ import React from 'react'
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios'
+import { superAdminLoginUrl } from '../../utils/Url';
 const SuperAdminLogin = () => {
     const naviate = useNavigate();
     const [userData, setUserDate] = useState({
@@ -18,7 +19,7 @@ const SuperAdminLogin = () => {
     }
     const formSubmitHandler = (e) => {
         e.preventDefault();
-        axios.post('http://localhost:8080/SuperAdmin/login', userData)
+        axios.post(superAdminLoginUrl, userData)
             .then((res) => {
                 localStorage.setItem('sAdminToken', res.data.token)
                 naviate('/sadmindashboard')

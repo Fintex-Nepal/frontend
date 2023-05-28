@@ -26,9 +26,6 @@ const CreateAdmin = () => {
     }
     const formSubmitHandler = (e) => {
         e.preventDefault();
-        console.log('====================================');
-        console.log(formData);
-        console.log('====================================');
         axios.post(createAdminUrl, formData, {
             headers: {
                 'Authorization': 'Bearer ' + localStorage.getItem('sAdminToken')

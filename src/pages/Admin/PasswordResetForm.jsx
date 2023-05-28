@@ -36,7 +36,7 @@ const PasswordResetForm = () => {
             return
         }
         else {
-            console.log(userData,localStorage.getItem('adminToken'));
+            
             axios.put(updatePasswordMicrofinance, userData, {
                 headers: {
                     'Authorization': 'Bearer ' + localStorage.getItem('adminToken')
@@ -49,17 +49,14 @@ const PasswordResetForm = () => {
                     }
                     else
                     {
-                        console.log('====================================');
-                        console.log(res.data);
-                        console.log('====================================');
+                        alert(res.data)
                     }
 
 
                 })
-                .catch(err => console.log(err))
+                .catch(err => alert(err))
         }
     }
-  console.log('asasasas');
     return (
         <>
             {showSuccessModal && <SuccessModal heading={modalText?.heading} bodyText={modalText?.bodyText} setshowSuccessModal={setshowSuccessModal} showSuccessModal={showSuccessModal} isLogout={isLogout} />}

@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
+import { accountTypesUrl } from "../../utils/Url";
 const groupSlice=createSlice({
     name:'group',
     initialState:{
@@ -18,7 +19,7 @@ export default groupSlice.reducer;
 export function fetchAccountType() {
     return async function fetchAccountTypeThunk(dispatch, getState) {
       try {
-        const response = await axios.get("http://localhost:8080/accountsetup/accounttypes", {
+        const response = await axios.get(accountTypesUrl, {
           headers: {
             'Authorization': 'Bearer ' + localStorage.getItem('adminToken')
           }

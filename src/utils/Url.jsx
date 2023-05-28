@@ -1,33 +1,66 @@
-export const createAdminUrl="http://localhost:8080/superadmin/create-admin";
-export const updatePasswordUrl = "http://localhost:8080/superadmin/update-password";
+export const baseurl='https://fintexfinanceservice.azurewebsites.net/'
 
-export const userActivateDeactivateUrl="http://localhost:8080/superadmin/activate-deactivate";
+//superlogin
 
-export const updatePasswordMicrofinance="http://localhost:8080/financecompany/update-password";
+export const superAdminLoginUrl=baseurl+"SuperAdmin/login"
+export const getUsersUrl=baseurl+"superadmin/getusers"
 
-export const createEmployeeLoginUrl="http://localhost:8080/financecompany/register";
-export const getAllEmployeeUrl="http://localhost:8080/financecompany/getemployees";
 
-export const editUserProfile="http://localhost:8080/financecompany/edit-profile"
 
+//fintex
+
+export const fintexLoginUrl=baseurl+"FinanceCompany/login"
+
+
+
+
+export const createAdminUrl=baseurl+"superadmin/create-admin";
+export const updatePasswordUrl = baseurl+"superadmin/update-password";
+
+export const userActivateDeactivateUrl=baseurl+"superadmin/activate-deactivate";
+
+export const updatePasswordMicrofinance=baseurl+"financecompany/update-password";
+
+export const createEmployeeLoginUrl=baseurl+"financecompany/register";
+export const getAllEmployeeUrl=baseurl+"financecompany/getemployees";
+
+export const editUserProfile=baseurl+"financecompany/edit-profile"
+
+
+
+//Ledger
+
+
+export const getallSubLedger=baseurl+"accountsetup/subLedgers"
+
+export const getAllLedger=baseurl+"accountsetup/ledgers"
 
 //Account Setup
 
 
-export const accountTypesUrl="http://localhost:8080/accountsetup/accounttypes"
-
-export const createGroupUrl="http://localhost:8080/accountsetup/grouptype"
-export const accoutTypeByIdUrl="http://localhost:8080/accountsetup/grouptypes/accounttype?accountTypeId"
-
-export const ledgerDetailByAccountTypeUrl="http://localhost:8080/accountsetup/grouptypes/accounttype?accountTypeId"
+export const accountTypesUrl=baseurl+"accountsetup/accounttypes"
 
 
-export const allLedgerDataUrl="http://localhost:8080/accountsetup/ledgers"
-export const createLedgerUrl="http://localhost:8080/accountsetup/ledger"
+export const createGroupUrl=baseurl+"accountsetup/grouptype"
+export const accoutTypeByIdUrl=baseurl+"accountsetup/grouptypes/accounttype?accountTypeId"
 
-export const groupByAccountIdUrl="http://localhost:8080/accountsetup/grouptypes/accounttype?accountTypeId"
-
-export const getLedgerByGroupId="http://localhost:8080/accountsetup/ledgers/grouptype?groupTypeId"
+export const ledgerDetailByAccountTypeUrl=baseurl+"accountsetup/grouptypes/accounttype?accountTypeId"
 
 
-export const createSubLedgerUrl="http://localhost:8080/accountsetup/subledger"
+export const allLedgerDataUrl=baseurl+"accountsetup/ledgers"
+export const createLedgerUrl=baseurl+"accountsetup/ledger"
+
+export const groupByAccountIdUrl=baseurl+"accountsetup/grouptypes/accounttype?accountTypeId"
+
+export const getLedgerByGroupId=baseurl+"accountsetup/ledgers/grouptype?groupTypeId"
+
+
+export const createSubLedgerUrl=baseurl+"accountsetup/subledger"
+
+
+
+//Employee
+
+export const createEmployeeUrl=baseurl+"financecompany/create-employee"
+
+export const getEmployeeById=baseurl+"financecompany/getemployee/username?username="

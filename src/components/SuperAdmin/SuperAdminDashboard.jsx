@@ -1,6 +1,7 @@
 import React from 'react'
 import { Routes, Route, Link,useNavigate } from 'react-router-dom'
 import { useEffect, useState } from 'react';
+import jwtDecode from 'jwt-decode';
 import PasswordResetForm from './PasswordResetForm'
 import CreateAdmin from './CreateAdmin';
 import Content from '../../pages/Admin/Content';
@@ -23,6 +24,7 @@ const SuperAdminDashboard = () => {
         localStorage.removeItem('sAdminToken')
         navigate('/sadminlogin')
     }
+    const userName=jwtDecode(localStorage.getItem("sAdminToken"))
     if (isValidUser) {
         return (
             <>
@@ -57,7 +59,7 @@ const SuperAdminDashboard = () => {
                                         </div>
                                     </Link>
                                 </li>
-                                <li className="pl-6 cursor-pointer text-gray-600 text-sm leading-3 tracking-normal mb-4 py-2 hover:text-indigo-700 focus:text-indigo-700 focus:outline-none">
+                                {/* <li className="pl-6 cursor-pointer text-gray-600 text-sm leading-3 tracking-normal mb-4 py-2 hover:text-indigo-700 focus:text-indigo-700 focus:outline-none">
                                     <div className="flex items-center">
                                         <svg xmlns="http://www.w3.org/2000/svg" className="icon icon-tabler icon-tabler-compass" width={20} height={20} viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" fill="none" strokeLinecap="round" strokeLinejoin="round">
                                             <path stroke="none" d="M0 0h24v24H0z" />
@@ -66,7 +68,7 @@ const SuperAdminDashboard = () => {
                                         </svg>
                                         <span className="ml-2">Performance</span>
                                     </div>
-                                </li>
+                                </li> */}
                                 <li className="pl-6 cursor-pointer text-gray-600 text-sm leading-3 tracking-normal py-2 hover:text-indigo-700 focus:text-indigo-700 focus:outline-none">
                                     <Link to={'/sadmindashboard/createadmin'}>
                                         <div className="flex items-center">
@@ -99,7 +101,7 @@ const SuperAdminDashboard = () => {
                                         </div>
                                         <ul className=" py-6">
                                             <li className="pl-6 cursor-pointer  text-sm leading-3 tracking-normal pb-4 pt-5 text-indigo-700 focus:text-indigo-700 focus:outline-none">
-                                                <div className="flex items-center">
+                                                <Link to={'/sadmindashboard/users'} className="flex items-center">
                                                     <div className="w-6 h-6 md:w-8 md:h-8">
                                                         <svg xmlns="http://www.w3.org/2000/svg" className="icon icon-tabler icon-tabler-grid" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" fill="none" strokeLinecap="round" strokeLinejoin="round">
                                                             <path stroke="none" d="M0 0h24v24H0z" />
@@ -109,8 +111,8 @@ const SuperAdminDashboard = () => {
                                                             <rect x={14} y={14} width={6} height={6} rx={1} />
                                                         </svg>
                                                     </div>
-                                                    <span className="ml-2 xl:text-base md:text-2xl text-base">Dashboard</span>
-                                                </div>
+                                                    <span className="ml-2 xl:text-base md:text-2xl text-base">Users</span>
+                                                </Link>
                                             </li>
                                             <li className="pl-6 cursor-pointer text-gray-600 text-sm leading-3 tracking-normal mt-4 mb-4 py-2 hover:text-indigo-700 focus:text-indigo-700 focus:outline-none">
                                                 <Link to={'/sadmindashboard/profile'}>
@@ -174,8 +176,8 @@ const SuperAdminDashboard = () => {
                                         <div className="border-t border-gray-300">
                                             <div className="w-full flex items-center justify-between px-6 pt-1">
                                                 <div className="flex items-center">
-                                                    <img alt="profile-pic" src="https://tuk-cdn.s3.amazonaws.com/assets/components/boxed_layout/bl_1.png" className="w-8 h-8 rounded-md" />
-                                                    <p className="md:text-xl text-gray-800 text-base leading-4 ml-2">Jane Doe</p>
+                                                    <img alt="profile-pic" src="https://cdn-icons-png.flaticon.com/512/1053/1053244.png" className="w-8 h-8 rounded-md" />
+                                                    <p className="md:text-xl text-gray-800 text-base leading-4 ml-2">{userName && userName?.given_name}</p>
                                                 </div>
                                                 <ul className="flex">
                                                     <li className="cursor-pointer text-white pt-5 pb-3">
@@ -265,11 +267,11 @@ const SuperAdminDashboard = () => {
                                                         ""
                                                     )}
                                                     <div className="relative">
-                                                        <img className="rounded-full h-10 w-10 object-cover" src="https://tuk-cdn.s3.amazonaws.com/assets/components/sidebar_layout/sl_1.png" alt="avatar" />
+                                                        <img className="rounded-full h-10 w-10 object-cover" src="https://cdn-icons-png.flaticon.com/512/1053/1053244.png" alt="avatar" />
                                                         <div className="w-2 h-2 rounded-full bg-green-400 border border-white absolute inset-0 mb-0 mr-0 m-auto" />
                                                     </div>
                                                 </div>
-                                                <p className="text-gray-800 text-sm mx-3">Jane Doe</p>
+                                                <p className="text-gray-800 text-sm mx-3">{userName && userName?.given_name}</p>
                                                 <div className="cursor-pointer text-gray-600">
                                                     <svg aria-haspopup="true" xmlns="http://www.w3.org/2000/svg" className="icon icon-tabler icon-tabler-chevron-down" width={20} height={20} viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" fill="none" strokeLinecap="round" strokeLinejoin="round">
                                                         <path stroke="none" d="M0 0h24v24H0z" />

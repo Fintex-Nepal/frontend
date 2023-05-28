@@ -10,7 +10,7 @@ import CreateStaffLogin from './CreateStaffLogin';
 import StaffInfo from './StaffInfo';
 import PasswordResetForm from './PasswordResetForm'
 import EmployeeDetails from './EmployeeDetails'
-// import Logo from '../../assets/logo.png'
+import microFinanceLogo from '../../assets/microFinanceLogo.png'
 // import DropDownCustom from '../../utils/DropDownCustom'
 
 import Dropdown from '../../utils/DropDownt'
@@ -46,8 +46,6 @@ const Dashboard = () => {
         localStorage.removeItem('adminToken')
         navigate('/')
     }
-
-
     if (isAuthorized) {
         return (
             <>
@@ -57,7 +55,7 @@ const Dashboard = () => {
                             <div class="flex h-16 items-center justify-between">
                                 <div class="flex items-center">
                                     <div class="flex-shrink-0">
-                                        <img class="h-8 w-8" src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500" alt="Your Company" />
+                                        <img class="h-8 w-8" src={microFinanceLogo} alt="Your Company" />
                                     </div>
                                     <div class="hidden md:block">
                                         <div class="ml-10 flex items-baseline space-x-4">
@@ -65,8 +63,8 @@ const Dashboard = () => {
                                             <Link to={'profile'} class="bg-gray-900 text-white rounded-md px-3 py-2 text-sm font-medium" aria-current="page">Profile</Link>
                                             <Link to={'accountsetup'} class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Account Setup</Link>
                                             <Link to={'createdeposit'} class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Deposit</Link>
-                                            <a href="1" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Calendar</a>
-                                            <Dropdown dropDownList={clientDropdown} heading="Clinet" />
+                                            {/* <a href="1" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Calendar</a> */}
+                                            <Dropdown dropDownList={clientDropdown} heading="Client" />
                                             <Dropdown dropDownList={employeeDropdown} heading="Employee" />
                                         </div>
                                     </div>
@@ -85,7 +83,7 @@ const Dashboard = () => {
                                             <div onClick={() => setProfileMenu(!profileMenu)}>
                                                 <button type="button" class="flex max-w-xs items-center rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800" id="user-menu-button" aria-expanded="false" aria-haspopup="true">
                                                     <span class="sr-only">Open user menu</span>
-                                                    <img class="h-8 w-8 rounded-full" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="" />
+                                                    <img class="h-8 w-8 rounded-full" src="https://cdn-icons-png.flaticon.com/512/1053/1053244.png" alt="" />
                                                 </button>
                                             </div>
                                             {profileMenu &&
@@ -123,7 +121,7 @@ const Dashboard = () => {
                                     <a href="1" class="bg-gray-900 text-white block rounded-md px-3 py-2 text-base font-medium" aria-current="page">Dashboard</a>
                                     <a href="1" class="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium">Team</a>
                                     <Link to={'/createdeposit'} class="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium">Deposit</Link>
-                                    <Dropdown dropDownList={clientDropdown} heading="Clinet" />
+                                    <Dropdown dropDownList={clientDropdown} heading="Client" />
                                     <Dropdown dropDownList={employeeDropdown} heading="Employee" />
                                     <a href="1" class="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium">Reports</a>
                                 </div>
@@ -131,7 +129,7 @@ const Dashboard = () => {
                             <div class="border-t border-gray-700 pb-3 pt-4">
                                 <div class="flex items-center px-5">
                                     <div onClick={() => setProfileMenu(!profileMenu)} class="flex-shrink-0">
-                                        <img class="h-10 w-10 rounded-full" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="" />
+                                        <img class="h-10 w-10 rounded-full" src="https://cdn-icons-png.flaticon.com/512/1053/1053244.png" alt="" />
                                     </div>
                                     <div class="ml-3">
                                         <div class="text-base font-medium leading-none text-white">Tom Cook</div>

@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
-import { editUserProfile } from '../../utils/Url';
+import { editUserProfile ,getEmployeeById} from '../../utils/Url';
 import SuccessModal from '../../utils/SuccessModal';
 const modalText = {
     heading: "Successfully Updated",
@@ -15,7 +15,7 @@ const EmployeeDetails = () => {
     
     const { id } = useParams();
     useEffect(() => {
-        axios.get(`http://localhost:8080/financecompany/getemployee/username?username=${id}`, {
+        axios.get(`${getEmployeeById}${id}`, {
             headers: {
                 'Authorization': 'Bearer ' + localStorage.getItem('adminToken')
             }

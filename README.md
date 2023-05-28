@@ -110,8 +110,19 @@
 * Sub Ledger Create garna ma problem xa:
 
 
-* Create Client api bha ko xa?
-* Api aajahi kun kun bho?
+***
+<!-- Error Handlening
+{
+  "type": "https://tools.ietf.org/html/rfc7231#section-6.5.1",
+  "title": "One or more validation errors occurred.",
+  "status": 400,
+  "traceId": "00-882ffacea2c07c5388d5c8f068c4ac9c-bf35e666880657ac-00",
+  "errors": {
+    "InterestRate": [
+      "Interest must have up to two decimal places."
+    ]
+  }
+} -->
 
 
 

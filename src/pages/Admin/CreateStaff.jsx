@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import axios from 'axios';
 import SuccessModal from '../../utils/SuccessModal';
 import jwt_decode from 'jwt-decode'
+import { createEmployeeUrl } from '../../utils/Url';
 const CreateStaff = () => {
 
     const decoded=jwt_decode(localStorage.getItem('adminToken'))
@@ -27,7 +28,7 @@ const CreateStaff = () => {
       }
     const formSubmitHandler = (e) => {
         e.preventDefault();
-        axios.post('http://localhost:8080/financecompany/create-employee', formData, {
+        axios.post(createEmployeeUrl, formData, {
             headers: {
                 'Authorization': 'Bearer ' + localStorage.getItem('adminToken')
             },

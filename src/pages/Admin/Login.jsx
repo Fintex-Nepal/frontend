@@ -4,6 +4,7 @@ import Navbar from '../../components/Navbar'
 import Footer from '../../components/Footer'
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { fintexLoginUrl } from '../../utils/Url';
 const Login = () => {
     const naviate = useNavigate();
     const [loginData, setLoginData] = useState({
@@ -24,7 +25,7 @@ const Login = () => {
     }
     const formSubmitHandler = (e) => {
         e.preventDefault()
-        axios.post('http://localhost:8080/FinanceCompany/login',loginData)
+        axios.post(fintexLoginUrl,loginData)
         .then((res=>{
             localStorage.setItem('adminToken',res.data.token)
             naviate('/dashboard')
