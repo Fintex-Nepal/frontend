@@ -1,10 +1,9 @@
-import React from 'react'
-import { useState } from 'react'
+import React,{ useState } from 'react'
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
+import { fintexLoginUrl } from '../../utils/Url';
 import Navbar from '../../components/Navbar'
 import Footer from '../../components/Footer'
-import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
-import { fintexLoginUrl } from '../../utils/Url';
 const Login = () => {
     const naviate = useNavigate();
     const [loginData, setLoginData] = useState({
