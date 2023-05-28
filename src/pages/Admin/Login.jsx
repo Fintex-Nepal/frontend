@@ -13,8 +13,6 @@ const Login = () => {
         stayLogin:true,
     });
 
-
-
     const signUpFormChangeHandler = (event) => {
         const { name, value } = event.target;
         setLoginData(prevState => ({
