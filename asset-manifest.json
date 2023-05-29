@@ -1,0 +1,17 @@
+{
+  "files": {
+    "main.css": "/static/css/main.e0f4c1c0.css",
+    "main.js": "/static/js/main.b8ba9d3b.js",
+    "static/js/787.cda612ba.chunk.js": "/static/js/787.cda612ba.chunk.js",
+    "static/media/microFinanceLogo.png": "/static/media/microFinanceLogo.94689db4c46cd8048ff8.png",
+    "static/media/logo.png": "/static/media/logo.1288e037c3ad716d8d43.png",
+    "index.html": "/index.html",
+    "main.e0f4c1c0.css.map": "/static/css/main.e0f4c1c0.css.map",
+    "main.b8ba9d3b.js.map": "/static/js/main.b8ba9d3b.js.map",
+    "787.cda612ba.chunk.js.map": "/static/js/787.cda612ba.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.e0f4c1c0.css",
+    "static/js/main.b8ba9d3b.js"
+  ]
+}
