@@ -26,13 +26,19 @@ jobs:
           npm config set legacy-peer-deps true
           npm install
           npm run build --if-present
+
+      - name: Zip Release
+        uses: TheDoctor0/zip-release@0.7.1
+        with:
+          filename: release.zip
+          path: ./build/*
           
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v2
         with:
           name: node-app
-          path: .
+          path: release.zip
 
   deploy:
     runs-on: ubuntu-latest
@@ -54,4 +60,4 @@ jobs:
           app-name: 'FintexFinanceServices'
           slot-name: 'Production'
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_8699A59BC74043B88D678F0D04296EBE }}
-          package: .
+          package: release.zip
