@@ -25,8 +25,6 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "predeploy" : "npm run build",
-    "deploy" : "gh-pages -d build",
     "build": "react-scripts build"
    
   },
@@ -34,14 +32,6 @@
     "extends": [
       "react-app",
       "react-app/jest"
-    ],
-    "overrides": [
-      {
-        "files": [],
-        "rules": {
-          "import/no-anonymous-default-export": "off"
-        }
-      }
     ]
   },
   "browserslist": {
@@ -58,7 +48,6 @@
   },
   "devDependencies": {
     "babel-plugin-named-exports-order": "^0.0.2",
-    "gh-pages": "^5.0.0",
     "prop-types": "^15.8.1",
     "tailwindcss": "^3.3.1",
     "webpack": "^5.80.0"
