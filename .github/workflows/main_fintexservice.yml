@@ -57,7 +57,7 @@ jobs:
         id: deploy-to-webapp
         with:
           app-name: 'fintexservice'
-          startUpCommand: 'pm2 serve /home/site/wwwroot --spa --no-daemon'
+          startup-command: 'pm2 serve /home/site/wwwroot --spa --no-daemon'
           slot-name: 'Production'
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_1D40EA7E658E4615AAD245109E569AE6 }}
           package: release.zip
