@@ -9,11 +9,11 @@ const Dropdown = ({ heading, dropDownList }) => {
   };
 
   return (
-    <div className="relative inline-block text-left">
+    <div className="relative inline-block text-left z-50">
       <div>
         <button
           type="button"
-          className="inline-flex w-full justify-center gap-x-1.5  text-gray-300 hover:bg-gray-900 hover:text-white  rounded-md px-3 py-2 text-base font-medium"
+          className="inline-flex w-full justify-center gap-x-1.5 text-gray-300 hover:bg-gray-900 hover:text-white rounded-md px-3 py-2 text-base font-medium"
           id="menu-button"
           aria-expanded={isOpen}
           aria-haspopup="true"
@@ -36,17 +36,17 @@ const Dropdown = ({ heading, dropDownList }) => {
       </div>
       {isOpen && (
         <div
-          className="absolute left-0 mt-2 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
+          className="absolute left-0 mt-2 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none z-50"
           role="menu"
           aria-orientation="vertical"
           aria-labelledby="menu-button"
           tabIndex="-1"
         >
           <div className="py-1" role="none">
-            {dropDownList?.map(itm => (
-              <Link  to={`${itm.replace(/\s/g, "").toLowerCase()}`}
-               
-                className=" block px-4 py-2 text-sm hover:bg-gray-300"
+            {dropDownList?.map((itm) => (
+              <Link
+                to={`${itm.replace(/\s/g, '').toLowerCase()}`}
+                className="block z-50 px-4 py-2 text-sm hover:bg-gray-300"
                 role="menuitem"
                 tabIndex="-1"
                 id="menu-item-0"
@@ -54,18 +54,6 @@ const Dropdown = ({ heading, dropDownList }) => {
                 {itm}
               </Link>
             ))}
-
-            {/* <form method="POST" action="1" role="none">
-              <button
-                type="submit"
-                className="text-gray-700 block w-full px-4 py-2 text-left text-sm"
-                role="menuitem"
-                tabIndex="-1"
-                id="menu-item-3"
-              >
-                Sign out
-              </button>
-            </form> */}
           </div>
         </div>
       )}

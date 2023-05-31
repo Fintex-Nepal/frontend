@@ -100,7 +100,7 @@ const Login = () => {
                                                         placeholder=" password" required
                                                         onChange={signUpFormChangeHandler}
                                                     />
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                    {/* <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                                         class="absolute right-0 mt-2 mr-3 i " fill="currentColor"
                                                         viewBox="0 0 16 16">
                                                         <path
@@ -109,16 +109,16 @@ const Login = () => {
                                                             d="M11.297 9.176a3.5 3.5 0 0 0-4.474-4.474l.823.823a2.5 2.5 0 0 1 2.829 2.829l.822.822zm-2.943 1.299.822.822a3.5 3.5 0 0 1-4.474-4.474l.823.823a2.5 2.5 0 0 0 2.829 2.829z" />
                                                         <path
                                                             d="M3.35 5.47c-.18.16-.353.322-.518.487A13.134 13.134 0 0 0 1.172 8l.195.288c.335.48.83 1.12 1.465 1.755C4.121 11.332 5.881 12.5 8 12.5c.716 0 1.39-.133 2.02-.36l.77.772A7.029 7.029 0 0 1 8 13.5C3 13.5 0 8 0 8s.939-1.721 2.641-3.238l.708.709zm10.296 8.884-12-12 .708-.708 12 12-.708.708z" />
-                                                    </svg>
+                                                    </svg> */}
                                                 </div>
                                                 <div class="relative flex items-center mb-4">
-                                                    <input type="password"
+                                                    <input type="text"
                                                         name='confirmPassword'
                                                         class="w-full py-4 rounded-lg px-7  "
                                                         placeholder="Repeat password" required
                                                         onChange={signUpFormChangeHandler}
                                                     />
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                    {/* <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                                         class="absolute right-0 items-center mr-3 "
                                                         fill="currentColor" viewBox="0 0 16 16">
                                                         <path
@@ -127,7 +127,7 @@ const Login = () => {
                                                             d="M11.297 9.176a3.5 3.5 0 0 0-4.474-4.474l.823.823a2.5 2.5 0 0 1 2.829 2.829l.822.822zm-2.943 1.299.822.822a3.5 3.5 0 0 1-4.474-4.474l.823.823a2.5 2.5 0 0 0 2.829 2.829z" />
                                                         <path
                                                             d="M3.35 5.47c-.18.16-.353.322-.518.487A13.134 13.134 0 0 0 1.172 8l.195.288c.335.48.83 1.12 1.465 1.755C4.121 11.332 5.881 12.5 8 12.5c.716 0 1.39-.133 2.02-.36l.77.772A7.029 7.029 0 0 1 8 13.5C3 13.5 0 8 0 8s.939-1.721 2.641-3.238l.708.709zm10.296 8.884-12-12 .708-.708 12 12-.708.708z" />
-                                                    </svg>
+                                                    </svg> */}
                                                 </div>
                                                 <div class="mb-4 text-right ">
                                                     <a href="1"
