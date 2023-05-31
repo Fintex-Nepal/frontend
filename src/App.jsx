@@ -6,7 +6,6 @@ import SuperAdminLogin from './components/SuperAdmin/SuperAdminLogin'
 import SuperAdminDashboard from './components/SuperAdmin/SuperAdminDashboard'
 import Error from './pages/Error'
 
-// import KnowYourMember from './pages/Admin/UserRegestration/KYM/KnowYourMember'
 
 const App = () => {
   return (
