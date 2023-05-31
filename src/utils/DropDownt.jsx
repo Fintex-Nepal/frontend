@@ -28,7 +28,7 @@ const Dropdown = ({ heading, dropDownList }) => {
       <div>
         <button
           type="button"
-          className="inline-flex w-full justify-center gap-x-1.5 text-gray-300 hover:bg-gray-900 hover:text-white rounded-md px-3 py-2 text-base font-medium"
+          className={`inline-flex w-full justify-center gap-x-1.5 text-gray-300 hover:bg-gray-900 hover:text-white rounded-md px-3 py-2 text-base font-medium relative overflow-hidden ${isOpen ? 'animated-gradient' : ''}`}
           id="menu-button"
           aria-expanded={isOpen}
           aria-haspopup="true"
@@ -47,6 +47,7 @@ const Dropdown = ({ heading, dropDownList }) => {
               clipRule="evenodd"
             />
           </svg>
+          <div className={`transition-all duration-2000 absolute inset-0 bg-gradient-to-r ${isOpen ? 'w-full' : 'w-0'}`} />
         </button>
       </div>
       {isOpen && (

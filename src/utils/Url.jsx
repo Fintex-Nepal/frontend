@@ -64,3 +64,6 @@ export const createSubLedgerUrl=baseurl+"accountsetup/subledger"
 export const createEmployeeUrl=baseurl+"financecompany/create-employee"
 
 export const getEmployeeById=baseurl+"financecompany/getemployee/username?username="
+
+export const getUserByUserName=baseurl+"FinanceCompany/getuser/username?userName="
+

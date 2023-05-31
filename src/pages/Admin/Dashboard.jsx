@@ -7,13 +7,13 @@ import CreateStaff from './CreateStaff';
 import KnowYourMember from '../Admin/UserRegestration/KYM/KnowYourMember'
 import CreateStaffLogin from './CreateStaffLogin';
 import StaffInfo from './StaffInfo';
-import PasswordResetForm from './PasswordResetForm'
 import EmployeeDetails from './EmployeeDetails'
 import microFinanceLogo from '../../assets/microFinanceLogo.png'
 // import DropDownCustom from '../../utils/DropDownCustom'
 
 import Dropdown from '../../utils/DropDownt'
 import CreateDeposit from '../Deposit/CreateDeposit'
+import Profile from './Profile'
 
 
 const Dashboard = () => {
@@ -87,7 +87,7 @@ const Dashboard = () => {
                                             </div>
                                             {profileMenu &&
                                                 <div class="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="user-menu-button" tabindex="-1">
-                                                    <a  href="1" class="block cursor-pointer px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1" id="user-menu-item-0">Your Profile</a>
+                                                    <Link to={'profile'} class="block cursor-pointer px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1" id="user-menu-item-0">Your Profile</Link>
                                                     {/* <a  href="1" class="block cursor-pointer px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1" id="user-menu-item-1">Settings</a> */}
                                                     <div  onClick={signOutHandler} class="block cursor-pointer px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1" id="user-menu-item-2">Sign out</div>
                                                 </div>
@@ -142,7 +142,7 @@ const Dashboard = () => {
                                     </button>
                                 </div>
                                 {profileMenu && <div class="mt-3 space-y-1 px-2">
-                                    <a href="1"  class="block rounded-md cursor-pointer px-3 py-2 text-base font-medium text-gray-400 hover:bg-gray-700 hover:text-white">Your Profile</a>
+                                    <Link to={'profile'}  class="block rounded-md cursor-pointer px-3 py-2 text-base font-medium text-gray-400 hover:bg-gray-700 hover:text-white">Your Profile</Link>
                                     {/* <a href="1"  class="block rounded-md cursor-pointer px-3 py-2 text-base font-medium text-gray-400 hover:bg-gray-700 hover:text-white">Settings</a> */}
                                     <div  onClick={signOutHandler} class="block rounded-md cursor-pointer px-3 py-2 text-base font-medium text-gray-400 hover:bg-gray-700 hover:text-white">Sign out</div>
                                 </div>}
@@ -159,7 +159,7 @@ const Dashboard = () => {
                         <div class="mx-auto pt-7  lg:px-8">
                             <Routes>
                                 <Route path='/' element={<Content />} />
-                                <Route path='/profile' element={<PasswordResetForm />} />
+                                <Route path='/profile' element={<Profile/>} />
                                 <Route path='/accountsetup' element={<MainRegestration />} />
                                 <Route path='/registeremployee' element={<CreateStaff />} />
                                 <Route path='/createlogincredentials' element={<CreateStaffLogin />} />
