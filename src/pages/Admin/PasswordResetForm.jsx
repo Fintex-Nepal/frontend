@@ -66,13 +66,13 @@ const PasswordResetForm = () => {
                         Reset Password
                     </h1>
 
-                    <p className="mx-auto mt-4 max-w-md text-center text-gray-500">
+                    <p className="mx-auto  max-w-md text-center text-gray-500">
                         Provide your existing and new credentials
                     </p>
 
                     <form
                         onSubmit={formSubmitHandler}
-                        className="mt-6 mb-0 space-y-4 rounded-lg p-4 shadow-lg sm:p-6 lg:p-8"
+                        className=" mb-0 space-y-4 rounded-lg p-4 shadow-lg sm:p-6 lg:p-8"
                     >
                         <p className="text-center text-lg font-medium">your credentials</p>
 
