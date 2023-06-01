@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import BasicInfo from '../BasicInfo'
+import BasicInfo from './BasicInfo'
 import Address from './Address'
 import OtherInfo from './OtherInfo'
 import PhotoSign from './PhotoSign'
