@@ -162,7 +162,7 @@ const SuperAdminDashboard = () => {
                                     </div>
                                     <div className="w-full">
                                         <div className="flex justify-center mb-4 w-full px-6">
-                                            <div className="relative w-full">
+                                            {/* <div className="relative w-full">
                                                 <div className="text-gray-500 absolute ml-4 inset-0 m-auto w-4 h-4">
                                                     <svg xmlns="http://www.w3.org/2000/svg" className="icon icon-tabler icon-tabler-search" width={16} height={16} viewBox="0 0 24 24" strokeWidth={1} stroke="#A0AEC0" fill="none" strokeLinecap="round" strokeLinejoin="round">
                                                         <path stroke="none" d="M0 0h24v24H0z" />
@@ -171,7 +171,7 @@ const SuperAdminDashboard = () => {
                                                     </svg>
                                                 </div>
                                                 <input className="bg-gray-200 focus:outline-none rounded w-full text-sm text-gray-500  pl-10 py-2" type="text" placeholder="Search" />
-                                            </div>
+                                            </div> */}
                                         </div>
                                         <div className="border-t border-gray-300">
                                             <div className="w-full flex items-center justify-between px-6 pt-1">
@@ -208,7 +208,7 @@ const SuperAdminDashboard = () => {
                             <nav className="h-16 flex items-center lg:items-stretch justify-end lg:justify-between bg-white shadow relative z-10">
                                 <div className="hidden lg:flex w-full pr-6">
                                     <div className="w-1/2 h-full hidden lg:flex items-center pl-6 pr-24">
-                                        <div className="relative w-full">
+                                        {/* <div className="relative w-full">
                                             <div className="text-gray-500 absolute ml-4 inset-0 m-auto w-4 h-4">
                                                 <svg xmlns="http://www.w3.org/2000/svg" className="icon icon-tabler icon-tabler-search" width={16} height={16} viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" fill="none" strokeLinecap="round" strokeLinejoin="round">
                                                     <path stroke="none" d="M0 0h24v24H0z" />
@@ -217,7 +217,7 @@ const SuperAdminDashboard = () => {
                                                 </svg>
                                             </div>
                                             <input className="border border-gray-100 focus:outline-none focus:border-indigo-700 rounded w-full text-sm text-gray-500 bg-gray-100 pl-12 py-2" type="text" placeholder="Search" />
-                                        </div>
+                                        </div> */}
                                     </div>
                                     <div className="w-1/2 hidden lg:flex">
                                         <div className="w-full flex items-center pl-8 justify-end">
@@ -231,13 +231,13 @@ const SuperAdminDashboard = () => {
                                                     <div className="w-2 h-2 rounded-full bg-red-400 border border-white absolute inset-0 mt-1 mr-1 m-auto" />
                                                 </div>
                                             </div>
-                                            <div className="h-full w-20 flex items-center justify-center border-r mr-4 cursor-pointer text-gray-600">
+                                            {/* <div className="h-full w-20 flex items-center justify-center border-r mr-4 cursor-pointer text-gray-600">
                                                 <svg xmlns="http://www.w3.org/2000/svg" className="icon icon-tabler icon-tabler-messages" width={28} height={28} viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" fill="none" strokeLinecap="round" strokeLinejoin="round">
                                                     <path stroke="none" d="M0 0h24v24H0z" />
                                                     <path d="M21 14l-3 -3h-7a1 1 0 0 1 -1 -1v-6a1 1 0 0 1 1 -1h9a1 1 0 0 1 1 1v10" />
                                                     <path d="M14 15v2a1 1 0 0 1 -1 1h-7l-3 3v-10a1 1 0 0 1 1 -1h2" />
                                                 </svg>
-                                            </div>
+                                            </div> */}
                                             <div className="flex items-center relative cursor-pointer" onClick={() => setProfile(!profile)}>
                                                 <div className="rounded-full">
                                                     {profile ? (

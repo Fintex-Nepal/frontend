@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
-import { useDispatch,useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import SuccessModal from '../../../utils/SuccessModal';
 import { createGroupUrl, accoutTypeByIdUrl } from '../../../utils/Url';
 import ModifyRegestrartionModal from '../../../utils/ModifyRegestrartionModal';
@@ -11,17 +11,16 @@ const GroupSetup = () => {
     const [existingGroups, setExistingGroups] = useState();
     const [selectedAccountType, setSelectedAccountType] = useState()
     const [showSuccessModal, setshowSuccessModal] = useState(false)
-    const [showModifyModal,setShowModifyModal]=useState(false)
+    const [showModifyModal, setShowModifyModal] = useState(false)
     const dispatch = useDispatch();
     const accountTypeData = useSelector((state) => state.group?.accountTypeData);
     const modalText = {
         heading: "Employee Account Successfully Created",
         bodyText: 'The entered username and password can be used by Employee'
     }
-     if(!accountTypeData || accountTypeData.length<=0)
-     {
+    if (!accountTypeData || accountTypeData.length <= 0) {
         dispatch(fetchAccountType())
-     }
+    }
     useEffect(() => {
         if (selectedAccountType) {
             axios.get(`${accoutTypeByIdUrl}=${selectedAccountType}`, {
@@ -33,7 +32,7 @@ const GroupSetup = () => {
                 .catch(err => alert(err))
         }
     }, [selectedAccountType])
-   
+
     const onChanegHandler = (e) => {
         const { name, value } = e.target;
 
@@ -68,7 +67,6 @@ const GroupSetup = () => {
 
     return (
         <>
-
             {showSuccessModal && <SuccessModal heading={modalText?.heading} bodyText={modalText?.bodyText} setshowSuccessModal={setshowSuccessModal} showSuccessModal={showSuccessModal} />}
             <div class="grid grid-cols-1 gap-6 mt-4 sm:grid-cols-2">
                 <div>
@@ -83,7 +81,6 @@ const GroupSetup = () => {
                                         setSelectedAccountType(e.target.value);
                                         onChanegHandler(e);
                                     }}
-
                                         required type="number" name='accountTypeId' class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md" >
                                         <option selected disabled>Select</option>
                                         {accountTypeData?.map(itm => (
@@ -133,7 +130,7 @@ const GroupSetup = () => {
                         </form>
                     </section>
                 </div>
-                {showModifyModal &&<ModifyRegestrartionModal setShowUpdateModal={setShowModifyModal}/>}
+                {showModifyModal && <ModifyRegestrartionModal setShowUpdateModal={setShowModifyModal} />}
                 <div class=" h-1/2 sm:h-full p-4">
                     <div class=" text-black bg-white  py-2 rounded w-full">
                         <div class="flex flex-col">
@@ -210,7 +207,7 @@ const GroupSetup = () => {
                                                             {itm?.groupType?.entryDate.substring(0, 10)}
                                                         </td>
 
-                                                        <td onClick={()=>setShowModifyModal(!showModifyModal)} role='button'
+                                                        <td onClick={() => setShowModifyModal(!showModifyModal)} role='button'
                                                             class="whitespace-nowrap border-r px-6 py-4 ">
                                                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" class="w-6 h-6">
                                                                 <path strokeLinecap="round" strokeLinejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10" />
