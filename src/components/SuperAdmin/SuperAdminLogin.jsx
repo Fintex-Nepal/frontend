@@ -3,8 +3,12 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios'
 import { superAdminLoginUrl } from '../../utils/Url';
+import Loader from '../../utils/Helper/Loader';
+import { STATUS } from '../../Redux/Regestration/SubLedgerSlice';
+import { toast, ToastContainer } from 'react-toastify';
 const SuperAdminLogin = () => {
     const naviate = useNavigate();
+    const [loginStatus, setLoginStatus] = useState(STATUS.IDLE)
     const [userData, setUserDate] = useState({
         userName: '',
         password: '',
@@ -19,15 +23,26 @@ const SuperAdminLogin = () => {
     }
     const formSubmitHandler = (e) => {
         e.preventDefault();
+        setLoginStatus(STATUS.LOADING)
         axios.post(superAdminLoginUrl, userData)
             .then((res) => {
                 localStorage.setItem('sAdminToken', res.data.token)
+                setLoginStatus(STATUS.IDLE)
                 naviate('/sadmindashboard')
             })
-            .catch(err => alert(err))
+            .catch(err => {
+                setLoginStatus(STATUS.ERROR)
+                const errors=err?.response?.data?.errors
+                Object.keys(errors).forEach(element => {
+                    toast.error(element, {
+                        position: toast.POSITION.TOP_RIGHT
+                    });
+                });  
+            })
     }
     return (
         <>
+            {loginStatus === STATUS.LOADING && <Loader />}
             <section class="flex items-center justify-center h-screen font-poppins  bg-slate-300">
                 <div class="flex-1">
                     <div class="px-2 mx-auto max-w-7xl lg:px-4">
@@ -44,7 +59,7 @@ const SuperAdminLogin = () => {
                                     </a>
                                     <h2 class="mb-4 text-2xl font-bold text-gray-700 lg:mb-7 md:text-5xl">
                                         Admin Login account</h2>
-                                    <p class="text-gray-500">Your credentials here</p>
+                                    <p class="text-gray-500">Please Enter Your credentials here</p>
                                     <form onSubmit={formSubmitHandler} class="mt-4 lg:mt-7 ">
                                         <div class="">
                                             <input type="string"
@@ -98,6 +113,7 @@ const SuperAdminLogin = () => {
                     </div>
                 </div>
             </section>
+            <ToastContainer />
         </>
     )
 }

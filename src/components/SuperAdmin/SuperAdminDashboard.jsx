@@ -1,5 +1,5 @@
 import React from 'react'
-import { Routes, Route, Link,useNavigate } from 'react-router-dom'
+import { Routes, Route, Link, useNavigate } from 'react-router-dom'
 import { useEffect, useState } from 'react';
 import jwtDecode from 'jwt-decode';
 import PasswordResetForm from './PasswordResetForm'
@@ -7,11 +7,15 @@ import CreateAdmin from './CreateAdmin';
 import Content from '../../pages/Admin/Content';
 import Users from './Users';
 import logo from '../../assets/logo.png'
+import AllBranch from './Company Profile/AllBranch';
 const SuperAdminDashboard = () => {
     const [show, setShow] = useState(false);
     const [profile, setProfile] = useState(false);
     const [isValidUser, setIsValidUser] = useState(false);
-    const navigate=useNavigate();
+    const navigate = useNavigate();
+
+
+
     useEffect(() => {
         if (localStorage.getItem('sAdminToken')) {
             setIsValidUser(true)
@@ -20,11 +24,11 @@ const SuperAdminDashboard = () => {
             navigate('/sadminlogin')
         }
     }, [navigate])
-    const logOutHandler=()=>{
+    const logOutHandler = () => {
         localStorage.removeItem('sAdminToken')
         navigate('/sadminlogin')
     }
-    const userName=jwtDecode(localStorage.getItem("sAdminToken"))
+    const userName = jwtDecode(localStorage.getItem("sAdminToken"))
     if (isValidUser) {
         return (
             <>
@@ -37,9 +41,19 @@ const SuperAdminDashboard = () => {
                             </div>
                             <ul className=" py-6">
                                 <li className="pl-6 cursor-pointer text-gray-600 text-sm leading-3 tracking-normal mt-4 mb-4 py-2 hover:text-indigo-700 focus:text-indigo-700 focus:outline-none">
+                                    <Link to={'/sadmindashboard/companyprofile'}>
+                                        <div className="flex items-center">
+                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                                <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 21h19.5m-18-18v18m10.5-18v18m6-13.5V21M6.75 6.75h.75m-.75 3h.75m-.75 3h.75m3-6h.75m-.75 3h.75m-.75 3h.75M6.75 21v-3.375c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21M3 3h12m-.75 4.5H21m-3.75 3.75h.008v.008h-.008v-.008zm0 3h.008v.008h-.008v-.008zm0 3h.008v.008h-.008v-.008z" />
+                                            </svg>
+                                            <span className="ml-2">Company Profile</span>
+                                        </div>
+                                    </Link>
+                                </li>
+                                <li className="pl-6 cursor-pointer text-gray-600 text-sm leading-3 tracking-normal mt-4 mb-4 py-2 hover:text-indigo-700 focus:text-indigo-700 focus:outline-none">
                                     <Link to={'/sadmindashboard/users'}>
                                         <div className="flex items-center">
-                                            <svg xmlns="http://www.w3.org/2000/svg"  width={20} height={20} fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" class="w-6 h-6">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width={20} height={20} fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" class="w-6 h-6">
                                                 <path strokeLinecap="round" strokeLinejoin="round" d="M15 19.128a9.38 9.38 0 002.625.372 9.337 9.337 0 004.121-.952 4.125 4.125 0 00-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 018.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0111.964-3.07M12 6.375a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zm8.25 2.25a2.625 2.625 0 11-5.25 0 2.625 2.625 0 015.25 0z" />
                                             </svg>
 
@@ -59,16 +73,7 @@ const SuperAdminDashboard = () => {
                                         </div>
                                     </Link>
                                 </li>
-                                {/* <li className="pl-6 cursor-pointer text-gray-600 text-sm leading-3 tracking-normal mb-4 py-2 hover:text-indigo-700 focus:text-indigo-700 focus:outline-none">
-                                    <div className="flex items-center">
-                                        <svg xmlns="http://www.w3.org/2000/svg" className="icon icon-tabler icon-tabler-compass" width={20} height={20} viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" fill="none" strokeLinecap="round" strokeLinejoin="round">
-                                            <path stroke="none" d="M0 0h24v24H0z" />
-                                            <polyline points="8 16 10 10 16 8 14 14 8 16" />
-                                            <circle cx={12} cy={12} r={9} />
-                                        </svg>
-                                        <span className="ml-2">Performance</span>
-                                    </div>
-                                </li> */}
+                                
                                 <li className="pl-6 cursor-pointer text-gray-600 text-sm leading-3 tracking-normal py-2 hover:text-indigo-700 focus:text-indigo-700 focus:outline-none">
                                     <Link to={'/sadmindashboard/createadmin'}>
                                         <div className="flex items-center">
@@ -252,7 +257,7 @@ const SuperAdminDashboard = () => {
                                                                     <span className="text-sm ml-2">My Profile</span>
                                                                 </div>
                                                             </li>
-                                                            <li  onClick={logOutHandler} className="flex w-full justify-between text-gray-600 hover:text-indigo-700 cursor-pointer items-center mt-2">
+                                                            <li onClick={logOutHandler} className="flex w-full justify-between text-gray-600 hover:text-indigo-700 cursor-pointer items-center mt-2">
                                                                 <div className="flex items-center">
                                                                     <svg xmlns="http://www.w3.org/2000/svg" className="icon icon-tabler icon-tabler-logout" width={20} height={20} viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" fill="none" strokeLinecap="round" strokeLinejoin="round">
                                                                         <path stroke="none" d="M0 0h24v24H0z" />
@@ -304,19 +309,22 @@ const SuperAdminDashboard = () => {
                                         <Route path='/profile' element={<PasswordResetForm />} />
                                         <Route path='/createadmin' element={<CreateAdmin />} />
                                         <Route path='/users' element={<Users />} />
+
+                                        {/* Company Profile */}
+                                        <Route path='/companyprofile' element={<AllBranch/>} />
                                     </Routes>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-         </>
+            </>
         )
     }
-    else{
+    else {
         return null
     }
-    
+
 }
 
 export default SuperAdminDashboard

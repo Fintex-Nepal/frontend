@@ -87,7 +87,7 @@ const Login = () => {
                                                 />
                                             </div>
                                             <div class="relative flex items-center mb-4">
-                                                <input type="text"
+                                                <input type="password"
                                                     name='confirmPassword'
                                                     class="w-full py-4 rounded-lg px-7  "
                                                     placeholder="Repeat password" required

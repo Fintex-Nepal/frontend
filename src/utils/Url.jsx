@@ -67,3 +67,11 @@ export const getEmployeeById=baseurl+"financecompany/getemployee/username?userna
 
 export const getUserByUserName=baseurl+"FinanceCompany/getuser/username?userName="
 
+
+
+
+
+//Company Profile
+
+export const getAllBranches=baseurl+"CompanyProfile/getAllBranches"
+

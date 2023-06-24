@@ -2,11 +2,10 @@ import React, { useState, useEffect } from 'react'
 import axios from 'axios';
 import { createLedgerUrl } from '../../../utils/Url';
 import { useSelector, useDispatch } from 'react-redux';
-
 import SuccessModal from '../../../utils/SuccessModal';
 import { fetchAccountType } from '../../../Redux/Regestration/GroupSlice';
 import { fetchGroupData } from '../../../Redux/Regestration/LedgerSlice';
-import { getallSubLedger } from '../../../utils/Url'
+// import { getAllLedger } from '../../../utils/Url'
 
 const LedgerSetup = () => {
     const [ledgerData, setLedgerData] = useState({})
@@ -41,13 +40,18 @@ const LedgerSetup = () => {
     };
 
     useEffect(() => {
-        axios.get(getallSubLedger, {
+        axios.get("https://fintexfinanceservice.azurewebsites.net/AccountSetup/ledgers", {
             headers: {
-                'Authorization': 'Bearer ' + localStorage.getItem("adminToken")
+                'Authorization': 'Bearer ' +localStorage.getItem("adminToken")
             }
         })
-            .then((res) => setAllLedger(res.data))
-            .catch(err => alert(err))
+            .then((res) => {
+                setAllLedger(res.data)
+                console.log('====================================');
+                console.log(res.data);
+                console.log('====================================');
+            })
+            .catch(err => console.log(err))
     }, [])
 
     const LedgerSubmitHandler = (e) => {
@@ -72,7 +76,6 @@ const LedgerSetup = () => {
         heading: "Ledger Successfully Created",
         // bodyText: 'The entered username and password can be used by Employee'
     }
-    console.log(allLedger);
     return (
         <>
             {showSuccessModal && <SuccessModal heading={modalText?.heading} bodyText={modalText?.bodyText} setshowSuccessModal={setshowSuccessModal} showSuccessModal={showSuccessModal} />}
@@ -251,7 +254,6 @@ const LedgerSetup = () => {
                                                             </td>
                                                         </>
                                                     ))}
-
                                                 </tr>
                                             </tbody>
                                         </table>
