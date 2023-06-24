@@ -75,3 +75,5 @@ export const getUserByUserName=baseurl+"FinanceCompany/getuser/username?userName
 
 export const getAllBranches=baseurl+"CompanyProfile/getAllBranches"
 
+export const createBranchUrl=baseurl+"CompanyProfile/create-branch"
+

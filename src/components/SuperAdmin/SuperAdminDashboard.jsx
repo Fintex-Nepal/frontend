@@ -3,6 +3,7 @@ import { Routes, Route, Link, useNavigate } from 'react-router-dom'
 import { useEffect, useState } from 'react';
 import jwtDecode from 'jwt-decode';
 import PasswordResetForm from './PasswordResetForm'
+import CreateBranch from './Company Profile/CreateBranch';
 import CreateAdmin from './CreateAdmin';
 import Content from '../../pages/Admin/Content';
 import Users from './Users';
@@ -73,7 +74,7 @@ const SuperAdminDashboard = () => {
                                         </div>
                                     </Link>
                                 </li>
-                                
+
                                 <li className="pl-6 cursor-pointer text-gray-600 text-sm leading-3 tracking-normal py-2 hover:text-indigo-700 focus:text-indigo-700 focus:outline-none">
                                     <Link to={'/sadmindashboard/createadmin'}>
                                         <div className="flex items-center">
@@ -311,7 +312,8 @@ const SuperAdminDashboard = () => {
                                         <Route path='/users' element={<Users />} />
 
                                         {/* Company Profile */}
-                                        <Route path='/companyprofile' element={<AllBranch/>} />
+                                        <Route path='/companyprofile' element={<AllBranch />} />
+                                        <Route path='/createbranch' element={<CreateBranch />} />
                                     </Routes>
                                 </div>
                             </div>
