@@ -1,4 +1,4 @@
-export const baseurl='https://fintexfinanceservice.azurewebsites.net/'
+export const baseurl='http://localhost/'
 
 //superlogin
 
@@ -76,4 +76,6 @@ export const getUserByUserName=baseurl+"FinanceCompany/getuser/username?userName
 export const getAllBranches=baseurl+"CompanyProfile/getAllBranches"
 
 export const createBranchUrl=baseurl+"CompanyProfile/create-branch"
+
+export const updateBranchUrl=baseurl+"CompanyProfile/update-branch"
 

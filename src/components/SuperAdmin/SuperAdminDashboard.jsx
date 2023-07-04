@@ -7,15 +7,15 @@ import CreateBranch from './Company Profile/CreateBranch';
 import CreateAdmin from './CreateAdmin';
 import Content from '../../pages/Admin/Content';
 import Users from './Users';
-import logo from '../../assets/logo.png'
 import AllBranch from './Company Profile/AllBranch';
+import UpdateBranch from './Company Profile/UpdateBranch'
+import logo from '../../assets/logo.png'
+
 const SuperAdminDashboard = () => {
     const [show, setShow] = useState(false);
     const [profile, setProfile] = useState(false);
     const [isValidUser, setIsValidUser] = useState(false);
     const navigate = useNavigate();
-
-
 
     useEffect(() => {
         if (localStorage.getItem('sAdminToken')) {
@@ -314,6 +314,7 @@ const SuperAdminDashboard = () => {
                                         {/* Company Profile */}
                                         <Route path='/companyprofile' element={<AllBranch />} />
                                         <Route path='/createbranch' element={<CreateBranch />} />
+                                        <Route path='/updatebranch/:id' element={<UpdateBranch />} />
                                     </Routes>
                                 </div>
                             </div>

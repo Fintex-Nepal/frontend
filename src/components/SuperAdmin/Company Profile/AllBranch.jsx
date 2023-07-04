@@ -1,15 +1,25 @@
 import React, { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
+import { toast, ToastContainer } from 'react-toastify';
 import { fetchBranchData } from '../../../Redux/companyprofile/BranchSlice'
+import { STATUS } from '../../../Redux/Regestration/SubLedgerSlice'
+import Loader from '../../../utils/Helper/Loader'
 const AllBranch = () => {
     const dispatch = useDispatch()
     const branches = useSelector((state) => state.branches.branches)
+    const branchFetchStatus = useSelector((state) => state.branches.branchFetchStatus)
     useEffect(() => {
         dispatch(fetchBranchData())
     }, [dispatch])
+    if (branchFetchStatus === STATUS.ERROR) {
+        toast.error('Error in Fetching data', {
+            position: toast.POSITION.TOP_RIGHT
+        })
+    }
     return (
         <>
+            {branchFetchStatus === STATUS.LOADING && <Loader />}
             <Link to="/sadmindashboard/createbranch">
                 <button type="button" class="py-2.5 px-5 mr-2 mb-2 text-sm font-medium text-gray-900 bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700">Create Branch</button>
             </Link>
@@ -52,18 +62,21 @@ const AllBranch = () => {
 
                             </div>
                             <div class="p-6 pt-0">
-                                <button
-                                    class="select-none rounded-lg bg-pink-500 py-3 px-6 text-center align-middle font-sans text-xs font-bold uppercase text-white shadow-md shadow-pink-500/20 transition-all hover:shadow-lg hover:shadow-pink-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
-                                    type="button"
-                                    data-ripple-light="true"
-                                >
-                                    Edit
-                                </button>
+                                <Link to={`/sadmindashboard/updatebranch/${branch?.id}`}>
+                                    <button
+                                        class="select-none rounded-lg bg-pink-500 py-3 px-6 text-center align-middle font-sans text-xs font-bold uppercase text-white shadow-md shadow-pink-500/20 transition-all hover:shadow-lg hover:shadow-pink-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
+                                        type="button"
+                                        data-ripple-light="true"
+                                    >
+                                        Edit
+                                    </button>
+                                </Link>
                             </div>
                         </div>
                     ))}
                 </div>
             </div>
+            <ToastContainer />
         </>
     )
 }

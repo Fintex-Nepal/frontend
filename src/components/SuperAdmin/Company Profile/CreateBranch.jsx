@@ -42,7 +42,6 @@ const CreateBranch = () => {
             position: toast.POSITION.TOP_RIGHT
           });
         });
-
       })
   }
   return (

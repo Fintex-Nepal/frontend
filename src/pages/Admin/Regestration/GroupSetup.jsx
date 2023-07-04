@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import { useDispatch, useSelector } from 'react-redux';
-import SuccessModal from '../../../utils/SuccessModal';
+import { ToastContainer, toast } from 'react-toastify';
+import Loader from '../../../utils/Helper/Loader';
 import { createGroupUrl, accoutTypeByIdUrl } from '../../../utils/Url';
 import ModifyRegestrartionModal from '../../../utils/ModifyRegestrartionModal';
 import { fetchAccountType } from '../../../Redux/Regestration/GroupSlice';
@@ -10,14 +11,11 @@ const GroupSetup = () => {
     const [groupSetUpData, setGroupSetUpData] = useState({})
     const [existingGroups, setExistingGroups] = useState();
     const [selectedAccountType, setSelectedAccountType] = useState()
-    const [showSuccessModal, setshowSuccessModal] = useState(false)
+    const [showLoader,setShowLoader]=useState(false)
     const [showModifyModal, setShowModifyModal] = useState(false)
     const dispatch = useDispatch();
     const accountTypeData = useSelector((state) => state.group?.accountTypeData);
-    const modalText = {
-        heading: "Employee Account Successfully Created",
-        bodyText: 'The entered username and password can be used by Employee'
-    }
+    
     if (!accountTypeData || accountTypeData.length <= 0) {
         dispatch(fetchAccountType())
     }
@@ -48,6 +46,7 @@ const GroupSetup = () => {
     };
     const groupSetUpSubmitHandler = (e) => {
         e.preventDefault();
+        setShowLoader(true)
         axios.post(createGroupUrl, groupSetUpData, {
             headers: {
                 'Authorization': 'Bearer ' + localStorage.getItem('adminToken')
@@ -55,19 +54,22 @@ const GroupSetup = () => {
         })
             .then((res) => {
                 if (res?.data?.status) {
-                    setshowSuccessModal(true)
+                    setShowLoader(false)
+                    toast.success(res?.data?.message)
                 }
                 else {
                     alert(res?.data?.message)
                 }
             })
-            .catch(err => alert(err))
-
+            .catch(err => {
+                toast.error(err?.response?.data?.errors?.Message[0],{
+                    position:'top-right'
+                })
+            })
     }
-
     return (
         <>
-            {showSuccessModal && <SuccessModal heading={modalText?.heading} bodyText={modalText?.bodyText} setshowSuccessModal={setshowSuccessModal} showSuccessModal={showSuccessModal} />}
+            {showLoader && <Loader/>}
             <div class="grid grid-cols-1 gap-6 mt-4 sm:grid-cols-2">
                 <div>
                     <section class="max-w-4xl p-6 mx-auto bg-white rounded-md shadow-md ">
@@ -101,8 +103,16 @@ const GroupSetup = () => {
                                 <div>
                                     <label class="text-gray-700" >समुहको नाम</label>
                                     <input class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md   "
-                                        required
+                                        
                                         name='nepaliName'
+                                        onChange={onChanegHandler}
+                                    />
+                                </div>
+                                <div>
+                                    <label class="text-gray-700" >CharKhata Number</label>
+                                    <input class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md   "
+                                        required
+                                        name='charKhataNumber'
                                         onChange={onChanegHandler}
                                     />
                                 </div>
@@ -188,23 +198,23 @@ const GroupSetup = () => {
                                                         </td>
                                                         <td
                                                             class="whitespace-nowrap border-r px-6 py-4 font-medium ">
-                                                            {itm?.groupType?.id}
+                                                            {itm?.id}
                                                         </td>
                                                         <td
                                                             class="whitespace-nowrap border-r px-6 py-4 font-medium ">
-                                                            {itm?.groupType?.name}
+                                                            {itm?.name}
                                                         </td>
                                                         <td
                                                             class="whitespace-nowrap border-r px-6 py-4 font-medium ">
-                                                            {itm?.groupType?.nepaliName}
+                                                            {itm?.nepaliName}
                                                         </td>
                                                         <td
                                                             class="whitespace-nowrap border-r px-6 py-4 font-medium ">
-                                                            {itm?.groupType?.schedule}
+                                                            {itm?.schedule}
                                                         </td>
                                                         <td
                                                             class="whitespace-nowrap border-r px-6 py-4 font-medium ">
-                                                            {itm?.groupType?.entryDate.substring(0, 10)}
+                                                            {itm?.entryDate.substring(0, 10)}
                                                         </td>
 
                                                         <td onClick={() => setShowModifyModal(!showModifyModal)} role='button'
@@ -224,6 +234,7 @@ const GroupSetup = () => {
                     </div>
                 </div>
             </div>
+            <ToastContainer/>
         </>
     )
 }

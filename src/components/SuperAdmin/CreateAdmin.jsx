@@ -1,15 +1,21 @@
 import React, { useState } from 'react'
 import axios from 'axios';
+import { useSelector } from 'react-redux';
 import { createAdminUrl } from '../../utils/Url'
-import SuccessModal from '../../utils/SuccessModal';
-import jwt_decode from 'jwt-decode'
+import jwt_decode from 'jwt-decode';
+import { ToastContainer, toast } from 'react-toastify';
+import Loader from '../../utils/Helper/Loader';
+
+
 const CreateAdmin = () => {
+    const branches = useSelector((state) => state.branches.branches)
     const decoded = jwt_decode(localStorage.getItem('sAdminToken'))
     const [formData, setFormData] = useState({
         "createdBy": decoded.given_name,
         "role": 3,
     });
-    const [showSuccessModal, setshowSuccessModal] = useState(false)
+    const [branchCreateStatus,setBranchCreateStatus]=useState(false)
+
     const onChangeHandler = (event) => {
         const { name, value } = event.target;
         name === 'role'
@@ -20,32 +26,37 @@ const CreateAdmin = () => {
             }));
     };
 
-    const modalText = {
-        heading: "Admin Account Successfully Created",
-        bodyText: 'The entered username and password can be used by client admin'
-    }
+
     const formSubmitHandler = (e) => {
         e.preventDefault();
+        setBranchCreateStatus(true)
         axios.post(createAdminUrl, formData, {
             headers: {
                 'Authorization': 'Bearer ' + localStorage.getItem('sAdminToken')
             }
         })
             .then((res) => {
-               if(res.data.status)
-               {
-                   setshowSuccessModal(true)
-               }
-               else
-               {
-                alert(res.data.message)
-               }
+                setBranchCreateStatus(false)
+                if (res.data.status) {
+                    toast.success(res?.data?.message, {
+                        position: toast.POSITION.TOP_RIGHT
+                    })
+                }
+                else {
+                    console.log(res.data.message)
+                }
             })
-            .catch(err => console.log(err))
+            .catch(err => {
+                setBranchCreateStatus(false)
+                toast.error(err.response.data.errors.Message[0], {
+                    position: toast.POSITION.TOP_RIGHT
+                })
+            })
     }
+
     return (
         <>
-            {showSuccessModal && <SuccessModal heading={modalText?.heading} bodyText={modalText?.bodyText} setshowSuccessModal={setshowSuccessModal} showSuccessModal={showSuccessModal} />}
+           {branchCreateStatus&&<Loader/>}
             <section class="max-w-4xl p-6 mx-auto bg-white rounded-md shadow-md ">
                 <h2 class="text-lg font-semibold text-gray-700 capitalize ">Create Admin</h2>
                 <form onSubmit={formSubmitHandler}>
@@ -101,12 +112,17 @@ const CreateAdmin = () => {
                             />
                         </div>
                         <div>
-                            <label class="text-gray-700" for="passwordConfirmation">Branch Name</label>
-                            <input type="text" class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 focus:outline-none focus:ring"
+                            <label class="text-gray-700" for="passwordConfirmation">Branch Code</label>
+                            <select class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 focus:outline-none focus:ring"
                                 required
-                                name='branchName'
+                                name='branchCode'
                                 onChange={onChangeHandler}
-                            />
+                            >
+                                <option selected disabled>Select</option>
+                                {branches?.map(branch => (
+                                    <option>{branch.branchCode}</option>
+                                ))}
+                            </select>
                         </div>
                         <div>
                             <label class="text-gray-700" for="passwordConfirmation">Role</label>
@@ -134,7 +150,7 @@ const CreateAdmin = () => {
                                 <option value="false">In Active</option>
                             </select>
                         </div>
-                        <div>
+                        {/* <div>
                             <label class="text-gray-700" for="passwordConfirmation">Created by</label>
                             <input type="text" class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 focus:outline-none focus:ring"
                                 required
@@ -143,7 +159,7 @@ const CreateAdmin = () => {
                                 name='createdBy'
 
                             />
-                        </div>
+                        </div> */}
 
                     </div>
 
@@ -152,6 +168,7 @@ const CreateAdmin = () => {
                     </div>
                 </form>
             </section>
+            <ToastContainer />
         </>
     )
 }

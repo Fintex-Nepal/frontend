@@ -5,7 +5,7 @@ import axios from 'axios'
 import { superAdminLoginUrl } from '../../utils/Url';
 import Loader from '../../utils/Helper/Loader';
 import { STATUS } from '../../Redux/Regestration/SubLedgerSlice';
-import { toast, ToastContainer } from 'react-toastify';
+import {  ToastContainer } from 'react-toastify';
 const SuperAdminLogin = () => {
     const naviate = useNavigate();
     const [loginStatus, setLoginStatus] = useState(STATUS.IDLE)
@@ -13,7 +13,6 @@ const SuperAdminLogin = () => {
         userName: '',
         password: '',
     })
-
     const onChangeHandle = (event) => {
         const { name, value } = event.target;
         setUserDate(prevState => ({
@@ -33,11 +32,14 @@ const SuperAdminLogin = () => {
             .catch(err => {
                 setLoginStatus(STATUS.ERROR)
                 const errors=err?.response?.data?.errors
-                Object.keys(errors).forEach(element => {
-                    toast.error(element, {
-                        position: toast.POSITION.TOP_RIGHT
-                    });
-                });  
+                console.log('====================================');
+                console.log(errors);
+                console.log('====================================');
+                // Object.keys(errors).forEach(element => {
+                //     toast.error(element, {
+                //         position: toast.POSITION.TOP_RIGHT
+                //     });
+                // });  
             })
     }
     return (
