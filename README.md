@@ -166,3 +166,24 @@
 
 
 Branch Name-> Branch Code
+
+
+
+# change id to int -> update branch
+
+
+
+
+# Do not show Gl code in front end (our present )
+
+
+# Resgister Employee (Pdf)-> Employee 
+
+
+
+
+
+
+
+
+

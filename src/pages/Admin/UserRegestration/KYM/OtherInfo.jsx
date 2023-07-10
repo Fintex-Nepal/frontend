@@ -19,141 +19,125 @@ const OtherInfo = () => {
           <form>
             <div class="grid grid-cols-1 gap-6 mt-4 sm:grid-cols-2">
               <div>
-                <label class="text-gray-700 " for="username">Mother Name *</label>
+                <label class="text-gray-700 " >Father Name *</label>
                 <input name='memberNumber' type="text" class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md  "
                   required
                 />
               </div>
               <div>
-                <label class="text-gray-700 " for="emailAddress">आमाको नाम *</label>
+                <label class="text-gray-700 ">बुबा नाम *</label>
                 <input class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md  " />
               </div>
+              <div>
+                <label class="text-gray-700 " >Mother Name *</label>
+                <input name='memberNumber' type="text" class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md  "
+                  required
+                />
+              </div>
+              <div>
+                <label class="text-gray-700 ">आमाको नाम *</label>
+                <input class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md  " />
+              </div>
+              <div>
+                <label class="text-gray-700 " >Grand Father Name </label>
+                <input name='memberNumber' type="text" class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md  "
+                  required
+                />
+              </div>
+              <div>
+                <label class="text-gray-700 ">हजुरबुबा नाम *</label>
+                <input class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md  " />
+              </div>
+              <div>
+              <label class="text-gray-700 " >Spouse Name </label>
+              <input name='memberNumber' type="text" class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md  "
+                required
+              />
             </div>
-            <div class="grid grid-cols-1 gap-6 mt-4 sm:grid-cols-2">
-              <div>
-                <label class="text-gray-700 " for="username">Spouse Name </label>
-                <input name='memberNumber' type="text" class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md  "
-                  required
-                />
-              </div>
-              <div>
-                <label class="text-gray-700 " for="emailAddress">Spouse Occuption</label>
-                <input class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md  " />
-              </div>
+            <div>
+              <label class="text-gray-700 ">Spouse Occuption</label>
+              <input class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md  " />
             </div>
-            <div class="grid grid-cols-1 gap-6 mt-4 sm:grid-cols-2">
-              <div>
-                <label class="text-gray-700 " for="username">Sons Name </label>
+            <div>
+                <label class="text-gray-700 " >Number of Sons</label>
                 <input name='memberNumber' type="text" class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md  "
                   required
                 />
               </div>
               <div>
-                <label class="text-gray-700 " for="emailAddress">Daughters Name</label>
+                <label class="text-gray-700 " >Number of Daughters</label>
+                <input name='memberNumber' type="text" class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md  "
+                  required
+                />
+              </div>
+              <div>
+                <label class="text-gray-700 " >Father in Law </label>
+                <input name='memberNumber' type="text" class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md  "
+                  required
+                />
+              </div>
+              <div>
+                <label class="text-gray-700 ">Mother in Law</label>
                 <input class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md  " />
               </div>
+
             </div>
+
+           
+           
+
             <div class="grid grid-cols-1 gap-6 mt-4 sm:grid-cols-2">
-              <div>
-                <label class="text-gray-700 " for="username">Father in Law </label>
-                <input name='memberNumber' type="text" class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md  "
-                  required
-                />
-              </div>
-              <div>
-                <label class="text-gray-700 " for="emailAddress">Mother in Law</label>
-                <input class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md  " />
-              </div>
+                
             </div>
             <h2 class="text-lg font-bold  text-gray-700 capitalize text-left mt-4">Nominee Details</h2>
             <div class="grid grid-cols-1 gap-6 mt-4 sm:grid-cols-2">
               <div>
-                <label class="text-gray-700 " for="username">Nominee Name </label>
+                <label class="text-gray-700 " >Nominee Name </label>
                 <input name='memberNumber' type="text" class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md  "
                   required
                 />
               </div>
               <div>
-                <label class="text-gray-700 " for="emailAddress">हाकवालाको नाम</label>
+                <label class="text-gray-700 ">हाकवालाको नाम</label>
                 <input class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md  " />
               </div>
             </div>
             <div class="grid grid-cols-1 gap-6 mt-4 sm:grid-cols-2">
               <div>
-                <label class="text-gray-700 " for="username">Relation </label>
+                <label class="text-gray-700 " >Relation </label>
                 <input name='memberNumber' type="text" class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md  "
                   required
                 />
               </div>
               <div>
-                <label class="text-gray-700 " for="emailAddress">नाता</label>
+                <label class="text-gray-700 ">नाता</label>
                 <input class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md  " />
               </div>
             </div>
             <div class="grid grid-cols-1 gap-6 mt-4 sm:grid-cols-2">
               <div>
-                <label class="text-gray-700 " for="username">Introduced by </label>
+                <label class="text-gray-700 " >Introduced by </label>
                 <input name='memberNumber' type="text" class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md  "
-                  required
-                />
-              </div>
-            </div>
-            <h2 class="text-lg font-bold text-gray-700 capitalize text-left">Extra Details</h2>
-            <div class="grid grid-cols-1 gap-6 mt-4 sm:grid-cols-2">
-              <div>
-                <label class="text-gray-700 " for="username">Educational Status </label>
-                <input name='memberNumber' type="text" class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md  "
-                  required
+                
                 />
               </div>
               <div>
-                <label class="text-gray-700 " for="emailAddress">Marital Status</label>
-                <input class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md  " />
-              </div>
-            </div>
-            <div class="grid grid-cols-1 gap-6 mt-4 sm:grid-cols-2">
-              <div>
-                <label class="text-gray-700 " for="username">Nationality Id Status </label>
+                <label class="text-gray-700 " >Nominee Address </label>
                 <input name='memberNumber' type="text" class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md  "
-                  required
+                
                 />
               </div>
               <div>
-                <label class="text-gray-700 " for="emailAddress">Voting Id</label>
-                <input class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md  " />
-              </div>
-            </div>
-            <div class="grid grid-cols-1 gap-6 mt-4 sm:grid-cols-2">
-              <div>
-                <label class="text-gray-700 " for="username">Other Info </label>
+                <label class="text-gray-700 " >Nominee Citizenship Number </label>
                 <input name='memberNumber' type="text" class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md  "
-                  required
                 />
               </div>
               <div>
-                <label class="text-gray-700 " for="username">Income Source </label>
+                <label class="text-gray-700 " >Nominee Contact Number </label>
                 <input name='memberNumber' type="text" class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md  "
-                  required
                 />
               </div>
-            </div>
-            <div class="grid grid-cols-1 gap-6 mt-4 sm:grid-cols-2">
-              <div>
-                <label class="text-gray-700 " for="username">सहकारीमा सदस्य बन्नुको उदाश्य </label>
-                <input name='memberNumber' type="text" class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md  "
-                  required
-                />
-              </div>
-              <div>
-                <label class="text-gray-700 " for="username">आफै आर्को सहकारीमा सदस्य भएमा </label>
-                <input name='memberNumber' type="text" class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md  "
-                  required
-                />
-              </div>
-            </div>
-            <div class="flex justify-end mt-6">
-              <button class="px-8 py-2.5 leading-5 text-white transition-colors duration-300 transform bg-gray-700 rounded-md hover:bg-gray-600 focus:outline-none focus:bg-gray-600">Save</button>
-            </div>
+            </div> 
           </form>
         </section>
       </div>

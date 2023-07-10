@@ -14,15 +14,17 @@ const UpdateBranch = () => {
   })
   const formChangeHandler = (event) => {
     const { name, value } = event.target;
-    const updatedValue = name === 'isActive' ? value === 'true' : value;
+    const updatedValue = name === 'isActive' ? value === 'true' : name === 'id' ? Number(value) : value;
     setFormData(prevState => ({
       ...prevState,
       [name]: updatedValue
-    }))
-  }
+    }));
+  };
+  
   const formSubmitHandler = (event) => {
     event.preventDefault();
     setUpdateBranchStatus(STATUS.LOADING);
+    
     axios.post(updateBranchUrl, formData, {
       headers: {
         'Authorization': 'Bearer ' + localStorage.getItem('sadminToken')
@@ -63,7 +65,7 @@ const UpdateBranch = () => {
         <form onSubmit={formSubmitHandler}>
           <div class="grid grid-cols-1 gap-6 mt-4 sm:grid-cols-2">
             <div>
-              <label class="text-gray-700 dark:text-gray-200" for="username">ID</label>
+              <label class="text-gray-700 dark:text-gray-200" >ID</label>
               <input selected value={id} onChange={formChangeHandler} type="text" class="block w-full px-4 py-2 mt-2 text-black bg-white border border-gray-200 rounded-md  " disabled
                 name='id'
               />

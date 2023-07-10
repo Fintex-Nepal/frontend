@@ -1,17 +1,15 @@
 import React from 'react'
 import { useState } from 'react';
 import axios from 'axios'
-import {updatePasswordUrl} from '../../utils/Url'
-import SuccessModal from '../../utils/SuccessModal';
+import { ToastContainer, toast } from 'react-toastify'
+import { useNavigate } from 'react-router-dom';
+import { updatePasswordUrl } from '../../utils/Url'
+import Loader from '../../utils/Helper/Loader';
 const PasswordResetForm = ({ api }) => {
-    const modalText = {
-        heading: "Password Changed Successfull",
-        bodyText: 'Please login again'
-    }
-
     const [userData, setUserData] = useState({})
-    const [showSuccessModal, setshowSuccessModal] = useState(false)
-    const [isLogout, setIsLogout] = useState(false)
+    const navigate=useNavigate();
+    const [loaderStatus,setLoaderStatus]=useState(false);
+    
     const onChangeHandler = (event) => {
         const { name, value } = event.target;
         setUserData(prevState => ({
@@ -25,6 +23,7 @@ const PasswordResetForm = ({ api }) => {
     }
     const formSubmitHandler = (e) => {
         e.preventDefault()
+        setLoaderStatus(true);
         if (userData.newPassword !== userData.confirmNewPassword) {
             alert('Passwords do not match')
             return
@@ -41,27 +40,31 @@ const PasswordResetForm = ({ api }) => {
                     'Authorization': 'Bearer ' + localStorage.getItem('sAdminToken')
                 }
             })
-            .then((res) => {
+                .then((res) => {
                     if (res.data.status) {
-                        setIsLogout(true)
-                        setshowSuccessModal(true);
+                        toast.success(res?.data?.message, {
+                            position: toast.POSITION.TOP_RIGHT
+                        });
+                        setLoaderStatus(false)
+                        localStorage.removeItem('sAdminToken')
+                        navigate('/sadminlogin')
                     }
-                    else
-                    {
-                        console.log('====================================');
-                        console.log(res.data);
-                        console.log('====================================');
+                    else {
+                        toast('Error in Creating Admin')
                     }
-
-
                 })
-                .catch(err => console.log(err))
+                .catch((err) => {
+                    setLoaderStatus(false)
+                    toast.error(err.response.data.errors.Message[0], {
+                        position: toast.POSITION.TOP_RIGHT
+                    })
+                })
         }
     }
 
     return (
         <>
-            {showSuccessModal && <SuccessModal heading={modalText?.heading} bodyText={modalText?.bodyText} setshowSuccessModal={setshowSuccessModal} showSuccessModal={showSuccessModal} isLogout={isLogout} />}
+            {loaderStatus && <Loader/>}
             <div className="mx-auto max-w-screen-xl px-4 py-16 sm:px-6 lg:px-8">
                 <div className="mx-auto max-w-lg">
                     <h1 className="text-center text-2xl font-bold text-indigo-600 sm:text-3xl">
@@ -153,7 +156,7 @@ const PasswordResetForm = ({ api }) => {
                     </form>
                 </div>
             </div>
-
+            <ToastContainer />
         </>
     )
 }

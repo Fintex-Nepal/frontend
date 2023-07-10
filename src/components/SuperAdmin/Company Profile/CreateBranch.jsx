@@ -36,12 +36,7 @@ const CreateBranch = () => {
       })
       .catch((err) => {
         setCreateBranchStatus(STATUS.ERROR)
-        const errors = err?.response?.data?.errors
-        Object.values(errors)?.forEach(error => {
-          toast.error(error, {
-            position: toast.POSITION.TOP_RIGHT
-          });
-        });
+       toast.error(err?.response.statusText)
       })
   }
   return (

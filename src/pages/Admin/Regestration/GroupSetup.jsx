@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
-import { useDispatch, useSelector } from 'react-redux';
 import { ToastContainer, toast } from 'react-toastify';
 import Loader from '../../../utils/Helper/Loader';
 import { createGroupUrl, accoutTypeByIdUrl } from '../../../utils/Url';
 import ModifyRegestrartionModal from '../../../utils/ModifyRegestrartionModal';
-import { fetchAccountType } from '../../../Redux/Regestration/GroupSlice';
+import { accountTypes } from '../../../utils/Helper/Enums';
 
 const GroupSetup = () => {
     const [groupSetUpData, setGroupSetUpData] = useState({})
@@ -13,12 +12,10 @@ const GroupSetup = () => {
     const [selectedAccountType, setSelectedAccountType] = useState()
     const [showLoader,setShowLoader]=useState(false)
     const [showModifyModal, setShowModifyModal] = useState(false)
-    const dispatch = useDispatch();
-    const accountTypeData = useSelector((state) => state.group?.accountTypeData);
+
+   
     
-    if (!accountTypeData || accountTypeData.length <= 0) {
-        dispatch(fetchAccountType())
-    }
+    
     useEffect(() => {
         if (selectedAccountType) {
             axios.get(`${accoutTypeByIdUrl}=${selectedAccountType}`, {
@@ -62,11 +59,13 @@ const GroupSetup = () => {
                 }
             })
             .catch(err => {
+                setShowLoader(false)
                 toast.error(err?.response?.data?.errors?.Message[0],{
                     position:'top-right'
                 })
             })
     }
+
     return (
         <>
             {showLoader && <Loader/>}
@@ -85,8 +84,8 @@ const GroupSetup = () => {
                                     }}
                                         required type="number" name='accountTypeId' class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md" >
                                         <option selected disabled>Select</option>
-                                        {accountTypeData?.map(itm => (
-                                            <option value={itm?.id}>{itm?.name}</option>
+                                        {accountTypes?.map(itm => (
+                                            <option value={itm?.Id}>{itm?.Name}</option>
                                         ))}
                                     </select>
                                 </div>

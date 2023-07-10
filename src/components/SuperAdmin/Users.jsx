@@ -4,7 +4,8 @@ import { styled } from "@mui/material/styles";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Switch from "@mui/material/Switch";
 import { getUsersUrl, userActivateDeactivateUrl } from '../../utils/Url'
-import SuccessModal from '../../utils/SuccessModal'
+import { ToastContainer, toast } from 'react-toastify';
+import Loader from '../../utils/Helper/Loader';
 
 
 const IOSSwitch = styled((props) => (
@@ -61,11 +62,8 @@ const Users = () => {
     const [allUsers, setAllUsers] = useState();
     const [selectedUsers, setSelectedUsers] = useState([]);
     const [updatedUsers, setUpdatedUsers] = useState([]);
-    const [showSuccessModal, setshowSuccessModal] = useState(false)
-    const modalText = {
-        heading: "Status Successfully Activated",
-        bodyText: 'Now user will access accordingly'
-    }
+    const [showLoader, setShowLoader] = useState(false)
+
     useEffect(() => {
         axios.get(getUsersUrl, {
             headers: {
@@ -77,6 +75,7 @@ const Users = () => {
     }, [updatedUsers])
     const handleUpdate = () => {
         console.log(selectedUsers);
+        setShowLoader(true)
         axios.put(userActivateDeactivateUrl, selectedUsers, {
             headers: {
                 'Authorization': 'Bearer ' + localStorage.getItem('sAdminToken')
@@ -85,21 +84,31 @@ const Users = () => {
             .then(res => {
                 if (res.status) {
                     setUpdatedUsers(res.data)
+                    setShowLoader(false)
                     setAllUsers(allUsers.map(user => {
                         const updatedUser = updatedUsers.find(u => u.userId === user.userId);
                         if (updatedUser) {
+                            toast.success(res?.data?.message, {
+                                position: 'top-right'
+                            })
                             return { ...user, isActive: updatedUser.isActive };
+
                         }
                         return user;
                     }))
-                    setshowSuccessModal(true)
+
                 }
                 // else
                 // {
                 //     alert('Sth Went Wrong')
                 // }
             })
-            .catch(err => console.log(err));
+            .catch(err => {
+                setShowLoader(false)
+                toast.error(err?.response?.data?.errors?.Message[0], {
+                    position: 'top-right'
+                })
+            })
     }
     const handleSwitchChange = (event, user) => {
         const updatedUser = { ...{ userName: user.userName }, isActive: event.target.checked };
@@ -108,7 +117,7 @@ const Users = () => {
 
     return (
         <>
-            {showSuccessModal && <SuccessModal heading={modalText?.heading} bodyText={modalText?.bodyText} setshowSuccessModal={setshowSuccessModal} showSuccessModal={showSuccessModal} />}
+            {showLoader && <Loader />}
             <div class=" text-black bg-white px-4 py-2 rounded w-full">
                 <div class="flex flex-col">
                     <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
@@ -194,6 +203,7 @@ const Users = () => {
                     </div>
                 </div>
             </div>
+            <ToastContainer />
         </>
     )
 }

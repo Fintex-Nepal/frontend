@@ -1,24 +1,25 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios';
+import { ToastContainer, toast } from 'react-toastify';
 import { createLedgerUrl } from '../../../utils/Url';
 import { useSelector, useDispatch } from 'react-redux';
-import SuccessModal from '../../../utils/SuccessModal';
-import { fetchAccountType } from '../../../Redux/Regestration/GroupSlice';
 import { fetchGroupData } from '../../../Redux/Regestration/LedgerSlice';
-// import { getAllLedger } from '../../../utils/Url'
+import { getLedgerByGroupType, getUniqueGlCode } from '../../../utils/Url'
+import { accountTypes } from '../../../utils/Helper/Enums';
+import Loader from '../../../utils/Helper/Loader';
 
 const LedgerSetup = () => {
+    const [glCode, setGlCode] = useState();
     const [ledgerData, setLedgerData] = useState({})
     const [selectedAccountType, setSelectedAccountType] = useState()
-    const [showSuccessModal, setshowSuccessModal] = useState(false)
+    const [selectedGroupType, setSelectedGroupType] = useState();
+    const [showLoader,setShowLoader]=useState(false);
+
     const [allLedger, setAllLedger] = useState()
-    const accountTypeData = useSelector((state) => state.group?.accountTypeData);
+
     const groupTypeData = useSelector((state) => state.ledger?.groupData);
     const dispatch = useDispatch();
-    if (!accountTypeData || accountTypeData.length <= 0) {
-        dispatch(fetchAccountType());
-
-    }
+   
     useEffect(() => {
         dispatch(fetchGroupData(selectedAccountType))
     }, [dispatch, selectedAccountType])
@@ -40,45 +41,63 @@ const LedgerSetup = () => {
     };
 
     useEffect(() => {
-        axios.get("https://fintexfinanceservice.azurewebsites.net/AccountSetup/ledgers", {
+        axios.get(getUniqueGlCode, {
             headers: {
-                'Authorization': 'Bearer ' +localStorage.getItem("adminToken")
+                'Authorization': 'Bearer ' + localStorage.getItem('adminToken')
+            }
+        })
+            .then((response) => setGlCode(response.data))
+            .catch((err) => {
+                toast.error(err?.response?.data?.errors?.Message[0], {
+                    position: 'top-right'
+                })
+            })
+    }, [])
+    useEffect(() => {
+        axios.get(`${getLedgerByGroupType}?groupTypeId=${selectedGroupType}`, {
+            headers: {
+                'Authorization': 'Bearer ' + localStorage.getItem("adminToken")
             }
         })
             .then((res) => {
                 setAllLedger(res.data)
-                console.log('====================================');
-                console.log(res.data);
-                console.log('====================================');
             })
             .catch(err => console.log(err))
-    }, [])
+    }, [selectedGroupType])
 
     const LedgerSubmitHandler = (e) => {
         e.preventDefault();
-        console.log(ledgerData);
-        axios.post(createLedgerUrl, ledgerData, {
+        setShowLoader(true)
+        // Add new field "id" with value 23
+        const updatedLedgerData = {
+            ...ledgerData,
+            id: glCode
+        };
+
+        axios.post(createLedgerUrl, updatedLedgerData, {
             headers: {
                 'Authorization': 'Bearer ' + localStorage.getItem('adminToken')
             }
         })
             .then((res) => {
                 if (res?.data?.status) {
-                    setshowSuccessModal(true)
-                }
-                else {
-                    alert(res?.data?.message)
+                    setShowLoader(false)
+                    toast.success(res?.data?.message);
+
+                } else {
+                    alert(res?.data?.message);
                 }
             })
-            .catch(err => alert(err))
-    }
-    const modalText = {
-        heading: "Ledger Successfully Created",
-        // bodyText: 'The entered username and password can be used by Employee'
-    }
+            .catch(err => {
+                setShowLoader(false)
+                toast.error(err?.response?.data?.errors?.Message[0],{
+                    position:'top-right'
+                })
+            });
+    };
     return (
         <>
-            {showSuccessModal && <SuccessModal heading={modalText?.heading} bodyText={modalText?.bodyText} setshowSuccessModal={setshowSuccessModal} showSuccessModal={showSuccessModal} />}
+            {showLoader && <Loader/>}
             <div class="grid grid-cols-1 gap-6 mt-4 sm:grid-cols-2">
                 <div>
                     <section class="max-w-4xl p-6 mx-auto bg-white rounded-md shadow-md ">
@@ -90,23 +109,26 @@ const LedgerSetup = () => {
                                     <label class="text-gray-700" >Account Type</label>
                                     <select onChange={(e) => {
                                         setSelectedAccountType(e.target.value);
-                                        onChangeHandler(e);
+                                        // onChangeHandler(e);
                                     }}
 
-                                        required type="number" name='accountTypeId' class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md" >
+                                        required type="number"  class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md" >
                                         <option selected disabled>Select</option>
-                                        {accountTypeData?.map(itm => (
-                                            <option value={itm?.id}>{itm?.name}</option>
+                                        {accountTypes?.map(itm => (
+                                            <option value={itm?.Id}>{itm?.Name}</option>
                                         ))}
                                     </select>
                                 </div>
 
                                 <div>
                                     <label class="text-gray-700" >Group Name</label>
-                                    <select onChange={onChangeHandler} required name='groupTypeId' class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md" >
+                                    <select onChange={(e) => {
+                                        onChangeHandler(e);
+                                        setSelectedGroupType(e.target.value)
+                                    }} required name='groupTypeId' class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md" >
                                         <option selected disabled>Select</option>
                                         {groupTypeData?.map(itm => (
-                                            <option value={itm?.groupType?.id}>{itm?.groupType?.name}</option>
+                                            <option value={itm?.id}>{itm?.name}</option>
                                         ))}
                                     </select>
                                 </div>
@@ -218,32 +240,33 @@ const LedgerSetup = () => {
 
                                             </thead>
                                             <tbody>
-                                                <tr class="border-b ">
-                                                    {allLedger?.map((ledger,index) => (
+                                               
+                                                    {allLedger?.map((ledger, index) => (
                                                         <>
+                                                           <tr class="border-b" key={ledger.id}></tr>
                                                             <td
                                                                 class="whitespace-nowrap border-r px-6 py-4 font-medium ">
-                                                               {index+1}
+                                                                {index + 1}
                                                             </td>
                                                             <td
                                                                 class="whitespace-nowrap border-r px-6 py-4 ">
-                                                                {ledger?.ledger?.id}
+                                                                {ledger?.id}
                                                             </td>
                                                             <td
                                                                 class="whitespace-nowrap border-r px-6 py-4 ">
-                                                                {ledger?.ledger?.name}
+                                                                {ledger?.name}
                                                             </td>
                                                             <td
                                                                 class="whitespace-nowrap border-r px-6 py-4 ">
-                                                                {ledger?.ledger?.nepaliName}
+                                                                {ledger?.nepaliName}
                                                             </td>
                                                             <td
                                                                 class="whitespace-nowrap border-r px-6 py-4 ">
-                                                               {ledger?.groupType?.name}
+                                                                {ledger?.name}
                                                             </td>
                                                             <td
                                                                 class="whitespace-nowrap border-r px-6 py-4 ">
-                                                                {ledger?.groupType?.schedule}
+                                                                {ledger?.schedule}
                                                             </td>
                                                             <td role='button'
                                                                 class="whitespace-nowrap border-r px-6 py-4 ">
@@ -254,7 +277,7 @@ const LedgerSetup = () => {
                                                             </td>
                                                         </>
                                                     ))}
-                                                </tr>
+                                               
                                             </tbody>
                                         </table>
                                     </div>
@@ -264,6 +287,7 @@ const LedgerSetup = () => {
                     </div>
                 </div>
             </div>
+            <ToastContainer />
         </>
     )
 }

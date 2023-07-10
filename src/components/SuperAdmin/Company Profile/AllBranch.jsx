@@ -17,6 +17,7 @@ const AllBranch = () => {
             position: toast.POSITION.TOP_RIGHT
         })
     }
+    
     return (
         <>
             {branchFetchStatus === STATUS.LOADING && <Loader />}

@@ -1,32 +1,39 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios';
+import { ToastContainer, toast } from 'react-toastify';
 import { createSubLedgerUrl } from '../../../utils/Url';
 import { useSelector, useDispatch } from 'react-redux';
-import SuccessModal from '../../../utils/SuccessModal';
 import { fetchGroupData } from '../../../Redux/Regestration/LedgerSlice';
-import { fetchAccountType } from '../../../Redux/Regestration/GroupSlice';
 import { fetchLedgerData } from '../../../Redux/Regestration/SubLedgerSlice';
-import { getallSubLedger } from '../../../utils/Url'
+import { getallSubLedger, getLedgerByGroupType } from '../../../utils/Url'
+import { accountTypes } from '../../../utils/Helper/Enums';
+import Loader from '../../../utils/Helper/Loader';
 
 const SubLedger = () => {
     const [subLedgerData, setSubLedgerData] = useState({})
     const [selectedAccountType, setSelectedAccountType] = useState()
+    const [allLedger, setAllLedger] = useState()
     const [selectedGroupType, setSelectedGroupType] = useState()
-    const [showSuccessModal, setshowSuccessModal] = useState(false)
     const [allSubLedger, setAllSubLedger] = useState()
+    const [showLoader, setShowLoader] = useState();
     const dispatch = useDispatch()
-    const accountTypeData = useSelector((state) => state.group?.accountTypeData);
     const groupTypeData = useSelector((state) => state.ledger?.groupData);
-    const ledgerData = useSelector((state) => state.subLedger?.ledgerData);
-    if (!accountTypeData || accountTypeData.length <= 0) {
-        dispatch(fetchAccountType());
 
-    }
     useEffect(() => {
         dispatch(fetchGroupData(selectedAccountType))
     }, [dispatch, selectedAccountType])
 
-
+    useEffect(() => {
+        axios.get(`${getLedgerByGroupType}?groupTypeId=${selectedGroupType}`, {
+            headers: {
+                'Authorization': 'Bearer ' + localStorage.getItem("adminToken")
+            }
+        })
+            .then((res) => {
+                setAllLedger(res.data)
+            })
+            .catch(err => console.log(err))
+    }, [selectedGroupType])
     const onChangeHandler = (e) => {
         const { name, value } = e.target;
         let parsedValue = value;
@@ -42,15 +49,7 @@ const SubLedger = () => {
             [name]: parsedValue,
         }));
     };
-    useEffect(() => {
-        axios.get(getallSubLedger, {
-            headers: {
-                'Authorization': 'Bearer ' + localStorage.getItem("adminToken")
-            }
-        })
-            .then((res) => setAllSubLedger(res.data))
-            .catch(err => alert(err))
-    }, [])
+   
     useEffect(() => {
         if (selectedAccountType) {
             dispatch(fetchLedgerData(selectedGroupType))
@@ -58,6 +57,7 @@ const SubLedger = () => {
     }, [dispatch, selectedAccountType, selectedGroupType])
     const LedgerSubmitHandler = (e) => {
         e.preventDefault();
+        setShowLoader(true)
         axios.post(createSubLedgerUrl, subLedgerData, {
             headers: {
                 'Authorization': 'Bearer ' + localStorage.getItem('adminToken')
@@ -65,23 +65,30 @@ const SubLedger = () => {
         })
             .then((res) => {
                 if (res?.data?.status) {
-                    setshowSuccessModal(true)
+                    setShowLoader(false)
+                    toast.success(res?.data?.message, {
+                        position: 'top-right'
+                    })
                 }
                 else {
-                    alert(res?.data?.message)
+                    setShowLoader(false)
+                    toast.error("Error in Creating Sub Ledger", {
+                        position: 'top-right'
+                    })
                 }
             })
-            .catch(err => alert(err))
-    }
-    const modalText = {
-        heading: "Sub Ledger Successfully Created",
-        // bodyText: 'The entered username and password can be used by Employee'
+            .catch((err) => {
+                setShowLoader(false)
+                toast.error(err?.response?.data?.errors?.Message[0], {
+                    position: 'top-right'
+                })
+            })
     }
 
 
     return (
         <>
-            {showSuccessModal && <SuccessModal heading={modalText?.heading} bodyText={modalText?.bodyText} setshowSuccessModal={setshowSuccessModal} showSuccessModal={showSuccessModal} />}
+            {showLoader && <Loader />}
             <div class="grid grid-cols-1 gap-6 mt-4 sm:grid-cols-2">
                 <div>
                     <section class="max-w-4xl p-6 mx-auto bg-white rounded-md shadow-md ">
@@ -98,8 +105,8 @@ const SubLedger = () => {
 
                                         required type="number" name='accountTypeId' class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md" >
                                         <option selected disabled>Select</option>
-                                        {accountTypeData?.map(itm => (
-                                            <option value={itm?.id}>{itm?.name}</option>
+                                        {accountTypes?.map(itm => (
+                                            <option value={itm?.Id}>{itm?.Name}</option>
                                         ))}
                                     </select>
                                 </div>
@@ -112,17 +119,20 @@ const SubLedger = () => {
                                     }} required name='groupTypeId' class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md" >
                                         <option selected disabled>Select</option>
                                         {groupTypeData?.map(itm => (
-                                            <option value={itm?.groupType?.id}>{itm?.groupType?.name}</option>
+                                            <option value={itm?.id}>{itm?.name}</option>
                                         ))}
                                     </select>
                                 </div>
 
                                 <div>
                                     <label class="text-gray-700" >Ledger Name</label>
-                                    <select onChange={onChangeHandler} className='block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md  ' name='ledgerId'>
+                                    <select onChange={(e)=>{
+                                        onChangeHandler(e.target.value)
+                                        
+                                    }} className='block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md  ' name='ledgerId'>
                                         <option disabled selected>Select</option>
-                                        {ledgerData?.map(itm => (
-                                            <option value={itm?.ledger?.id}>{itm?.ledger?.name}</option>
+                                        {allLedger?.map(itm => (
+                                            <option value={itm?.id}>{itm?.name}</option>
                                         ))}
                                     </select>
 
@@ -191,32 +201,33 @@ const SubLedger = () => {
 
                                             </thead>
                                             <tbody>
-                                                <tr class="border-b ">
-                                                    {allSubLedger?.map((subLedger,index) => (
-                                                        <>
+
+                                                {allSubLedger?.map((subLedger, index) => (
+                                                    <>
+                                                        <tr class="border-b ">
                                                             <td
                                                                 class="whitespace-nowrap border-r px-6 py-4 font-medium ">
-                                                                {index+1}
+                                                                {index + 1}
                                                             </td>
                                                             <td
                                                                 class="whitespace-nowrap border-r px-6 py-4 ">
-                                                               {subLedger?.subLedger?.id}
+                                                                {subLedger?.id}
                                                             </td>
                                                             <td
                                                                 class="whitespace-nowrap border-r px-6 py-4 ">
-                                                                {subLedger?.subLedger?.name}
+                                                                {subLedger?.name}
                                                             </td>
                                                             <td
                                                                 class="whitespace-nowrap border-r px-6 py-4 ">
-                                                                {subLedger?.ledger?.name}
+                                                                {subLedger?.name}
                                                             </td>
                                                             <td
                                                                 class="whitespace-nowrap border-r px-6 py-4 ">
-                                                                {subLedger?.groupType?.name}
+                                                                {subLedger?.name}
                                                             </td>
                                                             <td
                                                                 class="whitespace-nowrap border-r px-6 py-4 ">
-                                                                 {subLedger?.accountType?.name}
+                                                                {subLedger?.name}
                                                             </td>
                                                             <td role='button'
                                                                 class="whitespace-nowrap border-r px-6 py-4 ">
@@ -225,10 +236,9 @@ const SubLedger = () => {
                                                                 </svg>
 
                                                             </td>
-                                                        </>
-                                                    ))}
-
-                                                </tr>
+                                                        </tr>
+                                                    </>
+                                                ))}
                                             </tbody>
                                         </table>
                                     </div>
@@ -237,7 +247,8 @@ const SubLedger = () => {
                         </div>
                     </div>
                 </div>
-            </div>
+            </div >
+            <ToastContainer />
         </>
     )
 }

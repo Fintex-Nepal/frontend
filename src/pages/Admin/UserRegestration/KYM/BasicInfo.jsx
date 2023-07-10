@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react'
 import { districtsInNepal } from '../../../../utils/Districts';
+import { genderTypeEnum, casteEnum ,shareTypeEnum,ClientTypeEnum} from '../../../../utils/Helper/Enums';
 
 const BasicInfo = () => {
   const [hasOverflow, setHasOverflow] = useState(false);
@@ -30,80 +31,126 @@ const BasicInfo = () => {
     }));
   }
 
-  const formSubmitHandler=(e)=>{
-       e.preventDefault();
-       console.log(clientInfo,clientContact);
+  const formSubmitHandler = (e) => {
+    e.preventDefault();
+    console.log(clientInfo, clientContact);
   }
   return (
     <div className='grid grid-cols-1 sm:grid-cols-2 h-max:h-[60vh] gap-5 mt-8'>
       <div className={`h-[60vh] overflow-y-auto ${maxHeight}`} ref={ref}>
+
         <section class="max-w-4xl p-6 mx-auto bg-white rounded-md shadow-md   border-b-2">
-          <h2 class="text-lg font-semibold text-gray-700 capitalize ">Basic Information</h2>
+          <h2 class="text-lg font-semibold text-gray-700 capitalize ">Client Details</h2>
           <form onSubmit={formSubmitHandler}>
+            <div class="grid grid-cols-1 gap-6 mt-4 sm:grid-cols-2">
+              <div>
+                <label class="text-gray-700 " >Client Type</label>
+                <select onChange={onChangeClientInfo} name='ClientType' class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md  " >
+                  <option selected disabled>Select</option>
+                  {ClientTypeEnum?.map(clientType=>(
+                    <option value={clientType.Id} >{clientType.Name}</option>
+                  ))}
+                </select>
+              </div>
+              <div>
+                <label class="text-gray-700 " >Share Type</label>
+                <select onChange={onChangeClientInfo} name='ShareType' class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md  " >
+                 <option disabled selected>Select</option>
+                 {shareTypeEnum?.map(shareType=>(
+                  <option value={shareType.Id}>{shareType.Name}</option>
+                 ))}
+                </select>
+              </div>
+              <div>
+                <label class="text-gray-700 " >Client Group ID</label>
+                <input onChange={onChangeClientInfo} name='ClientGroupId' class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md  " />
+              </div>
+              <div>
+                <label class="text-gray-700 " >Client Unit ID</label>
+                <input onChange={onChangeClientInfo} name='ClientUnitId' class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md  " />
+              </div>
+            </div>
+            <h2 class="mt-6 text-lg font-semibold text-gray-700 capitalize ">Basic Information</h2>
             <div class="grid grid-cols-1 gap-6 mt-4 sm:grid-cols-3">
+             
               <div>
                 <label class="text-gray-700 " >First Name*</label>
-                <input onChange={onChangeClientInfo} name='firstName' class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md  " />
+                <input onChange={onChangeClientInfo} name='ClientFirstName' class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md  " />
               </div>
               <div>
                 <label class="text-gray-700 " >Middle Name </label>
-                <input onChange={onChangeClientInfo} name='middleName' type="text" class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md  "
+                <input onChange={onChangeClientInfo} name='ClientMiddleName' type="text" class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md  "
                   required
                 />
               </div>
               <div>
-                <label class="text-gray-700 " >Last Name</label>
-                <input onChange={onChangeClientInfo} name='lastName' class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md" />
+                <label class="text-gray-700 " >Last Name *</label>
+                <input onChange={onChangeClientInfo} name='ClientLastName' class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md" />
               </div>
             </div>
             <div class="grid grid-cols-1 gap-6 mt-4 sm:grid-cols-1">
 
               <div>
                 <label class="text-gray-700 " >नाम थर </label>
-                <input onChange={onChangeClientInfo} name='nepaliName' type="text" class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md"
+                <input onChange={onChangeClientInfo} name='ClientNepaliName' type="text" class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md"
                   required
                 />
               </div>
             </div>
-            <div class="grid grid-cols-1 gap-6 mt-4 sm:grid-cols-3">
+            <div class="grid grid-cols-1 gap-6 mt-4 sm:grid-cols-2">
               <div>
                 <label class="text-gray-700 " >Gender </label>
-                <input onChange={onChangeClientInfo} name='gender' type="text" class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md"
+                <input onChange={onChangeClientInfo} name='ClientGender' type="text" class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md"
                   required
                 />
               </div>
               <div>
+                <label class="text-gray-700 " >Gender Code</label>
+                <select onChange={onChangeClientInfo} name='ClientGenderCode' class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md" >
+                  <option selected disabled>Select</option>
+                  {genderTypeEnum?.map(gender => (
+                    <option value={gender.Id}>{gender.Name}</option>
+                  ))}
+                </select>
+              </div>
+              <div>
                 <label class="text-gray-700 " >Cast</label>
-                <input onChange={onChangeClientInfo} name='cast' class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md" />
+                <input onChange={onChangeClientInfo} name='ClientCast' class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md" />
+              </div>
+
+              <div>
+                <label class="text-gray-700 " >Cast Code</label>
+                <select onChange={onChangeClientInfo} name='ClientCastCode ' class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md" >
+                  <option disabled selected>Select</option>
+                  {casteEnum?.map(caste => (
+                    <option value={caste.Id}>{caste.Name}</option>
+                  ))}
+                </select>
               </div>
 
               <div>
                 <label class="text-gray-700 " >Date of Birth</label>
-                <input onChange={onChangeClientInfo} name='dateOfBirth' class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md" />
+                <input onChange={onChangeClientInfo} name='ClientDateOfBirth' class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md" />
               </div>
-            </div>
-
-
-            <div class="grid grid-cols-1 gap-6 mt-4 sm:grid-cols-3">
               <div>
                 <label class="text-gray-700 " >Nationality</label>
-                <input onChange={onChangeClientInfo} name='nationality' class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md  " />
+                <input onChange={onChangeClientInfo} name='ClientNationality' class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md  " />
               </div>
               <div>
                 <label class="text-gray-700 " >Occupation</label>
-                <input onChange={onChangeClientInfo} name='occupation' class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md  " />
+                <input onChange={onChangeClientInfo} name='ClientOccupation' class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md  " />
               </div>
               <div>
                 <label class="text-gray-700 " >Education Status</label>
-                <input onChange={onChangeClientInfo} name='educationStatus' class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md  " />
+                <input onChange={onChangeClientInfo} name='ClientEducationStatus' class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md  " />
               </div>
               <div>
                 <label class="text-gray-700 " >Citizenship Number</label>
-                <input onChange={onChangeClientInfo} name='citizenshipNumber' class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md  " />
+                <input onChange={onChangeClientInfo} name='ClientCitizenshipNumber' class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md  " />
               </div>
               <div>
                 <label class="text-gray-700 " >Issue District</label>
-                <select onChange={onChangeClientInfo} name='issueDistrict' required class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md  ">
+                <select onChange={onChangeClientInfo} name='ClientCitizenShipIssueDistrict' required class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md  ">
                   <option selected disabled>Select</option>
                   {districtsInNepal?.map(district => (
                     <option>{district}</option>
@@ -112,47 +159,52 @@ const BasicInfo = () => {
               </div>
               <div>
                 <label class="text-gray-700 " >Issued Date</label>
-                <input onChange={onChangeClientInfo} type='date' class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md  " />
+                <input onChange={onChangeClientInfo} type='date' class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md  "
+
+                  name='ClientCitizenShipIssueDate '
+                />
               </div>
-
-
+              <div>
+                <label class="text-gray-700 " >Pan Number</label>
+                <input onChange={onChangeClientInfo} name='ClientPanNumber' class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md  " />
+              </div>
               <div>
                 <label class="text-gray-700 " >Marital Status</label>
-                <input onChange={onChangeClientInfo} name='maritalStatus' class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md  " />
+                <input onChange={onChangeClientInfo} name='ClientMaritalStatus' class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md  " />
               </div>
-
+              <div>
+                <label class="text-gray-700 " >Marital Status Code</label>
+                <input onChange={onChangeClientInfo} name='ClientMartialStatusCode' class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md  " />
+              </div>
               <div>
                 <label class="text-gray-700 " >Nationality Id Status</label>
-                <input onChange={onChangeClientInfo} name='nationalityIdStatus' class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md  " />
+                <input onChange={onChangeClientInfo} name='ClientNationalityIdStatus' class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md  " />
               </div>
-
               <div>
                 <label class="text-gray-700 " >Voiting ID</label>
-                <input onChange={onChangeClientInfo} name='votingId' class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md  " />
+                <input onChange={onChangeClientInfo} name='ClientVotingId' class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md  " />
               </div>
               <div>
                 <label class="text-gray-700 " >Other Info</label>
-                <input onChange={onChangeClientInfo} name='otherInfo' class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md  " />
+                <input onChange={onChangeClientInfo} name='ClientOtherInfo' class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md  " />
               </div>
               <div>
                 <label class="text-gray-700 " >Other Info 2</label>
-                <input onChange={onChangeClientInfo} name='otherInfo2' class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md  " />
+                <input onChange={onChangeClientInfo} name='ClientOtherInfo2' class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md  " />
               </div>
               <div>
                 <label class="text-gray-700 " >Income Source</label>
-                <input onChange={onChangeClientInfo} name='incomeSource' class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md  " />
+                <input onChange={onChangeClientInfo} name='ClientIncomeSource' class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md  " />
               </div>
-            </div>
-
-            <div class="grid grid-cols-1 gap-6 mt-4 sm:grid-cols-2">
               <div>
                 <label class="text-gray-700 " >खाता खोल्ने उद्देश्य</label>
-                <input onChange={onChangeClientInfo} name='accountPurposeNepali' class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md  " />
+                <input onChange={onChangeClientInfo} name='ClientAccountPurposeNepali' class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md  " />
               </div>
               <div>
                 <label class="text-gray-700 " >अन्य लघुवित्तको सदस्य</label>
-                <input onChange={onChangeClientInfo} name='ifMemberOfOtherParty' class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md  " />
+                <input onChange={onChangeClientInfo} name='ClientIfMemberOfOtherParty' class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md  " />
               </div>
+
             </div>
 
             {/* Contact Section */}
@@ -162,31 +214,31 @@ const BasicInfo = () => {
             <div class="grid grid-cols-1 gap-6 mt-4 sm:grid-cols-3">
               <div>
                 <label class="text-gray-700 " >Mobile No. </label>
-                <input onChange={onChnageClientContact} name='mobileNumber1' type="text" class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md  "
+                <input onChange={onChnageClientContact} name='ClientMobileNumber1' type="text" class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md  "
                   required
                 />
               </div>
               <div>
                 <label class="text-gray-700 " >Mobile No. </label>
-                <input onChange={onChnageClientContact} name='mobileNumber2' type="text" class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md  "
+                <input onChange={onChnageClientContact} name='ClientMobileNumber2' type="text" class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md  "
                   required
                 />
               </div>
               <div>
                 <label class="text-gray-700 " >Telephone No.</label>
-                <input onChange={onChnageClientContact} name='telephoneNumber1' class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md  " />
+                <input onChange={onChnageClientContact} name='ClientTelephoneNumber1' class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md  " />
               </div>
               <div>
                 <label class="text-gray-700 " >Telephone No.</label>
-                <input onChange={onChnageClientContact} name='telephoneNumber2' class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md  " />
+                <input onChange={onChnageClientContact} name='ClientTelephoneNumber2' class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md  " />
               </div>
               <div>
                 <label class="text-gray-700 " >Email</label>
-                <input onChange={onChnageClientContact} name='email' class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md  " />
+                <input onChange={onChnageClientContact} name='ClientEmail' class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md  " />
               </div>
               <div>
                 <label class="text-gray-700 " >Website</label>
-                <input onChange={onChnageClientContact} name='website' class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md  " />
+                <input onChange={onChnageClientContact} name='ClientWebsite' class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md  " />
               </div>
             </div>
             <div class="flex justify-end mt-6">

@@ -1,42 +1,60 @@
 import React, { useState } from 'react'
-
+import axios from 'axios'
+import { ToastContainer, toast } from 'react-toastify';
+import { createBankUrl } from '../../../utils/Url'
+import Loader from '../../../utils/Helper/Loader';
 const typesOfBanks = [
-    'Commercial Bank',
-    'Development Bank',
-    'Investment Bank',
-    'Central Bank',
-    'Cooperative Bank',
-    'Retail Bank',
-    'Savings Bank',
-    'Credit Union',
-    'Islamic Bank',
-    'Private Bank',
-    'Online Bank',
-    'Postal Bank',
-    'Foreign Bank',
-    'Community Bank',
-    'Microfinance Bank',
-    'Merchant Bank',
-    'Offshore Bank',
-    'Industrial Bank',
-    'Wholesale Bank',
-    'Mutual Bank'
-];
+    {
+        "id": 1,
+        "name": "Commercial"
+    },
+    {
+        "id": 2,
+        "name": "Development"
+    },
+    {
+        "id": 3,
+        "name": "Finance"
+    }
+]
 const BackSetup = () => {
     const [bankSetupData, setBankSetupData] = useState({})
+    const [showLoader, setShowLoader] = useState(false)
     const onChanegHandler = (event) => {
         const { name, value } = event.target;
+        const updatedValue = name === 'interestRate' || name === "bankTypeId" ? Number(value) : value;
         setBankSetupData((prevState) => ({
             ...prevState,
-            [name]: value,
+            [name]: updatedValue,
         }));
     }
-const formSubmitHandler=(e)=>{
-    e.preventDefault();
-    console.log(bankSetupData);
-}
+    const formSubmitHandler = (e) => {
+        e.preventDefault();
+        setShowLoader(true)
+        axios.post(createBankUrl, bankSetupData, {
+            headers: {
+                'Authorization': 'Bearer ' + localStorage.getItem('adminToken')
+            }
+        })
+            .then((res) => {
+                if (res?.data?.status) {
+                    setShowLoader(false)
+                    toast.success(res?.data?.message)
+                }
+                else {
+                    alert(res?.data?.message)
+                }
+            })
+            .catch(err => {
+                setShowLoader(false)
+                toast.error(err?.response?.data?.errors?.Message[0], {
+                    position: 'top-right'
+                })
+            })
+    }
     return (
         <>
+           {showLoader && <Loader/>}
             <div class="grid grid-cols-1 gap-6 mt-4 sm:grid-cols-2">
                 <div>
                     <section class="max-w-4xl p-6 mx-auto bg-white rounded-md shadow-md ">
@@ -49,7 +67,7 @@ const formSubmitHandler=(e)=>{
                                     <label class="text-gray-700" >Bank Name</label>
                                     <input class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md   "
                                         required
-                                        name='bankName'
+                                        name='name'
                                         onChange={onChanegHandler}
                                     />
                                 </div>
@@ -65,7 +83,15 @@ const formSubmitHandler=(e)=>{
                                     <label class="text-gray-700" >Branch Name</label>
                                     <input class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md   "
                                         required
-                                        name='branchName'
+                                        name='bankBranch'
+                                        onChange={onChanegHandler}
+                                    />
+                                </div>
+                                <div>
+                                    <label class="text-gray-700" >Branch Code</label>
+                                    <input class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md   "
+                                        required
+                                        name='branchCode'
                                         onChange={onChanegHandler}
                                     />
                                 </div>
@@ -84,29 +110,21 @@ const formSubmitHandler=(e)=>{
                                     <select onChange={(e) => {
                                         onChanegHandler(e);
                                     }}
-                                        required type="number" name='bankType' class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md" >
+                                        required type="number" name='bankTypeId' class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md" >
                                         <option selected disabled>Select</option>
                                         {typesOfBanks?.map(itm => (
-                                            <option value={itm}>{itm}</option>
+                                            <option value={itm.id}>{itm.name}</option>
                                         ))}
                                     </select>
                                 </div>
                                 <div>
                                     <label class="text-gray-700" >Int Rate</label>
                                     <input type="number" class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md"
-                                        name='intRate'
+                                        name='interestRate'
                                         required
                                         defaultValue={"0.00"}
                                         onChange={onChanegHandler}
                                     />
-                                </div>
-                                <div>
-                                    <label class="text-gray-700" >Select Branch</label>
-                                    <select required class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md">
-                                        <option selected disabled>Select</option>
-                                        <option>Head Office</option>
-                                        <option>Branch Office</option>
-                                    </select>
                                 </div>
                             </div>
                             <div class="flex justify-end mt-6">
@@ -179,6 +197,7 @@ const formSubmitHandler=(e)=>{
                     </div>
                 </div>
             </div>
+            <ToastContainer />
         </>
     )
 }
