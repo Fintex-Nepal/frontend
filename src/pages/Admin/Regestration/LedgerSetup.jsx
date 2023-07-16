@@ -88,11 +88,20 @@ const LedgerSetup = () => {
                     alert(res?.data?.message);
                 }
             })
-            .catch(err => {
-                setShowLoader(false)
-                toast.error(err?.response?.data?.errors?.Message[0],{
-                    position:'top-right'
-                })
+            .catch((err) => {
+                setShowLoader(false);
+                const errorData = err.response?.data?.errors;
+                if (errorData) {
+                    Object.values(errorData).forEach((er) => {
+                        toast.warning(er[0], {
+                            position: 'top-right'
+                        });
+                    });
+                } else {
+                    toast.error(err?.message,{
+                        position:'top-right'
+                    });
+                }
             });
     };
     return (
@@ -146,7 +155,6 @@ const LedgerSetup = () => {
                                     <label class="text-gray-700" >लेजरको नाम</label>
                                     <input type='text' class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md"
                                         name='nepaliName'
-                                        required
                                         onChange={onChangeHandler}
                                     />
                                 </div>

@@ -1,17 +1,14 @@
-import React from 'react'
-import { useState } from 'react';
+import React,{ useState } from 'react'
+import {useNavigate} from 'react-router-dom'
 import axios from 'axios'
+import { toast, ToastContainer } from 'react-toastify';
 import {updatePasswordMicrofinance} from '../../utils/Url'
-import SuccessModal from '../../utils/SuccessModal';
+import Loader from '../../utils/Helper/Loader';
 const PasswordResetForm = () => {
-    const modalText = {
-        heading: "Password Changed Successfull",
-        bodyText: 'Please login again'
-    }
-
+  
+    const navigate=useNavigate();
     const [userData, setUserData] = useState({})
-    const [showSuccessModal, setshowSuccessModal] = useState(false)
-    const [isLogout, setIsLogout] = useState(false)
+    const [showLoader,setShowLoader]=useState(false)
     const onChangeHandler = (event) => {
         const { name, value } = event.target;
         setUserData(prevState => ({
@@ -43,23 +40,33 @@ const PasswordResetForm = () => {
                 }
             })
             .then((res) => {
-                    if (res.data.status) {
-                        setIsLogout(true)
-                        setshowSuccessModal(true);
-                    }
-                    else
-                    {
-                        alert(res.data)
-                    }
-
-
+                toast.success(res?.data?.message,{
+                    position:'top-right'
                 })
-                .catch(err => alert(err))
+                setShowLoader(false);
+                localStorage.removeItem('adminToken')
+                navigate('/')
+              })
+              .catch((err) => {
+                setShowLoader(false);
+                const errorData = err.response?.data?.errors;
+                if (errorData) {
+                    Object.values(errorData).forEach((er) => {
+                        toast.warning(er[0], {
+                            position: 'top-right'
+                        });
+                    });
+                } else {
+                    toast.error(err?.message,{
+                        position:'top-right'
+                    });
+                }
+            });
         }
     }
     return (
         <>
-            {showSuccessModal && <SuccessModal heading={modalText?.heading} bodyText={modalText?.bodyText} setshowSuccessModal={setshowSuccessModal} showSuccessModal={showSuccessModal} isLogout={isLogout} />}
+           {showLoader && <Loader/>}
             <div className="mx-auto max-w-screen-xl px-4 py-16 sm:px-6 lg:px-8">
                 <div className="mx-auto max-w-lg">
                     <h1 className="text-center text-2xl font-bold text-indigo-600 sm:text-3xl">
@@ -151,7 +158,7 @@ const PasswordResetForm = () => {
                     </form>
                 </div>
             </div>
-
+           <ToastContainer/>
         </>
     )
 }

@@ -1,63 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios';
-import { styled } from "@mui/material/styles";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Switch from "@mui/material/Switch";
 import { getUsersUrl, userActivateDeactivateUrl } from '../../utils/Url'
 import { ToastContainer, toast } from 'react-toastify';
 import Loader from '../../utils/Helper/Loader';
 
 
-const IOSSwitch = styled((props) => (
-    <Switch focusVisibleClassName=".Mui-focusVisible" disableRipple {...props} />
-))(({ theme }) => ({
-    width: 42,
-    height: 26,
-    padding: 0,
-    "& .MuiSwitch-switchBase": {
-        padding: 0,
-        margin: 2,
-        transitionDuration: "300ms",
-        "&.Mui-checked": {
-            transform: "translateX(16px)",
-            color: "#fff",
-            "& + .MuiSwitch-track": {
-                backgroundColor: theme.palette.mode === "dark" ? "#2ECA45" : "#65C466",
-                opacity: 1,
-                border: 0
-            },
-            "&.Mui-disabled + .MuiSwitch-track": {
-                opacity: 0.5
-            }
-        },
-        "&.Mui-focusVisible .MuiSwitch-thumb": {
-            color: "#33cf4d",
-            border: "6px solid #fff"
-        },
-        "&.Mui-disabled .MuiSwitch-thumb": {
-            color:
-                theme.palette.mode === "light"
-                    ? theme.palette.grey[100]
-                    : theme.palette.grey[600]
-        },
-        "&.Mui-disabled + .MuiSwitch-track": {
-            opacity: theme.palette.mode === "light" ? 0.7 : 0.3
-        }
-    },
-    "& .MuiSwitch-thumb": {
-        boxSizing: "border-box",
-        width: 22,
-        height: 22
-    },
-    "& .MuiSwitch-track": {
-        borderRadius: 26 / 2,
-        backgroundColor: theme.palette.mode === "light" ? "#E9E9EA" : "#39393D",
-        opacity: 1,
-        transition: theme.transitions.create(["background-color"], {
-            duration: 500
-        })
-    }
-}));
+
 const Users = () => {
     const [allUsers, setAllUsers] = useState();
     const [selectedUsers, setSelectedUsers] = useState([]);
@@ -71,11 +19,23 @@ const Users = () => {
             }
         })
             .then((res) => setAllUsers(res.data))
-            .catch(err => console.log(err))
+            .catch(err => {
+                const errorData = err.response?.data?.errors;
+                if (errorData) {
+                    Object.values(errorData).forEach((er) => {
+                        toast.warning(er[0], {
+                            position: 'top-right'
+                        });
+                    });
+                } else {
+                    toast.error(err?.message, {
+                        position: 'top-right'
+                    });
+                }
+            })
     }, [updatedUsers])
     const handleUpdate = () => {
-        console.log(selectedUsers);
-        setShowLoader(true)
+        setShowLoader(true);
         axios.put(userActivateDeactivateUrl, selectedUsers, {
             headers: {
                 'Authorization': 'Bearer ' + localStorage.getItem('sAdminToken')
@@ -83,33 +43,37 @@ const Users = () => {
         })
             .then(res => {
                 if (res.status) {
-                    setUpdatedUsers(res.data)
-                    setShowLoader(false)
+                    setUpdatedUsers(res.data);
+                    setShowLoader(false);
                     setAllUsers(allUsers.map(user => {
                         const updatedUser = updatedUsers.find(u => u.userId === user.userId);
                         if (updatedUser) {
                             toast.success(res?.data?.message, {
                                 position: 'top-right'
-                            })
+                            });
                             return { ...user, isActive: updatedUser.isActive };
-
                         }
                         return user;
-                    }))
-
+                    }));
                 }
-                // else
-                // {
-                //     alert('Sth Went Wrong')
-                // }
             })
-            .catch(err => {
-                setShowLoader(false)
-                toast.error(err?.response?.data?.errors?.Message[0], {
-                    position: 'top-right'
-                })
-            })
-    }
+            .catch((err) => {
+                setShowLoader(false);
+                const errorData = err.response?.data?.errors;
+                if (errorData) {
+                    Object.values(errorData).forEach((er) => {
+                        toast.warning(er[0], {
+                            position: 'top-right'
+                        });
+                    });
+                } else {
+                    toast.error(err?.message, {
+                        position: 'top-right'
+                    });
+                }
+            });
+    };
+
     const handleSwitchChange = (event, user) => {
         const updatedUser = { ...{ userName: user.userName }, isActive: event.target.checked };
         setSelectedUsers([...selectedUsers, updatedUser])
@@ -178,13 +142,17 @@ const Users = () => {
 
                                             <td role='button'>
 
-
-                                                <FormControlLabel
-                                                    control={<IOSSwitch sx={{ m: 1 }} defaultChecked={itm.isActive} onChange={(event) => handleSwitchChange(event, itm)} />}
-                                                    label={itm.isActive ? 'Active' : 'In Active'}
+                                                <label class="relative inline-flex items-center cursor-pointer">
+                                                    <input defaultChecked={itm.isActive} onChange={(event) => handleSwitchChange(event, itm)} type="checkbox" value="checked" class="sr-only peer" />
+                                                    <div class="w-11 h-6 bg-gray-200 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full  after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all  peer-checked:bg-green-700"></div>
+                                                    <span class="ml-3 text-sm font-medium text-gray-900 ">{itm.isActive ? 'Active' : 'In Active'}</span>
+                                                </label>
+                                                {/* <FormControlLabel
+                                                    control={<IOSSwitch sx={{ m: 1 }}   />}
+                                                   
                                                     role="button"
                                                     className="whitespace-nowrap border-r px-6 py-4"
-                                                />
+                                                /> */}
 
 
                                             </td>
@@ -193,8 +161,8 @@ const Users = () => {
                                 </tbody>
                             </table>
                             {allUsers?.length > 0 && <button onClick={handleUpdate} class="float-right inline-flex items-center px-4 py-2 bg-gray-200 hover:bg-gray-300 text-gray-800 text-sm font-medium rounded-md">
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99" />
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" class="w-6 h-6">
+                                    <path strokeLinecap="round" strokeLinejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99" />
                                 </svg>
                                 Update
                             </button>}

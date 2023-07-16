@@ -3,12 +3,11 @@ import axios from 'axios'
 import { useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import { createBranchUrl } from '../../../utils/Url'
-import { STATUS } from '../../../Redux/Regestration/SubLedgerSlice';
 import Loader from '../../../utils/Helper/Loader';
 const CreateBranch = () => {
   const [formData, setFormData] = useState({})
-  const [createBranchStatus, setCreateBranchStatus] = useState(STATUS.IDLE)
-  const navigate=useNavigate();
+  const [createBranchStatus, setCreateBranchStatus] = useState(false)
+  const navigate = useNavigate();
 
   const onChangeHandler = (event) => {
     const { name, value } = event.target;
@@ -22,34 +21,45 @@ const CreateBranch = () => {
 
   const formSubmitHandler = (event) => {
     event.preventDefault();
-    setCreateBranchStatus(STATUS.LOADING)
+    setCreateBranchStatus(true)
     axios.post(createBranchUrl, formData, {
       headers: {
         'Authorization': 'Bearer ' + localStorage.getItem('sAdminToken')
       }
     })
       .then((res) => {
-        setCreateBranchStatus(STATUS.IDLE)
+        setCreateBranchStatus(false)
         toast.success(res?.data?.message, {
           position: toast.POSITION.TOP_RIGHT
         });
       })
       .catch((err) => {
-        setCreateBranchStatus(STATUS.ERROR)
-       toast.error(err?.response.statusText)
-      })
+        setCreateBranchStatus(false);
+        const errorData = err.response?.data?.errors;
+        if (errorData) {
+            Object.values(errorData).forEach((er) => {
+                toast.warning(er[0], {
+                    position: 'top-right'
+                });
+            });
+        } else {
+            toast.error(err?.message,{
+                position:'top-right'
+            });
+        }
+    });
   }
   return (
     <>
-      {createBranchStatus === STATUS.LOADING && <Loader />}
-      <button onClick={()=>navigate(-1)} class="text-base  rounded-r-none  hover:scale-110 focus:outline-none flex justify-center px-4 py-2 rounded font-bold cursor-pointer 
+      {createBranchStatus && <Loader />}
+      <button onClick={() => navigate(-1)} class="text-base  rounded-r-none  hover:scale-110 focus:outline-none flex justify-center px-4 py-2 rounded font-bold cursor-pointer 
         hover:bg-gray-200  
         bg-gray-100 
         text-gray-700 
         border duration-200 ease-in-out 
         border-gray-600 transition">
         <div class="flex leading-5">
-          <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-left w-5 h-5">
+          <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" class="feather feather-chevron-left w-5 h-5">
             <polyline points="15 18 9 12 15 6"></polyline>
           </svg>
           Back</div>

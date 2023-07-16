@@ -1,18 +1,19 @@
 import { useEffect, useState } from 'react'
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
-import { editUserProfile ,getEmployeeById} from '../../utils/Url';
-import SuccessModal from '../../utils/SuccessModal';
-const modalText = {
-    heading: "Successfully Updated",
-    bodyText: ''
-}
+import { editUserProfile, getEmployeeById } from '../../utils/Url';
+import { toast, ToastContainer } from 'react-toastify';
+import { genderTypeEnum } from '../../utils/Helper/Enums';
+import Loader from '../../utils/Helper/Loader';
+
+
 const EmployeeDetails = () => {
     const [userData, setUserData] = useState();
     const [isEditable, setIsEditable] = useState(false)
     const [dataUpdate, setDataUpdated] = useState([])
-    const [showSuccessModal, setshowSuccessModal] = useState(false)
-    
+    const [showLoader,setShowLoader]=useState(false)
+
+
     const { id } = useParams();
     useEffect(() => {
         axios.get(`${getEmployeeById}${id}`, {
@@ -26,8 +27,10 @@ const EmployeeDetails = () => {
 
     const editFormHandler = (e) => {
         e.preventDefault();
+        
         setIsEditable(!isEditable)
         if (isEditable) {
+            setShowLoader(true)
             axios.put(editUserProfile, userData, {
                 headers: {
                     'Authorization': 'Bearer ' + localStorage.getItem('adminToken')
@@ -35,25 +38,42 @@ const EmployeeDetails = () => {
             })
                 .then((res) => {
                     if (res.data.status) {
-                        setshowSuccessModal(true)
+                        toast.success(res?.data?.message,{
+                            position:'top-right'
+                        })
+                        setShowLoader(false);
                         setDataUpdated(res.data)
                     }
                 })
-                .catch(err => console.log(err))
+                .catch((err) => {
+                    setShowLoader(false);
+                    const errorData = err.response?.data?.errors;
+                    if (errorData) {
+                        Object.values(errorData).forEach((er) => {
+                            toast.warning(er[0], {
+                                position: 'top-right'
+                            });
+                        });
+                    } else {
+                        toast.error(err?.message,{
+                            position:'top-right'
+                        });
+                    }
+                });
         }
     }
 
     const onChangeHandler = (e) => {
         const { name, value } = e.target;
-        const newValue = name === 'pfAllowed' ? value === 'true' : value;
+        const newValue = name === 'pfAllowed' ? value === 'true' : name === 'gender' ? parseInt(value) : value;
         setUserData(prevState => ({
             ...prevState,
             [name]: newValue
-        }))
-    }
+        }));
+    };
     return (
         <>
-            {showSuccessModal && <SuccessModal heading={modalText?.heading} bodyText={modalText?.bodyText} setshowSuccessModal={setshowSuccessModal} showSuccessModal={showSuccessModal} />}
+            {showLoader && <Loader/>}
             <section class="max-w-7xl p-6 mx-auto bg-white rounded-md shadow-md ">
                 <h2 class="text-lg font-semibold text-gray-700 capitalize ">User Details</h2>
                 <form>
@@ -89,13 +109,13 @@ const EmployeeDetails = () => {
                             />
                         </div>
 
-                        <div>
+                        {/* <div>
                             <label class="text-gray-700 " for="passwordConfirmation">User Name</label>
                             <input type="text" class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md   focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40  focus:outline-none focus:ring"
                                 value={userData?.userName}
                                 readOnly
                             />
-                        </div>
+                        </div> */}
                         <div>
                             <label class="text-gray-700 " for="passwordConfirmation">Company Name</label>
                             <input type="text" class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md   focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40  focus:outline-none focus:ring"
@@ -104,9 +124,9 @@ const EmployeeDetails = () => {
                             />
                         </div>
                         <div>
-                            <label class="text-gray-700 " for="passwordConfirmation">Branch Name</label>
+                            <label class="text-gray-700 " for="passwordConfirmation">Branch Code</label>
                             <input type="text" class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md   focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40  focus:outline-none focus:ring"
-                                value={userData?.branchName}
+                                value={userData?.branchCode}
                                 readOnly
                             />
                         </div>
@@ -133,12 +153,23 @@ const EmployeeDetails = () => {
                         </div>
                         <div>
                             <label class="text-gray-700 " for="passwordConfirmation">Gender</label>
-                            <input type="text" class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md   focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40  focus:outline-none focus:ring"
-                                value={userData?.gender}
-                                readOnly={!isEditable}
-                                name='gender'
-                                onChange={onChangeHandler}
-                            />
+                            {isEditable ?
+                                <select name='genderCode' onChange={onChangeHandler}
+                                    class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md   focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40  focus:outline-none focus:ring"
+
+                                >
+                                    <option selected disabled>Select</option>
+                                    {genderTypeEnum?.map(gender => (
+                                        <option value={gender.Id}>{gender.Name}</option>
+                                    ))}
+                                </select> : (
+                                    <input type="text" class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md   focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40  focus:outline-none focus:ring"
+                                        value={userData?.gender}
+                                        readOnly
+                                    />
+                                )}
+
+
                         </div>
                         <div>
                             <label class="text-gray-700 " for="passwordConfirmation">Is Pf Allowed</label>
@@ -222,7 +253,7 @@ const EmployeeDetails = () => {
                             <label class="text-gray-700 " for="passwordConfirmation">createdBy</label>
                             <input type="text" class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md   focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40  focus:outline-none focus:ring"
                                 value={userData?.createdBy}
-                                onChange={onChangeHandler}
+                                // onChange={onChangeHandler}
                                 name='createdBy'
                                 readOnly
                             />
@@ -234,6 +265,7 @@ const EmployeeDetails = () => {
                     </div>
                 </form>
             </section>
+            <ToastContainer/>
         </>
     )
 }

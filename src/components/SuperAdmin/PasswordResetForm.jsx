@@ -22,45 +22,59 @@ const PasswordResetForm = ({ api }) => {
         return regex.test(password);
     }
     const formSubmitHandler = (e) => {
-        e.preventDefault()
+        e.preventDefault();
         setLoaderStatus(true);
+      
         if (userData.newPassword !== userData.confirmNewPassword) {
-            alert('Passwords do not match')
-            return
+          toast.warning('Passwords do not match', {
+            position: 'top-right'
+          });
+          setLoaderStatus(false);
+          return;
         }
+      
         if (!isPasswordValid(userData.newPassword)) {
-            alert(
-                'Password must contain at least 8 characters, including 1 lowercase letter, 1 uppercase letter, and 1 digit'
-            )
-            return
+          setLoaderStatus(false);
+          toast.warning('Password must contain at least 8 characters, including 1 lowercase letter, 1 uppercase letter, and 1 digit', {
+            position: 'top-right'
+          });
+          return;
         }
-        else {
-            axios.put(updatePasswordUrl, userData, {
-                headers: {
-                    'Authorization': 'Bearer ' + localStorage.getItem('sAdminToken')
-                }
-            })
-                .then((res) => {
-                    if (res.data.status) {
-                        toast.success(res?.data?.message, {
-                            position: toast.POSITION.TOP_RIGHT
-                        });
-                        setLoaderStatus(false)
-                        localStorage.removeItem('sAdminToken')
-                        navigate('/sadminlogin')
-                    }
-                    else {
-                        toast('Error in Creating Admin')
-                    }
-                })
-                .catch((err) => {
-                    setLoaderStatus(false)
-                    toast.error(err.response.data.errors.Message[0], {
-                        position: toast.POSITION.TOP_RIGHT
-                    })
-                })
-        }
-    }
+      
+        axios.put(updatePasswordUrl, userData, {
+          headers: {
+            'Authorization': 'Bearer ' + localStorage.getItem('sAdminToken')
+          }
+        })
+          .then((res) => {
+            if (res.data.status) {
+              toast.success(res?.data?.message, {
+                position: toast.POSITION.TOP_RIGHT
+              });
+              setLoaderStatus(false);
+              localStorage.removeItem('sAdminToken');
+              navigate('/sadminlogin');
+            } else {
+              toast('Error in Creating Admin');
+            }
+          })
+          .catch((err) => {
+            setLoaderStatus(false);
+            const errorData = err.response?.data?.errors;
+            if (errorData) {
+                Object.values(errorData).forEach((er) => {
+                    toast.warning(er[0], {
+                        position: 'top-right'
+                    });
+                });
+            } else {
+                toast.error(err?.message,{
+                    position:'top-right'
+                });
+            }
+        });
+      }
+      
 
     return (
         <>

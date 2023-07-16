@@ -5,9 +5,9 @@ import axios from 'axios'
 import { superAdminLoginUrl } from '../../utils/Url';
 import Loader from '../../utils/Helper/Loader';
 import { STATUS } from '../../Redux/Regestration/SubLedgerSlice';
-import {  ToastContainer } from 'react-toastify';
+import { ToastContainer, toast } from 'react-toastify';
 const SuperAdminLogin = () => {
-    const naviate = useNavigate();
+    const navigate = useNavigate();
     const [loginStatus, setLoginStatus] = useState(STATUS.IDLE)
     const [userData, setUserDate] = useState({
         userName: '',
@@ -22,25 +22,29 @@ const SuperAdminLogin = () => {
     }
     const formSubmitHandler = (e) => {
         e.preventDefault();
-        setLoginStatus(STATUS.LOADING)
+        setLoginStatus(STATUS.LOADING);
         axios.post(superAdminLoginUrl, userData)
             .then((res) => {
-                localStorage.setItem('sAdminToken', res.data.token)
-                setLoginStatus(STATUS.IDLE)
-                naviate('/sadmindashboard')
+                localStorage.setItem('sAdminToken', res.data.token);
+                setLoginStatus(STATUS.IDLE);
+                navigate('/sadmindashboard');
             })
-            .catch(err => {
-                setLoginStatus(STATUS.ERROR)
-                const errors=err?.response?.data?.errors
-                console.log('====================================');
-                console.log(errors);
-                console.log('====================================');
-                // Object.keys(errors).forEach(element => {
-                //     toast.error(element, {
-                //         position: toast.POSITION.TOP_RIGHT
-                //     });
-                // });  
-            })
+            .catch((err) => {
+                setLoginStatus(false);
+                const errorData = err.response?.data?.errors;
+                if (errorData) {
+                    Object.values(errorData).forEach((er) => {
+                        toast.warning(er[0], {
+                            position: 'top-right'
+                        });
+                    });
+                } else {
+                    toast.error(err?.message,{
+                        position:'top-right'
+                    });
+                }
+            });
+
     }
     return (
         <>

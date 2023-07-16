@@ -1,10 +1,11 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import axios from 'axios';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { createAdminUrl } from '../../utils/Url'
 import jwt_decode from 'jwt-decode';
 import { ToastContainer, toast } from 'react-toastify';
 import Loader from '../../utils/Helper/Loader';
+import { fetchBranchData } from '../../Redux/companyprofile/BranchSlice';
 
 
 const CreateAdmin = () => {
@@ -14,7 +15,14 @@ const CreateAdmin = () => {
         "createdBy": decoded.given_name,
         "role": 3,
     });
-    const [branchCreateStatus,setBranchCreateStatus]=useState(false)
+    const [branchCreateStatus, setBranchCreateStatus] = useState(false)
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        if (branches.length <= 0) {
+            dispatch(fetchBranchData());
+        }
+    }, [branches.length, dispatch]);
 
     const onChangeHandler = (event) => {
         const { name, value } = event.target;
@@ -46,17 +54,25 @@ const CreateAdmin = () => {
                     console.log(res.data.message)
                 }
             })
-            .catch(err => {
-                setBranchCreateStatus(false)
-                toast.error(err.response.data.errors.Message[0], {
-                    position: toast.POSITION.TOP_RIGHT
-                })
-            })
+            .catch((err) => {
+                setBranchCreateStatus(false);
+                const errorData = err.response?.data?.errors;
+                if (errorData) {
+                    Object.values(errorData).forEach((er) => {
+                        toast.warning(er[0], {
+                            position: 'top-right'
+                        });
+                    });
+                } else {
+                    toast.error(err?.message, {
+                        position: 'top-right'
+                    });
+                }
+            });
     }
-
     return (
         <>
-           {branchCreateStatus&&<Loader/>}
+            {branchCreateStatus && <Loader />}
             <section class="max-w-4xl p-6 mx-auto bg-white rounded-md shadow-md ">
                 <h2 class="text-lg font-semibold text-gray-700 capitalize ">Create Admin</h2>
                 <form onSubmit={formSubmitHandler}>

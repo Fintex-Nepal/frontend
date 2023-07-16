@@ -29,12 +29,21 @@ const Login = () => {
                 setLoginStatus(STATUS.IDLE)
                 navigate('/dashboard')
             }))
-            .catch(err => {
-                setLoginStatus(STATUS.ERROR)
-                toast.error("Invalid Credentials", {
-                    position: toast.POSITION.TOP_RIGHT
-                });
-            })
+            .catch((err) => {
+                setLoginStatus(false);
+                const errorData = err.response?.data?.errors;
+                if (errorData) {
+                    Object.values(errorData).forEach((er) => {
+                        toast.warning(er[0], {
+                            position: 'top-right'
+                        });
+                    });
+                } else {
+                    toast.error(err?.message,{
+                        position:'top-right'
+                    });
+                }
+            });
     }
 
     return (

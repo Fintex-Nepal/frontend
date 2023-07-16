@@ -1,54 +1,73 @@
 import React, { useState } from 'react'
+import { useSelector, useDispatch } from 'react-redux';
 import axios from 'axios';
-import SuccessModal from '../../utils/SuccessModal';
-import jwt_decode from 'jwt-decode'
+import { toast, ToastContainer } from 'react-toastify';
 import { createEmployeeUrl } from '../../utils/Url';
+import { fetchBranchData } from '../../Redux/companyprofile/BranchSlice';
+import { genderTypeEnum } from '../../utils/Helper/Enums';
+import Loader from '../../utils/Helper/Loader'
+
 const CreateStaff = () => {
 
-    const decoded=jwt_decode(localStorage.getItem('adminToken'))
-    const [formData, setFormData] = useState({
-        "createdBy":decoded.given_name,
-    });
-    const [showSuccessModal, setshowSuccessModal] = useState(false)
-    const modalText = {
-        heading: "Employee Account Successfully Created",
-        bodyText: 'The entered username and password can be used by Employee'
+    const [formData, setFormData] = useState({});
+    const [showLoader,setShowLoader]=useState(false)
+    const branches = useSelector((state) => state.branches.branches)
+    const dispatch = useDispatch();
+    if (branches.length <= 0) {
+        dispatch(fetchBranchData())
     }
 
     const fromChangeHandler = (e) => {
         const { name, value } = e.target;
+
         // If the name is 'pfAllowed', convert the selected value to a boolean
-        const newValue = name === 'pfAllowed' ? value === 'true' : value;
-      
+        const newValue =
+            name === 'pfAllowed' ? value === 'true' :
+                name === 'genderCode' || name === 'salaryAmount' || name === 'tax' ? parseInt(value) : value;
+
+
         // Update the form data with the new value
         setFormData(prevState => ({
-          ...prevState,
-          [name]: newValue
+            ...prevState,
+            [name]: newValue
         }));
-      }
+    };
+
     const formSubmitHandler = (e) => {
         e.preventDefault();
-        axios.post(createEmployeeUrl, formData, {
-            headers: {
-                'Authorization': 'Bearer ' + localStorage.getItem('adminToken')
-            },
-        })
-            .then((res => {
-                if(res.data.status)
-                {
-                    setshowSuccessModal(true)
-                }
-                else
-                {
-                    alert(res.data.message)
-                }
-            }))
-            .catch(err => console.log(err))
-
-    }
+        setShowLoader(true);
+        axios
+          .post(createEmployeeUrl, formData,{
+            headers:{
+                'Authorization':'Bearer '+localStorage.getItem('adminToken')
+            }
+          })
+          .then((res) => {
+            toast.success(res?.data?.message,{
+                position:'top-right'
+            })
+            setShowLoader(false);
+          })
+          .catch((err) => {
+            setShowLoader(false);
+            const errorData = err.response?.data?.errors;
+            if (errorData) {
+                Object.values(errorData).forEach((er) => {
+                    toast.warning(er[0], {
+                        position: 'top-right'
+                    });
+                });
+            } else {
+                toast.error(err?.message,{
+                    position:'top-right'
+                });
+            }
+        });
+      };
+      
     return (
         <>
-            {showSuccessModal && <SuccessModal heading={modalText?.heading} bodyText={modalText?.bodyText} setshowSuccessModal={setshowSuccessModal} showSuccessModal={showSuccessModal} />}
+           {showLoader && <Loader/>}
             <section class="max-w-7xl p-6 mx-auto bg-white rounded-md shadow-md ">
                 <h2 class="text-lg font-semibold text-gray-700 capitalize ">Create Employee</h2>
                 <form onSubmit={formSubmitHandler}>
@@ -69,42 +88,24 @@ const CreateStaff = () => {
                                 onChange={fromChangeHandler}
                             />
                         </div>
-
-                        <div>
-                            <label class="text-gray-700 " >User Name</label>
-                            <input type="string" class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md   focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40  focus:outline-none focus:ring"
-                                name='userName'
-                                required
-                                onChange={fromChangeHandler}
-                            />
-                        </div>
-
-                        <div>
-                            <label class="text-gray-700 " >Company Name</label>
-                            <input type="text" class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md   focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40  focus:outline-none focus:ring"
-                                name='companyName'
-                                required
-                                onChange={fromChangeHandler}
-                            />
-                        </div>
-                        <div>
-                            <label class="text-gray-700 " >Branch Name</label>
-                            <input type="text" class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md   focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40  focus:outline-none focus:ring"
-                                name='branchName'
-                                required
-                                onChange={fromChangeHandler}
-                            />
-                        </div>
                         <div>
                             <label class="text-gray-700 " >Phone Number</label>
                             <input type="number" class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md   focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40  focus:outline-none focus:ring"
                                 name='phoneNumber'
                                 required
-                                maxLength={10}
-                                minLength={10}
                                 onChange={fromChangeHandler}
                             />
                         </div>
+                        <div>
+                            <label class="text-gray-700 " >Branch Code</label>
+                            <select onChange={fromChangeHandler} name='branchCode' required class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md   focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40  focus:outline-none focus:ring">
+                                <option selected disabled>Select</option>
+                                {branches?.map(branch => (
+                                    <option value={branch.branchCode}>{branch.branchCode}</option>
+                                ))}
+                            </select>
+                        </div>
+
                         <div>
                             <label class="text-gray-700 " >Designation</label>
                             <input type="text" class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md   focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40  focus:outline-none focus:ring"
@@ -121,15 +122,18 @@ const CreateStaff = () => {
                         </div>
                         <div>
                             <label class="text-gray-700 " >Gender</label>
-                            <input type="text" class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md   focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40  focus:outline-none focus:ring"
-                                name='gender'
-                                onChange={fromChangeHandler}
-                            />
+                            <select name='genderCode' onChange={fromChangeHandler}
+                                class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md   focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40  focus:outline-none focus:ring">
+                                <option selected disabled>Select</option>
+                                {genderTypeEnum?.map(gender => (
+                                    <option value={gender.Id}>{gender.Name}</option>
+                                ))}
+                            </select>
                         </div>
                         <div>
                             <label class="text-gray-700 " >PF Allowed</label>
                             <select onChange={fromChangeHandler} name='pfAllowed' type='text' class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md   focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40  focus:outline-none focus:ring">
-                            <option  disabled selected>Select</option>
+                                <option disabled selected>Select</option>
                                 <option value={true}>Yes</option>
                                 <option value={false}>No</option>
                             </select>
@@ -190,21 +194,13 @@ const CreateStaff = () => {
                                 onChange={fromChangeHandler}
                             />
                         </div>
-                        <div>
-                            <label class="text-gray-700 " >Created BY</label>
-                            <input type="text" class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md   focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40  focus:outline-none focus:ring"
-                                name='createdBy'
-                                onChange={fromChangeHandler}
-                                readOnly
-                                value={decoded.given_name}
-                            />
-                        </div>
                     </div>
                     <div class="flex justify-end mt-6">
                         <button class="px-8 py-2.5 leading-5 text-white transition-colors duration-300 transform bg-gray-700 rounded-md hover:bg-gray-600 focus:outline-none focus:bg-gray-600">Save</button>
                     </div>
                 </form>
             </section>
+            <ToastContainer />
         </>
     )
 }

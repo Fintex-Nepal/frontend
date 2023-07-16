@@ -15,16 +15,16 @@ export const fintexLoginUrl=baseurl+"FinanceCompany/login"
 
 
 export const createAdminUrl=baseurl+"superadmin/createadmin";
-export const updatePasswordUrl = baseurl+"superadmin/update-password";
+export const updatePasswordUrl = baseurl+"superadmin/updatepassword";
 
 export const userActivateDeactivateUrl=baseurl+"superadmin/activateDeactivateUser";
 
 export const updatePasswordMicrofinance=baseurl+"financecompany/update-password";
 
-export const createEmployeeLoginUrl=baseurl+"financecompany/register";
-export const getAllEmployeeUrl=baseurl+"financecompany/getemployees";
+export const createEmployeeLoginUrl=baseurl+"FinanceCompany/createLoginCredential";
+export const getAllEmployeeUrl=baseurl+"financecompany/getAllEmployees";
 
-export const editUserProfile=baseurl+"financecompany/edit-profile"
+export const editUserProfile=baseurl+"financecompany/updateEmployeeProfile"
 
 
 
@@ -62,17 +62,21 @@ export const getLedgerByGroupId=baseurl+"accountsetup/ledgers/grouptype?groupTyp
 
 export const createSubLedgerUrl=baseurl+"accountsetup/createSubledger"
 
+export const getSubLedgerByLedger=baseurl+"accountSetup/subledgers/ledger?ledgerId="
+
 
 
 export const createBankUrl=baseurl+"accountsetup/creatBankSetup"
+
+export const getAllBanks=baseurl+"accountSetup/getAllBankSetup"
 
 
 
 //Employee
 
-export const createEmployeeUrl=baseurl+"financecompany/create-employee"
+export const createEmployeeUrl=baseurl+"financecompany/createEmployee"
 
-export const getEmployeeById=baseurl+"financecompany/getemployee/username?username="
+export const getEmployeeById=baseurl+"FinanceCompany/getemployeeById?id="
 
 export const getUserByUserName=baseurl+"FinanceCompany/getuser/username?userName="
 

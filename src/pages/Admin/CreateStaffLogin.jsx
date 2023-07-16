@@ -1,63 +1,66 @@
-import React ,{useState}from 'react'
+import React, { useState } from 'react'
 import jwt_decode from 'jwt-decode';
 import axios from 'axios'
+import { toast, ToastContainer } from 'react-toastify';
 import { createEmployeeLoginUrl } from '../../utils/Url'
-import SuccessModal from '../../utils/SuccessModal'
+import { roleEnum } from '../../utils/Helper/Enums';
+import Loader from '../../utils/Helper/Loader';
+
 
 const CreateStaffLogin = () => {
-    const decoded=jwt_decode(localStorage.getItem("adminToken"))
+    const decoded = jwt_decode(localStorage.getItem("adminToken"))
+    const [showLoader, setShowLoader] = useState(false)
     const [staffLogin, setStaffLogin] = useState({
-        createdBy:decoded.given_name
+        createdBy: decoded.given_name
     });
-    const [showSuccessModal, setshowSuccessModal] = useState(false)
 
-    const modalText = {
-        heading: "Employee Register Successfully",
-        bodyText: 'This credentials can be used by employee to access'
-    }
-     
-    const roleMap = {
-        "Marketing": 0,
-        "Assistant": 1,
-        "Senior Assistant": 2,
-    };
+
+    
     const fromChangeHandler = (event) => {
         const { name, value } = event.target;
-        if (name === "role") {
-            const roleValue = roleMap[value];
-            setStaffLogin(prevState => ({
-                ...prevState,
-                [name]: roleValue
-            }));
-        }
-        else {
-            setStaffLogin(prevState => ({
-                ...prevState,
-                [name]: value,
-            }));
-        }
+        const newValue= name === 'isActive' ? value === 'true' :
+        name==="role" || name==="depositLimit"|| name==="loanLimit"?parseInt(value):value;
+
+        setStaffLogin(prevState => ({
+            ...prevState,
+            [name]: newValue
+        }));
+
     }
 
     const formSubmitHandler = (e) => {
-        e.preventDefault(); 
+        e.preventDefault();
+        setShowLoader(true)
         axios.post(createEmployeeLoginUrl, staffLogin, {
             headers: {
                 'Authorization': 'Bearer ' + localStorage.getItem('adminToken')
             }
         })
             .then((res) => {
-                if (res.data.status) {
-                   setshowSuccessModal(true)
-                }
-                else {
-                    console.log(res.data.message)
-                }
+                toast.success(res?.data?.message, {
+                    position: 'top-right'
+                })
+                setShowLoader(false);
             })
-            .catch(err => alert(err.response.data.message))
+            .catch((err) => {
+                setShowLoader(false);
+                const errorData = err.response?.data?.errors;
+                if (errorData) {
+                    Object.values(errorData).forEach((er) => {
+                        toast.warning(er[0], {
+                            position: 'top-right'
+                        });
+                    });
+                } else {
+                    toast.error(err?.message,{
+                        position:'top-right'
+                    });
+                }
+            });
     }
     return (
         <>
-            {showSuccessModal && <SuccessModal heading={modalText?.heading} bodyText={modalText?.bodyText} setshowSuccessModal={setshowSuccessModal} showSuccessModal={showSuccessModal} />}
+            {showLoader && <Loader />}
             <section class="max-w-4xl p-6 mx-auto bg-white rounded-md shadow-md ">
                 <h2 class="text-lg font-semibold text-gray-700 capitalize ">Create Employee Login</h2>
 
@@ -97,9 +100,10 @@ const CreateStaffLogin = () => {
                         <div>
                             <label class="text-gray-700 " >Role</label>
                             <select onChange={fromChangeHandler} name='role' type="text" class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 focus:outline-none focus:ring">
-                                <option>Marketing</option>
-                                <option>Assistant</option>
-                                <option>Senior Assistant</option>
+                                <option selected disabled>Select</option>
+                                {roleEnum?.map(role=>(
+                                    <option value={role.Id}>{role.Name}</option>
+                                ))}
                             </select>
                         </div>
                         <div>
@@ -116,20 +120,13 @@ const CreateStaffLogin = () => {
                                 onChange={fromChangeHandler}
                             />
                         </div>
-                        <div>
-                            <label class="text-gray-700 " >Created By</label>
-                            <input type="text" class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 focus:outline-none focus:ring"
-                                name='createdBy'
-                                value={decoded?.given_name}
-                                readOnly
-                            />
-                        </div>
                     </div>
                     <div class="flex justify-end mt-6">
                         <button type='submit' class="px-8 py-2.5 leading-5 text-white transition-colors duration-300 transform bg-gray-700 rounded-md hover:bg-gray-600 focus:outline-none focus:bg-gray-600">Save</button>
                     </div>
                 </form>
             </section>
+            <ToastContainer />
         </>
     )
 }

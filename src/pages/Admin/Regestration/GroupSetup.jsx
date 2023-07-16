@@ -13,9 +13,6 @@ const GroupSetup = () => {
     const [showLoader,setShowLoader]=useState(false)
     const [showModifyModal, setShowModifyModal] = useState(false)
 
-   
-    
-    
     useEffect(() => {
         if (selectedAccountType) {
             axios.get(`${accoutTypeByIdUrl}=${selectedAccountType}`, {
@@ -50,20 +47,26 @@ const GroupSetup = () => {
             }
         })
             .then((res) => {
-                if (res?.data?.status) {
-                    setShowLoader(false)
-                    toast.success(res?.data?.message)
-                }
-                else {
-                    alert(res?.data?.message)
-                }
-            })
-            .catch(err => {
-                setShowLoader(false)
-                toast.error(err?.response?.data?.errors?.Message[0],{
-                    position:'top-right'
+                toast.success(res?.data?.message, {
+                    position: 'top-right'
                 })
+                setShowLoader(false);
             })
+            .catch((err) => {
+                setShowLoader(false);
+                const errorData = err.response?.data?.errors;
+                if (errorData) {
+                    Object.values(errorData).forEach((er) => {
+                        toast.warning(er[0], {
+                            position: 'top-right'
+                        });
+                    });
+                } else {
+                    toast.error(err?.message,{
+                        position:'top-right'
+                    });
+                }
+            });
     }
 
     return (

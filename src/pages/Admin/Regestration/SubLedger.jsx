@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
-import { createSubLedgerUrl } from '../../../utils/Url';
+import { createSubLedgerUrl, getSubLedgerByLedger } from '../../../utils/Url';
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchGroupData } from '../../../Redux/Regestration/LedgerSlice';
 import { fetchLedgerData } from '../../../Redux/Regestration/SubLedgerSlice';
-import { getallSubLedger, getLedgerByGroupType } from '../../../utils/Url'
+import {getLedgerByGroupType } from '../../../utils/Url'
 import { accountTypes } from '../../../utils/Helper/Enums';
 import Loader from '../../../utils/Helper/Loader';
 
@@ -14,6 +14,7 @@ const SubLedger = () => {
     const [selectedAccountType, setSelectedAccountType] = useState()
     const [allLedger, setAllLedger] = useState()
     const [selectedGroupType, setSelectedGroupType] = useState()
+    const [selectedLedger,setSelectedLedger]=useState()
     const [allSubLedger, setAllSubLedger] = useState()
     const [showLoader, setShowLoader] = useState();
     const dispatch = useDispatch()
@@ -43,7 +44,6 @@ const SubLedger = () => {
         } else if (name === 'isSubLedgerActive') {
             parsedValue = value === 'true'; // Convert the selected value to a boolean
         }
-
         setSubLedgerData((prevState) => ({
             ...prevState,
             [name]: parsedValue,
@@ -55,6 +55,16 @@ const SubLedger = () => {
             dispatch(fetchLedgerData(selectedGroupType))
         }
     }, [dispatch, selectedAccountType, selectedGroupType])
+
+    useEffect(()=>{
+        axios.get(`${getSubLedgerByLedger}${selectedLedger}`,{
+            headers:{
+                'Authorization':'Bearer '+localStorage.getItem("adminToken")
+            }
+        })
+        .then((res)=>setAllSubLedger(res.data))
+        .catch(err=>console.log(err))
+    },[selectedLedger])
     const LedgerSubmitHandler = (e) => {
         e.preventDefault();
         setShowLoader(true)
@@ -78,13 +88,21 @@ const SubLedger = () => {
                 }
             })
             .catch((err) => {
-                setShowLoader(false)
-                toast.error(err?.response?.data?.errors?.Message[0], {
-                    position: 'top-right'
-                })
-            })
+                setShowLoader(false);
+                const errorData = err.response?.data?.errors;
+                if (errorData) {
+                    Object.values(errorData).forEach((er) => {
+                        toast.warning(er[0], {
+                            position: 'top-right'
+                        });
+                    });
+                } else {
+                    toast.error(err?.message,{
+                        position:'top-right'
+                    });
+                }
+            });
     }
-
 
     return (
         <>
@@ -127,8 +145,8 @@ const SubLedger = () => {
                                 <div>
                                     <label class="text-gray-700" >Ledger Name</label>
                                     <select onChange={(e)=>{
-                                        onChangeHandler(e.target.value)
-                                        
+                                        onChangeHandler(e)
+                                        setSelectedLedger(e.target.value)
                                     }} className='block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md  ' name='ledgerId'>
                                         <option disabled selected>Select</option>
                                         {allLedger?.map(itm => (
@@ -141,6 +159,14 @@ const SubLedger = () => {
                                     <label class="text-gray-700" >Sub Ledger</label>
                                     <input type='text' class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md"
                                         name='name'
+                                        required
+                                        onChange={onChangeHandler}
+                                    />
+                                </div>
+                                <div>
+                                    <label class="text-gray-700" >Description</label>
+                                    <input type='text' class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md"
+                                        name='description'
                                         required
                                         onChange={onChangeHandler}
                                     />
@@ -219,11 +245,11 @@ const SubLedger = () => {
                                                             </td>
                                                             <td
                                                                 class="whitespace-nowrap border-r px-6 py-4 ">
-                                                                {subLedger?.name}
+                                                                {subLedger?.ledgerName}
                                                             </td>
                                                             <td
                                                                 class="whitespace-nowrap border-r px-6 py-4 ">
-                                                                {subLedger?.name}
+                                                                {subLedger?.groupTypeName}
                                                             </td>
                                                             <td
                                                                 class="whitespace-nowrap border-r px-6 py-4 ">

@@ -1,8 +1,10 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import axios from 'axios'
+import { useSelector, useDispatch } from 'react-redux';
 import { ToastContainer, toast } from 'react-toastify';
-import { createBankUrl } from '../../../utils/Url'
+import { createBankUrl, getAllBanks } from '../../../utils/Url'
 import Loader from '../../../utils/Helper/Loader';
+import { fetchBranchData } from '../../../Redux/companyprofile/BranchSlice';
 const typesOfBanks = [
     {
         "id": 1,
@@ -19,7 +21,31 @@ const typesOfBanks = [
 ]
 const BackSetup = () => {
     const [bankSetupData, setBankSetupData] = useState({})
+    const [allBankSetup, setAllBankSetUp] = useState()
     const [showLoader, setShowLoader] = useState(false)
+    const branches = useSelector((state) => state.branches.branches)
+    const dispatch = useDispatch();
+
+    if (branches.length <= 0) {
+        dispatch(fetchBranchData())
+    }
+
+    useEffect(() => {
+        axios.get(getAllBanks, {
+            headers: {
+                'Authorization': 'Bearer ' + localStorage.getItem('adminToken')
+            }
+        })
+            .then((res) => setAllBankSetUp(res.data))
+            .catch(err => {
+                (Object.values(err.response.data.errors) || []).map(er => (
+                    toast.warning(er[0], {
+                        position: 'top-right'
+                    })
+                ));
+
+            })
+    }, [])
     const onChanegHandler = (event) => {
         const { name, value } = event.target;
         const updatedValue = name === 'interestRate' || name === "bankTypeId" ? Number(value) : value;
@@ -45,16 +71,25 @@ const BackSetup = () => {
                     alert(res?.data?.message)
                 }
             })
-            .catch(err => {
-                setShowLoader(false)
-                toast.error(err?.response?.data?.errors?.Message[0], {
-                    position: 'top-right'
-                })
-            })
+            .catch((err) => {
+                setShowLoader(false);
+                const errorData = err.response?.data?.errors;
+                if (errorData) {
+                    Object.values(errorData).forEach((er) => {
+                        toast.warning(er[0], {
+                            position: 'top-right'
+                        });
+                    });
+                } else {
+                    toast.error(err?.message,{
+                        position:'top-right'
+                    });
+                }
+            });
     }
     return (
         <>
-           {showLoader && <Loader/>}
+            {showLoader && <Loader />}
             <div class="grid grid-cols-1 gap-6 mt-4 sm:grid-cols-2">
                 <div>
                     <section class="max-w-4xl p-6 mx-auto bg-white rounded-md shadow-md ">
@@ -89,11 +124,13 @@ const BackSetup = () => {
                                 </div>
                                 <div>
                                     <label class="text-gray-700" >Branch Code</label>
-                                    <input class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md   "
-                                        required
-                                        name='branchCode'
-                                        onChange={onChanegHandler}
-                                    />
+                                    <select name='branchCode' onChange={onChanegHandler} required class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md   ">
+                                        <option selected disabled>Select</option>
+                                        {branches?.map(branch => (
+                                            <option value={branch?.branchCode}>{branch?.branchCode}</option>
+                                        ))}
+                                    </select>
+
                                 </div>
                                 <div>
                                     <label class="text-gray-700" >Account Number</label>
@@ -168,26 +205,30 @@ const BackSetup = () => {
                                             </thead>
                                             <tbody>
 
-                                                <tr class="border-b ">
-                                                    <td
-                                                        class="whitespace-nowrap border-r px-6 py-4 font-medium ">
-                                                        Test
-                                                    </td>
-                                                    <td
-                                                        class="whitespace-nowrap border-r px-6 py-4 font-medium ">
-                                                        Test
-                                                    </td>
-                                                    <td
-                                                        class="whitespace-nowrap border-r px-6 py-4 font-medium ">
-                                                        Test
-                                                    </td>
-                                                    <td role='button'
-                                                        class="whitespace-nowrap border-r px-6 py-4 ">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" class="w-6 h-6">
-                                                            <path strokeLinecap="round" strokeLinejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10" />
-                                                        </svg>
-                                                    </td>
-                                                </tr>
+                                                {allBankSetup?.map((bank,index) => (
+                                                    <>
+                                                        <tr class="border-b ">
+                                                            <td
+                                                                class="whitespace-nowrap border-r px-6 py-4 font-medium ">
+                                                                {index+1}
+                                                            </td>
+                                                            <td
+                                                                class="whitespace-nowrap border-r px-6 py-4 font-medium ">
+                                                                {bank?.name}
+                                                            </td>
+                                                            <td
+                                                                class="whitespace-nowrap border-r px-6 py-4 font-medium ">
+                                                                {bank?.accountNumber}
+                                                            </td>
+                                                            <td role='button'
+                                                                class="whitespace-nowrap border-r px-6 py-4 ">
+                                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" class="w-6 h-6">
+                                                                    <path strokeLinecap="round" strokeLinejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10" />
+                                                                </svg>
+                                                            </td>
+                                                        </tr>
+                                                    </>
+                                                ))}
                                             </tbody>
                                         </table>
                                     </div>
