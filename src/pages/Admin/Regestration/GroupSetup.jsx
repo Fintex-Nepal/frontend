@@ -142,7 +142,7 @@ const GroupSetup = () => {
                         </form>
                     </section>
                 </div>
-                {showModifyModal && <ModifyRegestrartionModal setShowUpdateModal={setShowModifyModal} />}
+                {showModifyModal && <ModifyRegestrartionModal heading="Group Setup" setShowUpdateModal={setShowModifyModal} />}
                 <div class=" h-1/2 sm:h-full p-4">
                     <div class=" text-black bg-white  py-2 rounded w-full">
                         <div class="flex flex-col">

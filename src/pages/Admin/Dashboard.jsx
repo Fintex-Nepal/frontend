@@ -1,7 +1,8 @@
 import React from 'react'
 import { useState, useEffect } from 'react'
-import MainRegestration from './Regestration/MainRegestration'
 import { Routes, Route, Link, useNavigate } from 'react-router-dom'
+import jwt_decode from "jwt-decode";
+import MainRegestration from './Regestration/MainRegestration'
 import Content from './Content'
 import CreateStaff from './CreateStaff';
 import KnowYourMember from '../Admin/UserRegestration/KYM/KnowYourMember'
@@ -9,17 +10,14 @@ import CreateStaffLogin from './CreateStaffLogin';
 import StaffInfo from './StaffInfo';
 import EmployeeDetails from './EmployeeDetails'
 import microFinanceLogo from '../../assets/microFinanceLogo.png'
-// import DropDownCustom from '../../utils/DropDownCustom'
-
-import Dropdown from '../../utils/DropDownt'
-// import Dropdown from '../Dropdown'
+import Dropdown from '../../utils/DropDown'
 import CreateDeposit from '../Deposit/CreateDeposit'
 import Profile from './Profile'
 
 
+
 const Dashboard = () => {
-
-
+    var decoded = jwt_decode(localStorage.getItem('adminToken'))
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
     const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
 
@@ -63,9 +61,7 @@ const Dashboard = () => {
                             <div className="flex items-center justify-between">
                                 <div className="flex items-center justify-start">
                                     <button
-                                        data-drawer-target="logo-sidebar"
-                                        data-drawer-toggle="logo-sidebar"
-                                        aria-controls="logo-sidebar"
+                                        
                                         type="button"
                                         className="inline-flex items-center p-2 text-sm text-gray-500 rounded-lg sm:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
                                         onClick={handleSidebarToggle}
@@ -97,7 +93,7 @@ const Dashboard = () => {
                                     </Link>
                                 </div>
                                 <div className="flex items-center">
-                                    <div className="flex items-center ml-3 relative">
+                                    <div className="relative ml-3">
                                         <button
                                             type="button"
                                             className="flex text-sm bg-gray-800 rounded-full focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600"
@@ -112,25 +108,14 @@ const Dashboard = () => {
                                             />
                                         </button>
                                         {isUserMenuOpen && (
-                                            <div className="z-50 absolute right-0 mt-2 w-40 bg-white divide-y divide-gray-100 rounded shadow dark:bg-gray-700 dark:divide-gray-600">
-                                                <div className="px-4 py-3" role="none">
-                                                    <p className="text-sm text-gray-900 dark:text-white" role="none">
-                                                        Neil Sims
-                                                    </p>
-                                                    <p className="text-sm font-medium text-gray-900 truncate dark:text-gray-300" role="none">
-                                                        neil.sims@flowbite.com
+                                            <div className="absolute right-0 mt-2 w-40 bg-white divide-y divide-gray-100 rounded shadow dark:bg-gray-700 dark:divide-gray-600 origin-bottom">
+                                                <div className="px-4 py-3">
+                                                    <p className="text-sm text-gray-900 dark:text-white">{decoded?.given_name}</p>
+                                                    <p className="text-sm font-medium text-gray-900 truncate dark:text-gray-300">
+                                                        {decoded?.email}
                                                     </p>
                                                 </div>
-                                                <ul className="py-1" role="none">
-                                                    <li>
-                                                        <a
-                                                            href="1"
-                                                            className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white"
-                                                            role="menuitem"
-                                                        >
-                                                            Dashboard
-                                                        </a>
-                                                    </li>
+                                                <ul className="py-1">
                                                     <li>
                                                         <button
                                                             onClick={signOutHandler}
@@ -145,6 +130,7 @@ const Dashboard = () => {
                                         )}
                                     </div>
                                 </div>
+
                             </div>
                         </div>
                     </nav>
@@ -186,8 +172,8 @@ const Dashboard = () => {
                                         <span class="inline-flex items-center justify-center w-3 h-3 p-3 ml-3 text-sm font-medium text-blue-800 bg-blue-100 rounded-full dark:bg-blue-900 dark:text-blue-300">3</span>
                                     </Link>
                                 </li>
-                                <Dropdown dropDownList={employeeDropdown} heading="Employee" /> <br/>
-                                <Dropdown dropDownList={clientDropdown} heading="Client" /> 
+                                <Dropdown dropDownList={employeeDropdown} heading="Employee" /> 
+                                <Dropdown dropDownList={clientDropdown} heading="Client" />
                                 {/* <Dropdown/> */}
                                 <li>
                                     <a href="1" class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">

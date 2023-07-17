@@ -41,7 +41,7 @@ export const getLedgerByGroupType=baseurl+"accountsetup/ledgers/groupType"
 export const getUniqueGlCode=baseurl+"accountsetup/unique-ledgerId"
 
 //Account Setup
-
+export const getallGroupTypes="AccountSetup/getAllGrouptypes"
 
 export const accountTypesUrl=baseurl+"accountsetup/accounttypes"
 
