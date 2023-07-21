@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react'
 import axios from 'axios';
 import { useSelector, useDispatch } from 'react-redux';
 import { createAdminUrl } from '../../utils/Url'
-import jwt_decode from 'jwt-decode';
 import { ToastContainer, toast } from 'react-toastify';
 import Loader from '../../utils/Helper/Loader';
 import { fetchBranchData } from '../../Redux/companyprofile/BranchSlice';
@@ -10,9 +9,7 @@ import { fetchBranchData } from '../../Redux/companyprofile/BranchSlice';
 
 const CreateAdmin = () => {
     const branches = useSelector((state) => state.branches.branches)
-    const decoded = jwt_decode(localStorage.getItem('sAdminToken'))
     const [formData, setFormData] = useState({
-        "createdBy": decoded.given_name,
         "role": 3,
     });
     const [branchCreateStatus, setBranchCreateStatus] = useState(false)
@@ -119,14 +116,14 @@ const CreateAdmin = () => {
                                 onChange={onChangeHandler}
                             />
                         </div>
-                        <div>
+                        {/* <div>
                             <label class="text-gray-700" for="passwordConfirmation">Company Name</label>
                             <input type="text" class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 focus:outline-none focus:ring"
                                 name='companyName'
                                 required
                                 onChange={onChangeHandler}
                             />
-                        </div>
+                        </div> */}
                         <div>
                             <label class="text-gray-700" for="passwordConfirmation">Branch Code</label>
                             <select class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 focus:outline-none focus:ring"

@@ -1,4 +1,4 @@
-export const baseurl='http://localhost/'
+export const baseurl='http://127.0.0.1:51543/'
 
 //superlogin
 
@@ -91,4 +91,9 @@ export const getAllBranches=baseurl+"CompanyProfile/getAllBranch"
 export const createBranchUrl=baseurl+"CompanyProfile/createbranch"
 
 export const updateBranchUrl=baseurl+"CompanyProfile/updateBranch"
+
+
+export const createCompanyProfile=baseurl+"CompanyProfile/createCompanyProfile"
+
+export const getCompanyProfile=baseurl+"CompanyProfile/getCompanyProfile"
 

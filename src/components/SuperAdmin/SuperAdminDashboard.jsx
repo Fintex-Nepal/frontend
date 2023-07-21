@@ -8,8 +8,11 @@ import CreateAdmin from './CreateAdmin';
 import Content from '../../pages/Admin/Content';
 import Users from './Users';
 import AllBranch from './Company Profile/AllBranch';
+import CreateProfile from './Company Profile/CreateProfile'
 import UpdateBranch from './Company Profile/UpdateBranch'
 import logo from '../../assets/logo.png'
+import CreateCalander from './Calander/CreateCalander';
+import CompanyProfile from './Company Profile/CompanyProfile';
 
 const SuperAdminDashboard = () => {
     const [show, setShow] = useState(false);
@@ -41,24 +44,24 @@ const SuperAdminDashboard = () => {
                                 <img src={logo} width={144} height={30} alt='logo'></img>
                             </div>
                             <ul className=" py-6">
+
                                 <li className="pl-6 cursor-pointer text-gray-600 text-sm leading-3 tracking-normal mt-4 mb-4 py-2 hover:text-indigo-700 focus:text-indigo-700 focus:outline-none">
                                     <Link to={'/sadmindashboard/companyprofile'}>
                                         <div className="flex items-center">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" class="w-6 h-6">
-                                                <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 21h19.5m-18-18v18m10.5-18v18m6-13.5V21M6.75 6.75h.75m-.75 3h.75m-.75 3h.75m3-6h.75m-.75 3h.75m-.75 3h.75M6.75 21v-3.375c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21M3 3h12m-.75 4.5H21m-3.75 3.75h.008v.008h-.008v-.008zm0 3h.008v.008h-.008v-.008zm0 3h.008v.008h-.008v-.008z" />
+                                            <svg xmlns="http://www.w3.org/2000/svg" width={20} height={20} fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" class="w-6 h-6">
+                                                <path strokeLinecap="round" strokeLinejoin="round" d="M15 19.128a9.38 9.38 0 002.625.372 9.337 9.337 0 004.121-.952 4.125 4.125 0 00-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 018.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0111.964-3.07M12 6.375a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zm8.25 2.25a2.625 2.625 0 11-5.25 0 2.625 2.625 0 015.25 0z" />
                                             </svg>
                                             <span className="ml-2">Company Profile</span>
                                         </div>
                                     </Link>
                                 </li>
+
                                 <li className="pl-6 cursor-pointer text-gray-600 text-sm leading-3 tracking-normal mt-4 mb-4 py-2 hover:text-indigo-700 focus:text-indigo-700 focus:outline-none">
                                     <Link to={'/sadmindashboard/users'}>
                                         <div className="flex items-center">
                                             <svg xmlns="http://www.w3.org/2000/svg" width={20} height={20} fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" class="w-6 h-6">
                                                 <path strokeLinecap="round" strokeLinejoin="round" d="M15 19.128a9.38 9.38 0 002.625.372 9.337 9.337 0 004.121-.952 4.125 4.125 0 00-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 018.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0111.964-3.07M12 6.375a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zm8.25 2.25a2.625 2.625 0 11-5.25 0 2.625 2.625 0 015.25 0z" />
                                             </svg>
-
-
                                             <span className="ml-2">Users</span>
                                         </div>
                                     </Link>
@@ -82,6 +85,16 @@ const SuperAdminDashboard = () => {
                                                 <path strokeLinecap="round" strokeLinejoin="round" d="M19 7.5v3m0 0v3m0-3h3m-3 0h-3m-2.25-4.125a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zM4 19.235v-.11a6.375 6.375 0 0112.75 0v.109A12.318 12.318 0 0110.374 21c-2.331 0-4.512-.645-6.374-1.766z" />
                                             </svg>
                                             <span className="ml-2">Create Admin</span>
+                                        </div>
+                                    </Link>
+                                </li>
+                                <li className="pl-6 cursor-pointer text-gray-600 text-sm leading-3 tracking-normal mt-4 mb-4 py-2 hover:text-indigo-700 focus:text-indigo-700 focus:outline-none">
+                                    <Link to={'/sadmindashboard/createcalander'}>
+                                        <div className="flex items-center">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width={20} height={20} fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" class="w-6 h-6">
+                                                <path strokeLinecap="round" strokeLinejoin="round" d="M15 19.128a9.38 9.38 0 002.625.372 9.337 9.337 0 004.121-.952 4.125 4.125 0 00-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 018.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0111.964-3.07M12 6.375a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zm8.25 2.25a2.625 2.625 0 11-5.25 0 2.625 2.625 0 015.25 0z" />
+                                            </svg>
+                                            <span className="ml-2">Create Calander</span>
                                         </div>
                                     </Link>
                                 </li>
@@ -137,11 +150,7 @@ const SuperAdminDashboard = () => {
                                                 <Link to={'/sadmindashboard/createadmin'}>
                                                     <div className="flex items-center">
                                                         <div className="w-6 h-6 md:w-8 md:h-8">
-                                                            {/* <svg xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" fill="none" strokeLinecap="round" strokeLinejoin="round">
-                                                                <path stroke="none" d="M0 0h24v24H0z" />
-                                                                <polyline points="8 16 10 10 16 8 14 14 8 16" />
-                                                                <circle cx={12} cy={12} r={9} />
-                                                            </svg> */}
+
                                                             <svg xmlns="http://www.w3.org/2000/svg" className="icon icon-tabler icon-tabler-compass" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor">
                                                                 <path strokeLinecap="round" strokeLinejoind="M19 7.5v3m0 0v3m0-3h3m-3 0h-3m-2.25-4.125a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zM4 19.235v-.11a6.375 6.375 0 0112.75 0v.109A12.318 12.318 0 0110.374 21c-2.331 0-4.512-.645-6.374-1.766z" />
                                                             </svg>
@@ -168,16 +177,7 @@ const SuperAdminDashboard = () => {
                                     </div>
                                     <div className="w-full">
                                         <div className="flex justify-center mb-4 w-full px-6">
-                                            {/* <div className="relative w-full">
-                                                <div className="text-gray-500 absolute ml-4 inset-0 m-auto w-4 h-4">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" className="icon icon-tabler icon-tabler-search" width={16} height={16} viewBox="0 0 24 24" strokeWidth={1} stroke="#A0AEC0" fill="none" strokeLinecap="round" strokeLinejoin="round">
-                                                        <path stroke="none" d="M0 0h24v24H0z" />
-                                                        <circle cx={10} cy={10} r={7} />
-                                                        <line x1={21} y1={21} x2={15} y2={15} />
-                                                    </svg>
-                                                </div>
-                                                <input className="bg-gray-200 focus:outline-none rounded w-full text-sm text-gray-500  pl-10 py-2" type="text" placeholder="Search" />
-                                            </div> */}
+
                                         </div>
                                         <div className="border-t border-gray-300">
                                             <div className="w-full flex items-center justify-between px-6 pt-1">
@@ -214,16 +214,7 @@ const SuperAdminDashboard = () => {
                             <nav className="h-16 flex items-center lg:items-stretch justify-end lg:justify-between bg-white shadow relative z-10">
                                 <div className="hidden lg:flex w-full pr-6">
                                     <div className="w-1/2 h-full hidden lg:flex items-center pl-6 pr-24">
-                                        {/* <div className="relative w-full">
-                                            <div className="text-gray-500 absolute ml-4 inset-0 m-auto w-4 h-4">
-                                                <svg xmlns="http://www.w3.org/2000/svg" className="icon icon-tabler icon-tabler-search" width={16} height={16} viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" fill="none" strokeLinecap="round" strokeLinejoin="round">
-                                                    <path stroke="none" d="M0 0h24v24H0z" />
-                                                    <circle cx={10} cy={10} r={7} />
-                                                    <line x1={21} y1={21} x2={15} y2={15} />
-                                                </svg>
-                                            </div>
-                                            <input className="border border-gray-100 focus:outline-none focus:border-indigo-700 rounded w-full text-sm text-gray-500 bg-gray-100 pl-12 py-2" type="text" placeholder="Search" />
-                                        </div> */}
+
                                     </div>
                                     <div className="w-1/2 hidden lg:flex">
                                         <div className="w-full flex items-center pl-8 justify-end">
@@ -237,13 +228,7 @@ const SuperAdminDashboard = () => {
                                                     <div className="w-2 h-2 rounded-full bg-red-400 border border-white absolute inset-0 mt-1 mr-1 m-auto" />
                                                 </div>
                                             </div>
-                                            {/* <div className="h-full w-20 flex items-center justify-center border-r mr-4 cursor-pointer text-gray-600">
-                                                <svg xmlns="http://www.w3.org/2000/svg" className="icon icon-tabler icon-tabler-messages" width={28} height={28} viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" fill="none" strokeLinecap="round" strokeLinejoin="round">
-                                                    <path stroke="none" d="M0 0h24v24H0z" />
-                                                    <path d="M21 14l-3 -3h-7a1 1 0 0 1 -1 -1v-6a1 1 0 0 1 1 -1h9a1 1 0 0 1 1 1v10" />
-                                                    <path d="M14 15v2a1 1 0 0 1 -1 1h-7l-3 3v-10a1 1 0 0 1 1 -1h2" />
-                                                </svg>
-                                            </div> */}
+
                                             <div className="flex items-center relative cursor-pointer" onClick={() => setProfile(!profile)}>
                                                 <div className="rounded-full">
                                                     {profile ? (
@@ -312,9 +297,13 @@ const SuperAdminDashboard = () => {
                                         <Route path='/users' element={<Users />} />
 
                                         {/* Company Profile */}
-                                        <Route path='/companyprofile' element={<AllBranch />} />
+                                        <Route path='/companyprofile' element={<CompanyProfile />} />
+                                        <Route path='/createcompanyprofile' element={<CreateProfile />} />
+                                        <Route path='/allbranches' element={<CreateBranch />} />
                                         <Route path='/createbranch' element={<CreateBranch />} />
                                         <Route path='/updatebranch/:id' element={<UpdateBranch />} />
+
+                                        <Route path='/createcalander' element={<CreateCalander />} />
                                     </Routes>
                                 </div>
                             </div>

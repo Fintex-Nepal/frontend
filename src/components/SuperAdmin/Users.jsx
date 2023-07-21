@@ -85,7 +85,7 @@ const Users = () => {
             <div class=" text-black bg-white px-4 py-2 rounded w-full">
                 <div class="flex flex-col">
                     <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
-                        <div class="inline-block min-w-full py-2 sm:px-6 lg:px-8" style={{ height: '46rem' }}>
+                        <div class="inline-block min-w-full py-2 sm:px-6 lg:px-8" style={{ minHeight: '2rem' }}>
                             <div class="overflow-hidden"></div>
                             <table
                                 class="min-w-full border text-center text-sm font-light h-96  overflow-y-auto">
