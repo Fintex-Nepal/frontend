@@ -1,4 +1,5 @@
-export const baseurl='http://127.0.0.1:51543/'
+export const baseurl='http://localhost/'
+
 
 //superlogin
 
@@ -47,6 +48,7 @@ export const accountTypesUrl=baseurl+"accountsetup/accounttypes"
 
 
 export const createGroupUrl=baseurl+"accountsetup/createGrouptype"
+export const updateGroupDataUrl=baseurl+"AccountSetup/update-grouptype"
 export const accoutTypeByIdUrl=baseurl+"AccountSetup/grouptypes/accounttype?accountTypeId"
 
 export const ledgerDetailByAccountTypeUrl=baseurl+"accountsetup/grouptypes/accounttype?accountTypeId"
@@ -94,6 +96,16 @@ export const updateBranchUrl=baseurl+"CompanyProfile/updateBranch"
 
 
 export const createCompanyProfile=baseurl+"CompanyProfile/createCompanyProfile"
+export const updatecompanyprofile=baseurl+"CompanyProfile/updateCompanyProfile"
 
 export const getCompanyProfile=baseurl+"CompanyProfile/getCompanyProfile"
+
+
+// Calander
+
+export const createCalander=baseurl+"CompanyProfile/createCalendars"
+
+export const getallCalenders=baseurl+"CompanyProfile/getAllCalendars"
+export const updateCalander=baseurl+"CompanyProfile/updateCalendar"
+
 

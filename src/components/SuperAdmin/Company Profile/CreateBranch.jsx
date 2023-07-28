@@ -18,7 +18,6 @@ const CreateBranch = () => {
     }))
   }
 
-
   const formSubmitHandler = (event) => {
     event.preventDefault();
     setCreateBranchStatus(true)

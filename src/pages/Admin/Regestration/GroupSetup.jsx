@@ -2,16 +2,17 @@ import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import { ToastContainer, toast } from 'react-toastify';
 import Loader from '../../../utils/Helper/Loader';
-import { createGroupUrl, accoutTypeByIdUrl } from '../../../utils/Url';
-import ModifyRegestrartionModal from '../../../utils/ModifyRegestrartionModal';
+import { createGroupUrl, accoutTypeByIdUrl, updateGroupDataUrl } from '../../../utils/Url';
 import { accountTypes } from '../../../utils/Helper/Enums';
 
 const GroupSetup = () => {
     const [groupSetUpData, setGroupSetUpData] = useState({})
+    const [updateGroupData, setUpdateGroupData] = useState({})
     const [existingGroups, setExistingGroups] = useState();
     const [selectedAccountType, setSelectedAccountType] = useState()
-    const [showLoader,setShowLoader]=useState(false)
-    const [showModifyModal, setShowModifyModal] = useState(false)
+    const [showLoader, setShowLoader] = useState(false)
+    const [selectedId, setSelectedId] = useState();
+    const [isUpdate, setIsUpdate] = useState(false)
 
     useEffect(() => {
         if (selectedAccountType) {
@@ -38,6 +39,51 @@ const GroupSetup = () => {
             [name]: parsedValue,
         }));
     };
+    const onEditChangeHandler = (e) => {
+        const { name, value } = e.target;
+
+        // Check if the field name is "schedule" and parse the value as a number
+        const parsedValue = name === "schedule" ? parseInt(value) : value;
+
+        setUpdateGroupData((prevState) => ({
+            ...prevState,
+            [name]: parsedValue,
+        }));
+    };
+
+    const EditGroupHandler = (e) => {
+        e.preventDefault();
+        setShowLoader(true);
+        const updateGroupDatawithId = { ...updateGroupData, id: selectedId };
+        axios.put(updateGroupDataUrl, updateGroupDatawithId, {
+            headers: {
+                'Authorization': 'Bearer ' + localStorage.getItem('adminToken')
+            }
+        })
+            .then((res) => {
+                toast.success(res?.data?.message, {
+                    position: 'top-right'
+                });
+                setShowLoader(false);
+            })
+            .catch((err) => {
+                setShowLoader(false);
+                const errorData = err.response?.data?.errors;
+                if (errorData) {
+                    Object.values(errorData).forEach((er) => {
+                        toast.warning(er[0], {
+                            position: 'top-right'
+                        });
+                    });
+                } else {
+                    toast.error(err?.message, {
+                        position: 'top-right'
+                    });
+                }
+            });
+    }
+    
+
     const groupSetUpSubmitHandler = (e) => {
         e.preventDefault();
         setShowLoader(true)
@@ -51,6 +97,7 @@ const GroupSetup = () => {
                     position: 'top-right'
                 })
                 setShowLoader(false);
+                setSelectedAccountType(selectedAccountType)
             })
             .catch((err) => {
                 setShowLoader(false);
@@ -62,87 +109,119 @@ const GroupSetup = () => {
                         });
                     });
                 } else {
-                    toast.error(err?.message,{
-                        position:'top-right'
+                    toast.error(err?.message, {
+                        position: 'top-right'
                     });
                 }
             });
     }
-
     return (
         <>
-            {showLoader && <Loader/>}
+            {showLoader && <Loader />}
             <div class="grid grid-cols-1 gap-6 mt-4 sm:grid-cols-2">
                 <div>
                     <section class="max-w-4xl p-6 mx-auto bg-white rounded-md shadow-md ">
-                        <h2 class="text-lg font-semibold text-gray-700 capitalize ">Group settings</h2>
+                        {isUpdate ?
+                            <>
+                                <h2 class="text-lg font-semibold text-gray-700 capitalize ">Edit Group</h2>
+                                <form onSubmit={EditGroupHandler}>
+                                    <div class="grid grid-cols-1 gap-6 mt-4 sm:grid-cols-2">
+                                        <div>
+                                            <label class="text-gray-700 " >ID</label>
+                                            <input readOnly value={selectedId} type="text" class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md" />
+                                        </div>
 
-                        <form onSubmit={groupSetUpSubmitHandler}>
-                            <div class="grid grid-cols-1 gap-6 mt-4 sm:grid-cols-2">
-                                <div>
-                                    <label class="text-gray-700" >Account Type</label>
-                                    <select onChange={(e) => {
-                                        setSelectedAccountType(e.target.value);
-                                        onChanegHandler(e);
-                                    }}
-                                        required type="number" name='accountTypeId' class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md" >
-                                        <option selected disabled>Select</option>
-                                        {accountTypes?.map(itm => (
-                                            <option value={itm?.Id}>{itm?.Name}</option>
-                                        ))}
-                                    </select>
-                                </div>
+                                        <div>
+                                            <label class="text-gray-700 " >Group Name</label>
+                                            <input onChange={onEditChangeHandler} name='name' type="text" class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md" />
+                                        </div>
 
-                                <div>
-                                    <label class="text-gray-700" >Group Name</label>
-                                    <input type="text" class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md   "
-                                        name='name'
-                                        required
-                                        onChange={onChanegHandler}
-                                    />
-                                </div>
+                                        <div>
+                                            <label class="text-gray-700 " >समुहको नाम</label>
+                                            <input onChange={onEditChangeHandler} name='nepaliName' type="text" class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md" />
+                                        </div>
 
-                                <div>
-                                    <label class="text-gray-700" >समुहको नाम</label>
-                                    <input class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md   "
-                                        
-                                        name='nepaliName'
-                                        onChange={onChanegHandler}
-                                    />
-                                </div>
-                                <div>
-                                    <label class="text-gray-700" >CharKhata Number</label>
-                                    <input class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md   "
-                                        required
-                                        name='charKhataNumber'
-                                        onChange={onChanegHandler}
-                                    />
-                                </div>
+                                        <div>
+                                            <label class="text-gray-700 " >Schedule</label>
+                                            <input onChange={onEditChangeHandler} name="schedule" type="number" class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md" />
+                                        </div>
+                                    </div>
+                                    <div class="flex justify-end mt-6">
+                                        <button type='submit' class="px-8 py-2.5 leading-5 text-white transition-colors duration-300 transform bg-gray-700 rounded-md hover:bg-gray-600 focus:outline-none focus:bg-gray-600">Save</button>
+                                    </div>
+                                </form>
+                            </>
+                            : (
+                                <>
+                                    <h2 class="text-lg font-semibold text-gray-700 capitalize ">Group settings</h2>
+                                    <form onSubmit={groupSetUpSubmitHandler}>
+                                        <div class="grid grid-cols-1 gap-6 mt-4 sm:grid-cols-2">
+                                            <div>
+                                                <label class="text-gray-700" >Account Type</label>
+                                                <select onChange={(e) => {
+                                                    setSelectedAccountType(e.target.value);
+                                                    onChanegHandler(e);
+                                                }}
+                                                    required type="number" name='accountTypeId' class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md" >
+                                                    <option selected disabled>Select</option>
+                                                    {accountTypes?.map(itm => (
+                                                        <option value={itm?.Id}>{itm?.Name}</option>
+                                                    ))}
+                                                </select>
+                                            </div>
 
-                                <div>
-                                    <label class="text-gray-700" >Entry Date</label>
-                                    <input type="date" class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md"
-                                        name='entryDate'
-                                        required
-                                        onChange={onChanegHandler}
-                                    />
-                                </div>
-                                <div>
-                                    <label class="text-gray-700" >Schedule</label>
-                                    <input type="text" class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md"
-                                        name='schedule'
-                                        required
-                                        onChange={onChanegHandler}
-                                    />
-                                </div>
-                            </div>
-                            <div class="flex justify-end mt-6">
-                                <button type='submit' class="px-8 py-2.5 leading-5 text-white transition-colors duration-300 transform bg-gray-700 rounded-md hover:bg-gray-600 focus:outline-none hover:animate-pulse focus:bg-gray-600">Save</button>
-                            </div>
-                        </form>
+                                            <div>
+                                                <label class="text-gray-700" >Group Name</label>
+                                                <input type="text" class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md   "
+                                                    name='name'
+                                                    required
+                                                    onChange={onChanegHandler}
+                                                />
+                                            </div>
+
+                                            <div>
+                                                <label class="text-gray-700" >समुहको नाम</label>
+                                                <input class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md   "
+
+                                                    name='nepaliName'
+                                                    onChange={onChanegHandler}
+                                                />
+                                            </div>
+                                            <div>
+                                                <label class="text-gray-700" >CharKhata Number</label>
+                                                <input class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md   "
+                                                    required
+                                                    name='charKhataNumber'
+                                                    onChange={onChanegHandler}
+                                                />
+                                            </div>
+
+                                            <div>
+                                                <label class="text-gray-700" >Entry Date</label>
+                                                <input type="date" class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md"
+                                                    name='entryDate'
+                                                    required
+                                                    onChange={onChanegHandler}
+                                                />
+                                            </div>
+                                            <div>
+                                                <label class="text-gray-700" >Schedule</label>
+                                                <input type="text" class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md"
+                                                    name='schedule'
+                                                    required
+                                                    onChange={onChanegHandler}
+                                                />
+                                            </div>
+                                        </div>
+                                        <div class="flex justify-end mt-6">
+                                            <button type='submit' class="px-8 py-2.5 leading-5 text-white transition-colors duration-300 transform bg-gray-700 rounded-md hover:bg-gray-600 focus:outline-none hover:animate-pulse focus:bg-gray-600">Save</button>
+                                        </div>
+                                    </form>
+                                </>
+                            )}
                     </section>
                 </div>
-                {showModifyModal && <ModifyRegestrartionModal heading="Group Setup" setShowUpdateModal={setShowModifyModal} />}
+
                 <div class=" h-1/2 sm:h-full p-4">
                     <div class=" text-black bg-white  py-2 rounded w-full">
                         <div class="flex flex-col">
@@ -219,7 +298,10 @@ const GroupSetup = () => {
                                                             {itm?.entryDate.substring(0, 10)}
                                                         </td>
 
-                                                        <td onClick={() => setShowModifyModal(!showModifyModal)} role='button'
+                                                        <td onClick={() => {
+                                                            setIsUpdate(!isUpdate)
+                                                            setSelectedId(itm?.id)
+                                                        }} role='button'
                                                             class="whitespace-nowrap border-r px-6 py-4 ">
                                                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" class="w-6 h-6">
                                                                 <path strokeLinecap="round" strokeLinejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10" />
@@ -236,7 +318,7 @@ const GroupSetup = () => {
                     </div>
                 </div>
             </div>
-            <ToastContainer/>
+            <ToastContainer />
         </>
     )
 }

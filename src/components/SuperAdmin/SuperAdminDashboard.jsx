@@ -10,9 +10,9 @@ import Users from './Users';
 import AllBranch from './Company Profile/AllBranch';
 import CreateProfile from './Company Profile/CreateProfile'
 import UpdateBranch from './Company Profile/UpdateBranch'
-import logo from '../../assets/logo.png'
-import CreateCalander from './Calander/CreateCalander';
 import CompanyProfile from './Company Profile/CompanyProfile';
+import UpdateProfile from './Company Profile/UpdateProfile';
+import logo from '../../assets/logo.png'
 
 const SuperAdminDashboard = () => {
     const [show, setShow] = useState(false);
@@ -299,11 +299,10 @@ const SuperAdminDashboard = () => {
                                         {/* Company Profile */}
                                         <Route path='/companyprofile' element={<CompanyProfile />} />
                                         <Route path='/createcompanyprofile' element={<CreateProfile />} />
-                                        <Route path='/allbranches' element={<CreateBranch />} />
+                                        <Route path='/updatecompanyprofile/:id' element={<UpdateProfile />} />
+                                        <Route path='/allbranches' element={<AllBranch />} />
                                         <Route path='/createbranch' element={<CreateBranch />} />
                                         <Route path='/updatebranch/:id' element={<UpdateBranch />} />
-
-                                        <Route path='/createcalander' element={<CreateCalander />} />
                                     </Routes>
                                 </div>
                             </div>

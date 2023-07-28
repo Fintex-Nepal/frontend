@@ -18,6 +18,7 @@ const AllBranch = () => {
         })
     }
     
+
     return (
         <>
             {branchFetchStatus === STATUS.LOADING && <Loader />}

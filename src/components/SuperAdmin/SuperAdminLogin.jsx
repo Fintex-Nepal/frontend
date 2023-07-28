@@ -39,8 +39,8 @@ const SuperAdminLogin = () => {
                         });
                     });
                 } else {
-                    toast.error(err?.message,{
-                        position:'top-right'
+                    toast.error(err?.message, {
+                        position: 'top-right'
                     });
                 }
             });
@@ -69,6 +69,7 @@ const SuperAdminLogin = () => {
                                     <form onSubmit={formSubmitHandler} class="mt-4 lg:mt-7 ">
                                         <div class="">
                                             <input type="string"
+                                                required
                                                 class="w-full px-4 py-3 mt-2 bg-white rounded-lg lg:py-5 -gray-800"
                                                 name="userName" placeholder="Enter your email"
                                                 onChange={onChangeHandle}
@@ -78,6 +79,7 @@ const SuperAdminLogin = () => {
                                             <div>
                                                 <div class="relative flex items-center">
                                                     <input type="password"
+                                                        required
                                                         class="w-full px-4 py-3 bg-white rounded-lg lg:py-5 -gray-800 "
                                                         name="password" placeholder="Enter password"
                                                         onChange={onChangeHandle}

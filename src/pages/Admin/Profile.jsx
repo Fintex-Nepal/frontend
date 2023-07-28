@@ -61,7 +61,7 @@ const Profile = () => {
                                         </li>
                                         <li class="flex items-center py-3">
                                             <span>Member since</span>
-                                            <span class="ml-auto">{userData?.employeeData?.dateOfJoining ? (userData?.employeeData?.dateOfJoining) : 'Not Specified'}</span>
+                                            <span class="ml-auto">{userData?.employeeData?.dateOfJoining ? (userData?.employeeData?.dateOfJoining.split('T')[0]) : 'Not Specified'}</span>
                                         </li>
                                     </ul>
                                     <button onClick={passWordChangeHandler} class="rounded-lg px-4 py-2 border-2 border-gray-600 text-gray-600 hover:bg-gray-600 hover:text-gray-100 duration-300">Change Password</button>
@@ -208,7 +208,19 @@ const Profile = () => {
     }
     else if (userDataFetchStatus === STATUS.ERROR) {
         return (
-            <h1>Error</h1>
+            <>
+              
+                <div class="mx-auto px-4 py-8 max-w-xl my-20">
+                    <div class="bg-white shadow-2xl rounded-lg mb-6 tracking-wide" >
+                        <div class="md:flex-shrink-0">
+                            <img src="https://img.freepik.com/premium-vector/cute-sad-kid-boy-sitting-alone-scared_97632-1236.jpg?w=826" alt="Error" class="w-full h-64 rounded-lg rounded-b-none"/>
+                        </div>
+                        <div class="px-4 py-2 mt-2">
+                            <h2 class="font-bold text-center text-2xl text-gray-800 tracking-normal">Please Contant The Adminstration</h2>
+                        </div>
+                    </div>
+                </div>
+            </>
         )
     }
 
