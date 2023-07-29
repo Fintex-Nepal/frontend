@@ -1,5 +1,5 @@
 
-export const baseurl = process.env.NODE_ENV === 'production'?process.env.REACT_APP_BASE_URL:"http://localhost/"
+export const baseurl = process.env.REACT_APP_BASE_URL || 'http://localhost/'
 
 //superlogin
 
