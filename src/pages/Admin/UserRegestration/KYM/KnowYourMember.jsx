@@ -1,11 +1,16 @@
 import React, { useState } from 'react'
+import { ToastContainer, toast } from 'react-toastify';
 import BasicInfo from './BasicInfo'
 import Address from './Address'
 import OtherInfo from './OtherInfo'
 import PhotoSign from './PhotoSign'
+import { createClient } from '../../../../utils/Url';
+import axios from 'axios';
+import Loader from '../../../../utils/Helper/Loader';
 const KnowYourMember = () => {
     const [activeSteps, setActiveSteps] = useState(1)
     const [clientInfo, setClientInfo] = useState({});
+    const [showLoader, setShowLoader] = useState(false)
     const prevStep = () => {
 
         if (activeSteps > 1) setActiveSteps(activeSteps - 1)
@@ -15,21 +20,69 @@ const KnowYourMember = () => {
     }
 
     const onChangeHandler = (event) => {
-        const { name, value } = event.target;
-        setClientInfo(prevState => ({
-            ...prevState,
-            [name]: value
-        }));
-    }
+        const { name, value, type, files } = event.target;
+        const updatedClientInfo = { ...clientInfo };
+
+        // For files, store the selected file object
+        if (type === 'file') {
+            updatedClientInfo[name] = files[0];
+        } else {
+            // For numeric fields, parse the value to an integer (or other numeric data type)
+            if (name === 'ClientType' || name==="ShareType" || name==="ClientGroupId" || name==="ClientUnitId" ||name==="KYMType"|| name==="ClientMartialStatusCode") {
+                updatedClientInfo[name] = parseInt(value, 10); // Parse to an integer using base 10
+            } else {
+                updatedClientInfo[name] = value;
+            }
+        }
+
+        setClientInfo(updatedClientInfo);
+    };
 
 
     const formSubmitHandler = (e) => {
         e.preventDefault();
-        console.log(clientInfo);
+        const formData = new FormData();
+
+        // Build formData dynamically based on the properties in clientInfo
+        Object.entries(clientInfo).forEach(([key, value]) => {
+            formData.append(key, value);
+        });
+        axios.post(createClient, formData, {
+            headers: {
+                'Authorization': 'Bearer ' + localStorage.getItem('adminToken')
+            }
+        })
+            .then((res) => {
+                setShowLoader(false)
+                if (res.data.status) {
+                    toast.success(res?.data?.message, {
+                        position: toast.POSITION.TOP_RIGHT
+                    })
+                }
+                else {
+                    console.log(res.data.message)
+                }
+            })
+            .catch((err) => {
+                setShowLoader(false);
+                const errorData = err.response?.data?.errors;
+                if (errorData) {
+                    Object.values(errorData).forEach((er) => {
+                        toast.warning(er[0], {
+                            position: 'top-right'
+                        });
+                    });
+                } else {
+                    toast.error(err?.message, {
+                        position: 'top-right'
+                    });
+                }
+            });
+
     }
     return (
         <>
-
+            {showLoader && <Loader />}
             <div class="">
                 <h2 class="text-lg font-semibold text-gray-700 capitalize">User Regestration</h2>
                 <div class="mx-4 p-4">
@@ -76,8 +129,8 @@ const KnowYourMember = () => {
             </div>
             {activeSteps === 1 && <BasicInfo onChangeHandler={onChangeHandler} />}
             {activeSteps === 2 && <Address onChangeHandler={onChangeHandler} />}
-            {activeSteps === 3 && <OtherInfo onChangeHandler={onChangeHandler} formSubmitHandler={formSubmitHandler} />}
-            {activeSteps === 4 && <PhotoSign onChangeHandler={onChangeHandler} />}
+            {activeSteps === 3 && <OtherInfo onChangeHandler={onChangeHandler} />}
+            {activeSteps === 4 && <PhotoSign onChangeHandler={onChangeHandler} formSubmitHandler={formSubmitHandler} />}
             <div class="flex p-2">
                 <button onClick={prevStep} class="text-base hover:scale-110 focus:outline-none flex justify-center px-4 py-2 rounded font-bold cursor-pointer 
         hover:bg-gray-200  
@@ -100,6 +153,7 @@ const KnowYourMember = () => {
         border-teal-600 transition">Skip</button>
                 </div>
             </div>
+            <ToastContainer />
         </>
     )
 }

@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react'
 
-const OtherInfo = ({ onChangeHandler ,formSubmitHandler}) => {
+const OtherInfo = ({ onChangeHandler }) => {
   const [hasOverflow, setHasOverflow] = useState(false);
   const ref = useRef(null);
   useEffect(() => {
@@ -16,7 +16,7 @@ const OtherInfo = ({ onChangeHandler ,formSubmitHandler}) => {
       <div className={`h-[60vh] overflow-y-auto ${maxHeight}`} ref={ref}>
         <section class="max-w-4xl p-6 mx-auto bg-white rounded-md shadow-md dark:bg-gray-800  border-b-2">
           <h2 class="text-lg font-semibold text-gray-700 capitalize ">Family Details</h2>
-          <form onSubmit={formSubmitHandler}>
+          <form>
             <div class="grid grid-cols-1 gap-6 mt-4 sm:grid-cols-2">
               <div>
                 <label class="text-gray-700 " >Father Name *</label>
@@ -80,12 +80,7 @@ const OtherInfo = ({ onChangeHandler ,formSubmitHandler}) => {
                 <label class="text-gray-700 ">Mother in Law</label>
                 <input onChange={onChangeHandler} class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md  " />
               </div>
-
             </div>
-
-
-
-
             <div class="grid grid-cols-1 gap-6 mt-4 sm:grid-cols-2">
 
             </div>
@@ -138,9 +133,7 @@ const OtherInfo = ({ onChangeHandler ,formSubmitHandler}) => {
                 />
               </div>
             </div>
-            <div class="flex justify-end mt-6">
-              <button type='submit' class="px-8 py-2.5 leading-5 text-white transition-colors duration-300 transform bg-gray-700 rounded-md hover:bg-gray-600 focus:outline-none focus:bg-gray-600">Save</button>
-            </div>
+           
           </form>
         </section>
       </div>

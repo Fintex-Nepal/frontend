@@ -7,12 +7,13 @@ import { accountTypes } from '../../../utils/Helper/Enums';
 
 const GroupSetup = () => {
     const [groupSetUpData, setGroupSetUpData] = useState({})
-    const [updateGroupData, setUpdateGroupData] = useState({})
     const [existingGroups, setExistingGroups] = useState();
     const [selectedAccountType, setSelectedAccountType] = useState()
     const [showLoader, setShowLoader] = useState(false)
     const [selectedId, setSelectedId] = useState();
-    const [isUpdate, setIsUpdate] = useState(false)
+    const [selectedGroup, setSelectedGroup] = useState({})
+    const [isUpdate, setIsUpdate] = useState(false);
+
 
     useEffect(() => {
         if (selectedAccountType) {
@@ -24,7 +25,7 @@ const GroupSetup = () => {
                 .then((res) => setExistingGroups(res.data))
                 .catch(err => alert(err))
         }
-    }, [selectedAccountType])
+    }, [selectedAccountType, showLoader])
 
     const onChanegHandler = (e) => {
         const { name, value } = e.target;
@@ -41,21 +42,20 @@ const GroupSetup = () => {
     };
     const onEditChangeHandler = (e) => {
         const { name, value } = e.target;
-
         // Check if the field name is "schedule" and parse the value as a number
         const parsedValue = name === "schedule" ? parseInt(value) : value;
 
-        setUpdateGroupData((prevState) => ({
+        setSelectedGroup((prevState) => ({
             ...prevState,
             [name]: parsedValue,
         }));
     };
 
+
     const EditGroupHandler = (e) => {
         e.preventDefault();
         setShowLoader(true);
-        const updateGroupDatawithId = { ...updateGroupData, id: selectedId };
-        axios.put(updateGroupDataUrl, updateGroupDatawithId, {
+        axios.put(updateGroupDataUrl, selectedGroup, {
             headers: {
                 'Authorization': 'Bearer ' + localStorage.getItem('adminToken')
             }
@@ -82,7 +82,13 @@ const GroupSetup = () => {
                 }
             });
     }
-    
+
+
+
+    useEffect(() => {
+        setSelectedGroup(existingGroups?.find((data) => data.id === selectedId) || {});
+    }, [existingGroups, selectedId])
+
 
     const groupSetUpSubmitHandler = (e) => {
         e.preventDefault();
@@ -115,6 +121,7 @@ const GroupSetup = () => {
                 }
             });
     }
+
     return (
         <>
             {showLoader && <Loader />}
@@ -123,7 +130,13 @@ const GroupSetup = () => {
                     <section class="max-w-4xl p-6 mx-auto bg-white rounded-md shadow-md ">
                         {isUpdate ?
                             <>
-                                <h2 class="text-lg font-semibold text-gray-700 capitalize ">Edit Group</h2>
+                                
+                                <button onClick={() => setIsUpdate(false)} class="inline-flex items-center px-4 py-2 bg-indigo-500 hover:bg-indigo-600 text-white text-sm font-medium rounded-md">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h10a8 8 0 018 8v2M3 10l6 6m-6-6l6-6" />
+                                    </svg>
+                                    Back
+                                </button>
                                 <form onSubmit={EditGroupHandler}>
                                     <div class="grid grid-cols-1 gap-6 mt-4 sm:grid-cols-2">
                                         <div>
@@ -133,21 +146,45 @@ const GroupSetup = () => {
 
                                         <div>
                                             <label class="text-gray-700 " >Group Name</label>
-                                            <input onChange={onEditChangeHandler} name='name' type="text" class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md" />
+                                            <input
+                                                value={selectedGroup?.name}
+                                                onChange={onEditChangeHandler}
+                                                name='name'
+                                                type="text"
+                                                class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md"
+                                            />
                                         </div>
 
                                         <div>
                                             <label class="text-gray-700 " >समुहको नाम</label>
-                                            <input onChange={onEditChangeHandler} name='nepaliName' type="text" class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md" />
+                                            <input
+                                                value={selectedGroup?.nepaliName}
+                                                onChange={onEditChangeHandler}
+                                                name='nepaliName'
+                                                type="text"
+                                                class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md"
+                                            />
                                         </div>
 
                                         <div>
                                             <label class="text-gray-700 " >Schedule</label>
-                                            <input onChange={onEditChangeHandler} name="schedule" type="number" class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md" />
+                                            <input
+                                                value={selectedGroup?.schedule}
+                                                onChange={onEditChangeHandler}
+                                                name="schedule"
+                                                type="number"
+                                                class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md"
+                                            />
                                         </div>
                                     </div>
                                     <div class="flex justify-end mt-6">
-                                        <button type='submit' class="px-8 py-2.5 leading-5 text-white transition-colors duration-300 transform bg-gray-700 rounded-md hover:bg-gray-600 focus:outline-none focus:bg-gray-600">Save</button>
+                                        <button type='submit' class="inline-flex items-center px-4 py-2 bg-gray-800 hover:bg-gray-600 text-white text-sm font-medium rounded-md">
+                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                                <path stroke-linecap="round" stroke-linejoin="round" d="M15 11.25l-3-3m0 0l-3 3m3-3v7.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                            </svg>
+
+                                            Back
+                                        </button>
                                     </div>
                                 </form>
                             </>
@@ -299,7 +336,7 @@ const GroupSetup = () => {
                                                         </td>
 
                                                         <td onClick={() => {
-                                                            setIsUpdate(!isUpdate)
+                                                            setIsUpdate(true)
                                                             setSelectedId(itm?.id)
                                                         }} role='button'
                                                             class="whitespace-nowrap border-r px-6 py-4 ">

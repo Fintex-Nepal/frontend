@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react'
 import { genderTypeEnum, casteEnum ,shareTypeEnum,ClientTypeEnum, clientUnitEnum, clientGroupEnum,districtsEnum, maritalStatusEnum} from '../../../../utils/Helper/Enums';
 
-const BasicInfo = ({onChangeHandler,}) => {
+const BasicInfo = ({onChangeHandler}) => {
   const [hasOverflow, setHasOverflow] = useState(false);
   
   const ref = useRef(null);
@@ -89,12 +89,6 @@ const BasicInfo = ({onChangeHandler,}) => {
               </div>
             </div>
             <div class="grid grid-cols-1 gap-6 mt-4 sm:grid-cols-2">
-              {/* <div>
-                <label class="text-gray-700 " >Gender </label>
-                <input onChange={onChangeHandler} name='ClientGender' type="text" class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md"
-                  required
-                />
-              </div> */}
               <div>
                 <label class="text-gray-700 " >Gender</label>
                 <select onChange={onChangeHandler} name='ClientGenderCode' class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md" >

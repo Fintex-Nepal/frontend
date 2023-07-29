@@ -1,29 +1,29 @@
-# Base image
-FROM node:18.14.0-alpine as build
+# Use the official Node.js LTS (Long-Term Support) image as the base image
+FROM node:18.14.0 as build-stage
 
-# Set the working directory
+# Set the working directory inside the container
 WORKDIR /app
 
-# Copy package.json and package-lock.json
+# Copy the package.json and package-lock.json (or yarn.lock) files to the container
 COPY package*.json ./
 
-# Install dependencies
+# Install project dependencies
 RUN npm install
 
-# Copy the app's source code
+# Copy the entire application to the container
 COPY . .
 
-# Build the React app
+# Build the React app for production
 RUN npm run build
 
-# Create a new stage for the production image
-FROM nginx:1.21-alpine
+# Use the Nginx image as the production server
+FROM nginx:latest as production-stage
 
-# Copy the built app from the previous stage
-COPY --from=build /app/build /usr/share/nginx/html
+# Copy the production build from the previous stage to the Nginx server's web root
+COPY --from=build-stage /app/build /usr/share/nginx/html
 
-# Expose the port for the NGINX server
+# Expose the port that Nginx will listen on
 EXPOSE 80
 
-# Start NGINX server
+# Start Nginx when the container runs
 CMD ["nginx", "-g", "daemon off;"]
