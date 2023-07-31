@@ -1,5 +1,5 @@
 import React from 'react'
-import { Routes, Route } from 'react-router-dom'
+import { Routes, Route, } from 'react-router-dom'
 import Login from './pages/Admin/Login'
 import Dashboard from './pages/Admin/Dashboard'
 import SuperAdminLogin from './components/SuperAdmin/SuperAdminLogin'
@@ -16,8 +16,8 @@ const App = () => {
         <Route exact path='/sadminlogin' element={<SuperAdminLogin />} />
         <Route exact path='/sadmindashboard/*' element={<SuperAdminDashboard />} />
         <Route exact path='/dashboard/*' element={<Dashboard />} />
-        <Route path='/test' element={<Test/>}/>
-        <Route path='*' element={<Error />} />
+        <Route exact path='/test' element={<Test />} />
+        <Route exact path='*' element={<Error />} />
       </Routes>
     </>
   )

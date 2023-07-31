@@ -233,16 +233,7 @@ const SuperAdminDashboard = () => {
                                                 <div className="rounded-full">
                                                     {profile ? (
                                                         <ul className="p-2 w-full border-r bg-white absolute rounded left-0 shadow mt-12 sm:mt-16 ">
-                                                            <li className="flex w-full justify-between text-gray-600 hover:text-indigo-700 cursor-pointer items-center">
-                                                                <div className="flex items-center">
-                                                                    <svg xmlns="http://www.w3.org/2000/svg" className="icon icon-tabler icon-tabler-user" width={18} height={18} viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" fill="none" strokeLinecap="round" strokeLinejoin="round">
-                                                                        <path stroke="none" d="M0 0h24v24H0z" />
-                                                                        <circle cx={12} cy={7} r={4} />
-                                                                        <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
-                                                                    </svg>
-                                                                    <span className="text-sm ml-2">My Profile</span>
-                                                                </div>
-                                                            </li>
+                                                            
                                                             <li onClick={logOutHandler} className="flex w-full justify-between text-gray-600 hover:text-indigo-700 cursor-pointer items-center mt-2">
                                                                 <div className="flex items-center">
                                                                     <svg xmlns="http://www.w3.org/2000/svg" className="icon icon-tabler icon-tabler-logout" width={20} height={20} viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" fill="none" strokeLinecap="round" strokeLinejoin="round">

@@ -53,6 +53,10 @@ const CompanyProfile = () => {
             });
     }, [])
 
+    console.log('====================================');
+    console.log(profileData);
+    console.log('====================================');
+
     return (
         <>
             {showLoader && <Loader />}
@@ -79,7 +83,7 @@ const CompanyProfile = () => {
                                         <div class="w-full lg:w-3/12 px-4 lg:order-2 flex justify-center">
                                             <div class=" pr-24">
                                                 <img
-                                                    src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTI4ONejT8KtT_m8KruG6px8rKb_HYrOcQLJuzGf-gBKXlCptzHGg0DR1Fyvd4YEy2eFRU&usqp=CAU"
+                                                    src={`data:image/${profileData?.logoFileName};base64,${profileData?.logoFileUrl}`}
                                                     alt="profile"
                                                     class="shadow-xl rounded-xl  align-middle border-none absolute -m-16  lg:-ml-16 max-w-150-px h-48"
                                                     onError={(e) => console.log('Image Load Error:', e)}
@@ -101,9 +105,9 @@ const CompanyProfile = () => {
                                                 <div class="mr-4 p-3 text-center">
                                                     <span class="text-xl font-bold block uppercase tracking-wide text-blueGray-600">{branches && branches.length}</span><span class="text-sm text-blueGray-400">Branches</span>
                                                 </div>
-                                                <div class="mr-4 p-3 text-center">
+                                                {/* <div class="mr-4 p-3 text-center">
                                                     <span class="text-xl font-bold block uppercase tracking-wide text-blueGray-600">10</span><span class="text-sm text-blueGray-400">Photos</span>
-                                                </div>
+                                                </div> */}
 
                                             </div>
                                         </div>
@@ -169,17 +173,7 @@ const CompanyProfile = () => {
                                 </div>
                             </div>
                         </div>
-                        <footer class="relative bg-blueGray-200 pt-8 pb-6 mt-8">
-                            <div class="container mx-auto px-4">
-                                <div class="flex flex-wrap items-center md:justify-between justify-center">
-                                    <div class="w-full md:w-6/12 px-4 mx-auto text-center">
-                                        <div class="text-sm text-blueGray-500 font-semibold py-1">
-                                            Made with <a href="1" class="text-blueGray-500 hover:text-gray-800" target="_blank">Notus JS</a> by <a href="1" class="text-blueGray-500 hover:text-blueGray-800" target="_blank"> Creative Tim</a>.
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </footer>
+
                     </section>
                 </main>
 

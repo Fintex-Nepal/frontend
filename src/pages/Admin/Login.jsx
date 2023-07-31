@@ -45,11 +45,16 @@ const Login = () => {
                 }
             });
     }
+    const redValue = 255;
+    const greenValue = 255;
+    const blueValue = 255;
+    const alphaValue = 0.5;
 
+const colorStyle = `rgba(${redValue}, ${greenValue}, ${blueValue}, ${alphaValue})`;
     return (
         <>
             {loginStatus === STATUS.LOADING && <Loader />}
-            <section class=" font-poppins">
+            <section class="bg-no-repeat bg-cover bg-[url('https://av.sc.com/corp-en/content/images/Serving_your_banking_couple_using_mobile_banking.jpg')]">
                 <div class="flex items-center justify-center h-screen mx-auto max-w-7xl">
                     <div class="flex-1">
                         <div class="flex flex-wrap ">
@@ -58,7 +63,7 @@ const Login = () => {
                                 <img class="absolute inset-0 z-0 object-cover w-full h-full ml-auto"
                                     src={loginImg} alt='loginImage' />
                             </div>
-                            <div class="w-full py-6 bg-gray-100 shadow-md lg:py-7 lg:w-1/2 ">
+                            <div class="w-full py-6  shadow-md lg:py-7 lg:w-1/2 " style={{ backgroundColor: colorStyle }}>
                                 <div class="max-w-md mx-auto">
                                     <div class="px-4 my-7 ">
                                         <div class="mb-7">
@@ -95,14 +100,7 @@ const Login = () => {
                                                     onChange={signUpFormChangeHandler}
                                                 />
                                             </div>
-                                            <div class="relative flex items-center mb-4">
-                                                <input type="password"
-                                                    name='confirmPassword'
-                                                    class="w-full py-4 rounded-lg px-7  "
-                                                    placeholder="Repeat password" required
-                                                    onChange={signUpFormChangeHandler}
-                                                />
-                                            </div>
+                                            
                                             <div class="mb-4 text-right ">
                                                 <a href="1"
                                                     class="text-sm font-semibold text-blue-500   hover:underline">

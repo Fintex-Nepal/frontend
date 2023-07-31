@@ -11,12 +11,12 @@ import StaffInfo from './StaffInfo';
 import EmployeeDetails from './EmployeeDetails'
 import microFinanceLogo from '../../assets/microFinanceLogo.png'
 import Dropdown from '../../utils/DropDown'
-import CreateDeposit from '../Deposit/CreateDeposit'
+import CreateDeposit from '../Deposit/DepositAccount/CreateDeposit'
 import CreateCalender from '../Admin/Calander/CreateCalander'
 import Profile from './Profile'
 import ViewCalander from './Calander/ViewCalander';
 import UpdateCalander from './Calander/UpdateCalander';
-
+import CreateDepositScheme from '../Deposit/Deposit Scheme/CreateDepositScheme';
 
 
 
@@ -47,6 +47,11 @@ const Dashboard = () => {
         'Create Calander',
         'View Calanders',
 
+    ]
+
+    const depositDropDown = [
+        'Create Account',
+        'Create Scheme'
     ]
     useEffect(() => {
         if (localStorage.getItem('adminToken')) {
@@ -172,15 +177,10 @@ const Dashboard = () => {
                                         {/* <span class="inline-flex items-center justify-center px-2 ml-3 text-sm font-medium text-gray-800 bg-gray-100 rounded-full dark:bg-gray-700 dark:text-gray-300">Pro</span> */}
                                     </Link>
                                 </li>
-                                <li>
-                                    <Link to={'createdeposit'} class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
-                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                            <path stroke-linecap="round" stroke-linejoin="round" d="M15 8.25H9m6 3H9m3 6l-3-3h1.5a3 3 0 100-6M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                        </svg>
-
-                                        <span class="flex-1 ml-3 whitespace-nowrap">Deposit</span>
-                                    </Link>
-                                </li>
+                                <Dropdown dropDownList={depositDropDown} heading="Deposit" svg={<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M15 8.25H9m6 3H9m3 6l-3-3h1.5a3 3 0 100-6M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                </svg>
+                                } />
                                 <Dropdown dropDownList={employeeDropdown} heading="Employee" svg={<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                                     <path stroke-linecap="round" stroke-linejoin="round" d="M15 19.128a9.38 9.38 0 002.625.372 9.337 9.337 0 004.121-.952 4.125 4.125 0 00-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 018.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0111.964-3.07M12 6.375a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zm8.25 2.25a2.625 2.625 0 11-5.25 0 2.625 2.625 0 015.25 0z" />
                                 </svg>
@@ -189,7 +189,9 @@ const Dashboard = () => {
                                 <Dropdown dropDownList={calenderDropDown} heading="Calenders" svg={<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                                     <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5m-9-6h.008v.008H12v-.008zM12 15h.008v.008H12V15zm0 2.25h.008v.008H12v-.008zM9.75 15h.008v.008H9.75V15zm0 2.25h.008v.008H9.75v-.008zM7.5 15h.008v.008H7.5V15zm0 2.25h.008v.008H7.5v-.008zm6.75-4.5h.008v.008h-.008v-.008zm0 2.25h.008v.008h-.008V15zm0 2.25h.008v.008h-.008v-.008zm2.25-4.5h.008v.008H16.5v-.008zm0 2.25h.008v.008H16.5V15z" />
                                 </svg>
-                                }  />
+                                } />
+
+
                                 {/* <Dropdown/> */}
                                 <li>
                                     <a href="1" class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
@@ -224,8 +226,10 @@ const Dashboard = () => {
 
 
 
-                                {/* Deposit Routes */}
-                                <Route path='/createdeposit' element={<CreateDeposit />} />
+                                {/* Deposit Routes */} 
+                                <Route path='/createaccount' element={<CreateDeposit />} />
+                                <Route path='/createscheme' element={<CreateDepositScheme />} />
+
 
                                 {/* Calander */}
                                 <Route path='/createcalander' element={< CreateCalender />} />

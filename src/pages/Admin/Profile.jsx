@@ -40,7 +40,7 @@ const Profile = () => {
                                     <div class="grid grid-cols-3">
                                         <div class="text-center my-2">
                                             <img class="h-16 w-16 rounded-full mx-auto"
-                                                src="https://www.shareicon.net/data/512x512/2016/05/24/770136_man_512x512.png"
+                                                 src={`data:image/${userData?.employeeData?.profilePicFileName};base64,${userData?.employeeData?.profilePicFileData}`}
                                                 alt="" />
                                             <a href="1" class="text-main-color">{userData?.employeeData?.name}</a>
                                         </div>
