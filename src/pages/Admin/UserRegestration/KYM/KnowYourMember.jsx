@@ -29,12 +29,12 @@ const KnowYourMember = () => {
         } else {
             // For numeric fields, parse the value to an integer (or other numeric data type)
             if (name === 'ClientType' || name==="ShareType" || name==="ClientGroupId" || name==="ClientUnitId" ||name==="KYMType"|| name==="ClientMartialStatusCode") {
-                updatedClientInfo[name] = parseInt(value, 10); // Parse to an integer using base 10
+                updatedClientInfo[name] = parseInt(value); 
             } else {
                 updatedClientInfo[name] = value;
             }
         }
-
+         
         setClientInfo(updatedClientInfo);
     };
 
@@ -46,6 +46,7 @@ const KnowYourMember = () => {
         // Build formData dynamically based on the properties in clientInfo
         Object.entries(clientInfo).forEach(([key, value]) => {
             formData.append(key, value);
+            console.log(key, formData[key]);
         });
         axios.post(createClient, formData, {
             headers: {

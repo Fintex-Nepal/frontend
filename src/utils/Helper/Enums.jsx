@@ -515,3 +515,15 @@ export const AccountStatusEnum = Object.freeze([
   { name: "Close", ID: 3 },
   { name: "Suspend", ID: 4 },
 ]);
+
+
+export const paymentTypeEnum=Object.freeze([
+  {Name:'Cash',ID:1},
+  {Name:'Bank',ID:2}
+])
+
+
+export const WithDrawalTypeEnum=Object.freeze([
+  {Name:'ByCheque',ID:1},
+  {Name:'ByCounter',ID:1},
+])

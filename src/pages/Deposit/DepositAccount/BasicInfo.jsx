@@ -83,9 +83,7 @@ const BasicInfo = ({ onChangeHandler, allNonClosedDepositAccount }) => {
       });
 
   }, []);
-  console.log('====================================');
-  console.log(allNonClosedDepositAccount, "allNonClosedDepositAccountallNonClosedDepositAccountallNonClosedDepositAccountallNonClosedDepositAccount");
-  console.log('====================================');
+
   return (
     <>
       <section class="max-w-4xl p-6 mx-auto bg-white rounded-md s
@@ -148,7 +146,7 @@ const BasicInfo = ({ onChangeHandler, allNonClosedDepositAccount }) => {
             <div>
               <label class="text-gray-700" >Opeing Date</label>
               <input onChange={onChangeHandler} type="text" class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md "
-                name='openingDate'
+                name='NepaliOpeningDate'
               />
             </div>
             <div>

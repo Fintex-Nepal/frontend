@@ -10,7 +10,7 @@ import { fetchBranchData } from '../../Redux/companyprofile/BranchSlice';
 const CreateAdmin = () => {
     const branches = useSelector((state) => state.branches.branches)
     const [formData, setFormData] = useState({
-        "role": 3,
+        "role": 4,
     });
     const [branchCreateStatus, setBranchCreateStatus] = useState(false)
     const dispatch = useDispatch();

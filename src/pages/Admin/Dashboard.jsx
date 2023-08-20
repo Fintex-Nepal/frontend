@@ -17,6 +17,8 @@ import Profile from './Profile'
 import ViewCalander from './Calander/ViewCalander';
 import UpdateCalander from './Calander/UpdateCalander';
 import CreateDepositScheme from '../Deposit/Deposit Scheme/CreateDepositScheme';
+import DepositAmount from '../Deposit/Transactions/DepositAmount';
+import Withdrawal from '../Deposit/Transactions/Withdrawal';
 
 
 
@@ -51,7 +53,13 @@ const Dashboard = () => {
 
     const depositDropDown = [
         'Create Account',
-        'Create Scheme'
+        'Create Scheme',
+
+    ]
+
+    const transactionDropDown = [
+        'Deposit Amount',
+        'WithDrawal'
     ]
     useEffect(() => {
         if (localStorage.getItem('adminToken')) {
@@ -70,14 +78,14 @@ const Dashboard = () => {
         return (
             <>
                 <>
-                    <nav className="fixed top-0 z-50 w-full bg-white border-b border-gray-200 dark:bg-gray-800 dark:border-gray-700">
+                    <nav className="fixed top-0 z-50 w-full bg-white border-b border-gray-200 ">
                         <div className="px-3 py-3 lg:px-5 lg:pl-3">
                             <div className="flex items-center justify-between">
                                 <div className="flex items-center justify-start">
                                     <button
 
                                         type="button"
-                                        className="inline-flex items-center p-2 text-sm text-gray-500 rounded-lg sm:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+                                        className="inline-flex items-center p-2 text-sm text-gray-500 rounded-lg sm:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 "
                                         onClick={handleSidebarToggle}
                                     >
                                         <span className="sr-only">Open sidebar</span>
@@ -101,7 +109,7 @@ const Dashboard = () => {
                                             className="h-8 mr-3"
                                             alt="FinTex Logo"
                                         />
-                                        <span className="self-center text-xl font-semibold sm:text-2xl whitespace-nowrap dark:text-white">
+                                        <span className="self-center text-xl font-semibold sm:text-2xl whitespace-nowrap ">
                                             Fintex
                                         </span>
                                     </Link>
@@ -110,7 +118,7 @@ const Dashboard = () => {
                                     <div className="relative ml-3">
                                         <button
                                             type="button"
-                                            className="flex text-sm bg-gray-800 rounded-full focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600"
+                                            className="flex text-sm bg-gray-800 rounded-full focus:ring-4 focus:ring-gray-300 "
                                             aria-expanded={isUserMenuOpen}
                                             onClick={handleUserMenuToggle}
                                         >
@@ -122,10 +130,10 @@ const Dashboard = () => {
                                             />
                                         </button>
                                         {isUserMenuOpen && (
-                                            <div className="absolute right-0 mt-2 w-40 bg-white divide-y divide-gray-100 rounded shadow dark:bg-gray-700 dark:divide-gray-600 origin-bottom">
+                                            <div className="absolute right-0 mt-2 w-40 bg-white divide-y divide-gray-100 rounded shadow origin-bottom">
                                                 <div className="px-4 py-3">
-                                                    <p className="text-sm text-gray-900 dark:text-white">{decoded?.given_name}</p>
-                                                    <p className="text-sm font-medium text-gray-900 truncate dark:text-gray-300">
+                                                    <p className="text-sm text-gray-900 ">{decoded?.given_name}</p>
+                                                    <p className="text-sm font-medium text-gray-900 truncate ">
                                                         {decoded?.email}
                                                     </p>
                                                 </div>
@@ -133,7 +141,7 @@ const Dashboard = () => {
                                                     <li>
                                                         <button
                                                             onClick={signOutHandler}
-                                                            className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white"
+                                                            className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 "
                                                             role="menuitem"
                                                         >
                                                             Logout
@@ -152,15 +160,15 @@ const Dashboard = () => {
                     <aside
                         id="logo-sidebar"
                         className={`fixed top-0 left-0 z-40 w-64 h-screen pt-20 transition-transform ${isSidebarOpen ? 'translate-x-0' : '-translate-x-full'
-                            } bg-white border-r border-gray-200 sm:translate-x-0 dark:bg-gray-800 dark:border-gray-700`}
+                            } bg-white border-r border-gray-200 sm:translate-x-0 `}
                         aria-label="Sidebar"
                     >
 
                         {/* Sidebar content */}
-                        <div class="h-full px-3 pb-4 overflow-y-auto bg-white dark:bg-gray-800">
+                        <div class="h-full px-3 pb-4 overflow-y-auto bg-white">
                             <ul class="space-y-2 font-medium">
                                 <li>
-                                    <Link to={'accountsetup'} class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+                                    <Link to={'accountsetup'} class="flex items-center p-2 text-gray-900 rounded-lg  hover:bg-gray-100 group">
                                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                                             <path stroke-linecap="round" stroke-linejoin="round" d="M11.42 15.17L17.25 21A2.652 2.652 0 0021 17.25l-5.877-5.877M11.42 15.17l2.496-3.03c.317-.384.74-.626 1.208-.766M11.42 15.17l-4.655 5.653a2.548 2.548 0 11-3.586-3.586l6.837-5.63m5.108-.233c.55-.164 1.163-.188 1.743-.14a4.5 4.5 0 004.486-6.336l-3.276 3.277a3.004 3.004 0 01-2.25-2.25l3.276-3.276a4.5 4.5 0 00-6.336 4.486c.091 1.076-.071 2.264-.904 2.95l-.102.085m-1.745 1.437L5.909 7.5H4.5L2.25 3.75l1.5-1.5L7.5 4.5v1.409l4.26 4.26m-1.745 1.437l1.745-1.437m6.615 8.206L15.75 15.75M4.867 19.125h.008v.008h-.008v-.008z" />
                                         </svg>
@@ -168,24 +176,33 @@ const Dashboard = () => {
                                         <span class="ml-3">Account Setup</span>
                                     </Link>
                                 </li>
+
                                 <li>
-                                    <Link to={'profile'} class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+                                    <Link to={'profile'} class="flex items-center p-2 text-gray-900 rounded-lg  hover:bg-gray-100 group">
                                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                                             <path stroke-linecap="round" stroke-linejoin="round" d="M17.982 18.725A7.488 7.488 0 0012 15.75a7.488 7.488 0 00-5.982 2.975m11.963 0a9 9 0 10-11.963 0m11.963 0A8.966 8.966 0 0112 21a8.966 8.966 0 01-5.982-2.275M15 9.75a3 3 0 11-6 0 3 3 0 016 0z" />
                                         </svg>
                                         <span class="flex-1 ml-3 whitespace-nowrap">Profile</span>
-                                        {/* <span class="inline-flex items-center justify-center px-2 ml-3 text-sm font-medium text-gray-800 bg-gray-100 rounded-full dark:bg-gray-700 dark:text-gray-300">Pro</span> */}
+                                        {/* <span class="inline-flex items-center justify-center px-2 ml-3 text-sm font-medium text-gray-800 bg-gray-100 rounded-full dark:bg-gray-700 ">Pro</span> */}
                                     </Link>
                                 </li>
                                 <Dropdown dropDownList={depositDropDown} heading="Deposit" svg={<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                                     <path stroke-linecap="round" stroke-linejoin="round" d="M15 8.25H9m6 3H9m3 6l-3-3h1.5a3 3 0 100-6M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                                 </svg>
                                 } />
+                                <Dropdown dropDownList={transactionDropDown} heading="TranSactions" svg={<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M7.5 21L3 16.5m0 0L7.5 12M3 16.5h13.5m0-13.5L21 7.5m0 0L16.5 12M21 7.5H7.5" />
+                                </svg>
+                                } />
                                 <Dropdown dropDownList={employeeDropdown} heading="Employee" svg={<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                                     <path stroke-linecap="round" stroke-linejoin="round" d="M15 19.128a9.38 9.38 0 002.625.372 9.337 9.337 0 004.121-.952 4.125 4.125 0 00-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 018.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0111.964-3.07M12 6.375a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zm8.25 2.25a2.625 2.625 0 11-5.25 0 2.625 2.625 0 015.25 0z" />
                                 </svg>
                                 } />
-                                <Dropdown dropDownList={clientDropdown} heading="Client" />
+                                <Dropdown dropDownList={clientDropdown} heading="Client" svg={<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M18 18.72a9.094 9.094 0 003.741-.479 3 3 0 00-4.682-2.72m.94 3.198l.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0112 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 016 18.719m12 0a5.971 5.971 0 00-.941-3.197m0 0A5.995 5.995 0 0012 12.75a5.995 5.995 0 00-5.058 2.772m0 0a3 3 0 00-4.681 2.72 8.986 8.986 0 003.74.477m.94-3.197a5.971 5.971 0 00-.94 3.197M15 6.75a3 3 0 11-6 0 3 3 0 016 0zm6 3a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0zm-13.5 0a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0z" />
+                                </svg>
+                                } />
+
                                 <Dropdown dropDownList={calenderDropDown} heading="Calenders" svg={<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                                     <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5m-9-6h.008v.008H12v-.008zM12 15h.008v.008H12V15zm0 2.25h.008v.008H12v-.008zM9.75 15h.008v.008H9.75V15zm0 2.25h.008v.008H9.75v-.008zM7.5 15h.008v.008H7.5V15zm0 2.25h.008v.008H7.5v-.008zm6.75-4.5h.008v.008h-.008v-.008zm0 2.25h.008v.008h-.008V15zm0 2.25h.008v.008h-.008v-.008zm2.25-4.5h.008v.008H16.5v-.008zm0 2.25h.008v.008H16.5V15z" />
                                 </svg>
@@ -193,14 +210,14 @@ const Dashboard = () => {
 
 
                                 {/* <Dropdown/> */}
-                                <li>
-                                    <a href="1" class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
-                                        <svg class="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 18">
+                                {/* <li>
+                                    <a href="1" class="flex items-center p-2 text-gray-900 rounded-lg  hover:bg-gray-100 group">
+                                        <svg class="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 group-hover:text-gray-900 " aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 18">
                                             <path d="M14 2a3.963 3.963 0 0 0-1.4.267 6.439 6.439 0 0 1-1.331 6.638A4 4 0 1 0 14 2Zm1 9h-1.264A6.957 6.957 0 0 1 15 15v2a2.97 2.97 0 0 1-.184 1H19a1 1 0 0 0 1-1v-1a5.006 5.006 0 0 0-5-5ZM6.5 9a4.5 4.5 0 1 0 0-9 4.5 4.5 0 0 0 0 9ZM8 10H5a5.006 5.006 0 0 0-5 5v2a1 1 0 0 0 1 1h11a1 1 0 0 0 1-1v-2a5.006 5.006 0 0 0-5-5Z" />
                                         </svg>
                                         <span class="flex-1 ml-3 whitespace-nowrap">Users</span>
                                     </a>
-                                </li>
+                                </li> */}
 
 
                             </ul>
@@ -224,11 +241,13 @@ const Dashboard = () => {
                                 <Route path='/createclient' element={<KnowYourMember />} />
 
 
-
-
-                                {/* Deposit Routes */} 
+                                {/* Deposit Routes */} depositamount
                                 <Route path='/createaccount' element={<CreateDeposit />} />
                                 <Route path='/createscheme' element={<CreateDepositScheme />} />
+
+                                {/* Transactions */}
+                                <Route path='/depositamount' element={<DepositAmount />} />
+                                <Route path='/withdrawal' element={<Withdrawal />} />
 
 
                                 {/* Calander */}

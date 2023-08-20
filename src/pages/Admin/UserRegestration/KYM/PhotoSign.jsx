@@ -35,6 +35,35 @@ const PhotoSign = ({ onChangeHandler, formSubmitHandler }) => {
                 <label class="text-gray-700 ">Client Signature Photo </label>
                 <input onChange={onChangeHandler} type="file" name='ClientSignaturePhoto' class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md  " />
               </div>
+              <div>
+                <label class="text-gray-700 ">Is Kym Updated</label>
+                <select onChange={onChangeHandler} name='IsKYMUpdated' class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md  ">
+                  <option selected disabled>Select</option>
+                  <option value={true}>Yes</option>
+                  <option value={false}>No</option>
+                </select>
+              </div>
+              <div>
+                <label class="text-gray-700 ">Is Active</label>
+                <select onChange={onChangeHandler} name='IsActive' class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md  ">
+                  <option selected disabled>Select</option>
+                  <option value={true}>Yes</option>
+                  <option value={false}>No</option>
+                </select>
+              </div>
+              <div>
+                <label class="text-gray-700 ">Is Share Allowed</label>
+                <select onChange={onChangeHandler} name='IsShareAllowed' class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md  ">
+                  <option selected disabled>Select</option>
+                  <option value={true}>Yes</option>
+                  <option value={false}>No</option>
+                </select>
+              </div>
+              <div>
+                <label class="text-gray-700 " >Registration Date</label>
+                <input onChange={onChangeHandler} type="string" name='RegistrationDate' class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md  "
+                />
+              </div>
             </div>
             <div class="flex justify-end mt-6">
               <button class="px-8 py-2.5 leading-5 text-white transition-colors duration-300 transform bg-gray-700 rounded-md hover:bg-gray-600 focus:outline-none focus:bg-gray-600">Save</button>

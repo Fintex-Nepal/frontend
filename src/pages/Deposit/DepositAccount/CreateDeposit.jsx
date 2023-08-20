@@ -4,7 +4,7 @@ import BasicInfo from './BasicInfo'
 import SmsSetting from './SmsSetting'
 import DepositPlan from './DepositPlan'
 import axios from 'axios'
-import { createDepositAccountUrl, getAllNonClosedDepostAccount } from '../../../utils/Url';
+import { createDepositAccountUrl, getAllDepositSchemeUrl, getAllNonClosedDepostAccount } from '../../../utils/Url';
 import Loader from '../../../utils/Helper/Loader'
 
 const CreateDeposit = () => {
@@ -12,6 +12,32 @@ const CreateDeposit = () => {
   const [depositData, setDepositData] = useState();
   const [showLoader, setShowLoader] = useState(false)
   const [allNonClosedDepositAccount, setAllNonClosedDepositAccount] = useState()
+  const [allDepositAccount, setAllDepositAccount] = useState();
+  useEffect(() => {
+    axios
+      .get(getAllDepositSchemeUrl, {
+        headers: {
+          Authorization: 'Bearer ' + localStorage.getItem('adminToken'),
+        },
+      })
+      .then((res) => setAllDepositAccount(res.data))
+      .catch((err) => {
+        setShowLoader(false);
+        const errorData = err.response?.data?.errors;
+        if (errorData) {
+          Object.values(errorData).forEach((er) => {
+            toast.warning(er[0], {
+              position: 'top-right',
+            });
+          });
+        } else {
+          toast.error(err?.message, {
+            position: 'top-right',
+          });
+        }
+      });
+  }, []);
+
   useEffect(() => {
     axios
       .get(getAllNonClosedDepostAccount, {
@@ -35,7 +61,7 @@ const CreateDeposit = () => {
           });
         }
       });
-  }, []);
+  }, [showLoader]);
 
   const onChangeHandler = (e) => {
     const { name, value } = e.target;
@@ -74,8 +100,12 @@ const CreateDeposit = () => {
   const onSubmitHandler = (e) => {
     e.preventDefault();
     setShowLoader(true);
+    const formDataToSend = new FormData();
+    for (const key in depositData) {
+      formDataToSend.append(key, depositData[key]);
+    }
     axios
-      .post(createDepositAccountUrl, depositData, {
+      .post(createDepositAccountUrl, formDataToSend, {
         headers: {
           Authorization: 'Bearer ' + localStorage.getItem('adminToken'),
         },
@@ -110,6 +140,8 @@ const CreateDeposit = () => {
       });
 
   }
+
+  console.log(allDepositAccount, "allDepositAccountallDepositAccountallDepositAccount");
   return (
     <>
       {showLoader && <Loader />}
@@ -220,8 +252,6 @@ const CreateDeposit = () => {
                           </td>
                         </tr>
                       ))}
-
-
                     </tbody>
                   </table>
                 </div>
