@@ -109,17 +109,12 @@ const Withdrawal = () => {
                 },
             })
             .then((res) => {
-                if (res?.data?.status) {
+                if (res) {
                     setShowLoader(false);
-                    toast.success(res?.data?.message, {
+                    toast.success(res?.data, {
                         position: 'top-right',
                     });
-                } else {
-                    setShowLoader(false);
-                    toast.error('Error in Creating Sub Ledger', {
-                        position: 'top-right',
-                    });
-                }
+                } 
             })
             .catch((err) => {
                 setShowLoader(false);

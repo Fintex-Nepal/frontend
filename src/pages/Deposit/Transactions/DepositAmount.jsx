@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { ToastContainer, toast } from 'react-toastify';
-import { getAllBanks, getAllEmployeesByBranch, getAllNonClosedDepostAccount, makeDepositUrl } from '../../../utils/Url';
 import axios from 'axios';
+import { getAllBanks, getAllEmployeesByBranch, getAllNonClosedDepostAccount, makeDepositUrl } from '../../../utils/Url';
 import Loader from '../../../utils/Helper/Loader';
 import { paymentTypeEnum } from '../../../utils/Helper/Enums';
 
@@ -108,14 +108,10 @@ const DepositAmount = () => {
                 },
             })
             .then((res) => {
-                if (res?.data?.status) {
+                
+                if (res) {
                     setShowLoader(false);
-                    toast.success(res?.data?.message, {
-                        position: 'top-right',
-                    });
-                } else {
-                    setShowLoader(false);
-                    toast.error('Error in Creating Sub Ledger', {
+                    toast.success(res?.data, {
                         position: 'top-right',
                     });
                 }
