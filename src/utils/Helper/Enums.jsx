@@ -540,3 +540,6 @@ export const ShareTransactionTypeEnum = Object.freeze([
   { Name: 'Transfer', ID: 3 }
 ]);
 
+
+
+

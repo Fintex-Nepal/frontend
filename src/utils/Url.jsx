@@ -151,5 +151,7 @@ export const sharePriceUrl=baseurl+"Share/shareKitta"
 
 export const shareTransaction=baseurl+"Transaction/share"
 
+export const getAllShareByClientId=baseurl+"Share?clientMemberId="
+
 
 
