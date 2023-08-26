@@ -116,6 +116,8 @@ export const updateCalander = baseurl+"CompanyProfile/updateCalendar"
 
 export const createClient = baseurl+"ClientSetup/createNewClient"
 
+export const getAllClients=baseurl+"ClientSetup/getAllClients"
+
 
 
 
@@ -124,7 +126,8 @@ export const createClient = baseurl+"ClientSetup/createNewClient"
 export const createDepositSchemeUrl = baseurl+"DepositScheme/create"
 export const updatedepositSchemeUrl = baseurl+"DepositScheme/updateDepositScheme"
 export const getallClientsUrl = baseurl+"ClientSetup/getAllClients"
-export const getAllDepositSchemeUrl = baseurl+"DepositScheme/all"
+export const getAllDepositSchemeUrl = baseurl+"DepositScheme/all" 
+export const getAllDepositAccount=baseurl+"DepositAccount/all"
 
 
 export const createDepositAccountUrl = baseurl+"DepositAccount/create"
@@ -140,6 +143,13 @@ export const getAllNonClosedDepostAccount = baseurl+"DepositAccount/all"
 
 export const makeDepositUrl=baseurl+"Transaction/makeDeposit"
 export const withdrawalUrl=baseurl+"Transaction/makeWithDrawal"
+
+
+//Set Share price
+
+export const sharePriceUrl=baseurl+"Share/shareKitta"
+
+export const shareTransaction=baseurl+"Transaction/share"
 
 
 

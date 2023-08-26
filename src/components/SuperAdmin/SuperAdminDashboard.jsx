@@ -13,6 +13,7 @@ import UpdateBranch from './Company Profile/UpdateBranch'
 import CompanyProfile from './Company Profile/CompanyProfile';
 import UpdateProfile from './Company Profile/UpdateProfile';
 import logo from '../../assets/logo.png'
+import ShareKitta from './Share/ShareKitta';
 
 const SuperAdminDashboard = () => {
     const [show, setShow] = useState(false);
@@ -85,6 +86,16 @@ const SuperAdminDashboard = () => {
                                                 <path strokeLinecap="round" strokeLinejoin="round" d="M19 7.5v3m0 0v3m0-3h3m-3 0h-3m-2.25-4.125a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zM4 19.235v-.11a6.375 6.375 0 0112.75 0v.109A12.318 12.318 0 0110.374 21c-2.331 0-4.512-.645-6.374-1.766z" />
                                             </svg>
                                             <span className="ml-2">Create Admin</span>
+                                        </div>
+                                    </Link>
+                                </li>
+                                <li className="pl-6 cursor-pointer text-gray-600 text-sm leading-3 tracking-normal py-2 hover:text-indigo-700 focus:text-indigo-700 focus:outline-none">
+                                    <Link to={'/sadmindashboard/share'}>
+                                        <div className="flex items-center">
+                                            <svg xmlns="http://www.w3.org/2000/svg" className="icon icon-tabler icon-tabler-compass" width={20} height={20} fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor">
+                                                <path strokeLinecap="round" strokeLinejoin="round" d="M19 7.5v3m0 0v3m0-3h3m-3 0h-3m-2.25-4.125a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zM4 19.235v-.11a6.375 6.375 0 0112.75 0v.109A12.318 12.318 0 0110.374 21c-2.331 0-4.512-.645-6.374-1.766z" />
+                                            </svg>
+                                            <span className="ml-2">Share Kitta</span>
                                         </div>
                                     </Link>
                                 </li>
@@ -233,7 +244,7 @@ const SuperAdminDashboard = () => {
                                                 <div className="rounded-full">
                                                     {profile ? (
                                                         <ul className="p-2 w-full border-r bg-white absolute rounded left-0 shadow mt-12 sm:mt-16 ">
-                                                            
+
                                                             <li onClick={logOutHandler} className="flex w-full justify-between text-gray-600 hover:text-indigo-700 cursor-pointer items-center mt-2">
                                                                 <div className="flex items-center">
                                                                     <svg xmlns="http://www.w3.org/2000/svg" className="icon icon-tabler icon-tabler-logout" width={20} height={20} viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" fill="none" strokeLinecap="round" strokeLinejoin="round">
@@ -286,6 +297,8 @@ const SuperAdminDashboard = () => {
                                         <Route path='/profile' element={<PasswordResetForm />} />
                                         <Route path='/createadmin' element={<CreateAdmin />} />
                                         <Route path='/users' element={<Users />} />
+
+                                        <Route path='/share' element={<ShareKitta />} />
 
                                         {/* Company Profile */}
                                         <Route path='/companyprofile' element={<CompanyProfile />} />

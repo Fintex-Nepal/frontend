@@ -527,3 +527,16 @@ export const WithDrawalTypeEnum=Object.freeze([
   {Name:'ByCheque',ID:1},
   {Name:'ByCounter',ID:1},
 ])
+
+export const sharePaymentTypeEnum = Object.freeze([
+  { Name: 'Cash', ID: 1 },
+  { Name: 'Bank', ID: 2 },
+  { Name: 'Account', ID: 3 }
+]);
+
+export const ShareTransactionTypeEnum = Object.freeze([
+  { Name: 'Issue', ID: 1 },
+  { Name: 'Refund', ID: 2 },
+  { Name: 'Transfer', ID: 3 }
+]);
+
