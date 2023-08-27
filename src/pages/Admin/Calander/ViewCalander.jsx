@@ -38,6 +38,7 @@ const ViewCalander = () => {
             });
 
     }, [])
+
     return (
         <>
             {showLoader && <Loader />}
@@ -67,10 +68,15 @@ const ViewCalander = () => {
                     </thead>
                     <tbody>
                         {calander?.map(calenderData => (
-                            <tr class="bg-white border-b dark:bg-gray-900 dark:border-gray-700">
-                                <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                            <tr class="bg-white border-b">
+                                <th
+                                    scope="row"
+                                    class={`px-6 py-4  whitespace-nowrap ${calenderData?.isActive ? 'text-green-700' : 'text-gray-900'
+                                        }`}
+                                >
                                     {calenderData.year}
                                 </th>
+
                                 <td class="px-6 py-4">
                                     {calenderData.month}
                                 </td>
