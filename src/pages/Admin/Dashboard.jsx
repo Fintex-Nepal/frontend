@@ -9,11 +9,10 @@ import KnowYourMember from '../Admin/UserRegestration/KYM/KnowYourMember'
 import CreateStaffLogin from './CreateStaffLogin';
 import StaffInfo from './StaffInfo';
 import EmployeeDetails from './EmployeeDetails'
-import microFinanceLogo from '../../assets/microFinanceLogo.png'
-import Dropdown from '../../utils/DropDown'
-import CreateDeposit from '../Deposit/DepositAccount/CreateDeposit'
-import CreateCalender from '../Admin/Calander/CreateCalander'
-import Profile from './Profile'
+import Dropdown from '../../utils/DropDown';
+import CreateDeposit from '../Deposit/DepositAccount/CreateDeposit';
+import CreateCalender from '../Admin/Calander/CreateCalander';
+import Profile from './Profile';
 import ViewCalander from './Calander/ViewCalander';
 import UpdateCalander from './Calander/UpdateCalander';
 import CreateDepositScheme from '../Deposit/Deposit Scheme/CreateDepositScheme';
@@ -24,8 +23,8 @@ import DepositReport from './Report/DepositReport';
 import ShareReport from './Report/ShareReport';
 import LedgerReport from './Report/LedgerReport';
 import SubLedgerReport from './Report/SubLedgerReport'
-
-
+import microFinanceLogo from '../../assets/microFinanceLogo.png'
+import Dayend from './DayEnd/Dayend';
 
 const Dashboard = () => {
     var decoded = jwt_decode(localStorage.getItem('adminToken'))
@@ -221,6 +220,14 @@ const Dashboard = () => {
                                     <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25" />
                                 </svg>
                                 } />
+                                <li>
+                                    <Link to={'dayend'} class="flex items-center p-2 text-gray-900 rounded-lg  hover:bg-gray-100 group cursor-pointer">
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v2.25m6.364.386l-1.591 1.591M21 12h-2.25m-.386 6.364l-1.591-1.591M12 18.75V21m-4.773-4.227l-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z" />
+                                        </svg>
+                                        <span class="flex-1 ml-3 whitespace-nowrap">Day End</span>
+                                    </Link>
+                                </li>
                             </ul>
                         </div>
                     </aside>
@@ -262,6 +269,9 @@ const Dashboard = () => {
                                 <Route path='/sharereport' element={< ShareReport />} />
                                 <Route path='/ledgerreport' element={< LedgerReport />} />
                                 <Route path='/subledgerreport' element={< SubLedgerReport />} />
+
+                                {/* Day End */}
+                                <Route path='/dayend' element={< Dayend />} />
                             </Routes>
                         </div>
                     </div>

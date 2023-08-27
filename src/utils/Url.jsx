@@ -167,3 +167,11 @@ export const getLedgerReport=baseurl+"TransactionReport/ledger?"
 export const getSubLedgerReport=baseurl+"TransactionReport/subledger?"
 export const getShareReport=baseurl+"TransactionReport/share?"
 export const getDepositReport=baseurl+"TransactionReport/depositAccount?"
+
+
+// Day End
+
+export const checkMaturityUrl=baseurl+"DayEnd/checkMaturity"
+export const CalculateDailyInterestUrl=baseurl+"DayEnd/calculateDailyInterest"
+export const postInterestUrl=baseurl+"DayEnd/postInterest"
+export const updateCalendarUrl=baseurl+"DayEnd/updateCalendar"
