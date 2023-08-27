@@ -103,7 +103,7 @@ const LedgerReport = () => {
 
         <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
           <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-            <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+            <thead class="text-xs text-gray-700 uppercase bg-gray-50 ">
               <tr>
                 <th scope="col" class="px-6 py-3">
                   S.No.
@@ -129,8 +129,8 @@ const LedgerReport = () => {
               </tr>
             </thead>
             <tbody>
-              <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+              <tr class="bg-white border-b">
+                <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
                   1
                 </th>
                 <td class="px-6 py-4">
@@ -155,8 +155,8 @@ const LedgerReport = () => {
 
               {allLedgerRecord?.ledgerTransactionReportDtos?.map((record,index) => (
                 <>
-                  <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                    <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                  <tr class="bg-white border-b">
+                    <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
                       {index+1}
                     </th>
                     <td class="px-6 py-4">
@@ -180,20 +180,18 @@ const LedgerReport = () => {
                   </tr>
                 </>
               ))}
-              <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                    
-                    
+              <tr class="bg-white border-b">
                     <td class="px-6 py-4"/>
                     <td class="px-6 py-4"/>
                     <td class="px-6 py-4"/>
                     <td class="px-6 py-4"/>
                     <td class="px-6 py-4"/>
-                    <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                    <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
                       Total
                     </th>
                    
                     <td class="px-6 py-4">
-                      100000
+                      {allLedgerRecord.debitSum}
                     </td>
                   </tr>
             </tbody>
@@ -218,7 +216,7 @@ const LedgerReport = () => {
                   name='LedgerId'>
                   <option disabled selected>Select</option>
                   {allLedger?.map(ledger => (
-                    <option>{ledger.id}</option>
+                    <option value={ledger.id}>{ledger.name}</option>
                   ))}
                 </select>
 

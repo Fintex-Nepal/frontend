@@ -67,6 +67,8 @@ export const createSubLedgerUrl = baseurl+"accountsetup/createSubledger"
 
 export const getSubLedgerByLedger = baseurl+"accountSetup/subledgers/ledger?ledgerId="
 
+export const getAllSubLedger=baseurl+"AccountSetup/getAllSubLedgers"
+
 
 
 export const createBankUrl = baseurl+"accountsetup/creatBankSetup"
@@ -153,9 +155,14 @@ export const sharePriceUrl=baseurl+"Share/shareKitta"
 export const shareTransaction=baseurl+"Transaction/share"
 
 export const getAllShareByClientId=baseurl+"Share?clientMemberId="
+export const getAllActiveShare=baseurl+"Share/allActive"
 
 
 
 // Report
 
 export const getLedgerReport=baseurl+"TransactionReport/ledger?"
+
+
+export const getSubLedgerReport=baseurl+"TransactionReport/subledger?"
+export const getShareReport=baseurl+"TransactionReport/share?"
