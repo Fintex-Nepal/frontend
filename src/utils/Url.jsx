@@ -56,6 +56,7 @@ export const ledgerDetailByAccountTypeUrl = baseurl+"accountsetup/grouptypes/acc
 
 export const allLedgerDataUrl = baseurl+"accountsetup/ledgers"
 export const createLedgerUrl = baseurl+"accountsetup/createledger"
+export const getAllLedgers=baseurl+"AccountSetup/getAllLedgers"
 
 export const groupByAccountIdUrl = baseurl+"accountsetup/grouptypes/accounttype?accountTypeId"
 
@@ -155,3 +156,6 @@ export const getAllShareByClientId=baseurl+"Share?clientMemberId="
 
 
 
+// Report
+
+export const getLedgerReport=baseurl+"TransactionReport/ledger?"
