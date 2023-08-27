@@ -166,3 +166,4 @@ export const getLedgerReport=baseurl+"TransactionReport/ledger?"
 
 export const getSubLedgerReport=baseurl+"TransactionReport/subledger?"
 export const getShareReport=baseurl+"TransactionReport/share?"
+export const getDepositReport=baseurl+"TransactionReport/depositAccount?"
